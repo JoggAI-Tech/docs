@@ -58,7 +58,7 @@ description: 'How to create video from templates with API.'
     "code": 0,
     "msg": "success",
     "data": {
-        "prj_id": "620b079caf3a4d2abd2c7ce095fb4e69"    # 工程ID
+        "prj_id": "620b079caf3a4d2abd2c7ce095fb4e69"    # Project ID
     }
 }
 ```
