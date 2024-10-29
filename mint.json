@@ -37,8 +37,7 @@
       "group": "Get Started",
       "pages": [
         "welcome",
-        "quickstart",
-        "development"
+        "quickstart"
       ]
     },
     {
