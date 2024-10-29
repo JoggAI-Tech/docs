@@ -9,8 +9,8 @@
   "theme": "quill",
   "colors": {
     "primary": "#2E5CFF",
-    "light": "#07C983",
-    "dark": "#0D9373",
+    "light": "#2E5CFF",
+    "dark": "#2E5CFF",
     "anchors": {
       "from": "#0D9373",
       "to": "#07C983"
