@@ -6,6 +6,7 @@
     "light": "/logo/Group 1312320557.png"
   },
   "favicon": "/favicon.svg",
+  "theme": "quill",
   "colors": {
     "primary": "#0D9373",
     "light": "#07C983",
