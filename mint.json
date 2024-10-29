@@ -28,12 +28,12 @@
   "tabs": [
     {
       "name": "API Reference",
-      "url": "api-reference",
-      "primaryTab": {
-    "name": "API Reference"
-}
+      "url": "api-reference"
     }
   ],
+    "primaryTab": {
+    "name": "API Reference"
+},
   "anchors": [
     {
         "name": "Roadmap",
