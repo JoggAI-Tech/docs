@@ -33,6 +33,23 @@
       "url": "api-reference"
     }
   ],
+  "anchors": [
+    {
+        "name": "Roadmap",
+        "icon": "code",
+        "url": "https://updates.jogg.ai/roadmap"
+    },
+    {
+        "name": "Changelog",
+        "icon": "pencil",
+        "url": "https://updates.jogg.ai/changelog"
+    },
+    {
+        "name": "Share Your Ideas",
+        "icon": "envelope",
+        "url": "https://updates.jogg.ai/"
+    }
+]
   "navigation": [
     {
       "group": "Get Started",
