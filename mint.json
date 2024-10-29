@@ -27,10 +27,13 @@
     "url": "https://app.jogg.ai/"  },
   "tabs": [
     {
-      "name": "API Reference",
+      "name": "API Documentation",
       "url": "api-reference"
     }
   ],
+  "primaryTab": {
+    "name": "Home"
+},
   "anchors": [
     {
         "name": "Roadmap",
