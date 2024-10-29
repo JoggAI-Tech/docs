@@ -55,7 +55,7 @@
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/Create_Video_from_Template",
+        "api-reference/Create Video from Template",
         "api-reference/Get_your_API_Key"
       ]
     },
