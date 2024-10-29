@@ -2,9 +2,9 @@
 title: 'Define Template Variables'
 description: 'Description of your new file.'
 ---
-### 选择图片进行替换
+### Select an image for replacement.
 ![](/images/img_3.png)
-### 选择文本进行替换
+### Select text for replacement.
 ![](/images/img_5.png)
-### 选择视频进行替换
+### Select a video for replacement.
 ![](/images/img_6.png)
