@@ -4,7 +4,7 @@ description: 'How to Replace Video in Template'
 ---
 #### Introduction
 - Replace videos set as specified variables in the template.
-```azure
+```java
 curl --location --request POST 'http://cmm-algo-jogg-backend-srv-dev.cds8.cn/open/render' 
 --header 'x-api-key: <your-api-key>' 
 --header 'Content-Type: application/json' 
