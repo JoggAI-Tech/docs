@@ -4,7 +4,7 @@ description: 'How to create video from templates with API.'
 ---
 
 ### Request Parameters
-```azure
+```java
 {
     "text": "string",   # Text script replacement; default is "default"
     "lang": "string",   # Language; options include:
@@ -53,7 +53,7 @@ description: 'How to create video from templates with API.'
 
 ```
 ### Response
-```azure
+```java
 {
     "code": 0,
     "msg": "success",
