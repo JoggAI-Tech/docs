@@ -5,7 +5,7 @@ description: 'How to Replace Avatar in Template.'
 #### Introduction
 - Customize and select a avatar to replace the existing one in the template for video creation.
 ```java
-curl --location --request POST 'http://cmm-algo-jogg-backend-srv-dev.cds8.cn/open/render' 
+curl --location --request POST 'https://api-services.jogg.ai/open/render' 
 --header 'x-api-key: <your-api-key>' 
 --header 'Content-Type: application/json' 
 --data-raw '{
