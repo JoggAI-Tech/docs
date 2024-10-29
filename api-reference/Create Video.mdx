@@ -1,53 +1,55 @@
-## 1. 应用模板生成视频 Create Video from Template
+## Create Video from Template
 
-### 请求参数
+### Request Parameters
 ```azure
 {
-    "text": "string",   # 文本script替换；默认为 "default"
-    "lang": "string",   # 语言； "english" 英语
-                                "filipino" 菲律宾语
-                                "french" 法语
-                                "german" 德语
-                                "hindi" 印地语
-                                "indonesian" 印度尼西亚语
-                                "italian" 意大利语
-                                "japanese" 日语
-                                "korean" 韩语
-                                "malay" 马来语
-                                "portuguese" 葡萄牙语
-                                "russian" 俄语
-                                "spanish" 西班牙语
-                                "thai" 泰语
-                                "vietnamese" 越南语
-                                "arabic" 阿拉伯语
-                                "greek" 希腊语
-                                "turkish" 土耳其语
-                                "slovenian" 斯洛文尼亚语
-                                "croatian" 克罗地亚语
-                                "romanian" 罗马尼亚语
-                                "chinese" 简体中文
-                                "bengali" 孟加拉语
-                                "urdu" 乌尔都语
-                                "hungarian" 匈牙利语
-                                "traditional-chinese" 繁体中文
-                                "polish" 波兰语
-    "template_id": 0,                # 模板ID
-    "template_type": "string",       # 模板类型 默认为 "user";
-    "dp_id": 0,                      # 数字人ID 默认为 0;
-    "timbre_td": 0,                  #  音色ID 默认为0; 
-    "without_tts": 0,                # 是否需要使用tts重做声音 0 需要 1不需要
-    "variables": [                   # 变量替换数组; 
-        {                            # type 变量类型：image 图片 video 视频 text 文本
-            "name": "string",        # name 变量名称：模板页设置的待替换变量名
-            "properties": {          # properties 变量属性
-                "url": "string"      #      url     替换的图片/视频 URL
-            },                       #      content 替换的文本信息
+    "text": "string",   # Text script replacement; default is "default"
+    "lang": "string",   # Language; options include:
+                                "english" 
+                                "filipino"
+                                "french"
+                                "german"
+                                "hindi"
+                                "indonesian"
+                                "italian"
+                                "japanese"
+                                "korean"
+                                "malay"
+                                "portuguese"
+                                "russian"
+                                "spanish"
+                                "thai"
+                                "vietnamese"
+                                "arabic"
+                                "greek"
+                                "turkish"
+                                "slovenian"
+                                "croatian"
+                                "romanian"
+                                "chinese" (Simplified Chinese)
+                                "bengali"
+                                "urdu"
+                                "hungarian"
+                                "traditional-chinese" (Traditional Chinese)
+                                "polish"
+    "template_id": 0,                # Template ID
+    "template_type": "string",       # Template type; default is "user"
+    "dp_id": 0,                      # Digital person ID; default is 0
+    "timbre_td": 0,                  # Timbre ID; default is 0
+    "without_tts": 0,                # Whether to use TTS to redo the voice; 0 for yes, 1 for no
+    "variables": [                   # Array for variable replacement
+        {                            # Type of variable: image, video, text
+            "name": "string",        # Name of the variable to be replaced as set in the template
+            "properties": {          # Properties of the variable
+                "url": "string"      # URL for the replacement image/video
+            },                       # Content for text replacement
             "type": "string"
         }
     ]
 }
+
 ```
-### 返回
+### Response
 ```azure
 {
     "code": 0,
@@ -57,7 +59,7 @@
     }
 }
 ```
-### 请求示例
+### Request Example
 ```json
 curl --location --request POST 'http://cmm-algo-jogg-backend-srv-dev.cds8.cn/open/render' 
 --header 'x-api-key: <your-api-key>' 
