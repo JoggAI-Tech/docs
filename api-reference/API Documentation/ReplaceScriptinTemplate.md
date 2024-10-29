@@ -2,7 +2,7 @@
 title: 'Replace Script in Template'
 description: 'How to Replace script, AI voices, language.'
 ---
-#### introduction
+#### Introduction
 - Replace script, AI voices
 ```java
 curl --location --request POST 'https://api-services.jogg.ai/open/render' 
