@@ -36,12 +36,12 @@
   "anchors": [
     {
         "name": "Roadmap",
-        "icon": "code",
+        "icon": "pencil",
         "url": "https://updates.jogg.ai/roadmap"
     },
     {
         "name": "Changelog",
-        "icon": "pencil",
+        "icon": "code",
         "url": "https://updates.jogg.ai/changelog"
     },
     {
