@@ -24,9 +24,7 @@
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://app.jogg.ai/",
-    "style":"roundedRectangle"
-  },
+    "url": "https://app.jogg.ai/"  },
   "tabs": [
     {
       "name": "API Reference",
