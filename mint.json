@@ -31,6 +31,9 @@
       "url": "api-reference"
     }
   ],
+  "primaryTab": {
+    "name": "API Reference"
+},
   "anchors": [
     {
         "name": "Roadmap",
