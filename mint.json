@@ -24,7 +24,8 @@
   ],
   "topbarCtaButton": {
     "name": "Get Started",
-    "url": "https://app.jogg.ai/"
+    "url": "https://app.jogg.ai/",
+    "type":"pill"
   },
   "tabs": [
     {
