@@ -5,7 +5,7 @@ description: 'How to Replace script, AI voices, language.'
 #### introduction
 - Replace script, AI voices
 ```java
-curl --location --request POST 'http://cmm-algo-jogg-backend-srv-dev.cds8.cn/open/render' 
+curl --location --request POST 'https://api-services.jogg.ai/open/render' 
 --header 'x-api-key: <your-api-key>' 
 --header 'Content-Type: application/json' 
 --data-raw '{
