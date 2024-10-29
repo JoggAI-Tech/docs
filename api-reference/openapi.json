@@ -240,15 +240,15 @@
 
             "post": {
 
-                "summary": "获取OSS签名URL",
+                "summary": "Get OSS signed URL",
 
-                "description": "生成用于文件上传的签名URL。",
+                "description": "Generate a signed URL for file upload.",
 
                 "responses": {
 
                     "200": {
 
-                        "description": "成功响应",
+                        "description": "Successful response",
 
                         "content": {
 
@@ -264,23 +264,23 @@
 
                                             "type": "string",
 
-                                            "description": "用于文件上传的签名URL"
+                                            "description": "Signed URL for file upload"
 
                                         },
 
-                                        "full_path":{
+                                        "full_path": {
 
                                             "type": "string",
 
-                                            "description": "文件上传后的URL"
+                                            "description": "URL after file upload"
 
                                         },
 
-                                        "key":{
+                                        "key": {
 
                                             "type": "string",
 
-                                            "description": "文件上传后的相对路径"
+                                            "description": "Relative path after file upload"
 
                                         }
 
@@ -304,9 +304,9 @@
 
             "put": {
 
-                "summary": "上传文件到指定的OSS URL",
+                "summary": "Upload file to specified OSS URL",
 
-                "description": "使用从`/open/upload/oss_sign`接口获取的`sign_url`上传文件。",
+                "description": "Use the `sign_url` obtained from `/open/upload/oss_sign` to upload a file.",
 
                 "requestBody": {
 
@@ -334,7 +334,7 @@
 
                     "200": {
 
-                        "description": "上传成功的响应",
+                        "description": "Successful upload response",
 
                         "content": {
 
@@ -350,7 +350,7 @@
 
                                             "type": "string",
 
-                                            "description": "请求ID"
+                                            "description": "Request ID"
 
                                         },
 
@@ -358,7 +358,7 @@
 
                                             "type": "integer",
 
-                                            "description": "响应代码"
+                                            "description": "Response code"
 
                                         },
 
@@ -366,7 +366,7 @@
 
                                             "type": "string",
 
-                                            "description": "响应消息"
+                                            "description": "Response message"
 
                                         }
 
@@ -441,3 +441,4 @@
     }
 
 }
+
