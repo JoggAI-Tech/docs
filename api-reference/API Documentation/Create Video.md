@@ -2,7 +2,6 @@
 title: 'Create Video from Templates'
 description: 'How to create video from templates with API.'
 ---
-## Create Video from Template
 
 ### Request Parameters
 ```azure
