@@ -70,7 +70,7 @@
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
         "api-reference/endpoint/delete",
-        "api-reference/openapi"
+        "api-reference/endpoint/openapi"
 
       ]
     }
