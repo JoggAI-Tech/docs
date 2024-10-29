@@ -4,7 +4,7 @@ description: 'How to Replace Image in Template.'
 ---
 #### Introduction
 - Replace images set as specified variables in the template, such as product logos.
-```azure
+```java
 curl --location --request POST 'http://cmm-algo-jogg-backend-srv-dev.cds8.cn/open/render' 
 --header 'x-api-key: <your-api-key>' 
 --header 'Content-Type: application/json' 
