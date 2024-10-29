@@ -1,0 +1,294 @@
+
+{
+
+    "openapi": "3.0.1",
+
+    "info": {
+
+        "title": "OpenAPI Render API",
+
+        "description": "A sample API that demonstrates features in the OpenAPI specification",
+
+        "license": {
+
+            "name": "MIT"
+
+        },
+
+        "version": "1.0.0"
+
+    },
+
+    "servers": [
+
+        {
+
+            "url": "http://sandbox.mintlify.com"
+
+        }
+
+    ],
+
+    "security": [
+
+        {
+
+            "bearerAuth": []
+
+        }
+
+    ],
+
+    "paths": {
+
+        "/open/render": {
+
+            "post": {
+
+                "description": "Renders a template with specified variables",
+
+                "requestBody": {
+
+                    "description": "Data required to render the template",
+
+                    "content": {
+
+                        "application/json": {
+
+                            "schema": {
+
+                                "type": "object",
+
+                                "properties": {
+
+                                    "text": {
+
+                                        "type": "string",
+
+                                        "example": "default"
+
+                                    },
+
+                                    "lang": {
+
+                                        "type": "string",
+
+                                        "example": "english"
+
+                                    },
+
+                                    "template_id": {
+
+                                        "type": "integer",
+
+                                        "example": 96
+
+                                    },
+
+                                    "template_type": {
+
+                                        "type": "string",
+
+                                        "example": "user"
+
+                                    },
+
+                                    "dp_id": {
+
+                                        "type": "integer",
+
+                                        "example": 0
+
+                                    },
+
+                                    "timbre_td": {
+
+                                        "type": "integer",
+
+                                        "example": 0
+
+                                    },
+
+                                    "without_tts": {
+
+                                        "type": "integer",
+
+                                        "example": 1
+
+                                    },
+
+                                    "variables": {
+
+                                        "type": "array",
+
+                                        "items": {
+
+                                            "type": "object",
+
+                                            "properties": {
+
+                                                "name": {
+
+                                                    "type": "string"
+
+                                                },
+
+                                                "type": {
+
+                                                    "type": "string"
+
+                                                },
+
+                                                "properties": {
+
+                                                    "type": "object",
+
+                                                    "additionalProperties": true
+
+                                                }
+
+                                            }
+
+                                        }
+
+                                    }
+
+                                },
+
+                                "required": [
+
+                                    "text",
+
+                                    "lang",
+
+                                    "template_id",
+
+                                    "template_type",
+
+                                    "variables"
+
+                                ]
+
+                            }
+
+                        }
+
+                    },
+
+                    "required": true
+
+                },
+
+                "responses": {
+
+                    "200": {
+
+                        "description": "Render response",
+
+                        "content": {
+
+                            "application/json": {
+
+                                "schema": {
+
+                                    "type": "object",
+
+                                    "properties": {
+
+                                        "result": {
+
+                                            "type": "string"
+
+                                        }
+
+                                    }
+
+                                }
+
+                            }
+
+                        }
+
+                    },
+
+                    "400": {
+
+                        "description": "Unexpected error",
+
+                        "content": {
+
+                            "application/json": {
+
+                                "schema": {
+
+                                    "$ref": "#/components/schemas/Error"
+
+                                }
+
+                            }
+
+                        }
+
+                    }
+
+                }
+
+            }
+
+        }
+
+    },
+
+    "components": {
+
+        "schemas": {
+
+            "Error": {
+
+                "required": [
+
+                    "error",
+
+                    "message"
+
+                ],
+
+                "type": "object",
+
+                "properties": {
+
+                    "error": {
+
+                        "type": "integer",
+
+                        "format": "int32"
+
+                    },
+
+                    "message": {
+
+                        "type": "string"
+
+                    }
+
+                }
+
+            }
+
+        },
+
+        "securitySchemes": {
+
+            "bearerAuth": {
+
+                "type": "http",
+
+                "scheme": "bearer"
+
+            }
+
+        }
+
+    }
+
+}
