@@ -32,7 +32,7 @@
 
         {
 
-            "bearerAuth": []
+            "apiKeyAuth": []
 
         }
 
@@ -47,8 +47,6 @@
                 "description": "Renders a template with specified variables",
 
                 "requestBody": {
-
-                    "description": "Data required to render the template",
 
                     "content": {
 
@@ -182,7 +180,7 @@
 
                     "200": {
 
-                        "description": "Render response",
+                        "description": "Successful render response",
 
                         "content": {
 
@@ -194,9 +192,37 @@
 
                                     "properties": {
 
-                                        "result": {
+                                        "code": {
 
-                                            "type": "string"
+                                            "type": "integer",
+
+                                            "description": "Response code.正常为0."
+
+                                        },
+
+                                        "msg": {
+
+                                            "type": "string",
+
+                                            "description": "Response message"
+
+                                        },
+
+                                        "data": {
+
+                                            "type": "object",
+
+                                            "properties": {
+
+                                                "prj_id": {
+
+                                                    "type": "string",
+
+                                                    "description": "Project ID,用于后面的prj_info接口进行查询合成情况."
+
+                                                }
+
+                                            }
 
                                         }
 
@@ -212,7 +238,7 @@
 
                     "400": {
 
-                        "description": "Unexpected error",
+                        "description": "Error in request",
 
                         "content": {
 
@@ -236,13 +262,73 @@
 
         },
 
-        "/open/upload/oss_sign": {
+        "/open/upload/sign": {
 
             "post": {
 
-                "summary": "Get OSS signed URL",
+                "summary": "Get Signed URL",
 
-                "description": "Generate a signed URL for file upload.",
+                "description": "Generate a signed URL for file upload. Use the `sign_url` obtained here to upload your file.",
+
+                "requestBody": {
+
+                    "description": "Data required for file upload",
+
+                    "content": {
+
+                        "application/json": {
+
+                            "schema": {
+
+                                "type": "object",
+
+                                "properties": {
+
+                                    "filetype": {
+
+                                        "type": "string",
+
+                                        "example": "image/jpeg"
+
+                                    },
+
+                                    "filename": {
+
+                                        "type": "string",
+
+                                        "example": "1.jpg"
+
+                                    },
+
+                                    "use_to": {
+
+                                        "type": "string",
+
+                                        "example": "media"
+
+                                    }
+
+                                },
+
+                                "required": [
+
+                                    "filetype",
+
+                                    "filename",
+
+                                    "use_to"
+
+                                ]
+
+                            }
+
+                        }
+
+                    },
+
+                    "required": true
+
+                },
 
                 "responses": {
 
@@ -264,7 +350,7 @@
 
                                             "type": "string",
 
-                                            "description": "Signed URL for file upload"
+                                            "description": "Use the sign_url to upload your file with a PUT request, including the file data in the request body. This is a direct upload to the signed URL"
 
                                         },
 
@@ -300,41 +386,41 @@
 
         },
 
-        "/upload/file": {
+        "/open/prj_info": {
 
-            "put": {
+            "get": {
 
-                "summary": "Upload file to specified OSS URL",
+                "summary": "Get Project Information",
 
-                "description": "Use the `sign_url` obtained from `/open/upload/oss_sign` to upload a file.",
+                "description": "Retrieve information about a specific project using its ID.",
 
-                "requestBody": {
+                "parameters": [
 
-                    "required": true,
+                    {
 
-                    "content": {
+                        "name": "project_id",
 
-                        "application/octet-stream": {
+                        "in": "query",
 
-                            "schema": {
+                        "required": true,
 
-                                "type": "string",
+                        "schema": {
 
-                                "format": "binary"
+                            "type": "string"
 
-                            }
+                        },
 
-                        }
+                        "description": "The ID of the project to retrieve information for."
 
                     }
 
-                },
+                ],
 
                 "responses": {
 
                     "200": {
 
-                        "description": "Successful upload response",
+                        "description": "Project information retrieved successfully",
 
                         "content": {
 
@@ -345,14 +431,6 @@
                                     "type": "object",
 
                                     "properties": {
-
-                                        "rid": {
-
-                                            "type": "string",
-
-                                            "description": "Request ID"
-
-                                        },
 
                                         "code": {
 
@@ -368,9 +446,207 @@
 
                                             "description": "Response message"
 
+                                        },
+
+                                        "data": {
+
+                                            "type": "object",
+
+                                            "properties": {
+
+                                                "id": {
+
+                                                    "type": "string",
+
+                                                    "description": "Project ID"
+
+                                                },
+
+                                                "title": {
+
+                                                    "type": "string",
+
+                                                    "description": "Project title"
+
+                                                },
+
+                                                "progress": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Progress percentage"
+
+                                                },
+
+                                                "progress_desc": {
+
+                                                    "type": "string",
+
+                                                    "description": "Description of current progress"
+
+                                                },
+
+                                                "aspect_ratio": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Aspect ratio"
+
+                                                },
+
+                                                "step": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Current step"
+
+                                                },
+
+                                                "status": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Current status"
+
+                                                },
+
+                                                "err_msg": {
+
+                                                    "type": "string",
+
+                                                    "description": "Error message, if any"
+
+                                                },
+
+                                                "video_path": {
+
+                                                    "type": "string",
+
+                                                    "description": "Path to the video output"
+
+                                                },
+
+                                                "video_duration": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Video duration in seconds"
+
+                                                },
+
+                                                "video_url": {
+
+                                                    "type": "string",
+
+                                                    "description": "URL to the video output"
+
+                                                },
+
+                                                "cover_path": {
+
+                                                    "type": "string",
+
+                                                    "description": "Path to the cover image"
+
+                                                },
+
+                                                "cover_url": {
+
+                                                    "type": "string",
+
+                                                    "description": "URL to the cover image"
+
+                                                },
+
+                                                "workspace_index": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Workspace index used"
+
+                                                },
+
+                                                "template_id": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Template ID"
+
+                                                },
+
+                                                "template_type": {
+
+                                                    "type": "string",
+
+                                                    "description": "Template type ('common', 'user', etc.)"
+
+                                                },
+
+                                                "index_template_id": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Index template ID"
+
+                                                },
+
+                                                "person_id": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Person ID"
+
+                                                },
+
+                                                "placeholder_cover_url": {
+
+                                                    "type": "string",
+
+                                                    "description": "Placeholder cover image URL"
+
+                                                },
+
+                                                "created_at": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Creation timestamp"
+
+                                                },
+
+                                                "updated_at": {
+
+                                                    "type": "integer",
+
+                                                    "description": "Last update timestamp"
+
+                                                }
+
+                                            }
+
                                         }
 
                                     }
+
+                                }
+
+                            }
+
+                        }
+
+                    },
+
+                    "400": {
+
+                        "description": "Invalid project ID",
+
+                        "content": {
+
+                            "application/json": {
+
+                                "schema": {
+
+                                    "$ref": "#/components/schemas/Error"
 
                                 }
 
@@ -428,11 +704,13 @@
 
         "securitySchemes": {
 
-            "bearerAuth": {
+            "apiKeyAuth": {
 
-                "type": "http",
+                "type": "apiKey",
 
-                "scheme": "bearer"
+                "in": "header",
+
+                "name": "x-api-key"
 
             }
 
@@ -441,4 +719,3 @@
     }
 
 }
-
