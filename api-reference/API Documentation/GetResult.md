@@ -1,5 +1,5 @@
 ---
-title: 'Get the generated video.'
+title: 'Get the generated video'
 description: 'How to get the generated video.'
 ---
 ```mermaid
