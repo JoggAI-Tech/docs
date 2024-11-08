@@ -1850,78 +1850,6 @@
 
 
 
-                    },
-
-
-
-                    {
-
-
-
-                        "name": "face_doubled",
-
-
-
-                        "in": "query",
-
-
-
-                        "description": "Whether the original video has been played forward and backward",
-
-
-
-                        "required": false,
-
-
-
-                        "schema": {
-
-
-
-                            "type": "boolean"
-
-
-
-                        }
-
-
-
-                    },
-
-
-
-                    {
-
-
-
-                        "name": "keying_face_doubled",
-
-
-
-                        "in": "query",
-
-
-
-                        "description": "Whether the keying video has been played forward and backward",
-
-
-
-                        "required": false,
-
-
-
-                        "schema": {
-
-
-
-                            "type": "boolean"
-
-
-
-                        }
-
-
-
                     }
 
 
@@ -1959,26 +1887,6 @@
 
 
                                     "properties": {
-
-
-
-                                        "rid": {
-
-
-
-                                            "type": "string",
-
-
-
-                                            "description": "Request ID",
-
-
-
-                                            "example": "93a69976e6d7a93589d406d19f6c5b78"
-
-
-
-                                        },
 
 
 
@@ -2034,7 +1942,7 @@
 
 
 
-                                                "digipal_persons": {
+                                                "avatars": {
 
 
 
@@ -2266,78 +2174,6 @@
 
 
 
-                    },
-
-
-
-                    {
-
-
-
-                        "name": "face_doubled",
-
-
-
-                        "in": "query",
-
-
-
-                        "description": "Whether the original video has been played forward and backward",
-
-
-
-                        "required": false,
-
-
-
-                        "schema": {
-
-
-
-                            "type": "boolean"
-
-
-
-                        }
-
-
-
-                    },
-
-
-
-                    {
-
-
-
-                        "name": "keying_face_doubled",
-
-
-
-                        "in": "query",
-
-
-
-                        "description": "Whether the keying video has been played forward and backward",
-
-
-
-                        "required": false,
-
-
-
-                        "schema": {
-
-
-
-                            "type": "boolean"
-
-
-
-                        }
-
-
-
                     }
 
 
@@ -2375,26 +2211,6 @@
 
 
                                     "properties": {
-
-
-
-                                        "rid": {
-
-
-
-                                            "type": "string",
-
-
-
-                                            "description": "Request ID",
-
-
-
-                                            "example": "93a69976e6d7a93589d406d19f6c5b78"
-
-
-
-                                        },
 
 
 
@@ -2450,7 +2266,7 @@
 
 
 
-                                                "digipal_persons": {
+                                                "avatars": {
 
 
 
@@ -2626,11 +2442,7 @@
 
 
 
-                        "apiKeyAuth": [],
-
-
-
-                        "bearerAuth": []
+                        "apiKeyAuth": []
 
 
 
@@ -3014,11 +2826,7 @@
 
 
 
-                        "apiKeyAuth": [],
-
-
-
-                        "bearerAuth": []
+                        "apiKeyAuth": []
 
 
 
@@ -3402,11 +3210,7 @@
 
 
 
-                        "apiKeyAuth": [],
-
-
-
-                        "bearerAuth": []
+                        "apiKeyAuth": []
 
 
 
@@ -3631,26 +3435,6 @@
 
 
                 "name": "x-api-key"
-
-
-
-            },
-
-
-
-            "bearerAuth": {
-
-
-
-                "type": "http",
-
-
-
-                "scheme": "bearer",
-
-
-
-                "bearerFormat": "JWT"
 
 
 
