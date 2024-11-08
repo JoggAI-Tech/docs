@@ -70,10 +70,10 @@
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/API Documentation/CreateVideo",
         {
           "group":"Create Video from Template",
           "pages":[
+        "api-reference/API Documentation/CreateVideo",
         "api-reference/API Documentation/GetTemplateID",
         "api-reference/API Documentation/DefineTemplateVariables",
         "api-reference/API Documentation/ReplaceImageinTemplate", 
