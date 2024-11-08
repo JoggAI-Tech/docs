@@ -93,6 +93,7 @@
         "api-reference/endpoint/GetURL",
         "api-reference/endpoint/upload",
         "api-reference/endpoint/TalkingAvatar",
+        "api-reference/endpoint/GetAvatarList",
         "api-reference/endpoint/openapi"
 
       ]
