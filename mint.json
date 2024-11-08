@@ -71,7 +71,6 @@
       "group": "API Documentation",
       "pages": [
         "api-reference/API Documentation/CreateVideo",
-        "api-reference/API Documentation/GetAPIKey",
         "api-reference/API Documentation/GetTemplateID",
         "api-reference/API Documentation/DefineTemplateVariables",
         "api-reference/API Documentation/ReplaceImageinTemplate", 
