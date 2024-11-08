@@ -6518,7 +6518,9 @@
 
 
 
-            "post": {
+
+
+            "put": {
 
 
 
@@ -6534,7 +6536,7 @@
 
 
 
-                "summary": "Step 1: Get Product Information",
+                "summary": "Step 2 (Optional): Update Product Information",
 
 
 
@@ -6542,7 +6544,7 @@
 
 
 
-                "description": "Retrieve product information by crawling the provided URL. The response contains two important IDs:\n- product_id: Used in Step 2 for updating product information\n- prj_id: Used in Step 3 for video generation",
+                "description": "Optional step to update product details. Use the product_id received from Step 1 (POST /open/product response)",
 
 
 
@@ -6551,14 +6553,6 @@
 
 
                 "requestBody": {
-
-
-
-
-
-
-
-                    "required": true,
 
 
 
@@ -6606,7 +6600,7 @@
 
 
 
-                                    "url": {
+                                    "product_id": {
 
 
 
@@ -6614,7 +6608,7 @@
 
 
 
-                                        "type": "string",
+                                        "type": "integer",
 
 
 
@@ -6622,7 +6616,7 @@
 
 
 
-                                        "description": "URL of the product to crawl",
+                                        "description": "Product ID obtained from Step 1 (POST /open/product) response data.id",
 
 
 
@@ -6630,7 +6624,7 @@
 
 
 
-                                        "example": "https://www.amazon.com/product-url"
+                                        "example": 3924
 
 
 
@@ -6654,7 +6648,7 @@
 
 
 
-                                "required": ["url"]
+                                "required": ["product_id"]
 
 
 
@@ -6686,423 +6680,7 @@
 
 
 
-                },
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-                        "description": "Product information retrieved successfully",
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-                                        "code": {
-
-
-
-
-
-
-
-                                            "type": "integer",
-
-
-
-
-
-
-
-                                            "description": "Response code. 0 indicates success"
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-                                        "msg": {
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-                                            "description": "Response message"
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-                                        "data": {
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-                                                "id": {
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-                                                    "description": "Product ID - Save this for Step 2 (PUT /open/product) if you need to update product information",
-
-
-
-
-
-
-
-                                                    "example": 3924
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-                                                "prj_id": {
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-                                                    "description": "Project ID - Save this for Step 3 (POST /open/project/render) to generate the video",
-
-
-
-
-
-
-
-                                                    "example": "2508cd37da0a4f978623827f71ba995c"
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-                        "description": "Invalid request",
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-                "security": [
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-                        "apiKeyAuth": []
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-                ]
+                }
 
 
 
