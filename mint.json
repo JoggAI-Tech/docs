@@ -71,7 +71,7 @@
       "group": "API Documentation",
       "pages": [
         {
-          "group":"Create Video from Template",
+          "group":"Create Video from Templates",
           "pages":[
         "api-reference/API Documentation/CreateVideo",
         "api-reference/API Documentation/GetTemplateID",
