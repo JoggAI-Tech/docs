@@ -1682,11 +1682,11 @@
 
 
 
-                "summary": "Get Digital Person List",
+                "summary": "Get Avatar List",
 
 
 
-                "description": "Retrieve a list of available digital persons with specified filters",
+                "description": "Retrieve a list of available avatars with specified filters",
 
 
 
@@ -1942,7 +1942,7 @@
 
 
 
-                                                                "description": "Digital person ID",
+                                                                "description": "Avatar ID",
 
 
 
@@ -1962,7 +1962,7 @@
 
 
 
-                                                                "description": "Digital person name",
+                                                                "description": "Avatar name",
 
 
 
@@ -2098,11 +2098,11 @@
 
 
 
-                "summary": "Get User Digital Person List",
+                "summary": "Get User Avatar List",
 
 
 
-                "description": "Retrieve a list of user's available digital persons with specified filters",
+                "description": "Retrieve a list of user's available avatar with specified filters",
 
 
 
@@ -2358,7 +2358,7 @@
 
 
 
-                                                                "description": "Digital person ID",
+                                                                "description": "Avatar ID",
 
 
 
@@ -2378,7 +2378,7 @@
 
 
 
-                                                                "description": "Digital person name",
+                                                                "description": "Avatar name",
 
 
 
@@ -2403,6 +2403,374 @@
 
 
                                                                 "example": "https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png"
+
+
+
+                                                            }
+
+
+
+                                                        }
+
+
+
+                                                    }
+
+
+
+                                                }
+
+
+
+                                            }
+
+
+
+                                        }
+
+
+
+                                    },
+
+
+
+                                    "required": ["code", "msg", "data"]
+
+
+
+                                }
+
+
+
+                            }
+
+
+
+                        }
+
+
+
+                    },
+
+
+
+                    "400": {
+
+
+
+                        "description": "Error in request",
+
+
+
+                        "content": {
+
+
+
+                            "application/json": {
+
+
+
+                                "schema": {
+
+
+
+                                    "$ref": "#/components/schemas/Error"
+
+
+
+                                }
+
+
+
+                            }
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+                },
+
+
+
+                "security": [
+
+
+
+                    {
+
+
+
+                        "apiKeyAuth": [],
+
+
+
+                        "bearerAuth": []
+
+
+
+                    }
+
+
+
+                ]
+
+
+
+            }
+
+
+
+        },
+
+
+
+        "/open/timbre": {
+
+
+
+            "get": {
+
+
+
+                "summary": "Get Timbre List",
+
+
+
+                "description": "Retrieve a list of available voice timbres with specified gender filter",
+
+
+
+                "parameters": [
+
+
+
+                    {
+
+
+
+                        "name": "gender",
+
+
+
+                        "in": "query",
+
+
+
+                        "description": "Filter timbres by gender (female/male)",
+
+
+
+                        "required": false,
+
+
+
+                        "schema": {
+
+
+
+                            "type": "string",
+
+
+
+                            "enum": ["female", "male"]
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+                ],
+
+
+
+                "responses": {
+
+
+
+                    "200": {
+
+
+
+                        "description": "Successful response",
+
+
+
+                        "content": {
+
+
+
+                            "application/json": {
+
+
+
+                                "schema": {
+
+
+
+                                    "type": "object",
+
+
+
+                                    "properties": {
+
+
+
+                                        "code": {
+
+
+
+                                            "type": "integer",
+
+
+
+                                            "description": "Response code. 0 indicates success",
+
+
+
+                                            "example": 0
+
+
+
+                                        },
+
+
+
+                                        "msg": {
+
+
+
+                                            "type": "string",
+
+
+
+                                            "description": "Response message",
+
+
+
+                                            "example": "success"
+
+
+
+                                        },
+
+
+
+                                        "data": {
+
+
+
+                                            "type": "object",
+
+
+
+                                            "properties": {
+
+
+
+                                                "total": {
+
+
+
+                                                    "type": "integer",
+
+
+
+                                                    "description": "Total number of timbres",
+
+
+
+                                                    "example": 5
+
+
+
+                                                },
+
+
+
+                                                "timbres": {
+
+
+
+                                                    "type": "array",
+
+
+
+                                                    "items": {
+
+
+
+                                                        "type": "object",
+
+
+
+                                                        "properties": {
+
+
+
+                                                            "name": {
+
+
+
+                                                                "type": "string",
+
+
+
+                                                                "description": "Timbre name",
+
+
+
+                                                                "example": "Emily"
+
+
+
+                                                            },
+
+
+
+                                                            "lang_id": {
+
+
+
+                                                                "type": "string",
+
+
+
+                                                                "description": "Language identifier",
+
+
+
+                                                                "example": "8xUNyTgckMBsX4jn4Lxf"
+
+
+
+                                                            },
+
+
+
+                                                            "audition_url": {
+
+
+
+                                                                "type": "string",
+
+
+
+                                                                "description": "URL for the audition audio file",
+
+
+
+                                                                "example": "https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3"
 
 
 
