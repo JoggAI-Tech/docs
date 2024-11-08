@@ -7,7 +7,7 @@ description: 'How to create avatar video.'
 
 
 
-#### Public Avatar List
+#### Public Avatars List
 
 ```bash
 
@@ -59,7 +59,7 @@ Response example:
 
 
 
-#### User Avatar List
+#### My Instant Avatars List
 
 ```bash
 
@@ -165,7 +165,7 @@ Response example:
 
 
 
-#### User Timbre List
+#### My Timbre List
 
 ```bash
 
