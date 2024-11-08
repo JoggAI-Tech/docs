@@ -92,7 +92,6 @@
       "pages": [
         "api-reference/endpoint/URL2Video",
         "api-reference/endpoint/ExtractProductInformation",
-        "api-reference/endpoint/UpdateProductDetails",
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
         "api-reference/endpoint/GetURL",
