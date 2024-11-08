@@ -1674,7 +1674,7 @@
 
 
 
-        "/open/digital_person/list": {
+        "/open/avatar": {
 
 
 
@@ -2086,6 +2086,446 @@
 
 
 
+        },
+
+
+
+        "/open/avatar/user": {
+
+
+
+            "get": {
+
+
+
+                "summary": "Get User Digital Person List",
+
+
+
+                "description": "Retrieve a list of user's available digital persons with specified filters",
+
+
+
+                "parameters": [
+
+
+
+                    {
+
+
+
+                        "name": "aspect_ratio",
+
+
+
+                        "in": "query",
+
+
+
+                        "description": "Aspect ratio of the video. 0: [9:16], 1: [16:9], 2: [1:1]",
+
+
+
+                        "required": false,
+
+
+
+                        "schema": {
+
+
+
+                            "type": "integer",
+
+
+
+                            "enum": [0, 1, 2]
+
+
+
+                        }
+
+
+
+                    },
+
+
+
+                    {
+
+
+
+                        "name": "face_doubled",
+
+
+
+                        "in": "query",
+
+
+
+                        "description": "Whether the original video has been played forward and backward",
+
+
+
+                        "required": false,
+
+
+
+                        "schema": {
+
+
+
+                            "type": "boolean"
+
+
+
+                        }
+
+
+
+                    },
+
+
+
+                    {
+
+
+
+                        "name": "keying_face_doubled",
+
+
+
+                        "in": "query",
+
+
+
+                        "description": "Whether the keying video has been played forward and backward",
+
+
+
+                        "required": false,
+
+
+
+                        "schema": {
+
+
+
+                            "type": "boolean"
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+                ],
+
+
+
+                "responses": {
+
+
+
+                    "200": {
+
+
+
+                        "description": "Successful response",
+
+
+
+                        "content": {
+
+
+
+                            "application/json": {
+
+
+
+                                "schema": {
+
+
+
+                                    "type": "object",
+
+
+
+                                    "properties": {
+
+
+
+                                        "rid": {
+
+
+
+                                            "type": "string",
+
+
+
+                                            "description": "Request ID",
+
+
+
+                                            "example": "93a69976e6d7a93589d406d19f6c5b78"
+
+
+
+                                        },
+
+
+
+                                        "code": {
+
+
+
+                                            "type": "integer",
+
+
+
+                                            "description": "Response code. 0 indicates success",
+
+
+
+                                            "example": 0
+
+
+
+                                        },
+
+
+
+                                        "msg": {
+
+
+
+                                            "type": "string",
+
+
+
+                                            "description": "Response message",
+
+
+
+                                            "example": "success"
+
+
+
+                                        },
+
+
+
+                                        "data": {
+
+
+
+                                            "type": "object",
+
+
+
+                                            "properties": {
+
+
+
+                                                "digipal_persons": {
+
+
+
+                                                    "type": "array",
+
+
+
+                                                    "items": {
+
+
+
+                                                        "type": "object",
+
+
+
+                                                        "properties": {
+
+
+
+                                                            "id": {
+
+
+
+                                                                "type": "integer",
+
+
+
+                                                                "description": "Digital person ID",
+
+
+
+                                                                "example": 81
+
+
+
+                                                            },
+
+
+
+                                                            "name": {
+
+
+
+                                                                "type": "string",
+
+
+
+                                                                "description": "Digital person name",
+
+
+
+                                                                "example": "Amanda outdoors"
+
+
+
+                                                            },
+
+
+
+                                                            "cover_url": {
+
+
+
+                                                                "type": "string",
+
+
+
+                                                                "description": "URL of the cover image",
+
+
+
+                                                                "example": "https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png"
+
+
+
+                                                            }
+
+
+
+                                                        }
+
+
+
+                                                    }
+
+
+
+                                                }
+
+
+
+                                            }
+
+
+
+                                        }
+
+
+
+                                    },
+
+
+
+                                    "required": ["code", "msg", "data"]
+
+
+
+                                }
+
+
+
+                            }
+
+
+
+                        }
+
+
+
+                    },
+
+
+
+                    "400": {
+
+
+
+                        "description": "Error in request",
+
+
+
+                        "content": {
+
+
+
+                            "application/json": {
+
+
+
+                                "schema": {
+
+
+
+                                    "$ref": "#/components/schemas/Error"
+
+
+
+                                }
+
+
+
+                            }
+
+
+
+                        }
+
+
+
+                    }
+
+
+
+                },
+
+
+
+                "security": [
+
+
+
+                    {
+
+
+
+                        "apiKeyAuth": [],
+
+
+
+                        "bearerAuth": []
+
+
+
+                    }
+
+
+
+                ]
+
+
+
+            }
+
+
+
         }
 
 
@@ -2295,6 +2735,26 @@
 
 
                 "name": "x-api-key"
+
+
+
+            },
+
+
+
+            "bearerAuth": {
+
+
+
+                "type": "http",
+
+
+
+                "scheme": "bearer",
+
+
+
+                "bearerFormat": "JWT"
 
 
 
