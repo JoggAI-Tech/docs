@@ -61,6 +61,13 @@
       ]
     },
     {
+      "group": "QuickStart",
+      "pages": [
+        "api-reference/QuickStart/QuickStart"
+
+      ]
+    }    
+    {
       "group": "API Documentation",
       "pages": [
         "api-reference/API Documentation/CreateVideo",
