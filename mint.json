@@ -91,6 +91,8 @@
       "group": "Endpoint Examples",
       "pages": [
         "api-reference/endpoint/URL2Video",
+        "api-reference/endpoint/Extract Product Information",
+        "api-reference/endpoint/Update Product Details",
         "api-reference/endpoint/get",
         "api-reference/endpoint/create",
         "api-reference/endpoint/GetURL",
