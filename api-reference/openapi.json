@@ -142,6 +142,126 @@
 
 
 
+                                        "description": "Language for text-to-speech conversion",
+
+
+
+                                        "enum": [
+
+
+
+                                            "english",
+
+
+
+                                            "filipino",
+
+
+
+                                            "french",
+
+
+
+                                            "german",
+
+
+
+                                            "hindi",
+
+
+
+                                            "indonesian",
+
+
+
+                                            "italian",
+
+
+
+                                            "japanese",
+
+
+
+                                            "korean",
+
+
+
+                                            "malay",
+
+
+
+                                            "portuguese",
+
+
+
+                                            "russian",
+
+
+
+                                            "spanish",
+
+
+
+                                            "thai",
+
+
+
+                                            "vietnamese",
+
+
+
+                                            "arabic",
+
+
+
+                                            "greek",
+
+
+
+                                            "turkish",
+
+
+
+                                            "slovenian",
+
+
+
+                                            "croatian",
+
+
+
+                                            "romanian",
+
+
+
+                                            "chinese",
+
+
+
+                                            "bengali",
+
+
+
+                                            "urdu",
+
+
+
+                                            "hungarian",
+
+
+
+                                            "traditional-chinese",
+
+
+
+                                            "polish"
+
+
+
+                                        ],
+
+
+
                                         "example": "english"
 
 
