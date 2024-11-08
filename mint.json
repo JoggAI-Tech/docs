@@ -96,6 +96,7 @@
         "api-reference/endpoint/GetAvatarList",
         "api-reference/endpoint/InstantAvatar",
         "api-reference/endpoint/GetVoiceList",
+        "api-reference/endpoint/GetMyVoices",
         "api-reference/endpoint/openapi"
 
       ]
