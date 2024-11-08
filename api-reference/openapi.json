@@ -6518,9 +6518,7 @@
 
 
 
-
-
-            "put": {
+            "post": {
 
 
 
@@ -6536,7 +6534,7 @@
 
 
 
-                "summary": "Step 2 (Optional): Update Product Information",
+                "summary": "Step 1: Get Product Information",
 
 
 
@@ -6544,7 +6542,7 @@
 
 
 
-                "description": "Optional step to update product details. Use the product_id received from Step 1 (POST /open/product response)",
+                "description": "Retrieve product information by crawling the provided URL. The response contains two important IDs:\n- product_id: Used in Step 2 for updating product information\n- prj_id: Used in Step 3 for video generation",
 
 
 
@@ -6553,6 +6551,14 @@
 
 
                 "requestBody": {
+
+
+
+
+
+
+
+                    "required": true,
 
 
 
@@ -6600,6 +6606,614 @@
 
 
 
+                                    "url": {
+
+
+
+
+
+
+
+                                        "type": "string",
+
+
+
+
+
+
+
+                                        "description": "URL of the product to crawl",
+
+
+
+
+
+
+
+                                        "example": "https://www.amazon.com/product-url"
+
+
+
+
+
+
+
+                                    }
+
+
+
+
+
+
+
+                                },
+
+
+
+
+
+
+
+                                "required": ["url"]
+
+
+
+
+
+
+
+                            }
+
+
+
+
+
+
+
+                        }
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+                },
+
+
+
+
+
+
+
+                "responses": {
+
+
+
+
+
+
+
+                    "200": {
+
+
+
+
+
+
+
+                        "description": "Product information retrieved successfully",
+
+
+
+
+
+
+
+                        "content": {
+
+
+
+
+
+
+
+                            "application/json": {
+
+
+
+
+
+
+
+                                "schema": {
+
+
+
+
+
+
+
+                                    "type": "object",
+
+
+
+
+
+
+
+                                    "properties": {
+
+
+
+
+
+
+
+                                        "code": {
+
+
+
+
+
+
+
+                                            "type": "integer",
+
+
+
+
+
+
+
+                                            "description": "Response code. 0 indicates success"
+
+
+
+
+
+
+
+                                        },
+
+
+
+
+
+
+
+                                        "msg": {
+
+
+
+
+
+
+
+                                            "type": "string",
+
+
+
+
+
+
+
+                                            "description": "Response message"
+
+
+
+
+
+
+
+                                        },
+
+
+
+
+
+
+
+                                        "data": {
+
+
+
+
+
+
+
+                                            "type": "object",
+
+
+
+
+
+
+
+                                            "properties": {
+
+
+
+
+
+
+
+                                                "id": {
+
+
+
+
+
+
+
+                                                    "type": "integer",
+
+
+
+
+
+
+
+                                                    "description": "Product ID - Save this for Step 2 (PUT /open/product) if you need to update product information",
+
+
+
+
+
+
+
+                                                    "example": 3924
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "prj_id": {
+
+
+
+
+
+
+
+                                                    "type": "string",
+
+
+
+
+
+
+
+                                                    "description": "Project ID - Save this for Step 3 (POST /open/project/render) to generate the video",
+
+
+
+
+
+
+
+                                                    "example": "2508cd37da0a4f978623827f71ba995c"
+
+
+
+
+
+
+
+                                                }
+
+
+
+
+
+
+
+                                            }
+
+
+
+
+
+
+
+                                        }
+
+
+
+
+
+
+
+                                    }
+
+
+
+
+
+
+
+                                }
+
+
+
+
+
+
+
+                            }
+
+
+
+
+
+
+
+                        }
+
+
+
+
+
+
+
+                    },
+
+
+
+
+
+
+
+                    "400": {
+
+
+
+
+
+
+
+                        "description": "Invalid request",
+
+
+
+
+
+
+
+                        "content": {
+
+
+
+
+
+
+
+                            "application/json": {
+
+
+
+
+
+
+
+                                "schema": {
+
+
+
+
+
+
+
+                                    "$ref": "#/components/schemas/Error"
+
+
+
+
+
+
+
+                                }
+
+
+
+
+
+
+
+                            }
+
+
+
+
+
+
+
+                        }
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+                },
+
+
+
+
+
+
+
+                "security": [
+
+
+
+
+
+
+
+                    {
+
+
+
+
+
+
+
+                        "apiKeyAuth": []
+
+
+
+
+
+
+
+                    }
+
+
+
+
+
+
+
+                ]
+
+
+
+
+
+
+
+            },
+
+
+
+
+
+
+
+            "put": {
+
+
+
+
+
+
+
+                "tags": ["Product Video Generation"],
+
+
+
+
+
+
+
+                "summary": "Step 2 (Optional): Update Product Information",
+
+
+
+
+
+
+
+                "description": "Optional step to update product details. Use the product_id received from Step 1 (POST /open/product response)",
+
+
+
+
+
+
+
+                "requestBody": {
+
+
+
+
+
+
+
+                    "required": true,
+
+
+
+
+
+
+
+                    "content": {
+
+
+
+
+
+
+
+                        "application/json": {
+
+
+
+
+
+
+
+                            "schema": {
+
+
+
+
+
+
+
+                                "type": "object",
+
+
+
+
+
+
+
+                                "required": ["product_id"],
+
+
+
+
+
+
+
+                                "properties": {
+
+
+
+
+
+
+
                                     "product_id": {
 
 
@@ -6632,6 +7246,598 @@
 
 
 
+                                    },
+
+
+
+
+
+
+
+                                    "title": {
+
+
+
+
+
+
+
+                                        "type": "string",
+
+
+
+
+
+
+
+                                        "description": "Product title",
+
+
+
+
+
+
+
+                                        "example": ""
+
+
+
+
+
+
+
+                                    },
+
+
+
+
+
+
+
+                                    "intro_text": {
+
+
+
+
+
+
+
+                                        "type": "string",
+
+
+
+
+
+
+
+                                        "description": "Product introduction and selling points",
+
+
+
+
+
+
+
+                                        "example": ""
+
+
+
+
+
+
+
+                                    },
+
+
+
+
+
+
+
+                                    "target_audience": {
+
+
+
+
+
+
+
+                                        "type": "string",
+
+
+
+
+
+
+
+                                        "description": "Target audience for the product",
+
+
+
+
+
+
+
+                                        "example": ""
+
+
+
+
+
+
+
+                                    },
+
+
+
+
+
+
+
+                                    "intro_medias": {
+
+
+
+
+
+
+
+                                        "type": "array",
+
+
+
+
+
+
+
+                                        "description": "Media resources array (will replace existing media if provided)",
+
+
+
+
+
+
+
+                                        "items": {
+
+
+
+
+
+
+
+                                            "type": "object",
+
+
+
+
+
+
+
+                                            "properties": {
+
+
+
+
+
+
+
+                                                "replace_key": {
+
+
+
+
+
+
+
+                                                    "type": "string",
+
+
+
+
+
+
+
+                                                    "description": "Replacement key for the media"
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "type": {
+
+
+
+
+
+
+
+                                                    "type": "integer",
+
+
+
+
+
+
+
+                                                    "description": "Media type (1: image, 2: video)",
+
+
+
+
+
+
+
+                                                    "enum": [1, 2]
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "name": {
+
+
+
+
+
+
+
+                                                    "type": "string",
+
+
+
+
+
+
+
+                                                    "description": "Media name"
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "url": {
+
+
+
+
+
+
+
+                                                    "type": "string",
+
+
+
+
+
+
+
+                                                    "description": "Media URL"
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "preview_url": {
+
+
+
+
+
+
+
+                                                    "type": "string",
+
+
+
+
+
+
+
+                                                    "description": "Preview URL"
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "w": {
+
+
+
+
+
+
+
+                                                    "type": "integer",
+
+
+
+
+
+
+
+                                                    "description": "Media width"
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "h": {
+
+
+
+
+
+
+
+                                                    "type": "integer",
+
+
+
+
+
+
+
+                                                    "description": "Media height"
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "description": {
+
+
+
+
+
+
+
+                                                    "type": "string",
+
+
+
+
+
+
+
+                                                    "description": "Media description"
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "duration": {
+
+
+
+
+
+
+
+                                                    "type": "integer",
+
+
+
+
+
+
+
+                                                    "description": "Media duration (for videos)"
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "clip_id": {
+
+
+
+
+
+
+
+                                                    "type": "integer",
+
+
+
+
+
+
+
+                                                    "description": "Clip ID"
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "clip_info": {
+
+
+
+
+
+
+
+                                                    "type": "object",
+
+
+
+
+
+
+
+                                                    "description": "Clip information",
+
+
+
+
+
+
+
+                                                    "nullable": true
+
+
+
+
+
+
+
+                                                },
+
+
+
+
+
+
+
+                                                "cover_url": {
+
+
+
+
+
+
+
+                                                    "type": "string",
+
+
+
+
+
+
+
+                                                    "description": "Cover image URL"
+
+
+
+
+
+
+
+                                                }
+
+
+
+
+
+
+
+                                            }
+
+
+
+
+
+
+
+                                        }
+
+
+
+
+
+
+
                                     }
 
 
@@ -6640,15 +7846,7 @@
 
 
 
-                                },
-
-
-
-
-
-
-
-                                "required": ["product_id"]
+                                }
 
 
 
@@ -6672,7 +7870,319 @@
 
 
 
-                    }
+                    },
+
+
+
+
+
+
+
+                    "responses": {
+
+
+
+
+
+
+
+                        "200": {
+
+
+
+
+
+
+
+                            "description": "Product updated successfully",
+
+
+
+
+
+
+
+                            "content": {
+
+
+
+
+
+
+
+                                "application/json": {
+
+
+
+
+
+
+
+                                    "schema": {
+
+
+
+
+
+
+
+                                        "type": "object",
+
+
+
+
+
+
+
+                                        "properties": {
+
+
+
+
+
+
+
+                                            "code": {
+
+
+
+
+
+
+
+                                                "type": "integer",
+
+
+
+
+
+
+
+                                                "description": "Response code. 0 indicates success",
+
+
+
+
+
+
+
+                                                "example": 0
+
+
+
+
+
+
+
+                                            },
+
+
+
+
+
+
+
+                                            "msg": {
+
+
+
+
+
+
+
+                                                "type": "string",
+
+
+
+
+
+
+
+                                                "description": "Response message",
+
+
+
+
+
+
+
+                                                "example": "success"
+
+
+
+
+
+
+
+                                            }
+
+
+
+
+
+
+
+                                        }
+
+
+
+
+
+
+
+                                    }
+
+
+
+
+
+
+
+                                }
+
+
+
+
+
+
+
+                            }
+
+
+
+
+
+
+
+                        },
+
+
+
+
+
+
+
+                        "400": {
+
+
+
+
+
+
+
+                            "description": "Invalid request",
+
+
+
+
+
+
+
+                            "content": {
+
+
+
+
+
+
+
+                                "application/json": {
+
+
+
+
+
+
+
+                                    "schema": {
+
+
+
+
+
+
+
+                                        "$ref": "#/components/schemas/Error"
+
+
+
+
+
+
+
+                                    }
+
+
+
+
+
+
+
+                                }
+
+
+
+
+
+
+
+                            }
+
+
+
+
+
+
+
+                        }
+
+
+
+
+
+
+
+                    },
+
+
+
+
+
+
+
+                    "security": [
+
+
+
+
+
+
+
+                        {
+
+
+
+
+
+
+
+                            "apiKeyAuth": []
+
+
+
+
+
+
+
+                        }
+
+
+
+
+
+
+
+                    ]
 
 
 
@@ -6694,15 +8204,7 @@
 
 
 
-
-
         },
-
-
-
-
-
-
 
         "/open/project/render": {
 
@@ -7201,6 +8703,14 @@
 
 
         }
+
+
+
+
+
+
+
+        
 
 
 
