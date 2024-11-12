@@ -3,10 +3,10 @@ title: 'Getting Started'
 description: 'Prerequisite and how to get help.'
 ---
 
+If you have any further questions about using the API, please don’t hesitate to reach out to us at [support@jogg.ai](mailto:support@jogg.ai) and include your Discord username. Our dedicated support team is ready to assist you.
+
 Welcome to JoggAI API
 The JoggAI API unlocks new possibilities, enabling you to effortlessly create dynamic avatar videos and seamlessly integrate JoggAI's advanced AI features into your product. Harness the power of JoggAI's innovative technology! Step into the future of video creation – happy creating!
-
-If you have any further questions about using the API, please don’t hesitate to reach out to us at [support@jogg.ai](mailto:support@jogg.ai) and include your Discord username. Our dedicated support team is ready to assist you.
 
 #### Create a account
 
