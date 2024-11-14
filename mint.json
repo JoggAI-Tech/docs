@@ -70,8 +70,8 @@
     {
       "group": "API Documentation",
       "pages": [
-        "api-reference/API Documentation/CreateVideoFromURL",
         "api-reference/API Documentation/CreateAvatarVideo",
+        "api-reference/API Documentation/CreateVideoFromURL",
         {
           "group":"Create Video from Templates",
           "pages":[
