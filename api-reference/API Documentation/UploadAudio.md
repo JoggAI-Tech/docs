@@ -1,6 +1,6 @@
 ---
 title: "Upload Audio as Voice"
-description: "create avatar video by upload audio."
+description: "create avatar video by uploading audio."
 ---
 
 ### Get Available Avatars

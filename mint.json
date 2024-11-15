@@ -70,8 +70,13 @@
     {
       "group": "API Documentation",
       "pages": [
+              {
+          "group":"Create Avatar Videos",
+          "pages":[
         "api-reference/API Documentation/CreateAvatarVideo",
-        "api-reference/API Documentation/UploadAudio",        
+        "api-reference/API Documentation/UploadAudio"
+          ]        
+          },     
         "api-reference/API Documentation/CreateVideoFromURL",
         {
           "group":"Create Video from Templates",
@@ -92,7 +97,8 @@
       "group": "Endpoint Examples",
       "pages": [
         "api-reference/endpoint/URL2Video",
-        "api-reference/endpoint/ExtractProductInformation",        "api-reference/endpoint/get",
+        "api-reference/endpoint/ExtractProductInformation",        
+        "api-reference/endpoint/get",
         "api-reference/endpoint/create",
         "api-reference/endpoint/GetURL",
         "api-reference/endpoint/upload",
