@@ -1,18329 +1,2471 @@
 {
 
+	"openapi": "3.0.1",
 
+	"info": {
 
+		"title": "OpenAPI Render API",
 
+		"description": "A sample API that demonstrates features in the OpenAPI specification",
 
+		"license": {
 
+			"name": "MIT"
 
+		},
 
+		"version": "1.0.0"
 
+	},
 
+	"servers": [
 
+		{
 
+			"url": "https://api-services.jogg.ai"
 
+		}
 
+	],
 
-    "openapi": "3.0.1",
+	"security": [
 
+		{
 
+			"apiKeyAuth": []
 
+		}
 
+	],
 
+	"tags": [
 
+		{
 
+			"name": "Product Video Generation",
 
+			"description": "Product video generation workflow:\n\n1. First call POST /open/product to crawl product information\n2. Optionally call PUT /open/product to modify product details using the product_id from step 1\n3. Finally call POST /open/project/render to generate video using the prj_id from step 1"
 
+		}
 
+	],
 
+	"paths": {
 
+		"/open/render": {
 
+			"post": {
 
+				"description": "Renders a template with specified variables",
 
-    "info": {
+				"requestBody": {
 
+					"content": {
 
+						"application/json": {
 
+							"schema": {
 
+								"type": "object",
 
+								"properties": {
 
+									"text": {
 
+										"type": "string",
 
+										"example": "default"
 
+									},
 
+									"lang": {
 
+										"type": "string",
 
+										"description": "Language for text-to-speech conversion",
 
+										"enum": [
 
+											"english",
 
-        "title": "OpenAPI Render API",
+											"filipino",
 
+											"french",
 
+											"german",
 
+											"hindi",
 
+											"indonesian",
 
+											"italian",
 
+											"japanese",
 
+											"korean",
 
+											"malay",
 
+											"portuguese",
 
+											"russian",
 
+											"spanish",
 
+											"thai",
 
+											"vietnamese",
 
+											"arabic",
 
-        "description": "A sample API that demonstrates features in the OpenAPI specification",
+											"greek",
 
+											"turkish",
 
+											"slovenian",
 
+											"croatian",
 
+											"romanian",
 
+											"chinese",
 
+											"bengali",
 
+											"urdu",
 
+											"hungarian",
 
+											"traditional-chinese",
 
+											"polish"
 
+										],
 
+										"example": "english"
 
+									},
 
+									"template_id": {
 
-        "license": {
+										"type": "integer",
 
+										"example": 96
 
+									},
 
+									"template_type": {
 
+										"type": "string",
 
+										"example": "user"
 
+									},
 
+									"dp_id": {
 
+										"type": "integer",
 
+										"example": 0
 
+									},
 
+									"timbre_td": {
 
+										"type": "integer",
 
+										"example": 0
 
+									},
 
-            "name": "MIT"
+									"without_tts": {
 
+										"type": "integer",
 
+										"example": 1
 
+									},
 
+									"variables": {
 
+										"type": "array",
 
+										"items": {
 
+											"type": "object",
 
+											"properties": {
 
+												"name": {
 
+													"type": "string"
 
+												},
 
+												"type": {
 
+													"type": "string"
 
+												},
 
-        },
+												"properties": {
 
+													"type": "object",
 
+													"additionalProperties": true
 
+												}
 
+											}
 
+										}
 
+									}
 
+								},
 
+								"required": [
 
+									"text",
 
+									"lang",
 
+									"template_id",
 
+									"template_type",
 
+									"variables"
 
+								]
 
-        "version": "1.0.0"
+							}
 
+						}
 
+					},
 
+					"required": true
 
+				},
 
+				"responses": {
 
+					"200": {
 
+						"description": "Successful render response",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"type": "object",
 
+									"properties": {
 
+										"code": {
 
+											"type": "integer",
 
-    },
+											"description": "Response code. Normally 0."
 
+										},
 
+										"msg": {
 
+											"type": "string",
 
+											"description": "Response message"
 
+										},
 
+										"data": {
 
+											"type": "object",
 
+											"properties": {
 
+												"prj_id": {
 
+													"type": "string",
 
+													"description": "Project ID, used for querying synthesis status via the prj_info endpoint."
 
+												}
 
+											}
 
+										}
 
-    "servers": [
+									}
 
+								}
 
+							}
 
+						}
 
+					},
 
+					"400": {
 
+						"description": "Error in request",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"$ref": "#/components/schemas/Error"
 
+								}
 
+							}
 
+						}
 
+					}
 
-        {
+				}
 
+			}
 
+		},
 
+		"/open/upload/sign": {
 
+			"post": {
 
+				"summary": "Get Signed URL",
 
+				"description": "Generate a signed URL for file upload. Use the `sign_url` obtained here to upload your file.",
 
+				"requestBody": {
 
+					"description": "Data required for file upload",
 
+					"content": {
 
+						"application/json": {
 
+							"schema": {
 
+								"type": "object",
 
+								"properties": {
 
+									"filetype": {
 
-            "url": "https://api-services.jogg.ai"
+										"type": "string",
 
+										"example": "image/jpeg"
 
+									},
 
+									"filename": {
 
+										"type": "string",
 
+										"example": "1.jpg"
 
+									},
 
+									"use_to": {
 
+										"type": "string",
 
+										"example": "media"
 
+									}
 
+								},
 
+								"required": [
 
+									"filetype",
 
+									"filename",
 
-        }
+									"use_to"
 
+								]
 
+							}
 
+						}
 
+					},
 
+					"required": true
 
+				},
 
+				"responses": {
 
+					"200": {
 
+						"description": "Successful response",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"type": "object",
 
+									"properties": {
 
-    ],
+										"sign_url": {
 
+											"type": "string",
 
+											"description": "Use the sign_url to upload your file with a PUT request, including the file data in the request body. This is a direct upload to the signed URL."
 
+										},
 
+										"full_path": {
 
+											"type": "string",
 
+											"description": "URL after file upload"
 
+										},
 
+										"key": {
 
+											"type": "string",
 
+											"description": "Relative path after file upload"
 
+										}
 
+									}
 
+								}
 
+							}
 
-    "security": [
+						}
 
+					}
 
+				}
 
+			}
 
+		},
 
+		"/open/prj_info": {
 
+			"get": {
 
+				"summary": "Get Project Information",
 
+				"description": "Retrieve information about a specific project using its ID.",
 
+				"parameters": [
 
+					{
 
+						"name": "project_id",
 
+						"in": "query",
 
+						"required": true,
 
+						"schema": {
 
-        {
+							"type": "string"
 
+						},
 
+						"description": "The ID of the project to retrieve information for."
 
+					}
 
+				],
 
+				"responses": {
 
+					"200": {
 
+						"description": "Project information retrieved successfully",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"type": "object",
 
+									"properties": {
 
+										"code": {
 
+											"type": "integer",
 
-            "apiKeyAuth": []
+											"description": "Response code"
 
+										},
 
+										"msg": {
 
+											"type": "string",
 
+											"description": "Response message"
 
+										},
 
+										"data": {
 
+											"type": "object",
 
+											"properties": {
 
+												"id": {
 
+													"type": "string",
 
+													"description": "Project ID"
 
+												},
 
+												"title": {
 
+													"type": "string",
 
-        }
+													"description": "Project title"
 
+												},
 
+												"progress": {
 
+													"type": "integer",
 
+													"description": "Progress percentage"
 
+												},
 
+												"progress_desc": {
 
+													"type": "string",
 
+													"description": "Description of current progress"
 
+												},
 
+												"aspect_ratio": {
 
+													"type": "integer",
 
+													"description": "Aspect ratio"
 
+												},
 
+												"step": {
 
-    ],
+													"type": "integer",
 
+													"description": "Current step"
 
+												},
 
+												"status": {
 
+													"type": "integer",
 
+													"description": "Current status"
 
+												},
 
+												"err_msg": {
 
+													"type": "string",
 
+													"description": "Error message, if any"
 
+												},
 
+												"video_path": {
 
+													"type": "string",
 
+													"description": "Path to the video output"
 
+												},
 
-    "tags": [
+												"video_duration": {
 
+													"type": "integer",
 
+													"description": "Video duration in seconds"
 
+												},
 
+												"video_url": {
 
+													"type": "string",
 
+													"description": "URL to the video output"
 
+												},
 
+												"cover_path": {
 
+													"type": "string",
 
+													"description": "Path to the cover image"
 
+												},
 
+												"cover_url": {
 
+													"type": "string",
 
+													"description": "URL to the cover image"
 
-        {
+												},
 
+												"workspace_index": {
 
+													"type": "integer",
 
+													"description": "Workspace index used"
 
+												},
 
+												"template_id": {
 
+													"type": "integer",
 
+													"description": "Template ID"
 
+												},
 
+												"template_type": {
 
+													"type": "string",
 
+													"description": "Template type ('common', 'user', etc.)"
 
+												},
 
+												"index_template_id": {
 
+													"type": "integer",
 
-            "name": "Product Video Generation",
+													"description": "Index template ID"
 
+												},
 
+												"person_id": {
 
+													"type": "integer",
 
+													"description": "Person ID"
 
+												},
 
+												"placeholder_cover_url": {
 
+													"type": "string",
 
+													"description": "Placeholder cover image URL"
 
+												},
 
+												"created_at": {
 
+													"type": "integer",
 
+													"description": "Creation timestamp"
 
+												},
 
+												"updated_at": {
 
-            "description": "Product video generation workflow:\n\n1. First call POST /open/product to crawl product information\n2. Optionally call PUT /open/product to modify product details using the product_id from step 1\n3. Finally call POST /open/project/render to generate video using the prj_id from step 1"
+													"type": "integer",
 
+													"description": "Last update timestamp"
 
+												}
 
+											}
 
+										}
 
+									}
 
+								}
 
+							}
 
+						}
 
+					},
 
+					"400": {
 
+						"description": "Invalid project ID",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
-        }
+									"$ref": "#/components/schemas/Error"
 
+								}
 
+							}
 
+						}
 
+					}
 
+				}
 
+			}
 
+		},
 
+		"/open/render/talking_avatar": {
 
+			"post": {
 
+				"description": "Creates a talking avatar video with specified parameters",
 
+				"requestBody": {
 
+					"content": {
 
+						"application/json": {
 
+							"schema": {
 
-    ],
+								"type": "object",
 
+								"properties": {
 
+									"script": {
 
+										"type": "string",
 
+										"description": "Script content for the avatar to speak. Must provide either script or audio_url",
 
+										"example": "Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!"
 
+									},
 
+									"audio_script": {
 
+										"type": "object",
 
+										"description": "Audio script details, mutually exclusive with script",
 
+										"required": [
 
+											"url",
 
+											"duration"
 
+										],
 
+										"properties": {
 
-    "paths": {
+											"url": {
 
+												"type": "string",
 
+												"description": "Audio file URL"
 
+											},
 
+											"duration": {
 
+												"type": "number",
 
+												"format": "float",
 
+												"description": "Audio duration in seconds"
 
+											}
 
+										}
 
+									},
 
+									"aspect_ratio": {
 
+										"type": "integer",
 
+										"description": "Aspect ratio of the output video. 0: [9:16], 1: [16:9], 2: [1:1]",
 
+										"enum": [
 
-        "/open/render": {
+											0,
 
+											1,
 
+											2
 
+										],
 
+										"example": 0
 
+									},
 
+									"screen_style": {
 
+										"type": "integer",
 
+										"description": "Background style. 1: with background, 2: green screen",
 
+										"enum": [
 
+											1,
 
+											2
 
+										],
 
+										"example": 1
 
+									},
 
-            "post": {
+									"person_id": {
 
+										"type": "integer",
 
+										"description": "ID of the avatar person to use",
 
+										"example": 81
 
+									},
 
+									"person_source": {
 
+										"type": "integer",
 
+										"description": "Source type of the person. 0: official avatar, 1: custom user avatar",
 
+										"enum": [
 
+											0,
 
+											1
 
+										],
 
+										"example": 0
 
+									},
 
+									"tts_voice_id": {
 
-                "description": "Renders a template with specified variables",
+										"type": "string",
 
+										"description": "ID of the text-to-speech voice to use",
 
+										"example": "en-US-ChristopherNeural"
 
+									},
 
+									"render_subtitle": {
 
+										"type": "integer",
 
+										"description": "Subtitle option. 1: enable subtitles, 2: disable subtitles",
 
+										"enum": [
 
+											1,
 
+											2
 
+										],
 
+										"example": 2
 
+									}
 
+								},
 
+								"required": [
 
-                "requestBody": {
+									"screen_style",
 
+									"person_id",
 
+									"tts_voice_id"
 
+								]
 
+							}
 
+						}
 
+					},
 
+					"required": true
 
+				},
 
+				"responses": {
 
+					"200": {
 
+						"description": "Successful render response",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
-                    "content": {
+									"$ref": "#/components/schemas/RenderResponse"
 
+								}
 
+							}
 
+						}
 
+					},
 
+					"400": {
 
+						"description": "Error in request",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"$ref": "#/components/schemas/Error"
 
+								}
 
+							}
 
+						}
 
+					}
 
-                        "application/json": {
+				}
 
+			}
 
+		},
 
+		"/open/avatar": {
 
+			"get": {
 
+				"summary": "Get Avatar List",
 
+				"description": "Retrieve a list of available avatars with specified filters",
 
+				"parameters": [
 
+					{
 
+						"name": "aspect_ratio",
 
+						"in": "query",
 
+						"description": "Aspect ratio of the video. 0: [9:16], 1: [16:9], 2: [1:1]",
 
+						"required": false,
 
+						"schema": {
 
+							"type": "integer",
 
-                            "schema": {
+							"enum": [
 
+								0,
 
+								1,
 
+								2
 
+							]
 
+						}
 
+					}
 
+				],
 
+				"responses": {
 
+					"200": {
 
+						"description": "Successful response",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"type": "object",
 
-                                "type": "object",
+									"properties": {
 
+										"code": {
 
+											"type": "integer",
 
+											"description": "Response code. 0 indicates success",
 
+											"example": 0
 
+										},
 
+										"msg": {
 
+											"type": "string",
 
+											"description": "Response message",
 
+											"example": "success"
 
+										},
 
+										"data": {
 
+											"type": "object",
 
+											"properties": {
 
+												"avatars": {
 
-                                "properties": {
+													"type": "array",
 
+													"items": {
 
+														"type": "object",
 
+														"properties": {
 
+															"id": {
 
+																"type": "integer",
 
+																"description": "Avatar ID",
 
+																"example": 81
 
+															},
 
+															"name": {
 
+																"type": "string",
 
+																"description": "Avatar name",
 
+																"example": "Amanda outdoors"
 
+															},
 
+															"cover_url": {
 
-                                    "text": {
+																"type": "string",
 
+																"description": "URL of the cover image",
 
+																"example": "https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png"
 
+															}
 
+														}
 
+													}
 
+												}
 
+											}
 
+										}
 
+									},
 
+									"required": [
 
+										"code",
 
+										"msg",
 
+										"data"
 
+									]
 
-                                        "type": "string",
+								}
 
+							}
 
+						}
 
+					},
 
+					"400": {
 
+						"description": "Error in request",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"$ref": "#/components/schemas/Error"
 
+								}
 
+							}
 
+						}
 
+					}
 
+				}
 
-                                        "example": "default"
+			}
 
+		},
 
+		"/open/avatar/user": {
 
+			"get": {
 
+				"summary": "Get User Avatar List",
 
+				"description": "Retrieve a list of user's available avatar with specified filters",
 
+				"parameters": [
 
+					{
 
+						"name": "aspect_ratio",
 
+						"in": "query",
 
+						"description": "Aspect ratio of the video. 0: [9:16], 1: [16:9], 2: [1:1]",
 
+						"required": false,
 
+						"schema": {
 
+							"type": "integer",
 
+							"enum": [
 
-                                    },
+								0,
 
+								1,
 
+								2
 
+							]
 
+						}
 
+					}
 
+				],
 
+				"responses": {
 
+					"200": {
 
+						"description": "Successful response",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"type": "object",
 
+									"properties": {
 
-                                    "lang": {
+										"code": {
 
+											"type": "integer",
 
+											"description": "Response code. 0 indicates success",
 
+											"example": 0
 
+										},
 
+										"msg": {
 
+											"type": "string",
 
+											"description": "Response message",
 
+											"example": "success"
 
+										},
 
+										"data": {
 
+											"type": "object",
 
+											"properties": {
 
+												"avatars": {
 
+													"type": "array",
 
-                                        "type": "string",
+													"items": {
 
+														"type": "object",
 
+														"properties": {
 
+															"id": {
 
+																"type": "integer",
 
+																"description": "Avatar ID",
 
+																"example": 81
 
+															},
 
+															"name": {
 
+																"type": "string",
 
+																"description": "Avatar name",
 
+																"example": "Amanda outdoors"
 
+															},
 
+															"cover_url": {
 
+																"type": "string",
 
-                                        "description": "Language for text-to-speech conversion",
+																"description": "URL of the cover image",
 
+																"example": "https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png"
 
+															},
 
+															"api_only": {
 
+																"type": "boolean",
 
+																"description": "Whether avatar is only available via API"
 
+															},
 
+															"product_status": {
 
+																"type": "integer",
 
+																"description": "Production status: 0:in progress, 1:success, 2:failed",
 
+																"enum": [
 
+																	0,
 
+																	1,
 
+																	2
 
+																]
 
-                                        "enum": [
+															},
 
+															"fail_msg": {
 
+																"type": "string",
 
+																"description": "Failure message when product_status is 2"
 
+															}
 
+														}
 
+													}
 
+												}
 
+											}
 
+										}
 
+									},
 
+									"required": [
 
+										"code",
 
+										"msg",
 
+										"data"
 
-                                            "english",
+									]
 
+								}
 
+							}
 
+						}
 
+					},
 
+					"400": {
 
+						"description": "Error in request",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"$ref": "#/components/schemas/Error"
 
+								}
 
+							}
 
+						}
 
+					}
 
-                                            "filipino",
+				},
 
+				"security": [
 
+					{
 
+						"apiKeyAuth": []
 
+					}
 
+				]
 
+			}
 
+		},
 
+		"/open/timbre": {
 
+			"get": {
 
+				"summary": "Get Timbre List",
 
+				"description": "Retrieve a list of available voice timbres with specified gender filter",
 
+				"parameters": [
 
+					{
 
+						"name": "gender",
 
-                                            "french",
+						"in": "query",
 
+						"description": "Filter timbres by gender (female/male)",
 
+						"required": false,
 
+						"schema": {
 
+							"type": "string",
 
+							"enum": [
 
+								"female",
 
+								"male"
 
+							]
 
+						}
 
+					}
 
+				],
 
+				"responses": {
 
+					"200": {
 
+						"description": "Successful response",
 
-                                            "german",
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"type": "object",
 
+									"properties": {
 
+										"code": {
 
+											"type": "integer",
 
+											"description": "Response code. 0 indicates success",
 
+											"example": 0
 
+										},
 
+										"msg": {
 
+											"type": "string",
 
+											"description": "Response message",
 
+											"example": "success"
 
+										},
 
-                                            "hindi",
+										"data": {
 
+											"type": "object",
 
+											"properties": {
 
+												"total": {
 
+													"type": "integer",
 
+													"description": "Total number of timbres",
 
+													"example": 10
 
+												},
 
+												"timbres": {
 
+													"type": "array",
 
+													"items": {
 
+														"type": "object",
 
+														"properties": {
 
+															"name": {
 
+																"type": "string",
 
-                                            "indonesian",
+																"description": "Timbre name",
 
+																"example": "Emily"
 
+															},
 
+															"lang_id": {
 
+																"type": "string",
 
+																"description": "Language identifier",
 
+																"example": "8xUNyTgckMBsX4jn4Lxf"
 
+															},
 
+															"audition_url": {
 
+																"type": "string",
 
+																"description": "URL for the audition audio file",
 
+																"example": "https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3"
 
+															},
 
+															"language": {
 
+																"type": "string",
 
-                                            "italian",
+																"description": "Language of the voice timbre",
 
+																"example": "english"
 
+															}
 
+														}
 
+													}
 
+												}
 
+											}
 
+										}
 
+									},
 
+									"required": [
 
+										"code",
 
+										"msg",
 
+										"data"
 
+									]
 
+								}
 
-                                            "japanese",
+							}
 
+						}
 
+					},
 
+					"400": {
 
+						"description": "Error in request",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"$ref": "#/components/schemas/Error"
 
+								}
 
+							}
 
+						}
 
+					}
 
+				},
 
+				"security": [
 
-                                            "korean",
+					{
 
+						"apiKeyAuth": []
 
+					}
 
+				]
 
+			}
 
+		},
 
+		"/open/timbre/user": {
 
+			"get": {
 
+				"summary": "Get User Timbre List",
 
+				"description": "Retrieve a list of user's available voice timbres with specified gender filter",
 
+				"parameters": [
 
+					{
 
+						"name": "gender",
 
+						"in": "query",
 
+						"description": "Filter timbres by gender (female/male)",
 
-                                            "malay",
+						"required": false,
 
+						"schema": {
 
+							"type": "string",
 
+							"enum": [
 
+								"female",
 
+								"male"
 
+							]
 
+						}
 
+					}
 
+				],
 
+				"responses": {
 
+					"200": {
 
+						"description": "Successful response",
 
+						"content": {
 
+							"application/json": {
 
-                                            "portuguese",
+								"schema": {
 
+									"type": "object",
 
+									"properties": {
 
+										"code": {
 
+											"type": "integer",
 
+											"description": "Response code. 0 indicates success",
 
+											"example": 0
 
+										},
 
+										"msg": {
 
+											"type": "string",
 
+											"description": "Response message",
 
+											"example": "success"
 
+										},
 
+										"data": {
 
+											"type": "object",
 
-                                            "russian",
+											"properties": {
 
+												"total": {
 
+													"type": "integer",
 
+													"description": "Total number of timbres",
 
+													"example": 14
 
+												},
 
+												"timbres": {
 
+													"type": "array",
 
+													"items": {
 
+														"type": "object",
 
+														"properties": {
 
+															"name": {
 
+																"type": "string",
 
+																"description": "Timbre name",
 
+																"example": "Emily"
 
-                                            "spanish",
+															},
 
+															"lang_id": {
 
+																"type": "string",
 
+																"description": "Language identifier",
 
+																"example": "8xUNyTgckMBsX4jn4Lxf"
 
+															},
 
+															"audition_url": {
 
+																"type": "string",
 
+																"description": "URL for the audition audio file",
 
+																"example": "https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3"
 
+															},
 
+															"language": {
 
+																"type": "string",
 
+																"description": "Language of the voice timbre",
 
+																"example": "english"
 
-                                            "thai",
+															}
 
+														}
 
+													}
 
+												}
 
+											}
 
+										}
 
+									},
 
+									"required": [
 
+										"code",
 
+										"msg",
 
+										"data"
 
+									]
 
+								}
 
+							}
 
+						}
 
-                                            "vietnamese",
+					},
 
+					"400": {
 
+						"description": "Error in request",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"$ref": "#/components/schemas/Error"
 
+								}
 
+							}
 
+						}
 
+					}
 
+				},
 
+				"security": [
 
+					{
 
+						"apiKeyAuth": []
 
-                                            "arabic",
+					}
 
+				]
 
+			}
 
+		},
 
+		"/open/product": {
 
+			"post": {
 
+				"tags": [
 
+					"Product Video Generation"
 
+				],
 
+				"summary": "Step 1: Get Product Information",
 
+				"description": "Retrieve product information by crawling the provided URL. The response contains two important IDs:\n- product_id: Used in Step 2 for updating product information\n- prj_id: Used in Step 3 for video generation",
 
+				"requestBody": {
 
+					"required": true,
 
+					"content": {
 
+						"application/json": {
 
-                                            "greek",
+							"schema": {
 
+								"type": "object",
 
+								"properties": {
 
+									"url": {
 
+										"type": "string",
 
+										"description": "URL of the product to crawl",
 
+										"example": "https://www.amazon.com/product-url"
 
+									}
 
+								},
 
+								"required": [
 
+									"url"
 
+								]
 
+							}
 
+						}
 
+					}
 
-                                            "turkish",
+				},
 
+				"responses": {
 
+					"200": {
 
+						"description": "Product information retrieved successfully",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"type": "object",
 
+									"properties": {
 
+										"code": {
 
+											"type": "integer",
 
+											"description": "Response code. 0 indicates success"
 
+										},
 
+										"msg": {
 
+											"type": "string",
 
-                                            "slovenian",
+											"description": "Response message"
 
+										},
 
+										"data": {
 
+											"type": "object",
 
+											"properties": {
 
+												"id": {
 
+													"type": "integer",
 
+													"description": "Product ID - Save this for Step 2 (PUT /open/product) if you need to update product information",
 
+													"example": 3924
 
+												},
 
+												"prj_id": {
 
+													"type": "string",
 
+													"description": "Project ID - Save this for Step 3 (POST /open/project/render) to generate the video",
 
+													"example": "2508cd37da0a4f978623827f71ba995c"
 
+												}
 
-                                            "croatian",
+											}
 
+										}
 
+									}
 
+								}
 
+							}
 
+						}
 
+					},
 
+					"400": {
 
+						"description": "Invalid request",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"$ref": "#/components/schemas/Error"
 
+								}
 
+							}
 
-                                            "romanian",
+						}
 
+					}
 
+				},
 
+				"security": [
 
+					{
 
+						"apiKeyAuth": []
 
+					}
 
+				]
 
+			},
 
+			"put": {
 
+				"tags": [
 
+					"Product Video Generation"
 
+				],
 
+				"summary": "Step 2 (Optional): Update Product Information",
 
+				"description": "Optional step to update product details. Use the product_id received from Step 1 (POST /open/product response)",
 
-                                            "chinese",
+				"requestBody": {
 
+					"required": true,
 
+					"content": {
 
+						"application/json": {
 
+							"schema": {
 
+								"type": "object",
 
+								"required": [
 
+									"product_id"
 
+								],
 
+								"properties": {
 
+									"product_id": {
 
+										"type": "integer",
 
+										"description": "Product ID obtained from Step 1 (POST /open/product) response data.id",
 
+										"example": 3924
 
+									},
 
-                                            "bengali",
+									"title": {
 
+										"type": "string",
 
+										"description": "Product title",
 
+										"example": ""
 
+									},
 
+									"intro_text": {
 
+										"type": "string",
 
+										"description": "Product introduction and selling points",
 
+										"example": ""
 
+									},
 
+									"target_audience": {
 
+										"type": "string",
 
+										"description": "Target audience for the product",
 
+										"example": ""
 
+									},
 
-                                            "urdu",
+									"intro_medias": {
 
+										"type": "array",
 
+										"description": "Media resources array (will replace existing media if provided)",
 
+										"items": {
 
+											"type": "object",
 
+											"properties": {
 
+												"replace_key": {
 
+													"type": "string",
 
+													"description": "Replacement key for the media"
 
+												},
 
+												"type": {
 
+													"type": "integer",
 
+													"description": "Media type (1: image, 2: video)",
 
+													"enum": [
 
+														1,
 
-                                            "hungarian",
+														2
 
+													]
 
+												},
 
+												"name": {
 
+													"type": "string",
 
+													"description": "Media name"
 
+												},
 
+												"url": {
 
+													"type": "string",
 
+													"description": "Media URL"
 
+												},
 
+												"preview_url": {
 
+													"type": "string",
 
+													"description": "Preview URL"
 
+												},
 
-                                            "traditional-chinese",
+												"w": {
 
+													"type": "integer",
 
+													"description": "Media width"
 
+												},
 
+												"h": {
 
+													"type": "integer",
 
+													"description": "Media height"
 
+												},
 
+												"description": {
 
+													"type": "string",
 
+													"description": "Media description"
 
+												},
 
+												"duration": {
 
+													"type": "integer",
 
+													"description": "Media duration (for videos)"
 
-                                            "polish"
+												},
 
+												"clip_id": {
 
+													"type": "integer",
 
+													"description": "Clip ID"
 
+												},
 
+												"clip_info": {
 
+													"type": "object",
 
+													"description": "Clip information",
 
+													"nullable": true
 
+												},
 
+												"cover_url": {
 
+													"type": "string",
 
+													"description": "Cover image URL"
 
+												}
 
+											}
 
-                                        ],
+										}
 
+									}
 
+								}
 
+							}
 
+						}
 
+					},
 
+					"responses": {
 
+						"200": {
 
+							"description": "Product updated successfully",
 
+							"content": {
 
+								"application/json": {
 
+									"schema": {
 
+										"type": "object",
 
+										"properties": {
 
+											"code": {
 
-                                        "example": "english"
+												"type": "integer",
 
+												"description": "Response code. 0 indicates success",
 
+												"example": 0
 
+											},
 
+											"msg": {
 
+												"type": "string",
 
+												"description": "Response message",
 
+												"example": "success"
 
+											}
 
+										}
 
+									}
 
+								}
 
+							}
 
+						},
 
+						"400": {
 
-                                    },
+							"description": "Invalid request",
 
+							"content": {
 
+								"application/json": {
 
+									"schema": {
 
+										"$ref": "#/components/schemas/Error"
 
+									}
 
+								}
 
+							}
 
+						}
 
+					},
 
+					"security": [
 
+						{
 
+							"apiKeyAuth": []
 
+						}
 
+					]
 
-                                    "template_id": {
+				}
 
+			}
 
+		},
 
+		"/open/project/render": {
 
+			"post": {
 
+				"tags": [
 
+					"Product Video Generation"
 
+				],
 
+				"summary": "Step 3: Generate Product Video",
 
+				"description": "Final step to generate the product video. Use the prj_id received from Step 1 (POST /open/product response)",
 
+				"requestBody": {
 
+					"content": {
 
+						"application/json": {
 
+							"schema": {
 
+								"type": "object",
 
-                                        "type": "integer",
+								"properties": {
 
+									"project_id": {
 
+										"type": "string",
 
+										"description": "Project ID obtained from Step 1 (POST /open/product) response data.prj_id",
 
+										"example": "2508cd37da0a4f978623827f71ba995c"
 
+									}
 
+								},
 
+								"required": [
 
+									"project_id"
 
+								]
 
+							}
 
+						}
 
+					}
 
+				},
 
+				"responses": {
 
-                                        "example": 96
+					"200": {
 
+						"description": "Project render started successfully",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"type": "object",
 
+									"properties": {
 
+										"code": {
 
+											"type": "integer",
 
+											"description": "Response code. 0 indicates success",
 
+											"example": 0
 
+										},
 
+										"msg": {
 
+											"type": "string",
 
+											"description": "Response message",
 
-                                    },
+											"example": "success"
 
+										}
 
+									}
 
+								}
 
+							}
 
+						}
 
+					},
 
+					"400": {
 
+						"description": "Invalid request",
 
+						"content": {
 
+							"application/json": {
 
+								"schema": {
 
+									"$ref": "#/components/schemas/Error"
 
+								}
 
+							}
 
-                                    "template_type": {
+						}
 
+					}
 
+				},
 
+				"security": [
 
+					{
 
+						"apiKeyAuth": []
 
+					}
 
+				]
 
+			}
 
+		}
 
+	},
 
+	"components": {
 
+		"schemas": {
 
+			"Error": {
 
+				"required": [
 
-                                        "type": "string",
+					"error",
 
+					"message"
 
+				],
 
+				"type": "object",
 
+				"properties": {
 
+					"error": {
 
+						"type": "integer",
 
+						"format": "int32"
 
+					},
 
+					"message": {
 
+						"type": "string"
 
+					}
 
+				}
 
+			},
 
+			"RenderResponse": {
 
-                                        "example": "user"
+				"required": [
 
+					"code",
 
+					"msg",
 
+					"data"
 
+				],
 
+				"type": "object",
 
+				"properties": {
 
+					"code": {
 
+						"type": "integer",
 
+						"description": "Response code. Normally 0."
 
+					},
 
+					"msg": {
 
+						"type": "string",
 
+						"description": "Response message"
 
+					},
 
-                                    },
+					"data": {
 
+						"type": "object",
 
+						"properties": {
 
+							"prj_id": {
 
+								"type": "string",
 
+								"description": "Project ID, used for querying synthesis status via the prj_info endpoint."
 
+							}
 
+						}
 
+					}
 
+				}
 
+			}
 
+		},
 
+		"securitySchemes": {
 
+			"apiKeyAuth": {
 
+				"type": "apiKey",
 
-                                    "dp_id": {
+				"in": "header",
 
+				"name": "x-api-key"
 
+			}
 
+		}
 
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "timbre_td": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "without_tts": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "variables": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "array",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "items": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "name": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "type": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "additionalProperties": true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "required": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "text",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "lang",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "template_id",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "template_type",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "variables"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "required": true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Successful render response",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response code. Normally 0."
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response message"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "data": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "prj_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Project ID, used for querying synthesis status via the prj_info endpoint."
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Error in request",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "/open/upload/sign": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "post": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "summary": "Get Signed URL",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Generate a signed URL for file upload. Use the `sign_url` obtained here to upload your file.",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "requestBody": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "description": "Data required for file upload",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "filetype": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": "image/jpeg"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "filename": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": "1.jpg"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "use_to": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": "media"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "required": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "filetype",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "filename",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "use_to"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "required": true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Successful response",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "sign_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Use the sign_url to upload your file with a PUT request, including the file data in the request body. This is a direct upload to the signed URL."
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "full_path": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "URL after file upload"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "key": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Relative path after file upload"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "/open/prj_info": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "get": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "summary": "Get Project Information",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Retrieve information about a specific project using its ID.",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "parameters": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "name": "project_id",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "in": "query",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "required": true,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "type": "string"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "The ID of the project to retrieve information for."
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Project information retrieved successfully",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response code"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response message"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "data": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Project ID"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "title": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Project title"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "progress": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Progress percentage"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "progress_desc": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Description of current progress"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "aspect_ratio": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Aspect ratio"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "step": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Current step"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "status": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Current status"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "err_msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Error message, if any"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "video_path": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Path to the video output"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "video_duration": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Video duration in seconds"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "video_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "URL to the video output"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "cover_path": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Path to the cover image"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "cover_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "URL to the cover image"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "workspace_index": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Workspace index used"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "template_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Template ID"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "template_type": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Template type ('common', 'user', etc.)"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "index_template_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Index template ID"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "person_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Person ID"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "placeholder_cover_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Placeholder cover image URL"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "created_at": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Creation timestamp"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "updated_at": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Last update timestamp"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Invalid project ID",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "/open/render/talking_avatar": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "post": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Creates a talking avatar video with specified parameters",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "requestBody": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "script": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Script content for the avatar to speak. Must provide either script or audio_url",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": "Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "audio_script": {
-
-                                        "type": "object",
-
-                                        "description": "Audio script details, mutually exclusive with script",
-
-                                        "required": ["url", "duration"],
-
-                                        "properties": {
-
-                                            "url": {
-
-                                                "type": "string",
-
-                                                "description": "Audio file URL"
-
-                                            },
-
-                                            "duration": {
-
-                                                "type": "number",
-
-                                                "format": "float",
-
-                                                "description": "Audio duration in seconds"
-
-                                            }
-
-                                        }
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "aspect_ratio": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Aspect ratio of the output video. 0: [9:16], 1: [16:9], 2: [1:1]",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "enum": [0, 1, 2],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "screen_style": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Background style. 1: with background, 2: green screen",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "enum": [1, 2],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": 1
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "person_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "ID of the avatar person to use",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": 81
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "person_source": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Source type of the person. 0: official avatar, 1: custom user avatar",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "enum": [0, 1],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "tts_voice_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "ID of the text-to-speech voice to use",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": "en-US-ChristopherNeural"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "render_subtitle": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Subtitle option. 1: enable subtitles, 2: disable subtitles",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "enum": [1, 2],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": 2
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "required": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "screen_style",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "person_id",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "tts_voice_id"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "required": true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Successful render response",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/RenderResponse"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Error in request",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "/open/avatar": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "get": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "summary": "Get Avatar List",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Retrieve a list of available avatars with specified filters",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "parameters": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "name": "aspect_ratio",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "in": "query",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Aspect ratio of the video. 0: [9:16], 1: [16:9], 2: [1:1]",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "required": false,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "enum": [0, 1, 2]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Successful response",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response code. 0 indicates success",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response message",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": "success"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "data": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "avatars": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "array",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "items": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Avatar ID",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": 81
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "name": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Avatar name",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "Amanda outdoors"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "cover_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "URL of the cover image",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "required": ["code", "msg", "data"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Error in request",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "/open/avatar/user": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "get": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "summary": "Get User Avatar List",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Retrieve a list of user's available avatar with specified filters",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "parameters": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "name": "aspect_ratio",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "in": "query",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Aspect ratio of the video. 0: [9:16], 1: [16:9], 2: [1:1]",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "required": false,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "enum": [0, 1, 2]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Successful response",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response code. 0 indicates success",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response message",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": "success"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "data": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "avatars": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "array",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "items": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Avatar ID",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": 81
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "name": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Avatar name",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "Amanda outdoors"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "cover_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "URL of the cover image",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-                                                            "api_only": {
-
-                                                              "type": "boolean",
-
-                                                              "description": "Whether avatar is only available via API"
-
-                                                            },
-
-                                                            "product_status": {
-
-                                                              "type": "integer",
-
-                                                              "description": "Production status: 0:in progress, 1:success, 2:failed",
-
-                                                              "enum": [0, 1, 2]
-
-                                                            },
-
-                                                            "fail_msg": {
-
-                                                              "type": "string",
-
-                                                              "description": "Failure message when product_status is 2"
-
-                                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "required": ["code", "msg", "data"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Error in request",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "security": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "apiKeyAuth": []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "/open/timbre": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "get": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "summary": "Get Timbre List",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Retrieve a list of available voice timbres with specified gender filter",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "parameters": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "name": "gender",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "in": "query",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Filter timbres by gender (female/male)",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "required": false,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "enum": ["female", "male"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Successful response",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response code. 0 indicates success",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response message",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": "success"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "data": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "total": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Total number of timbres",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "example": 10
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "timbres": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "array",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "items": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "name": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Timbre name",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "Emily"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "lang_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Language identifier",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "8xUNyTgckMBsX4jn4Lxf"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "audition_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "URL for the audition audio file",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "language": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Language of the voice timbre",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "english"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "required": ["code", "msg", "data"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Error in request",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "security": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "apiKeyAuth": []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "/open/timbre/user": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "get": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "summary": "Get User Timbre List",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Retrieve a list of user's available voice timbres with specified gender filter",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "parameters": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "name": "gender",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "in": "query",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Filter timbres by gender (female/male)",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "required": false,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "enum": ["female", "male"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Successful response",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response code. 0 indicates success",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response message",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": "success"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "data": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "total": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Total number of timbres",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "example": 14
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "timbres": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "array",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "items": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "name": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Timbre name",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "Emily"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "lang_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Language identifier",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "8xUNyTgckMBsX4jn4Lxf"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "audition_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "URL for the audition audio file",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            "language": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "description": "Language of the voice timbre",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                                "example": "english"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "required": ["code", "msg", "data"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Error in request",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "security": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "apiKeyAuth": []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "/open/product": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "post": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "tags": ["Product Video Generation"],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "summary": "Step 1: Get Product Information",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Retrieve product information by crawling the provided URL. The response contains two important IDs:\n- product_id: Used in Step 2 for updating product information\n- prj_id: Used in Step 3 for video generation",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "requestBody": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "required": true,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "URL of the product to crawl",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": "https://www.amazon.com/product-url"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "required": ["url"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Product information retrieved successfully",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response code. 0 indicates success"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response message"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "data": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Product ID - Save this for Step 2 (PUT /open/product) if you need to update product information",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "example": 3924
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "prj_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Project ID - Save this for Step 3 (POST /open/project/render) to generate the video",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "example": "2508cd37da0a4f978623827f71ba995c"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Invalid request",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "security": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "apiKeyAuth": []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "put": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "tags": ["Product Video Generation"],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "summary": "Step 2 (Optional): Update Product Information",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Optional step to update product details. Use the product_id received from Step 1 (POST /open/product response)",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "requestBody": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "required": true,
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "required": ["product_id"],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "product_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Product ID obtained from Step 1 (POST /open/product) response data.id",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": 3924
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "title": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Product title",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": ""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "intro_text": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Product introduction and selling points",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": ""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "target_audience": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Target audience for the product",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": ""
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "intro_medias": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "array",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Media resources array (will replace existing media if provided)",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "items": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "replace_key": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Replacement key for the media"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "type": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Media type (1: image, 2: video)",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "enum": [1, 2]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "name": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Media name"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Media URL"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "preview_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Preview URL"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "w": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Media width"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "h": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Media height"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "description": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Media description"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "duration": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Media duration (for videos)"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "clip_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Clip ID"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "clip_info": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Clip information",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "nullable": true
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "cover_url": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                    "description": "Cover image URL"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "description": "Product updated successfully",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "description": "Response code. 0 indicates success",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "description": "Response message",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                                "example": "success"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "description": "Invalid request",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "security": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "apiKeyAuth": []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-        "/open/project/render": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "post": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "tags": ["Product Video Generation"],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "summary": "Step 3: Generate Product Video",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "description": "Final step to generate the product video. Use the prj_id received from Step 1 (POST /open/product response)",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "requestBody": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "project_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "description": "Project ID obtained from Step 1 (POST /open/product) response data.prj_id",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "example": "2508cd37da0a4f978623827f71ba995c"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "required": ["project_id"]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "responses": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "200": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Project render started successfully",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response code. 0 indicates success",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": 0
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "description": "Response message",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                            "example": "success"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "400": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Invalid request",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "content": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "application/json": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "schema": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                    "$ref": "#/components/schemas/Error"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "security": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "apiKeyAuth": []
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    "components": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "schemas": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "Error": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "required": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "error",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "message"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "error": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "format": "int32"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "message": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "type": "string"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "RenderResponse": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "required": [
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "code",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "msg",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "data"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                ],
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "code": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "type": "integer",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Response code. Normally 0."
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "msg": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "description": "Response message"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    "data": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "type": "object",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        "properties": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            "prj_id": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "type": "string",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                                "description": "Project ID, used for querying synthesis status via the prj_info endpoint."
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        },
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        "securitySchemes": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            "apiKeyAuth": {
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "type": "apiKey",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "in": "header",
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-                "name": "x-api-key"
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-    }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	}
 
 }
