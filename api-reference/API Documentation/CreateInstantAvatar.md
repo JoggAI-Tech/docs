@@ -7,8 +7,6 @@ description: "How to create instant avatar."
 
 You can customize your avatar using the Create Instant Avatar API. Input the video path via `origin_url` to create your digital avatar.
 
-You can delete a customized avatar using the Delete Instant Avatar API by selecting it with the avatar's `ID`.
-
 ### Base URL
 
 \`https://api-services.jogg.ai\`
@@ -44,7 +42,7 @@ You can delete a customized avatar using the Delete Instant Avatar API by select
 
 ## Delete Custom Avatar
 
-Delete an existing custom avatar.
+You can delete a customized avatar using the Delete Instant Avatar API by selecting it with the avatar's `ID`.
 
 ### Request Body
 
