@@ -51,48 +51,6 @@ Response example:
 
 ```
 
-#### My Instant Avatars List
-
-```bash
-
-curl --location --request GET 'https://api-services.jogg.ai/open/avatar/user' \
-
---header 'x-api-key: <your-api-key>'
-
-```
-
-Response example:
-
-```json
-
-{
-
-    "code": 0,
-
-    "msg": "success",
-
-    "data": {
-
-        "avatars": [
-
-            {
-
-                "id": 81,          // This ID is the person_id needed for creating Talking Avatar
-
-                "name": "Amanda outdoors",
-
-                "cover_url": "<avatar-cover-url>"
-
-            }
-
-        ]
-
-    }
-
-}
-
-```
-
 ### Get Available Voice Timbres
 
 #### Public Timbre List
