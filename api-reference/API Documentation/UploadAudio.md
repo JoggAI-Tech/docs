@@ -10,6 +10,7 @@ The `audio_script` parameter allows you to input audio by setting the audio pa
 Additionally, you can adjust the Avatar using `person_id` and modify the voice with `tts_voice_id`.
 
 ***
+
 ### Create Talking Avatar Video
 
 ```bash
@@ -62,3 +63,6 @@ Response example:
 }
 
 ```
+### Consumption
+
+The generated video consumption is based on its duration: 1 credit is consumed for every 2 minutes of video.
