@@ -9,11 +9,7 @@ The `audio_script` parameter allows you to input audio by setting the audio pa
 
 Additionally, you can adjust the Avatar using `person_id` and modify the voice with `tts_voice_id`.
 
----
-title: "Using Audio Source as Voice"
-description: "create avatar video by uploading audio."
----
-
+***
 ### Create Talking Avatar Video
 
 ```bash
