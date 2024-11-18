@@ -3,26 +3,15 @@ title: "Create Instant Avatar"
 description: "How to create instant avatar."
 ---
 
-## Base URL
+## Create Instant Avatar
+
+You can customize your avatar using the Create Instant Avatar API. Input the video path via `origin_url` to create your digital avatar.
+
+You can delete a customized avatar using the Delete Instant Avatar API by selecting it with the avatar's `ID`.
+
+### Base URL
 
 \`https://api-services.jogg.ai\`
-
-## Create Custom Avatar
-
-Create a new custom avatar from a video.
-
-## Endpoint
-
-POST /open/avatar/create
-
-````
-
-### Headers
-
-| Key         | Value            |
-|-------------|------------------|
-| X-API-Key   | your_api_key     |
-| Content-Type| application/json |
 
 ### Request Body
 
@@ -31,7 +20,7 @@ POST /open/avatar/create
     "origin_url": "string",  // Required. URL of the source video
     "name": "string"         // Required. Name for the avatar
 }
-````
+```
 
 ### Response
 
@@ -56,19 +45,6 @@ POST /open/avatar/create
 ## Delete Custom Avatar
 
 Delete an existing custom avatar.
-
-### Endpoint
-
-```
-DELETE /open/avatar/delete
-```
-
-### Headers
-
-| Key          | Value            |
-| ------------ | ---------------- |
-| X-API-Key    | your\_api\_key   |
-| Content-Type | application/json |
 
 ### Request Body
 
