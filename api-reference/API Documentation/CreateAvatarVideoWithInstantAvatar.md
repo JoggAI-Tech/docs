@@ -2,6 +2,9 @@
 title: "Create Avatar Videos Using Instant Avatars"
 description: "How to create avatar video with instant avatars."
 ---
+Using the JoggAPI, you can create videos with Instant Avatars. In this tutorial, we'll guide you through making a video using your customized Instant Avatar and cloned Voice.
+
+First, create your Instant Avatar in the JoggAI app. Then, use the Get Available Avatars endpoint to obtain your Avatar ID, and the Get Available Voice endpoint to retrieve your Voice for video creation.
 
 ### Get Available Avatars
 
@@ -49,55 +52,6 @@ Response example:
 
 ### Get Available Voice Timbres
 
-#### Public Timbre List
-
-```bash
-
-curl --location --request GET 'https://api-services.jogg.ai/open/timbre?gender=female' \
-
---header 'x-api-key: <your-api-key>'
-
-```
-
-Parameters:
-
-* `gender`: Filter by gender (female/male)
-
-Response example:
-
-```json
-
-{
-
-    "code": 0,
-
-    "msg": "success",
-
-    "data": {
-
-        "total": 5,
-
-        "timbres": [
-
-            {
-
-                "name": "Emily",
-
-                "lang_id": "8xUNyTgckMBsX4jn4Lxf",    // This ID is the tts_voice_id needed for creating Talking Avatar
-
-                "audition_url": "<timbre-audio-url>",
-
-                "language": "english"
-
-            }
-
-        ]
-
-    }
-
-}
-
-```
 
 #### My Timbre List
 
