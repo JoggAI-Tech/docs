@@ -103,52 +103,6 @@ Response example:
 
 ```
 
-#### My Timbre List
-
-```bash
-
-curl --location --request GET 'https://api-services.jogg.ai/open/timbre/user' \
-
---header 'x-api-key: <your-api-key>'
-
-```
-
-Response example:
-
-```json
-
-{
-
-    "code": 0,
-
-    "msg": "success",
-
-    "data": {
-
-        "total": 5,
-
-        "timbres": [
-
-            {
-
-                "name": "Emily",
-
-                "lang_id": "8xUNyTgckMBsX4jn4Lxf",    // This ID is the tts_voice_id needed for creating Talking Avatar
-
-                "audition_url": "<timbre-audio-url>",
-
-                "language": "english"
-
-            }
-
-        ]
-
-    }
-
-}
-
-```
-
 ### Create Talking Avatar Video
 
 ```bash
