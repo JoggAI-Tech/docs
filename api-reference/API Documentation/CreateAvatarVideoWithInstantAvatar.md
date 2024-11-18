@@ -144,6 +144,4 @@ Response example:
 }
 
 ```
-### Consumption
 
-The generated video consumption is based on its duration: 1 credit is consumed for every 2 minutes of video.

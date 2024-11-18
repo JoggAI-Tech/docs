@@ -119,6 +119,4 @@ Response example:
 ```
 
 Note: After initiating video generation, you can use the project\_id to query the generation status through the /open/prj\_info endpoint.
-### Consumption
 
-The generated video consumption is based on its duration: 1 credit is consumed for every 2 minutes of video.
