@@ -74,6 +74,7 @@
           "group":"Create Avatar Videos",
           "pages":[
         "api-reference/API Documentation/CreateAvatarVideo",
+        "api-reference/API Documentation/CreateAvatarVideoWithInstantAvatar",
         "api-reference/API Documentation/UploadAudio"
           ]        
           },     
