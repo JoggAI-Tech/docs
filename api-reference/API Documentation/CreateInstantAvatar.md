@@ -24,7 +24,7 @@ POST /open/avatar/create
 
 | Key         | Value            |
 |-------------|------------------|
-| X-API-Key   | <your_api_key>   |
+| X-API-Key   | your_api_key     |
 | Content-Type| application/json |
 
 ### Request Body
@@ -68,7 +68,7 @@ DELETE /open/avatar/delete
 
 | Key         | Value            |
 |-------------|------------------|
-| X-API-Key   | <your_api_key>   |
+| X-API-Key   | your_api_key     |
 | Content-Type| application/json |
 
 ### Request Body
