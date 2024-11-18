@@ -1,11 +1,9 @@
 ---
-title: 'Create Avatar Video'
-description: 'How to create avatar video.'
+title: "Create Avatar Videos Using Library Avatars"
+description: "How to create avatar video with the avatars from library."
 ---
 
 ### Get Available Avatars
-
-
 
 #### Public Avatars List
 
@@ -17,13 +15,9 @@ curl --location --request GET 'https://api-services.jogg.ai/open/avatar?aspect_r
 
 ```
 
-
-
 Parameters:
 
-- `aspect_ratio`: Video aspect ratio (0: [9:16], 1: [16:9], 2: [1:1])
-
-
+* `aspect_ratio`: Video aspect ratio (0: \[9:16], 1: \[16:9], 2: \[1:1])
 
 Response example:
 
@@ -56,8 +50,6 @@ Response example:
 }
 
 ```
-
-
 
 #### My Instant Avatars List
 
@@ -69,8 +61,6 @@ curl --location --request GET 'https://api-services.jogg.ai/open/avatar/user' \
 
 ```
 
-
-
 Response example:
 
 ```json
@@ -103,11 +93,7 @@ Response example:
 
 ```
 
-
-
 ### Get Available Voice Timbres
-
-
 
 #### Public Timbre List
 
@@ -119,13 +105,9 @@ curl --location --request GET 'https://api-services.jogg.ai/open/timbre?gender=f
 
 ```
 
-
-
 Parameters:
 
-- `gender`: Filter by gender (female/male)
-
-
+* `gender`: Filter by gender (female/male)
 
 Response example:
 
@@ -162,8 +144,6 @@ Response example:
 }
 
 ```
-
-
 
 #### My Timbre List
 
@@ -175,8 +155,6 @@ curl --location --request GET 'https://api-services.jogg.ai/open/timbre/user' \
 
 ```
 
-
-
 Response example:
 
 ```json
@@ -213,11 +191,7 @@ Response example:
 
 ```
 
-
-
 ### Create Talking Avatar Video
-
-
 
 ```bash
 
@@ -246,8 +220,6 @@ curl --location --request POST 'https://api-services.jogg.ai/open/render/talking
 }'
 
 ```
-
-
 
 Response example:
 
