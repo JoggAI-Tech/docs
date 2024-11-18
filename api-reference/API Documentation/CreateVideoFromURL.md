@@ -101,8 +101,7 @@ curl --location --request POST 'https://api-services.jogg.ai/open/project/render
     "index_template_name": "", // Name of the Template from Library
     "script_style": "Discovery_stage" // Name of the script_style
 
-}'
-LanguageName
+}
 ```
 
 Response example:
