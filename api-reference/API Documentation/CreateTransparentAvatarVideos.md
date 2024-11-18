@@ -1,6 +1,6 @@
 ---
-title: 'Create Transparent Avatar Videos in WebM Format'
-description: 'How to create transparent avatar videos in WebM/MP4 format.'
+title: "Create Transparent Avatar Videos in WebM/MP4 Format"
+description: "How to create transparent avatar videos in WebM/MP4 format."
 ---
 
 You can export videos in WebM format with a transparent background or in MP4 format with a green screen.&#x20;
