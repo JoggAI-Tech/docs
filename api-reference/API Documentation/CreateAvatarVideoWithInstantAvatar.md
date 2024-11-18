@@ -2,7 +2,7 @@
 title: "Create Avatar Videos Using Instant Avatars"
 description: "How to create avatar video with instant avatars."
 ---
-Using the JoggAPI, you can create videos with Instant Avatars. In this tutorial, we'll guide you through making a video using your customized Instant Avatar and cloned Voice.
+Using the JoggAI API, you can create videos with Instant Avatars. In this tutorial, we'll guide you through making a video using your customized Instant Avatar and cloned Voice.
 
 First, create your Instant Avatar in the JoggAI app. Then, use the Get Available Avatars endpoint to obtain your Avatar ID, and the Get Available Voice endpoint to retrieve your Voice for video creation.
 
