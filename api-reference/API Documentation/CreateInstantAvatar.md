@@ -11,6 +11,10 @@ You can customize your avatar using the Create Instant Avatar API. Input the vid
 
 \`https://api-services.jogg.ai\`
 
+### Endpoint
+
+[https://docs.jogg.ai/api-reference/endpoint/CreateInstantAvatar](https://docs.jogg.ai/api-reference/endpoint/CreateInstantAvatar)
+
 ### Request Body
 
 ```json
@@ -43,6 +47,10 @@ You can customize your avatar using the Create Instant Avatar API. Input the vid
 ## Delete Custom Avatar
 
 You can delete a customized avatar using the Delete Instant Avatar API by selecting it with the avatar's `ID`.
+
+### Endpoint
+
+
 
 ### Request Body
 
