@@ -50,7 +50,7 @@ You can delete a customized avatar using the Delete Instant Avatar API by select
 
 ### Endpoint
 
-
+[https://docs.jogg.ai/api-reference/endpoint/DeleteInstantAvatar](https://docs.jogg.ai/api-reference/endpoint/DeleteInstantAvatar)
 
 ### Request Body
 
