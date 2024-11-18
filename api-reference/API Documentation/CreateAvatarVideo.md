@@ -2,11 +2,10 @@
 title: "Create Avatar Videos Using Library Avatars"
 description: "How to create avatar video with the avatars from library."
 ---
+
 Using the JoggAI API, you can create videos with avatars and voices from the library. In this tutorial, we'll guide you through making a video using a library avatar and voice.
 
-First, select your avatar from the library using the Get Available Avatars endpoint to obtain the Avatar ID. Then, choose a voice from the library using the Get Available Voice endpoint for your video creation.
-
-### Get Available Avatars
+First, select your avatar from the library using the `Public Avatars List` endpoint to obtain the Avatar ID. Then, choose a voice from the library using the `Public Voices List` endpoint for your video creation.
 
 #### Public Avatars List
 
@@ -54,9 +53,7 @@ Response example:
 
 ```
 
-### Get Available Voice Timbres
-
-#### Public Timbre List
+#### Public Voices List
 
 ```bash
 
