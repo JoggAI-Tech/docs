@@ -27,7 +27,7 @@ curl --location --request POST 'https://api-services.jogg.ai/open/render/talking
 
     "person_source": 0,         # Avatar source 0: Official avatar, 1: User custom avatar
 
-    "screen_style": 1,          # Background style 1: With background, 2: Green screen, 3: Transparent background(Webm)
+    "screen_style": 3,          # Background style 1: With background, 2: Green screen, 3: Transparent background(Webm)
 
     "tts_voice_id": "en-US-ChristopherNeural",  # Voice timbre ID from 2.2 API (lang_id)
 
