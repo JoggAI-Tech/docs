@@ -79,6 +79,10 @@ curl --location --request PUT 'https://api-services.jogg.ai/open/product' \
 
 ```
 
+### Get Template Name
+You can preview AI templates and obtain template_name on the URL to Video preview page within the app.
+![](/images/Preview.png)
+
 ### Generate Video
 
 ```bash
@@ -119,4 +123,5 @@ Response example:
 ```
 
 Note: After initiating video generation, you can use the project\_id to query the generation status through the /open/prj\_info endpoint.
+
 
