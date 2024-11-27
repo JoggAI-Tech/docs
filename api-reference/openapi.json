@@ -1,7 +1,6 @@
 openapi: 3.0.1
 
 info:
-
   title: OpenAPI Render API
 
   description: A sample API that demonstrates features in the OpenAPI specification
