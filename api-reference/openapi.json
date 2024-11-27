@@ -426,7 +426,7 @@ paths:
 
                         type: integer
 
-                        description: Current status
+                        description: 1: Not Started; 2:In Queue; 3: In Progress; 4: Success; 5: Failure; 99: Deleted
 
                       err_msg:
 
