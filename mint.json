@@ -96,7 +96,78 @@
                 ]
     },
     {
-      "group": "Endpoint Examples",
+      "group": "URL to Video",
+      "pages": [
+        "api-reference/URL-to-Video/UploadURL",
+        "api-reference/URL-to-Video/UpdateProduct",
+        "api-reference/URL-to-Video/CreateVideo"
+      ]
+    }
+    {
+      "group": "Create Avatar Videos",
+      "pages": [
+        "api-reference/Create-Avatar-Videos/CreateAvatarVideo"
+      ]
+    }
+    {
+      "group": "Get Generated Video",
+      "pages": [
+        "api-reference/GetGeneratedVideo/GetGeneratedVideo"
+
+      ]
+    }
+    {
+      "group": "Upload Media",
+      "pages": [
+        "api-reference/UploadFile/UploadFile"
+
+      ]
+    }
+    {
+      "group": "Avatar",
+      "pages": [
+        "api-reference/Avatar/GetAvatarList",
+        "api-reference/Avatar/GetInstantAvatar" 
+      ]
+    }
+    {
+      "group": "Voice",
+      "pages": [
+        "api-reference/endpoint/URL2Video",
+        "api-reference/endpoint/ExtractProductInformation",        
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/GetURL",
+        "api-reference/endpoint/upload",
+        "api-reference/endpoint/TalkingAvatar",
+        "api-reference/endpoint/GetAvatarList",
+        "api-reference/endpoint/InstantAvatar",
+        "api-reference/endpoint/GetVoicesList",
+        "api-reference/endpoint/GetMyVoices",
+        "api-reference/endpoint/openapi"
+
+      ]
+    }
+    {
+      "group": "Visual Style",
+      "pages": [
+        "api-reference/endpoint/URL2Video",
+        "api-reference/endpoint/ExtractProductInformation",        
+        "api-reference/endpoint/get",
+        "api-reference/endpoint/create",
+        "api-reference/endpoint/GetURL",
+        "api-reference/endpoint/upload",
+        "api-reference/endpoint/TalkingAvatar",
+        "api-reference/endpoint/GetAvatarList",
+        "api-reference/endpoint/InstantAvatar",
+        "api-reference/endpoint/GetVoicesList",
+        "api-reference/endpoint/GetMyVoices",
+        "api-reference/endpoint/openapi"
+
+      ]
+    }
+    {
+      "group": "Template",
       "pages": [
         "api-reference/endpoint/URL2Video",
         "api-reference/endpoint/ExtractProductInformation",        
