@@ -21,4 +21,5 @@ You can obtain the API ID and API Key.
 ![](/images/img_1.png)
 
 ### Consumption
-The generated video consumption is based on its duration: 1 credit is consumed for every 2 minutes of video.
+
+The generated video consumption is based on its duration: 1 API credit is consumed for every 2 minutes of video. Less than 2 minutes is calculated as 1 API credit.
