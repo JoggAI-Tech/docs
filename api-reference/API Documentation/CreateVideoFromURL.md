@@ -5,15 +5,15 @@ description: 'How to create video from URL.'
 
 ### Description
 
-Convert a product URL into a promotional video through a three-step process:
+Generate a video from a URL in the following three steps:
 
-1. Extract product information from URL
+1. Upload the URL to create and retrieve product information.
 
-2. Optionally modify product details
+2. Optionally update the product information if necessary.
 
-3. Generate video with the extracted information
+3. Set video parameters based on the product information and proceed with video creation.
 
-### Extract Product Information
+### Upload URL to create product
 
 ```bash
 
@@ -53,7 +53,7 @@ Response example:
 
 ```
 
-### Update Product Details (Optional)
+### Update Product Information(Optional)
 
 ```bash
 
@@ -79,11 +79,7 @@ curl --location --request PUT 'https://api-services.jogg.ai/open/product' \
 
 ```
 
-### Get Template Name
-You can preview AI templates and obtain template_name on the URL to Video preview page within the app.
-![](/images/Preview.png)
-
-### Generate Video
+### Generate Video from Product Information
 
 ```bash
 
@@ -123,5 +119,3 @@ Response example:
 ```
 
 Note: After initiating video generation, you can use the project\_id to query the generation status through the /open/prj\_info endpoint.
-
-
