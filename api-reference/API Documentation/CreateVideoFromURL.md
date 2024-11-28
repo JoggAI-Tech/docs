@@ -13,6 +13,8 @@ Generate a video from a URL in the following three steps:
 
 3. Set video parameters based on the product information and proceed with video creation.
 
+4. Get the generated video.
+
 ### Upload URL to create product
 
 ```bash
@@ -119,3 +121,5 @@ Response example:
 ```
 
 Note: After initiating video generation, you can use the project\_id to query the generation status through the /open/prj\_info endpoint.
+
+### Get the generated video
