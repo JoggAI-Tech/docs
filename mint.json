@@ -133,54 +133,22 @@
     {
       "group": "Voice",
       "pages": [
-        "api-reference/endpoint/URL2Video",
-        "api-reference/endpoint/ExtractProductInformation",        
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/GetURL",
-        "api-reference/endpoint/upload",
-        "api-reference/endpoint/TalkingAvatar",
-        "api-reference/endpoint/GetAvatarList",
-        "api-reference/endpoint/InstantAvatar",
-        "api-reference/endpoint/GetVoicesList",
-        "api-reference/endpoint/GetMyVoices",
-        "api-reference/endpoint/openapi"
+        "api-reference/Voice/GetVoiceList",
+        "api-reference/Voice/GetMyVoice"
 
       ]
     }
     {
       "group": "Visual Style",
       "pages": [
-        "api-reference/endpoint/URL2Video",
-        "api-reference/endpoint/ExtractProductInformation",        
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/GetURL",
-        "api-reference/endpoint/upload",
-        "api-reference/endpoint/TalkingAvatar",
-        "api-reference/endpoint/GetAvatarList",
-        "api-reference/endpoint/InstantAvatar",
-        "api-reference/endpoint/GetVoicesList",
-        "api-reference/endpoint/GetMyVoices",
-        "api-reference/endpoint/openapi"
-
+        "api-reference/Visual-Style/GetVisualStyle"
       ]
     }
     {
       "group": "Template",
       "pages": [
-        "api-reference/endpoint/URL2Video",
-        "api-reference/endpoint/ExtractProductInformation",        
-        "api-reference/endpoint/get",
-        "api-reference/endpoint/create",
-        "api-reference/endpoint/GetURL",
-        "api-reference/endpoint/upload",
-        "api-reference/endpoint/TalkingAvatar",
-        "api-reference/endpoint/GetAvatarList",
-        "api-reference/endpoint/InstantAvatar",
-        "api-reference/endpoint/GetVoicesList",
-        "api-reference/endpoint/GetMyVoices",
-        "api-reference/endpoint/openapi"
+        "api-reference/Template/GetTemplate",
+        "api-reference/Template/GetMyTemplate"
 
       ]
     }
