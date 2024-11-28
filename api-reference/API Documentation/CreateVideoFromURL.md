@@ -7,11 +7,11 @@ description: 'How to create video from URL.'
 
 Generate a video from a URL in the following three steps:
 
-1. Upload the URL to create and retrieve product information.
+1. Upload the URL to create the product and analyze the URL to retrieve product information.
 
-2. Optionally update the product information if necessary.
+2. Update the product information if necessary(Optionally).
 
-3. Set video parameters based on the product information and proceed with video creation.
+3. Initiate video generation based on the product, with the option to adjust video settings.
 
 4. Get the generated video.
 
