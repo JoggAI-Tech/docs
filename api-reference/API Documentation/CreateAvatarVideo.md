@@ -117,7 +117,7 @@ Response example:
 
                 "voice_id": "8xUNyTgckMBsX4jn4Lxf", 
 
-                "audition_url": "<timbre-audio-url>",
+                "audition_url": "<audio-url>",
 
                 "language": "english"
             }
