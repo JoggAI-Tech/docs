@@ -9,52 +9,38 @@ Use the Create Talking Avatar Video API to control the output format by selectin
 
 ### Create Talking Avatar Video
 
+### Create Talking Avatar Video
+
+Creating Avatar videos, supporting the configuration of various video settings including script, aspect ratio, screen style, avatar, and voice.
+
+Please refer to the [Create Talking Avatar Videos](https://docs.jogg.ai/api-reference/Create-Avatar-Videos/CreateAvatarVideo) for more details and refer to the next section for obtaining the avatar\_id and voice\_id.
+
 ```bash
-
-curl --location --request POST 'https://api-services.jogg.ai/open/render/talking_avatar' \
-
+curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking_avatar' \
 --header 'x-api-key: <your-api-key>' \
-
 --header 'Content-Type: application/json' \
-
 --data-raw '{
-
-    "aspect_ratio": 0,          # Aspect ratio 0: [9:16], 1: [16:9], 2: [1:1]
-
-    "script": "Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!",  # Text content to be read
-
-    "person_id": 81,            # Avatar ID from 2.1 API
-
-    "person_source": 0,         # Avatar source 0: Official avatar, 1: User custom avatar
-
-    "screen_style": 3,          # Background style 1: With background, 2: Green screen, 3: Transparent background(Webm)
-
-    "tts_voice_id": "en-US-ChristopherNeural",  # Voice timbre ID from 2.2 API (lang_id)
-
-    "render_subtitle": 2        # Subtitle option 1: Enable, 2: Disable
-
+    "script": "Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!",
+    "aspect_ratio": 0,
+    "screen_style": 1,# Background style 1: With background, 2: Green screen, 3: Transparent background(Webm)
+    "avatar_id": 127,
+    "avatar_type": 0,
+    "voice_id": "en-US-ChristopherNeural",
+    "caption": true
 }'
-
 ```
 
 Response example:
 
 ```json
-
 {
-
+    "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
-
     "msg": "success",
-
     "data": {
-
-        "prj_id": "<project-id>"    # Project ID for status query
-
+        "project_id": "<project-id>"   
     }
-
 }
-
 ```
 
 ### Consumption
