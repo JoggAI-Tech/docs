@@ -14,30 +14,30 @@ info:
 
 servers:
 
-  - url: https://api-services.jogg.ai/open/v1
+  - url: https://api.jogg.ai/v1
 
 security:
-  
+
   - apiKeyAuth: []
 
 tags:
 
-  - name: Product Video Generation
+  - name: Create Video from URL
 
     description: |-
 
       Product video generation workflow:
 
-        1. First call POST /open/product to crawl product information
+        1. First call POST /product to crawl product information
 
-        2. Optionally call PUT /open/product to modify product details using the product_id from step 1
+        2. Optionally call PUT /product to modify product details using the product_id from step 1
 
-        3. Finally call POST /open/project/render to generate video using the product_id from step 1
+        3. Finally call POST /create_video_from_url to generate video using the product_id from step 1
 
 paths:
 
   /create_video_with_variable:
-
+    
     post:
 
       description: Renders a template with specified variables
@@ -134,7 +134,7 @@ paths:
 
                   type: string
 
-                  example: user
+                  example: custom
 
                 dp_id:
 
@@ -142,7 +142,7 @@ paths:
 
                   example: 0
 
-                timbre_td:
+                timbre_id:
 
                   type: integer
 
@@ -224,59 +224,17 @@ paths:
 
                           description: "Created project ID"
 
-  /upload/sign:
+  /products:
 
-    post:
+    get:
 
       tags:
 
-      - Upload
+        - URL to Video 
 
-      summary: Get Signed URL
+      summary: Get products
 
-      description: Generate a signed URL for file upload. Use the `sign_url` obtained here to upload your file.
-
-      requestBody:
-
-        description: Data required for file upload
-
-        content:
-
-          application/json:
-
-            schema:
-
-              type: object
-
-              properties:
-
-                filetype:
-
-                  type: string
-
-                  example: image/jpeg
-
-                filename:
-
-                  type: string
-
-                  example: 1.jpg
-
-                use_to:
-
-                  type: string
-
-                  example: media
-
-              required:
-
-                - filetype
-
-                - filename
-
-                - use_to
-
-        required: true
+      description: Get list of products
 
       responses:
 
@@ -298,1153 +256,116 @@ paths:
 
                   properties:
 
-                      data:
+                    data:
+
+                      type: array
+
+                      items:
 
                         type: object
 
-                        properties:  
+                        properties:
 
-                          sign_url:
-
-                            type: string
-
-                            description: Use the sign_url to upload your file with a PUT request, including the file data in the request body. This is a direct upload to the signed URL.
-
-                          full_path:
+                          product_id:
 
                             type: string
 
-                            description: URL after file upload
+                            description: Product ID - Save this for Step 2 (PUT /open/product) if you need to update product information & Step 3 (POST /create_video_from_url) need to use product_id.
 
-                          key:
+                            example: NTQ0MTkzNjg
+
+                          url:
 
                             type: string
 
-                            description: Relative path after file upload
+                            description: URL of the product to crawl
 
-  /project:
+                            example: https://www.amazon.com/product-url
 
-    get:
+                          name:
 
-      tags:
+                            type: string
 
-      - Get video
+                            description: Product name
 
-      summary: Get Project Information
+                            example: 'Physicians Formula Happy Booster Heart Blush Glow &amp;amp; Mood Boosting, Rose, Dermatologist Tested'
 
-      description: Get information about a specific project using its ID.
+                          description:
 
-      parameters:
+                            type: string
 
-        - name: project_id
+                            description: Product introduction and selling points
 
-          in: query
+                            example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
 
-          required: true
+                          target_audience:
 
-          schema:
+                            type: string
 
-            type: string
+                            description: Target audience for the product
 
-          description: The ID of the project to retrieve information for.
+                            example: 'Tech-savvy millennials interested in sustainable living solutions.'
 
-      responses:
+                          media:
 
-        '200':
+                            type: array
 
-          description: "Success"
+                            description: Media resources array (will replace existing media if provided)
 
-          content:
+                            items:
 
-            application/json:
+                              type: object
 
-              schema:
+                              properties:
 
-                allOf:
+                                type:
 
-                - $ref: '#/components/schemas/BaseResponse'
+                                  type: integer
 
-                - type: object
+                                  description: 'Media type (1: image, 2: video)'
 
-                  properties:
+                                  enum:
 
-                    data:
+                                    - 1
 
-                      type: object
+                                    - 2
 
-                      properties:
+                                  example: 1
 
-                        id:
+                                name:
 
-                          type: string
+                                  type: string
 
-                          description: Project ID
+                                  description: Media name
 
-                        title:
+                                  example: 'media.jpg'
 
-                          type: string
+                                url:
 
-                          description: Project title
+                                  type: string
 
-                        status_desc:
+                                  description: Media URL
 
-                          type: string
+                                  example: 'https://res.jogg.ai/media.jpg'
 
-                          description: Description of current progress
 
-                        status:
+                                description:
 
-                          type: integer
+                                  type: string
 
-                          description: Current status
+                                  description: Media description
 
-                        video_duration:
-
-                          type: integer
-
-                          description: Video duration in seconds
-
-                        video_url:
-
-                          type: string
-
-                          description: URL to the video output
-
-                        cover_url:
-
-                          type: string
-
-                          description: URL to the cover image
-
-                        created_at:
-
-                          type: integer
-
-                          description: Creation timestamp
-
-  /create_video_from_talking_avatar:
-
-    post:
-
-      tags:
-
-      - Avatar
-
-      summary: Create Talking Avatar Video
-
-      description: Creates a talking avatar video with specified parameters
-
-      requestBody:
-
-        content:
-
-          application/json:
-
-            schema:
-
-              type: object
-
-              properties:
-
-                script:
-
-                  type: string
-
-                  description: Script content for the avatar to speak. Must provide either script or audio_url
-
-                  example: Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!
-
-                audio_script:
-
-                  type: object
-
-                  description: Audio script details, mutually exclusive with script
-
-                  required:
-
-                    - url
-
-                    - duration
-
-                  properties:
-
-                    url:
-
-                      type: string
-
-                      description: Audio file URL
-
-                    duration:
-
-                      type: number
-
-                      format: float
-
-                      description: Audio duration in seconds
-
-                aspect_ratio:
-
-                  type: integer
-
-                  description: 'Aspect ratio of the output video. 0: [9:16], 1: [16:9], 2: [1:1]'
-
-                  enum:
-
-                    - 0
-
-                    - 1
-
-                    - 2
-
-                  example: 0
-
-                screen_style:
-
-                  type: integer
-
-                  description: 'Background style. 1: with background, 2: green screen'
-
-                  enum:
-
-                    - 1
-
-                    - 2
-
-                  example: 1
-
-                avatar_id:
-
-                  type: integer
-
-                  description: ID of the avatar person to use
-
-                  example: 81
-
-                avatar_source:
-
-                  type: integer
-
-                  description: 'Source type of the person. 0: official avatar, 1: custom user avatar'
-
-                  enum:
-
-                    - 0
-
-                    - 1
-
-                  example: 0
-
-                voice_id:
-
-                  type: string
-
-                  description: ID of the text-to-speech voice to use
-
-                  example: en-US-ChristopherNeural
-
-                caption:
-
-                  type: boolean
-
-                  description: 'Subtitle option. true: enable subtitles, false: disable subtitles'
-
-                  enum:
-
-                    - true
-
-                    - false
-
-              required:
-
-                - screen_style
-
-                - avatar_id
-
-                - voice_id
-
-        required: true
-
-      responses:
-
-        '200':
-
-          description: "Success"
-
-          content:
-
-            application/json:
-
-              schema:
-
-                allOf:
-
-                - $ref: '#/components/schemas/BaseResponse'
-
-                - type: object
-
-                  properties:
-
-                    data:
-
-                      type: object
-
-                      properties:
-
-                        project_id:
-
-                          type: integer
-
-                          description: "Created project ID"
-
-  /avatar:
-
-    get:
-
-      tags:
-
-      - Avatar
-
-      summary: Get Avatar List
-
-      description: Retrieve a list of available avatars with specified filters
-
-      parameters:
-
-      - $ref: '#/components/parameters/AspectRatioParam'
-
-      responses:
-
-        '200':
-
-          description: Success
-
-          content:
-
-            application/json:
-
-              schema:
-
-                allOf:
-
-                - $ref: '#/components/schemas/BaseResponse'
-
-                - type: object
-
-                  properties:
-
-                    data:
-
-                      type: object
-
-                      properties:
-
-                        avatars:
-
-                          type: array
-
-                          items:
-
-                            type: object
-
-                            properties:
-
-                              id:
-
-                                type: integer
-
-                                description: Avatar ID
-
-                                example: 81
-
-                              name:
-
-                                type: string
-
-                                description: Avatar name
-
-                                example: Amanda outdoors
-
-                              cover_url:
-
-                                type: string
-
-                                description: URL of the cover image
-
-                                example: https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png
-
-  /avatar/user:
-
-    get:
-
-      tags:
-
-        - Avatar
-
-      summary: Get User Avatar List
-
-      description: Retrieve a list of user's available avatar with specified filters
-
-      parameters:
-
-      - $ref: '#/components/parameters/AspectRatioParam'
-
-      responses:
-
-        '200':
-
-          description: Success
-
-          content:
-
-            application/json:
-
-              schema:
-
-                allOf:
-
-                - $ref: '#/components/schemas/BaseResponse'
-
-                - type: object
-
-                  properties:
-
-                    data:
-
-                      type: object
-
-                      properties:
-
-                        avatars:
-
-                          type: array
-
-                          items:
-
-                            type: object
-
-                            properties:
-
-                              id:
-
-                                type: integer
-
-                                description: Avatar ID
-
-                                example: 81
-
-                              name:
-
-                                type: string
-
-                                description: Avatar name
-
-                                example: Amanda outdoors
-
-                              cover_url:
-
-                                type: string
-
-                                description: URL of the cover image
-
-                                example: https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png
-
-                              api_only:
-
-                                type: boolean
-
-                                description: Whether avatar is only available via API
-
-                              product_status:
-
-                                type: integer
-
-                                description: 'Production status: 0:in progress, 1:success, 2:failed'
-
-                                enum:
-
-                                  - 0
-
-                                  - 1
-
-                                  - 2
-
-                              fail_msg:
-
-                                type: string
-
-                                description: Failure message when product_status is 2
-
-  /voice:
-
-    get:
-
-      tags:
-
-      - Voice
-
-      summary: Get Timbre List
-
-      description: Retrieve a list of available voice timbres with specified gender filter
-
-      parameters:
-
-        - name: gender
-
-          in: query
-
-          description: Filter timbres by gender (female/male)
-
-          required: false
-
-          schema:
-
-            type: string
-
-            enum:
-
-              - female
-
-              - male
-
-        - name: language
-
-          in: query
-
-          description: |
-
-            Filter timbres by language:
-
-            * english - English
-
-            * filipino - Filipino
-
-            * french - French  
-
-            * german - German
-
-            * hindi - Hindi
-
-            * indonesian - Indonesian
-
-            * italian - Italian
-
-            * japanese - Japanese
-
-            * korean - Korean
-
-            * malay - Malay
-
-            * portuguese - Portuguese
-
-            * russian - Russian
-
-            * spanish - Spanish
-
-            * thai - Thai
-
-            * vietnamese - Vietnamese
-
-            * arabic - Arabic
-
-            * greek - Greek
-
-            * turkish - Turkish
-
-            * slovenian - Slovenian
-
-            * croatian - Croatian
-
-            * romanian - Romanian
-
-            * chinese - Simplified Chinese
-
-            * bengali - Bengali
-
-            * urdu - Urdu
-
-            * hungarian - Hungarian
-
-            * traditional-chinese - Traditional Chinese
-
-            * polish - Polish
-
-            * cantonese - Cantonese
-
-            * danish - Danish
-
-            * malayalam - Malayalam
-
-            * tamil - Tamil
-
-            * telugu - Telugu
-
-            * czech - Czech
-
-            * hebrew - Hebrew
-
-            * zulu - Zulu
-
-            * swedish - Swedish
-
-            * lithuanian - Lithuanian
-
-            * dutch - Dutch
-
-            * flemish - Flemish
-
-            * norwegian - Norwegian
-
-            * finnish - Finnish
-
-            * bulgarian - Bulgarian
-
-            * latvian - Latvian
-
-            * ukrainian - Ukrainian
-
-            * mongolian - Mongolian
-
-            * persian - Persian
-
-            * odia - Odia
-
-            * assamese - Assamese
-
-            * kannada - Kannada
-
-            * tagalog - Tagalog
-
-            * amharic - Amharic
-
-            * serbian - Serbian
-
-            * slovak - Slovak
-
-            * swahili - Swahili
-
-          required: false
-
-          schema:
-
-            type: string
-
-            enum:
-
-              - english
-
-              - filipino
-
-              - french
-
-              - german
-
-              - hindi
-
-              - indonesian
-
-              - italian
-
-              - japanese
-
-              - korean
-
-              - malay
-
-              - portuguese
-
-              - russian
-
-              - spanish
-
-              - thai
-
-              - vietnamese
-
-              - arabic
-
-              - greek
-
-              - turkish
-
-              - slovenian
-
-              - croatian
-
-              - romanian
-
-              - chinese
-
-              - bengali
-
-              - urdu
-
-              - hungarian
-
-              - traditional-chinese
-
-              - polish
-
-              - cantonese
-
-              - danish
-
-              - malayalam
-
-              - tamil
-
-              - telugu
-
-              - czech
-
-              - hebrew
-
-              - zulu
-
-              - swedish
-
-              - lithuanian
-
-              - dutch
-
-              - flemish
-
-              - norwegian
-
-              - finnish
-
-              - bulgarian
-
-              - latvian
-
-              - ukrainian
-
-              - mongolian
-
-              - persian
-
-              - odia
-
-              - assamese
-
-              - kannada
-
-              - tagalog
-
-              - amharic
-
-              - serbian
-
-              - slovak
-
-              - swahili
-
-      responses:
-
-        '200':
-
-          description: Success
-
-          content:
-
-            application/json:
-
-              schema:
-
-                allOf:
-
-                - $ref: '#/components/schemas/BaseResponse'
-
-                - type: object
-
-                  properties:
-
-                    data:
-
-                      type: object
-
-                      properties:
-
-                        total:
-
-                          type: integer
-
-                          description: Total number of timbres
-
-                          example: 10
-
-                        voices:
-
-                          type: array
-
-                          items:
-
-                            type: object
-
-                            properties:
-
-                              name:
-
-                                type: string
-
-                                description: Timbre name
-
-                                example: Emily
-
-                              voice_id:
-
-                                type: string
-
-                                description: Language identifier
-
-                                example: 8xUNyTgckMBsX4jn4Lxf
-
-                              audition_url:
-
-                                type: string
-
-                                description: URL for the audition audio file
-
-                                example: https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3
-
-                              language:
-
-                                type: string
-
-                                description: Language of the voice timbre
-
-                                example: english
-
-  /voice/user:
-
-    get:
-
-      tags:
-
-      - Voice
-
-      summary: Get User Timbre List
-
-      description: Retrieve a list of user's available voice timbres with specified gender filter
-
-      parameters:
-
-        - name: language
-
-          in: query
-
-          description: |
-
-            Filter timbres by language:
-
-            * english - English
-
-            * filipino - Filipino
-
-            * french - French  
-
-            * german - German
-
-            * hindi - Hindi
-
-            * indonesian - Indonesian
-
-            * italian - Italian
-
-            * japanese - Japanese
-
-            * korean - Korean
-
-            * malay - Malay
-
-            * portuguese - Portuguese
-
-            * russian - Russian
-
-            * spanish - Spanish
-
-            * thai - Thai
-
-            * vietnamese - Vietnamese
-
-            * arabic - Arabic
-
-            * greek - Greek
-
-            * turkish - Turkish
-
-            * slovenian - Slovenian
-
-            * croatian - Croatian
-
-            * romanian - Romanian
-
-            * chinese - Simplified Chinese
-
-            * bengali - Bengali
-
-            * urdu - Urdu
-
-            * hungarian - Hungarian
-
-            * traditional-chinese - Traditional Chinese
-
-            * polish - Polish
-
-            * cantonese - Cantonese
-
-            * danish - Danish
-
-            * malayalam - Malayalam
-
-            * tamil - Tamil
-
-            * telugu - Telugu
-
-            * czech - Czech
-
-            * hebrew - Hebrew
-
-            * zulu - Zulu
-
-            * swedish - Swedish
-
-            * lithuanian - Lithuanian
-
-            * dutch - Dutch
-
-            * flemish - Flemish
-
-            * norwegian - Norwegian
-
-            * finnish - Finnish
-
-            * bulgarian - Bulgarian
-
-            * latvian - Latvian
-
-            * ukrainian - Ukrainian
-
-            * mongolian - Mongolian
-
-            * persian - Persian
-
-            * odia - Odia
-
-            * assamese - Assamese
-
-            * kannada - Kannada
-
-            * tagalog - Tagalog
-
-            * amharic - Amharic
-
-            * serbian - Serbian
-
-            * slovak - Slovak
-
-            * swahili - Swahili
-
-          required: false
-
-          schema:
-
-            type: string
-
-            enum:
-
-              - english
-
-              - filipino
-
-              - french
-
-              - german
-
-              - hindi
-
-              - indonesian
-
-              - italian
-
-              - japanese
-
-              - korean
-
-              - malay
-
-              - portuguese
-
-              - russian
-
-              - spanish
-
-              - thai
-
-              - vietnamese
-
-              - arabic
-
-              - greek
-
-              - turkish
-
-              - slovenian
-
-              - croatian
-
-              - romanian
-
-              - chinese
-
-              - bengali
-
-              - urdu
-
-              - hungarian
-
-              - traditional-chinese
-
-              - polish
-
-              - cantonese
-
-              - danish
-
-              - malayalam
-
-              - tamil
-
-              - telugu
-
-              - czech
-
-              - hebrew
-
-              - zulu
-
-              - swedish
-
-              - lithuanian
-
-              - dutch
-
-              - flemish
-
-              - norwegian
-
-              - finnish
-
-              - bulgarian
-
-              - latvian
-
-              - ukrainian
-
-              - mongolian
-
-              - persian
-
-              - odia
-
-              - assamese
-
-              - kannada
-
-              - tagalog
-
-              - amharic
-
-              - serbian
-
-              - slovak
-
-              - swahili
-
-      responses:
-
-        '200':
-
-          description: Success
-
-          content:
-
-            application/json:
-
-              schema:
-
-                allOf:
-
-                - $ref: '#/components/schemas/BaseResponse'
-
-                - type: object
-
-                  properties:
-
-                    data:
-
-                      type: object
-
-                      properties:
-
-                        total:
-
-                          type: integer
-
-                          description: Total number of timbres
-
-                          example: 14
-
-                        voices:
-
-                          type: array
-
-                          items:
-
-                            type: object
-
-                            properties:
-
-                              name:
-
-                                type: string
-
-                                description: Timbre name
-
-                                example: Emily
-
-                              voice_id:
-
-                                type: string
-
-                                description: Language identifier
-
-                                example: 8xUNyTgckMBsX4jn4Lxf
-
-                              audition_url:
-
-                                type: string
-
-                                description: URL for the audition audio file
-
-                                example: https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3
-
-                              language:
-
-                                type: string
-
-                                description: Language of the voice timbre
-
-                                example: english
+                                  example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow.'
 
   /product:
-
+        
     post:
 
       tags:
 
-        - Product Video Generation
+        - URL to Video 
 
-      summary: 'Step 1: Get Product Information'
+      summary: 'Step 1: Upload URL to get product Information.'
 
       description: |-
 
@@ -1556,12 +477,6 @@ paths:
 
                             properties:
 
-                              replace_key:
-
-                                type: string
-
-                                description: Replacement key for the media
-
                               type:
 
                                 type: integer
@@ -1574,11 +489,15 @@ paths:
 
                                   - 2
 
+                                example: 1
+
                               name:
 
                                 type: string
 
                                 description: Media name
+
+                                example: 'media.jpg'
 
                               url:
 
@@ -1586,23 +505,8 @@ paths:
 
                                 description: Media URL
 
-                              preview_url:
+                                example: 'https://res.jogg.ai/media.jpg'
 
-                                type: string
-
-                                description: Preview URL
-
-                              w:
-
-                                type: integer
-
-                                description: Media width
-
-                              h:
-
-                                type: integer
-
-                                description: Media height
 
                               description:
 
@@ -1610,31 +514,7 @@ paths:
 
                                 description: Media description
 
-                              duration:
-
-                                type: integer
-
-                                description: Media duration (for videos)
-
-                              clip_id:
-
-                                type: integer
-
-                                description: Clip ID
-
-                              clip_info:
-
-                                type: object
-
-                                description: Clip information
-
-                                nullable: true
-
-                              cover_url:
-
-                                type: string
-
-                                description: Cover image URL
+                                example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow.'
 
                         
 
@@ -1642,7 +522,7 @@ paths:
 
       tags:
 
-        - Product Video Generation
+        - URL to Video 
 
       summary: 'Step 2 (Optional): Update Product Information'
 
@@ -1668,7 +548,7 @@ paths:
 
                 product_id:
 
-                  type: integer
+                  type: string
 
                   description: Product ID obtained from Step 1 (POST /open/product) response data.id
 
@@ -1710,12 +590,6 @@ paths:
 
                     properties:
 
-                      replace_key:
-
-                        type: string
-
-                        description: Replacement key for the media
-
                       type:
 
                         type: integer
@@ -1728,11 +602,15 @@ paths:
 
                           - 2
 
+                        example: 1
+
                       name:
 
                         type: string
 
                         description: Media name
+
+                        example: 'media.jpg'
 
                       url:
 
@@ -1740,23 +618,8 @@ paths:
 
                         description: Media URL
 
-                      preview_url:
+                        example: 'https://res.jogg.ai/media.jpg'
 
-                        type: string
-
-                        description: Preview URL
-
-                      w:
-
-                        type: integer
-
-                        description: Media width
-
-                      h:
-
-                        type: integer
-
-                        description: Media height
 
                       description:
 
@@ -1764,31 +627,9 @@ paths:
 
                         description: Media description
 
-                      duration:
+                        example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow.'
 
-                        type: integer
 
-                        description: Media duration (for videos)
-
-                      clip_id:
-
-                        type: integer
-
-                        description: Clip ID
-
-                      clip_info:
-
-                        type: object
-
-                        description: Clip information
-
-                        nullable: true
-
-                      cover_url:
-
-                        type: string
-
-                        description: Cover image URL
 
       responses:
 
@@ -1812,9 +653,9 @@ paths:
 
       tags:
 
-        - Product Video Generation
+        - URL to Video 
 
-      summary: 'Step 3: Generate Product Video'
+      summary: 'Step 3: Generate Video from Product Information'
 
       description: Final step to generate the product video. Use the product_id received from Step 1 (POST /product response)
 
@@ -1855,6 +696,22 @@ paths:
                   enum: [0, 1, 2]
 
                   example: 0
+                  
+                video_length:
+
+                  type: string
+
+                  description: Video Length.
+
+                  example: "15"
+
+                  enum:
+
+                    - "15"
+
+                    - "30"
+
+                    - "60"                  
 
                 language:
 
@@ -2086,41 +943,27 @@ paths:
 
                   example: "english"
 
-                caption:
-
-                  type: boolean
-
-                  description: |
-
-                    Controls subtitle rendering:
-
-                    * true - Show subtitles
-
-                    * false - Hide subtitles
-
-                  example: true
-
                 avatar_id:
 
                   type: integer
 
                   description: |
 
-                    Avatar id from Jogg Avatar or User Avatar.
+                    Avatar id from Jogg Avatar or Your Avatar.
 
                   example: 1
 
-                avatar_source:
+                avatar_type:
 
-                  type: string 
+                  type: integer 
 
                   description: |
 
                     Avatar source type:
 
-                    * 0 - Official avatars
+                    * 0 - Public avatars
 
-                    * 1 - User customized avatars
+                    * 1 - Custom avatars
 
                   enum:
 
@@ -2130,15 +973,15 @@ paths:
 
                   example: 0
 
-                visual_style:
+                voice_id:
 
                   type: string
 
                   description: |
 
-                    Visual style of the video from visual list(GET /visual)
+                    Voice id from voice list.
 
-                  example: "Simple split screen template"
+                  example: en-US-ChristopherNeural
 
                 script_style:
 
@@ -2176,25 +1019,15 @@ paths:
 
                   example: "Storytime"
 
-                template_type:
+                visual_style:
 
                   type: string
 
-                  description: | 
+                  description: |
 
-                    Template source type:
+                    Visual style of the video from visual list(GET /visual)
 
-                    * common - Template from template library
-
-                    * user - Template from custom templates
-
-                  example: common
-
-                  enum:
-
-                    - common
-
-                    - user
+                  example: "Simple split screen template"
 
                 template_id:
 
@@ -2204,21 +1037,41 @@ paths:
 
                   example: 0
 
-                video_length:
+
+                template_type:
 
                   type: string
 
-                  description: Video Length.
+                  description: | 
 
-                  example: "15"
+                    Template source type:
+
+                    * public - Template from template library
+
+                    * custom - Template from my templates
+
+                  example: custom
 
                   enum:
 
-                    - "15"
+                    - public
 
-                    - "30"
+                    - custom
 
-                    - "60"
+                caption:
+
+                  type: boolean
+
+                  description: |
+
+                    Controls subtitle rendering:
+
+                    * true - Show subtitles
+
+                    * false - Hide subtitles
+
+                  example: true
+
 
               required:
 
@@ -2226,15 +1079,18 @@ paths:
 
                 - aspect_ratio
 
+                - video_length
+
                 - language
 
                 - avatar_id
+
+                - avatar_type
 
                 - template_type
 
                 - script_style
 
-                - video_length
 
       responses:
 
@@ -2267,7 +1123,1358 @@ paths:
                           type: integer
 
                           description: "Created project ID"
+  /create_video_from_talking_avatar:
 
+    post:
+
+      tags:
+
+      - Create Avatar Videos
+
+      summary: Create Talking Avatar Video
+
+      description: Creates a talking avatar video with specified parameters
+
+      requestBody:
+
+        content:
+
+          application/json:
+
+            schema:
+
+              type: object
+
+              properties:
+
+                script:
+
+                  type: string
+
+                  description: Script content for the avatar to speak. Must provide either script or audio_script
+
+                  example: Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!
+
+                audio_script:
+
+                  type: string
+
+                  description: Url for Audio script details, either script or audio_script must be provided, but not both.
+
+                  example: https://res.jogg.ai/audio_script.mp3
+
+                aspect_ratio:
+
+                  type: integer
+
+                  description: 'Aspect ratio of the output video. 0: [9:16], 1: [16:9], 2: [1:1]'
+
+                  enum:
+
+                    - 0
+
+                    - 1
+
+                    - 2
+
+                  example: 0
+
+                screen_style:
+
+                  type: integer
+
+                  description: 'Background style. 1: with background, 2: green screen'
+
+                  enum:
+
+                    - 1
+
+                    - 2
+
+                  example: 1
+
+                avatar_id:
+
+                  type: integer
+
+                  description: ID of the avatar person to use
+
+                  example: 81
+
+                avatar_type:
+
+                  type: integer
+
+                  description: 'Source type of the person. 0: jogg avatar, 1: your avatar'
+
+                  enum:
+
+                    - 0
+
+                    - 1
+
+                  example: 0
+
+                voice_id:
+
+                  type: string
+
+                  description: ID of the text-to-speech voice to use
+
+                  example: en-US-ChristopherNeural
+
+                caption:
+
+                  type: boolean
+
+                  description: 'Subtitle option. true: enable subtitles, false: disable subtitles'
+
+                  enum:
+
+                    - true
+
+                    - false
+
+              required:
+
+                - screen_style
+
+                - avatar_id
+
+                - avatar_type
+
+                - voice_id
+
+        required: true
+
+      responses:
+
+        '200':
+
+          description: "Success"
+
+          content:
+
+            application/json:
+
+              schema:
+
+                allOf:
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: object
+
+                      properties:
+
+                        project_id:
+
+                          type: integer
+
+                          description: "Created project ID"
+  /project:
+
+    get:
+
+      tags:
+
+      - Get Generated Video
+
+      summary: Get Project Information
+
+      description: Get information about a specific project using its ID.
+
+      parameters:
+
+        - name: project_id
+
+          in: query
+
+          required: true
+
+          schema:
+
+            type: string
+
+          description: The ID of the project to retrieve information for.
+
+      responses:
+
+        '200':
+
+          description: "Success"
+
+          content:
+
+            application/json:
+
+              schema:
+
+                allOf:
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: object
+
+                      properties:
+
+                        id:
+
+                          type: string
+
+                          description: Project ID
+
+                          example: fa6228c0f52c4f3986e88f7ffa5d2864
+
+                        title:
+
+                          type: string
+
+                          description: Project title
+
+                          example: welcome to jogg.ai
+
+                        status_desc:
+
+                          type: string
+
+                          description: Description of current progress
+
+                          example: processing
+
+                        status_code:
+
+                          type: integer
+
+                          description: Current status
+
+                        video_duration:
+
+                          type: integer
+
+                          description: Video duration in seconds
+
+                          example: 6
+
+                        video_url:
+
+                          type: string
+
+                          description: URL to the video output
+
+                          example: https://res.jogg.ai/video.mp4
+
+                        cover_url:
+
+                          type: string
+
+                          description: URL to the cover image
+
+                          example: https://res.jogg.ai/cover.jpg
+
+                        created_at:
+
+                          type: integer
+
+                          description: Creation timestamp
+
+                          example: 1732806631
+
+
+
+  /upload/sign:
+
+    post:
+
+      tags:
+
+      - Upload File
+
+      summary: Get Signed URL
+
+      description: Generate a signed URL for file upload. Use the `sign_url` obtained here to upload your file.
+
+      requestBody:
+
+        description: Data required for file upload
+
+        content:
+
+          application/json:
+
+            schema:
+
+              type: object
+
+              properties:
+
+                filename:
+
+                  type: string
+
+                  example: 1.jpg
+
+              required:
+
+                - filename
+
+        required: true
+
+      responses:
+
+        '200':
+
+          description: "Success"
+
+          content:
+
+            application/json:
+
+              schema:
+
+                allOf:
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+                - type: object
+
+                  properties:
+
+                      data:
+
+                        type: object
+
+                        properties:  
+
+                          sign_url:
+
+                            type: string
+
+                            description: Use the sign_url to upload your file with a PUT request, including the file data in the request body. This is a direct upload to the signed URL.
+
+                          full_path:
+
+                            type: string
+
+                            description: URL after file upload
+
+                          key:
+
+                            type: string
+
+                            description: Relative path after file upload
+
+  /musics:
+
+    get:
+
+      tags:
+
+      - Music
+
+      summary: Get Music List
+
+      description: Get a list of jogg music
+
+      responses:
+
+        '200':
+
+          description: Success
+
+          content:
+
+            application/json:
+
+              schema:
+
+                allOf:
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: object
+
+                      properties:
+
+                        avatars:
+
+                          type: array
+
+                          items:
+
+                            type: object
+
+                            properties:
+
+                              id:
+
+                                type: integer
+
+                                description: Music ID
+
+                                example: 1
+
+                              name:
+
+                                type: string
+
+                                description: Music name
+
+                                example: Amanda outdoors
+
+                              music_url:
+
+                                type: string
+
+                                description: URL of the cover image
+
+                                example: https://res.jogg.ai/music/example.mp3
+
+                              
+                              duration:
+
+                                type: integer
+
+                                description: music duration
+
+                                example: 81
+
+  /musics/custom:
+
+    get:
+
+      tags:
+
+      - Music
+
+      summary: Get Music List
+
+      description: Get a list of your music
+
+      responses:
+
+        '200':
+
+          description: Success
+
+          content:
+
+            application/json:
+
+              schema:
+
+                allOf:
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: object
+
+                      properties:
+
+                        avatars:
+
+                          type: array
+
+                          items:
+
+                            type: object
+
+                            properties:
+
+                              id:
+
+                                type: integer
+
+                                description: Music ID
+
+                                example: 1
+
+                              name:
+
+                                type: string
+
+                                description: Music name
+
+                                example: Amanda outdoors
+
+                              music_url:
+
+                                type: string
+
+                                description: URL of the cover image
+
+                                example: https://res.chanjing.cc/
+
+                              
+                              duration:
+
+                                type: integer
+
+                                description: music duration
+
+                                example: 81
+
+  /avatars:
+
+    get:
+
+      tags:
+
+      - Avatar
+
+      summary: Get Avatar List
+
+      description: Get a list of available avatars with specified filters
+
+      parameters:
+
+      - $ref: '#/components/parameters/AspectRatioSearch'
+
+      responses:
+
+        '200':
+
+          description: Success
+
+          content:
+
+            application/json:
+
+              schema:
+
+                allOf:
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: object
+
+                      properties:
+
+                        avatars:
+
+                          type: array
+
+                          items:
+
+                            type: object
+
+                            properties:
+
+                              avatar_id:
+
+                                type: integer
+
+                                description: Avatar ID
+
+                                example: 81
+
+                              name:
+
+                                type: string
+
+                                description: Avatar name
+
+                                example: Amanda outdoors
+
+                              cover_url:
+
+                                type: string
+
+                                description: URL of the cover image
+
+                                example: https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png
+
+  /avatars/custom:
+
+    get:
+
+      tags:
+
+        - Avatar
+
+      summary: Get Your Avatar List
+
+      description: Get a list of your avatar
+
+      responses:
+
+        '200':
+
+          description: Success
+
+          content:
+
+            application/json:
+
+              schema:
+
+                allOf:
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: object
+
+                      properties:
+
+                        avatars:
+
+                          type: array
+
+                          items:
+
+                            type: object
+
+                            properties:
+
+                              avatar_id:
+
+                                type: integer
+
+                                description: Avatar ID
+
+                                example: 81
+
+                              name:
+
+                                type: string
+
+                                description: Avatar name
+
+                                example: Amanda outdoors
+
+                              cover_url:
+
+                                type: string
+
+                                description: URL of the cover image
+
+                                example: https://res.chanjing.cc/chanjing/dp/output/2024-05-23/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png
+
+                              api_only:
+
+                                type: boolean
+
+                                description: Whether avatar is only available via API
+
+                              avatar_status:
+
+                                type: integer
+
+                                description: 'Production status: 0:in progress, 1:success, 2:failed'
+
+                                enum:
+
+                                  - 0 processing
+
+                                  - 1 success
+
+                                  - 2 failed
+
+                              fail_msg:
+
+                                type: string
+
+                                description: Failure message when product_status is 2
+
+                                example: ""
+
+  /voices:
+
+    get:
+
+      tags:
+
+      - Voice
+
+      summary: Get Voice List
+
+      description: Retrieve a list of available voice with specified gender filter
+
+      parameters:
+
+        - name: gender
+
+          in: query
+
+          description: Filter voices by gender (female/male)
+
+          required: false
+
+          schema:
+
+            type: string
+
+            enum:
+
+              - female
+
+              - male
+
+        - name: language
+
+          in: query
+
+          description: |
+
+            Filter voices by language:
+
+            * english - English
+
+            * filipino - Filipino
+
+            * french - French  
+
+            * german - German
+
+            * hindi - Hindi
+
+            * indonesian - Indonesian
+
+            * italian - Italian
+
+            * japanese - Japanese
+
+            * korean - Korean
+
+            * malay - Malay
+
+            * portuguese - Portuguese
+
+            * russian - Russian
+
+            * spanish - Spanish
+
+            * thai - Thai
+
+            * vietnamese - Vietnamese
+
+            * arabic - Arabic
+
+            * greek - Greek
+
+            * turkish - Turkish
+
+            * slovenian - Slovenian
+
+            * croatian - Croatian
+
+            * romanian - Romanian
+
+            * chinese - Simplified Chinese
+
+            * bengali - Bengali
+
+            * urdu - Urdu
+
+            * hungarian - Hungarian
+
+            * traditional-chinese - Traditional Chinese
+
+            * polish - Polish
+
+            * cantonese - Cantonese
+
+            * danish - Danish
+
+            * malayalam - Malayalam
+
+            * tamil - Tamil
+
+            * telugu - Telugu
+
+            * czech - Czech
+
+            * hebrew - Hebrew
+
+            * zulu - Zulu
+
+            * swedish - Swedish
+
+            * lithuanian - Lithuanian
+
+            * dutch - Dutch
+
+            * flemish - Flemish
+
+            * norwegian - Norwegian
+
+            * finnish - Finnish
+
+            * bulgarian - Bulgarian
+
+            * latvian - Latvian
+
+            * ukrainian - Ukrainian
+
+            * mongolian - Mongolian
+
+            * persian - Persian
+
+            * odia - Odia
+
+            * assamese - Assamese
+
+            * kannada - Kannada
+
+            * tagalog - Tagalog
+
+            * amharic - Amharic
+
+            * serbian - Serbian
+
+            * slovak - Slovak
+
+            * swahili - Swahili
+
+          required: false
+
+          schema:
+
+            type: string
+
+            enum:
+
+              - english
+
+              - filipino
+
+              - french
+
+              - german
+
+              - hindi
+
+              - indonesian
+
+              - italian
+
+              - japanese
+
+              - korean
+
+              - malay
+
+              - portuguese
+
+              - russian
+
+              - spanish
+
+              - thai
+
+              - vietnamese
+
+              - arabic
+
+              - greek
+
+              - turkish
+
+              - slovenian
+
+              - croatian
+
+              - romanian
+
+              - chinese
+
+              - bengali
+
+              - urdu
+
+              - hungarian
+
+              - traditional-chinese
+
+              - polish
+
+              - cantonese
+
+              - danish
+
+              - malayalam
+
+              - tamil
+
+              - telugu
+
+              - czech
+
+              - hebrew
+
+              - zulu
+
+              - swedish
+
+              - lithuanian
+
+              - dutch
+
+              - flemish
+
+              - norwegian
+
+              - finnish
+
+              - bulgarian
+
+              - latvian
+
+              - ukrainian
+
+              - mongolian
+
+              - persian
+
+              - odia
+
+              - assamese
+
+              - kannada
+
+              - tagalog
+
+              - amharic
+
+              - serbian
+
+              - slovak
+
+              - swahili
+
+      responses:
+
+        '200':
+
+          description: Success
+
+          content:
+
+            application/json:
+
+              schema:
+
+                allOf:
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: object
+
+                      properties:
+
+                        total:
+
+                          type: integer
+
+                          description: Total number of voices
+
+                          example: 10
+
+                        voices:
+
+                          type: array
+
+                          items:
+
+                            type: object
+
+                            properties:
+
+                              name:
+
+                                type: string
+
+                                description: Voice name
+
+                                example: Emily
+
+                              voice_id:
+
+                                type: string
+
+                                description: Language identifier
+
+                                example: en-US-ChristopherNeural
+
+                              audition_url:
+
+                                type: string
+
+                                description: URL for the audition audio file
+
+                                example: https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3
+
+                              language:
+
+                                type: string
+
+                                description: Language of the voice
+
+                                example: english
+
+  /voices/custom:
+
+    get:
+
+      tags:
+
+      - Voice
+
+      summary: Get Your Voice List
+
+      description: Retrieve a list of your available voice with specified gender filter
+
+      parameters:
+
+        - name: language
+
+          in: query
+
+          description: |
+
+            Filter voices by language:
+
+            * english - English
+
+            * filipino - Filipino
+
+            * french - French  
+
+            * german - German
+
+            * hindi - Hindi
+
+            * indonesian - Indonesian
+
+            * italian - Italian
+
+            * japanese - Japanese
+
+            * korean - Korean
+
+            * malay - Malay
+
+            * portuguese - Portuguese
+
+            * russian - Russian
+
+            * spanish - Spanish
+
+            * thai - Thai
+
+            * vietnamese - Vietnamese
+
+            * arabic - Arabic
+
+            * greek - Greek
+
+            * turkish - Turkish
+
+            * slovenian - Slovenian
+
+            * croatian - Croatian
+
+            * romanian - Romanian
+
+            * chinese - Simplified Chinese
+
+            * bengali - Bengali
+
+            * urdu - Urdu
+
+            * hungarian - Hungarian
+
+            * traditional-chinese - Traditional Chinese
+
+            * polish - Polish
+
+            * cantonese - Cantonese
+
+            * danish - Danish
+
+            * malayalam - Malayalam
+
+            * tamil - Tamil
+
+            * telugu - Telugu
+
+            * czech - Czech
+
+            * hebrew - Hebrew
+
+            * zulu - Zulu
+
+            * swedish - Swedish
+
+            * lithuanian - Lithuanian
+
+            * dutch - Dutch
+
+            * flemish - Flemish
+
+            * norwegian - Norwegian
+
+            * finnish - Finnish
+
+            * bulgarian - Bulgarian
+
+            * latvian - Latvian
+
+            * ukrainian - Ukrainian
+
+            * mongolian - Mongolian
+
+            * persian - Persian
+
+            * odia - Odia
+
+            * assamese - Assamese
+
+            * kannada - Kannada
+
+            * tagalog - Tagalog
+
+            * amharic - Amharic
+
+            * serbian - Serbian
+
+            * slovak - Slovak
+
+            * swahili - Swahili
+
+          required: false
+
+          schema:
+
+            type: string
+
+            enum:
+
+              - english
+
+              - filipino
+
+              - french
+
+              - german
+
+              - hindi
+
+              - indonesian
+
+              - italian
+
+              - japanese
+
+              - korean
+
+              - malay
+
+              - portuguese
+
+              - russian
+
+              - spanish
+
+              - thai
+
+              - vietnamese
+
+              - arabic
+
+              - greek
+
+              - turkish
+
+              - slovenian
+
+              - croatian
+
+              - romanian
+
+              - chinese
+
+              - bengali
+
+              - urdu
+
+              - hungarian
+
+              - traditional-chinese
+
+              - polish
+
+              - cantonese
+
+              - danish
+
+              - malayalam
+
+              - tamil
+
+              - telugu
+
+              - czech
+
+              - hebrew
+
+              - zulu
+
+              - swedish
+
+              - lithuanian
+
+              - dutch
+
+              - flemish
+
+              - norwegian
+
+              - finnish
+
+              - bulgarian
+
+              - latvian
+
+              - ukrainian
+
+              - mongolian
+
+              - persian
+
+              - odia
+
+              - assamese
+
+              - kannada
+
+              - tagalog
+
+              - amharic
+
+              - serbian
+
+              - slovak
+
+              - swahili
+
+      responses:
+
+        '200':
+
+          description: Success
+
+          content:
+
+            application/json:
+
+              schema:
+
+                allOf:
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+                - type: object
+
+                  properties:
+
+                    data:
+
+                      type: object
+
+                      properties:
+
+                        total:
+
+                          type: integer
+
+                          description: Total number of voices
+
+                          example: 14
+
+                        voices:
+
+                          type: array
+
+                          items:
+
+                            type: object
+
+                            properties:
+
+                              name:
+
+                                type: string
+
+                                description: Voice name
+
+                                example: Emily
+
+                              voice_id:
+
+                                type: string
+
+                                description: Language identifier
+
+                                example: en-US-ChristopherNeural
+
+                              audition_url:
+
+                                type: string
+
+                                description: URL for the audition audio file
+
+                                example: https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3
+
+                              language:
+
+                                type: string
+
+                                description: Language of the voice
+
+                                example: english
 
 
   /avatar/create:
@@ -2338,13 +2545,13 @@ paths:
 
                       properties:
 
-                        id:
+                        avatar_id:
 
                           type: integer
 
                           description: "Created instant avatar ID"
 
-  /avatar/user/delete:
+  /avatar/custom/delete:
 
     delete:
 
@@ -2384,23 +2591,19 @@ paths:
 
                 - $ref: '#/components/schemas/BaseResponse'
 
-  /visual:
+  /visual_styles:
 
     get:
 
       tags:
 
-        - Template
+        - Visual Style
 
       summary: Get Visual Style
 
       description: Get list of Visual Style
 
       parameters:
-
-        - $ref: '#/components/parameters/PageParam'
-
-        - $ref: '#/components/parameters/PageSizeParam'
 
         - $ref: '#/components/parameters/AspectRatioParam'
 
@@ -2430,11 +2633,7 @@ paths:
 
                         properties:
 
-                          pageInfo:
-
-                            $ref: '#/components/schemas/PageInfo'
-
-                          data:
+                          visual_styles:
 
                             type: array
 
@@ -2448,11 +2647,15 @@ paths:
 
                                   type: integer
 
+                                  example: 2400
+
                                 name:
 
                                   type: string
 
-  /template:
+                                  example: Simple split screen template
+
+  /templates:
 
     get:
 
@@ -2466,10 +2669,6 @@ paths:
 
       parameters:
 
-        - $ref: '#/components/parameters/PageParam'
-
-        - $ref: '#/components/parameters/PageSizeParam'
-
         - $ref: '#/components/parameters/AspectRatioParam'
 
       responses:
@@ -2498,11 +2697,7 @@ paths:
 
                         properties:
 
-                          pageInfo:
-
-                            $ref: '#/components/schemas/PageInfo'
-
-                          data:
+                          templates:
 
                             type: array
 
@@ -2516,19 +2711,27 @@ paths:
 
                                   type: integer
 
+                                  example: 136
+
                                 name:
 
                                   type: string
+
+                                  example: roborock Q7 Max+ Robot Vacuum Cleaner, Hands-Free Cleaning for up to 7 Weeks, Robotic Vacuum with APP-Controlled Mopping, 4200Pa Suction, No-Mop&amp;amp;No-Go Zones, 180mins Runtime.
 
                                 cover_url:
 
                                   type: string
 
+                                  example: https://res.jogg.ai/cover.png
+
                                 preview_url:
 
                                   type: string
 
-  /template/user:
+                                  example: https://res.jogg.ai/preview.png
+
+  /templates/custom:
 
     get:
 
@@ -2536,15 +2739,11 @@ paths:
 
         - Template  
 
-      summary: Get user templates
+      summary: Get custom templates
 
       description: Get list of your custom templates
 
       parameters:
-
-        - $ref: '#/components/parameters/PageParam'
-
-        - $ref: '#/components/parameters/PageSizeParam'
 
         - $ref: '#/components/parameters/AspectRatioParam'
 
@@ -2574,11 +2773,7 @@ paths:
 
                         properties:
 
-                          pageInfo:
-
-                            $ref: '#/components/schemas/PageInfo'
-
-                          data:
+                          templates:
 
                             type: array
 
@@ -2592,13 +2787,19 @@ paths:
 
                                   type: integer
 
+                                  example: 2400
+
                                 name:
 
                                   type: string
 
+                                  example: Anker USB C Charger, 735 Charger (Nano II 65
+
                                 cover_url:
 
                                   type: string
+
+                                  example: https://res.jogg.ai/cover.png
 
 components:
 
@@ -2674,6 +2875,34 @@ components:
 
         default: -1
 
+
+
+    AspectRatioSearch:
+
+      name: aspect_ratio
+
+      in: query
+
+      description: |
+
+        Screen aspect ratio:
+
+        * 0 - [9:16]
+
+        * 1 - [16:9]
+
+        * 2 - [1:1]
+
+      required: false
+
+      schema:
+
+        type: integer
+
+        enum: [0, 1, 2]
+
+        default: 0
+
   schemas:
 
     Error:
@@ -2736,7 +2965,7 @@ components:
 
           description: Response message
 
-    # 分页基础结构
+    # Basic structure for pagination
 
     PageInfo:
 
@@ -2767,4 +2996,3 @@ components:
       in: header
 
       name: x-api-key
-
