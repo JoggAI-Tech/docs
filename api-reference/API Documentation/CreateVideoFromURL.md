@@ -31,7 +31,7 @@ Generate a video from a URL in the following four steps:
 
 Upload the URL to create the product and analyze the URL to retrieve product information.
 
-Please refer to the [Upload URL to create product](https://docs.jogg.ai/api-reference/URL-to-Video/UploadURL) for the full options of enums.
+Please refer to the [Upload URL to create product](https://docs.jogg.ai/api-reference/URL-to-Video/UploadURL) for more details.
 
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/product' \
@@ -100,7 +100,7 @@ Response example:
 
 Update the product information if necessary(Optionally).
 
-Please refer to the [Update Product Information ](https://docs.jogg.ai/api-reference/URL-to-Video/UpdateProduct)for the full options of enums.
+Please refer to the [Update Product Information ](https://docs.jogg.ai/api-reference/URL-to-Video/UpdateProduct)for more details.
 
 ```bash
 curl --location --request PUT 'https://api.jogg.ai/v1/product' \
@@ -142,11 +142,12 @@ curl --location --request PUT 'https://api.jogg.ai/v1/product' \
 
 ### Generate Video from Product Information
 
-Please refer to the [Generate Video from Product Information](https://docs.jogg.ai/api-reference/URL-to-Video/CreateVideo) for the full options of enums.
+Please refer to the [Generate Video from Product Information](https://docs.jogg.ai/api-reference/URL-to-Video/CreateVideo) for more details.
 
 #### With Visual Style
 
 Initiate a video generation task, where you can adjust video-related parameters and modify the video's layout by selecting a visual style.
+You can view [Get Visual Style](https://docs.jogg.ai/api-reference/Visual-Style/GetVisualStyle) for more details.
 
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
@@ -181,6 +182,8 @@ Response example:
 #### With Template
 
 Initiate a video generation task where you can adjust video-related parameters and customize the video's style and appearance by selecting a template.
+
+You can view [Get Template List from Library](https://docs.jogg.ai/api-reference/Template/GetTemplate) for more details.
 
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
