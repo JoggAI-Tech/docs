@@ -12,7 +12,7 @@ Additionally, you can adjust the Avatar using `avatar_id` and modify the voice
 
 ### Upload Audio
 
-You can upload audio to obtain your sign\_url.
+You can upload audio to obtain your asset_id.
 
 Please refer to the [Upload Media](https://docs.jogg.ai/api-reference/UploadFile/UploadFile) for more details.
 
@@ -71,7 +71,6 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking
 --header 'x-api-key: <your-api-key>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "script": "",
     "audio_url": <your-audio-url>,
     "aspect_ratio": 0,
     "screen_style": 1,
