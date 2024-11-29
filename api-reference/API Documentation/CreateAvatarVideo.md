@@ -10,6 +10,7 @@ Using the JoggAI API, you can create videos with avatars and voices from the lib
 First, select your avatar from the library using the `Public Avatars List` endpoint to obtain the Avatar ID. Then, choose a voice from the library using the `Public Voices List` endpoint for your video creation.
 
 ## Quick Start
+
 #### Public Avatars List
 
 ```bash
