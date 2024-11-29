@@ -15,7 +15,7 @@ Additionally, you can adjust the Avatar using `avatar_id` and modify the voice
 You can upload audio to obtain your sign\_url.
 
 ```bash
-curl --location --request POST 'https://alpha-app-odyssey-api-service.jogg.ai/open/v1/upload/sign' \
+curl --location --request POST 'https://alpha-app-odyssey-api-service.jogg.ai/open/v1/upload/asset' \
 --header 'x-api-key: <your-api-key>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
@@ -27,12 +27,12 @@ Response example:
 
 ```json
 {
+    "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
     "msg": "success",
     "data": {
         "sign_url": "https://asset.jogg.ai/joggUserData%2Fuser%2F39e62a29-0ae5-4285-bfc3-f0c65925ca0b%2Fusermedia%2F2024-11-29%2Fe06c14cbb52447aeb102eef61a9d0c57.jpg?Expires=1732878546&OSSAccessKeyId=LTAI5tJL4GudkEeC2wcuRj88&Signature=b5fNX2sKyXwoBJT1T0BVA%2Fhg1uM%3D&callback=eyJjYWxsYmFja0JvZHkiOiJjcmM2ND0ke2NyYzY0fVx1MDAyNmNvbnRlbnRfbWQ1PSR7Y29udGVudE1kNX1cdTAwMjZvYmplY3Q9JHtvYmplY3R9XHUwMDI2c2l6ZT0ke3NpemV9XHUwMDI2dD0xNzMyODc3OTQ2LjI3NTNcdTAwMjZtaW1lVHlwZT0ke21pbWVUeXBlfVx1MDAyNmltYWdlX2g9JHtpbWFnZUluZm8uaGVpZ2h0fVx1MDAyNmltYWdlX3c9JHtpbWFnZUluZm8ud2lkdGh9XHUwMDI2aW1hZ2VfZj0ke2ltYWdlSW5mby5mb3JtYXR9IiwiY2FsbGJhY2tVcmwiOiJodHRwczovL2FscGhhLWFwcC1vZHlzc2V5LWFwaS1zZXJ2aWNlLmpvZ2cuYWkvY29tbW9uL29zc19jYWxsYmFjayJ9",
-        "full_path": "https://res.jogg.ai/joggUserData/user/39e62a29-0ae5-4285-bfc3-f0c65925ca0b/usermedia/2024-11-29/e06c14cbb52447aeb102eef61a9d0c57.jpg",
-        "key": "joggUserData/user/39e62a29-0ae5-4285-bfc3-f0c65925ca0b/usermedia/2024-11-29/e06c14cbb52447aeb102eef61a9d0c57.jpg"
+        "asset_id": "https://res.jogg.ai/joggUserData/user/39e62a29-0ae5-4285-bfc3-f0c65925ca0b/usermedia/2024-11-29/e06c14cbb52447aeb102eef61a9d0c57.jpg",
     }
 }
 ```
@@ -67,6 +67,7 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking
 --header 'x-api-key: <your-api-key>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
+    "script": "",
     "audio_script": <your-audio-url>,
     "aspect_ratio": 0,
     "screen_style": 1,
@@ -81,10 +82,11 @@ Response example:
 
 ```json
 {
+    "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
     "msg": "success",
     "data": {
-        "project": "<project-id>"    # Project ID for status query
+        "project": "<project-id>"   
     }
 }
 ```
