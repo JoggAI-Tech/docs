@@ -90,7 +90,7 @@ Response example:
     "code": 0,
     "msg": "success",
     "data": {
-        "project": "<project-id>"   
+        "project_id": "<project-id>"   
     }
 }
 ```
