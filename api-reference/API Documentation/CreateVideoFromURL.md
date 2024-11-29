@@ -5,7 +5,7 @@ description: 'How to create video from URL.'
 
 ## Introduction
 
-With our API, you can upload a URL to generate a video. Simply provide a URL, and we will analyze and extract the product information for you. You can customize the product information and video settings, such as aspect ratio, video length, language, script style, and visual style. This allows you to quickly create a tailored video.![](c323c87b74bc41d4bf0a2e3065b5b10c.jpg)
+With our API, you can upload a URL to generate a video. Simply provide a URL, and we will analyze and extract the product information for you. You can customize the product information and video settings, such as aspect ratio, video length, language, script style, and visual style. This allows you to quickly create a tailored video.
 
 ## Quick Start
 
