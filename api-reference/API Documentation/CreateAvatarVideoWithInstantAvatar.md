@@ -71,8 +71,7 @@ Response example:
                 "avatar_id": 81,
                 "name": "Amanda outdoors",
                 "cover_url": "<avatar-cover-url>",
-                "api_only": false,
-                "avatar_status": 1
+                "status": 1
             }
         ]
     }
@@ -100,13 +99,14 @@ Response example:
             {
                 "name": "Emily",
                 "voice_id": "8xUNyTgckMBsX4jn4Lxf",
-                "audition_url": "<voice-audio-url>",
+                "audio_url": "<voice-audio-url>",
                 "language": "english"
             }
         ]
     }
 }
 ```
+
 ### Get the generated video
 
 Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
