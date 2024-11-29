@@ -70,6 +70,8 @@ Response example:
 
 ### Create Talking Avatar Video
 
+Creating Avatar videos, supporting the configuration of various video settings including script, aspect ratio, screen style, avatar, and voice.
+
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking_avatar' \
 --header 'x-api-key: <your-api-key>' \
