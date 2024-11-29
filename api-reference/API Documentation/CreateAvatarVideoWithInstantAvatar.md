@@ -11,9 +11,41 @@ First, create your Instant Avatar on the [Create Instant Avatar page](https://
 
 ## Quick Start
 
+### Create Talking Avatar Video
+
+Creating Avatar videos, supporting the configuration of various video settings including script, aspect ratio, screen style, avatar, and voice.
+
+```bash
+curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking_avatar' \
+--header 'x-api-key: <your-api-key>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "script": "Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!",
+    "audio_script": "",
+    "aspect_ratio": 0,
+    "screen_style": 1,
+    "avatar_id": 127,
+    "avatar_type": 0,
+    "voice_id": "en-US-ChristopherNeural",
+    "caption": true
+}'
+```
+
+Response example:
+
+```json
+{
+    "code": 0,
+    "msg": "success",
+    "data": {
+        "project_id": "<project-id>"    # Project ID for status query
+    }
+}
+```
+
 ### Get Avatars and Voices List
 
-First, get the list of Instant Avatars and My Voices. Choose the Avatar and Voice you need to create the video.
+If you want to change the Avatar or voice, you can obtain the `avatar_id` from My Instant Avatars List and the `voice_id` from My Voices List to make replacements.
 
 #### My Instant Avatars List
 
@@ -31,7 +63,7 @@ Response example:
     "data": {
         "avatars": [
             {
-                "id": 81,       
+                "avatar_id": 81,       
                 "name": "Amanda outdoors",
                 "cover_url": "<avatar-cover-url>",
                 "api_only": false,
@@ -64,38 +96,6 @@ Response example:
                 "language": "english"
             }
         ]
-    }
-}
-```
-
-### Create Talking Avatar Video
-
-Creating Avatar videos, supporting the configuration of various video settings including script, aspect ratio, screen style, avatar, and voice.
-
-```bash
-curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking_avatar' \
---header 'x-api-key: <your-api-key>' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "script": "Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!",
-    "audio_script": "",
-    "aspect_ratio": 0,
-    "screen_style": 1,
-    "avatar_id": 127,
-    "avatar_type": 0,
-    "voice_id": "en-US-ChristopherNeural",
-    "caption": true
-}'
-```
-
-Response example:
-
-```json
-{
-    "code": 0,
-    "msg": "success",
-    "data": {
-        "project_id": "<project-id>"    # Project ID for status query
     }
 }
 ```
