@@ -107,3 +107,32 @@ Response example:
     }
 }
 ```
+### Get the generated video
+
+Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
+
+Please refer to the[ GetGeneratedVideo](https://docs.jogg.ai/api-reference/GetGeneratedVideo/GetGeneratedVideo) for the full options of enums.
+
+```bash
+curl --location --request GET 'https://api.jogg.ai/v1/project?project_id=fa6228c0f52c4f3986e88f7ffa5d2864' \
+--header 'x-api-key: <your-api-key>' \
+```
+
+Response example:
+
+```json
+{
+    "code": 0,
+    "msg": "success",
+    "data": {
+        "id": "fa6228c0f52c4f3986e88f7ffa5d2864",
+        "title": "welcome to jogg.ai",
+        "status": 4,
+        "status_desc": "success",
+        "video_duration": 6,
+        "video_url": "https://res.jogg.ai/video.webm",
+        "cover_url": "https://res.jogg.ai/cover.png",
+        "created_at": 1732806631
+    }
+}
+```
