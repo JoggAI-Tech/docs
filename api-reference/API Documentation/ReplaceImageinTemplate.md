@@ -2,8 +2,11 @@
 title: 'Replace Image in Template'
 description: 'How to Replace Image in Template.'
 ---
+
 #### Introduction
-- Replace images set as specified variables in the template, such as product logos.
+
+* Replace images set as specified variables in the template, such as product logos.
+
 ```java
 curl --location --request POST 'https://api-services.jogg.ai/open/render' 
 --header 'x-api-key: <your-api-key>' 
