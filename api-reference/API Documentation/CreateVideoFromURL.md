@@ -136,10 +136,10 @@ curl --location --request PUT 'https://api.jogg.ai/v1/product' \
 }'
 ```
 
-### Generate Video from Product Information with visual style
+### Generate Video from Product Information 
+#### With Visual Style
 
 Initiate a video generation task, where you can adjust video-related parameters and modify the video's layout by selecting a visual style.
-
 
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
@@ -166,7 +166,8 @@ Response example:
     "msg": "success"
 }
 ```
-### Generate Video from Product Information with template
+
+#### With Template
 
 Initiate a video generation task where you can adjust video-related parameters and customize the video's style and appearance by selecting a template.
 
@@ -196,6 +197,7 @@ Response example:
     "msg": "success"
 }
 ```
+
 ### Get the generated video
 
 Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
