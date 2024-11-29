@@ -123,3 +123,4 @@ Response example:
 Note: After initiating video generation, you can use the project\_id to query the generation status through the /open/prj\_info endpoint.
 
 ### Get the generated video
+Use the project_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video_url.
