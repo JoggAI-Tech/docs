@@ -4,7 +4,7 @@
   "logo": {
     "dark": "/logo/Dark-logo.png",
     "light": "/logo/Group 1312320557.png"
-  }, 
+  },
   "favicon": "/logo/Group 1312319951.png",
   "theme": "prism",
   "colors": {
@@ -102,34 +102,34 @@
         "api-reference/URL-to-Video/UpdateProduct",
         "api-reference/URL-to-Video/CreateVideo"
       ]
-    }
+    },
     {
       "group": "Create Avatar Videos",
       "pages": [
         "api-reference/Create-Avatar-Videos/CreateAvatarVideo"
       ]
-    }
+    },
     {
       "group": "Get Generated Video",
       "pages": [
         "api-reference/GetGeneratedVideo/GetGeneratedVideo"
 
       ]
-    }
+    },
     {
       "group": "Upload Media",
       "pages": [
         "api-reference/UploadFile/UploadFile"
 
       ]
-    }
+    },
     {
       "group": "Avatar",
       "pages": [
         "api-reference/Avatar/GetAvatarList",
         "api-reference/Avatar/GetInstantAvatar" 
       ]
-    }
+    },
     {
       "group": "Voice",
       "pages": [
@@ -137,13 +137,13 @@
         "api-reference/Voice/GetMyVoice"
 
       ]
-    }
+    },
     {
       "group": "Visual Style",
       "pages": [
         "api-reference/Visual-Style/GetVisualStyle"
       ]
-    }
+    },
     {
       "group": "Template",
       "pages": [
