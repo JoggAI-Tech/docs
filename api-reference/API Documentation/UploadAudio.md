@@ -72,7 +72,7 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking
 --header 'Content-Type: application/json' \
 --data-raw '{
     "script": "",
-    "audio_script": <your-audio-url>,
+    "audio_url": <your-audio-url>,
     "aspect_ratio": 0,
     "screen_style": 1,
     "avatar_id": 127,
@@ -94,6 +94,7 @@ Response example:
     }
 }
 ```
+
 ### Get the generated video
 
 Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
