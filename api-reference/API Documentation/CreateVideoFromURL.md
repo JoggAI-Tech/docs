@@ -136,9 +136,10 @@ curl --location --request PUT 'https://api.jogg.ai/v1/product' \
 }'
 ```
 
-### Generate Video from Product Information
+### Generate Video from Product Information with visual style
 
-Initiate video generation based on the product, with the option to adjust video settings.
+Initiate a video generation task, where you can adjust video-related parameters and modify the video's layout by selecting a visual style.
+
 
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
@@ -152,8 +153,36 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
     "avatar_id": 100266,
     "avatar_source":1,
     "visual_style": "FullScreen",
-    "template_type": "common",
     "script_style": "Don't Worry",
+    "video_length":"15"
+}
+```
+
+Response example:
+
+```json
+{
+    "code": 0,
+    "msg": "success"
+}
+```
+### Generate Video from Product Information with template
+
+Initiate a video generation task where you can adjust video-related parameters and customize the video's style and appearance by selecting a template.
+
+```bash
+curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
+--header 'x-api-key: <your-api-key>' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "aspect_ratio": 0,
+    "product_id": "NTQ0MTkzNjg",
+    "language": "english",
+    "caption": true,
+    "avatar_id": 100266,
+    "avatar_source":1,
+    "script_style": "Don't Worry",
+    "template_type": "common",
     "template_id":0,
     "video_length":"15"
 }
@@ -167,7 +196,6 @@ Response example:
     "msg": "success"
 }
 ```
-
 ### Get the generated video
 
 Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
