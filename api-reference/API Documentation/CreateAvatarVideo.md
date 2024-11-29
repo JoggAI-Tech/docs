@@ -16,7 +16,6 @@ Creating Avatar videos, supporting the configuration of various video settings i
 Please refer to the [Create Talking Avatar Videos](https://docs.jogg.ai/api-reference/Create-Avatar-Videos/CreateAvatarVideo) for more details.
 
 ```bash
-
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking_avatar' \
 --header 'x-api-key: <your-api-key>' \
 --header 'Content-Type: application/json' \
@@ -30,13 +29,11 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking
     "voice_id": "en-US-ChristopherNeural",
     "caption": true   
 }'
-
 ```
 
 Response example:
 
 ```json
-
 {
     "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
@@ -45,7 +42,6 @@ Response example:
         "project": "<project-id>"  
     }
 }
-
 ```
 
 ### Get Avatars and Voices List
@@ -57,10 +53,8 @@ If you want to change the Avatar or voice, you can obtain the `avatar_id` from P
 Please refer to the [Get Avatar List from Library](https://docs.jogg.ai/api-reference/Avatar/GetAvatarList) for more details.
 
 ```bash
-
 curl --location --request GET 'https://api.jogg.ai/v1/avatars?aspect_ratio=0' \
 --header 'x-api-key: <your-api-key>'
-
 ```
 
 Parameters:
@@ -70,7 +64,6 @@ Parameters:
 Response example:
 
 ```json
-
 {
     "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
@@ -81,13 +74,11 @@ Response example:
                 "avatar_id": 81,         
                 "name": "Amanda outdoors",
                 "cover_url": "<avatar-cover-url>",
-                "api_only": false,
-                "avatar_status": 0
+                "status": 0
             }
         ]
     }
 }
-
 ```
 
 #### Public Voices List
@@ -95,11 +86,8 @@ Response example:
 Please refer to the [Get Voice List form Library](https://docs.jogg.ai/api-reference/Voice/GetVoiceList) for more details.
 
 ```bash
-
 curl --location --request GET 'https://api.jogg.ai/v1/voices?gender=female' \
-
 --header 'x-api-key: <your-api-key>'
-
 ```
 
 Parameters:
@@ -109,7 +97,6 @@ Parameters:
 Response example:
 
 ```json
-
 {
     "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
@@ -118,18 +105,15 @@ Response example:
         "voices": [
             {
                 "name": "Emily",
-
                 "voice_id": "8xUNyTgckMBsX4jn4Lxf", 
-
-                "audition_url": "<audio-url>",
-
+                "audio_url": "<audio-url>",
                 "language": "english"
             }
         ]
     }
 }
-
 ```
+
 ### Get the generated video
 
 Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
