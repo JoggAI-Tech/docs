@@ -18,7 +18,9 @@ Sign up to create an account at [https://app.jogg.ai/register](https://app.jogg.
 Click the avatar, then click 'API'
 ![](/images/img01.png)
 You can obtain the API ID and API Key.
-![](/images/img_1.png)
+
+
+![](image.png)
 
 ### Consumption
 
