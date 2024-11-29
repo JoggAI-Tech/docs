@@ -51,6 +51,8 @@ If you want to change the Avatar or voice, you can obtain the `avatar_id` from M
 
 #### My Instant Avatars List
 
+Please refer to the [Get Instant Avatar List](https://docs.jogg.ai/api-reference/Avatar/GetInstantAvatar) for more details.
+
 ```bash
 curl --location --request GET 'https://api.jogg.ai/v1/avatars/custom' \
 --header 'x-api-key: <your-api-key>'
@@ -78,6 +80,8 @@ Response example:
 ```
 
 #### My Voices List
+
+Please refer to the [Get My Voice ](https://docs.jogg.ai/api-reference/Voice/GetMyVoice)for more details.
 
 ```bash
 curl --location --request GET 'https://api.jogg.ai/v1/voices/custom' \

@@ -54,6 +54,8 @@ If you want to change the Avatar or voice, you can obtain the `avatar_id` from P
 
 #### Public Avatars List
 
+Please refer to the [Get Avatar List from Library](https://docs.jogg.ai/api-reference/Avatar/GetAvatarList) for more details.
+
 ```bash
 
 curl --location --request GET 'https://api.jogg.ai/v1/avatars?aspect_ratio=0' \
@@ -89,6 +91,8 @@ Response example:
 ```
 
 #### Public Voices List
+
+Please refer to the [Get Voice List form Library](https://docs.jogg.ai/api-reference/Voice/GetVoiceList) for more details.
 
 ```bash
 

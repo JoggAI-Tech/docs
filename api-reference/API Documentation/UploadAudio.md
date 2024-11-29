@@ -14,6 +14,8 @@ Additionally, you can adjust the Avatar using `avatar_id` and modify the voice
 
 You can upload audio to obtain your sign\_url.
 
+Please refer to the [Create Talking Avatar Videos](https://docs.jogg.ai/api-reference/Create-Avatar-Videos/CreateAvatarVideo) for more details.
+
 ```bash
 curl --location --request POST 'https://alpha-app-odyssey-api-service.jogg.ai/open/v1/upload/asset' \
 --header 'x-api-key: <your-api-key>' \
