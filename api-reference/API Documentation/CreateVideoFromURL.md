@@ -136,7 +136,8 @@ curl --location --request PUT 'https://api.jogg.ai/v1/product' \
 }'
 ```
 
-### Generate Video from Product Information 
+### Generate Video from Product Information
+
 #### With Visual Style
 
 Initiate a video generation task, where you can adjust video-related parameters and modify the video's layout by selecting a visual style.
@@ -146,8 +147,8 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
 --header 'x-api-key: <your-api-key>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "aspect_ratio": 0,
     "product_id": "NTQ0MTkzNjg",
+    "aspect_ratio": 0,
     "language": "english",
     "caption": true,
     "avatar_id": 100266,
@@ -176,8 +177,8 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
 --header 'x-api-key: <your-api-key>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-    "aspect_ratio": 0,
     "product_id": "NTQ0MTkzNjg",
+    "aspect_ratio": 0,
     "language": "english",
     "caption": true,
     "avatar_id": 100266,
