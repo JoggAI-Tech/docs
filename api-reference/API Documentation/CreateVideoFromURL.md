@@ -32,7 +32,6 @@ Generate a video from a URL in the following four steps:
 Upload the URL to create the product and analyze the URL to retrieve product information.
 
 Please refer to the [Upload URL to create product](https://docs.jogg.ai/api-reference/URL-to-Video/UploadURL) for more details.
-
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/product' \
 --header 'x-api-key: <your-api-key>' \
@@ -46,6 +45,7 @@ Response example:
 
 ```json
 {
+    "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
     "msg": "success",
     "data": {
@@ -59,12 +59,6 @@ Response example:
                 "name": "c7131c6d03cf0e5df33f7db8f1176c32.mp4",
                 "url": "https://res.jogg.ai/c7131c6d03cf0e5df33f7db8f1176c32.mp4",
                 "description": ""
-            },
-            {
-                "type": 2,
-                "name": "Image1",
-                "url": "https://res.jogg.ai/c7131c6d03cf0e5df33f7db8f1176c32.mp4",
-                "description": "Physicians Formula offers clean, hypoallergenic, cruelty-free, clinically and dermatologist-tested products without parabens, supporting environmental health and women's empowerment."
             },
             {
                 "type": 1,
@@ -83,18 +77,13 @@ Response example:
                 "name": "Image4",
                 "url": "https://res.jogg.ai/ed39da987c4c513b15f1a4915b033175.jpg",
                 "description": "Heart-themed blush with mood-boosting violet scent, includes brush and mirror for convenient application, ideal for enhancing complexion and uplifting spirits."
-            },
-            {
-                "type": 2,
-                "name": "Image6",
-                "url": "https://res.jogg.ai/2a0d72c8febe5244943fd9b7e7cebad4.jpg",
-                "description": "Physicians Formula Happy Booster Glow & Mood Boosting Blush offers a heart-embossed design that enhances radiance and mood, ideal for beauty enthusiasts seeking a cheerful, luminous look."
             }
         ],
         "target_audience": ""
     }
 }
 ```
+
 
 ### Update Product Information(Optional)
 
@@ -149,6 +138,7 @@ Please refer to the [Generate Video from Product Information](https://docs.jogg.
 Initiate a video generation task, where you can adjust video-related parameters and modify the video's layout by selecting a visual style.
 You can view [Get Visual Style](https://docs.jogg.ai/api-reference/Visual-Style/GetVisualStyle) for more details.
 
+
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
 --header 'x-api-key: <your-api-key>' \
@@ -156,14 +146,15 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
 --data-raw '{
     "product_id": "NTQ0MTkzNjg",
     "aspect_ratio": 0,
+    "video_length":"15",
     "language": "english",
     "caption": true,
-    "avatar_id": 100266,
-    "avatar_source":1,
+    "avatar_id": 127,
+    "avatar_type":0,
     "visual_style": "FullScreen",
     "script_style": "Don't Worry",
-    "video_length":"15"
-}
+    "template_type": "public"
+    }
 ```
 
 Response example:
@@ -179,11 +170,13 @@ Response example:
 }
 ```
 
+
 #### With Template
 
 Initiate a video generation task where you can adjust video-related parameters and customize the video's style and appearance by selecting a template.
 
 You can view [Get Template List from Library](https://docs.jogg.ai/api-reference/Template/GetTemplate) for more details.
+
 
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
@@ -192,14 +185,14 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
 --data-raw '{
     "product_id": "NTQ0MTkzNjg",
     "aspect_ratio": 0,
+    "video_length":"15",
     "language": "english",
     "caption": true,
     "avatar_id": 100266,
-    "avatar_source":1,
+    "avatar_type":1,
     "script_style": "Don't Worry",
     "template_type": "common",
-    "template_id":0,
-    "video_length":"15"
+    "template_id":0
 }
 ```
 
@@ -231,16 +224,17 @@ Response example:
 
 ```json
 {
+    "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
     "msg": "success",
     "data": {
         "id": "fa6228c0f52c4f3986e88f7ffa5d2864",
         "title": "welcome to jogg.ai",
-        "status": 4,
-        "status_desc": "success",
-        "video_duration": 6,
         "video_url": "https://res.jogg.ai/video.webm",
         "cover_url": "https://res.jogg.ai/cover.png",
+        "video_duration": 6,
+        "status_code": 4,
+        "status_desc": "success",
         "created_at": 1732806631
     }
 }
