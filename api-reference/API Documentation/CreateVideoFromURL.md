@@ -31,6 +31,8 @@ Generate a video from a URL in the following four steps:
 
 Upload the URL to create the product and analyze the URL to retrieve product information.
 
+Please refer to the [Upload URL to create product](https://docs.jogg.ai/api-reference/URL-to-Video/UploadURL) for the full options of enums.
+
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/product' \
 --header 'x-api-key: <your-api-key>' \
@@ -98,6 +100,8 @@ Response example:
 
 Update the product information if necessary(Optionally).
 
+Please refer to the [Update Product Information ](https://docs.jogg.ai/api-reference/URL-to-Video/UpdateProduct)for the full options of enums.
+
 ```bash
 curl --location --request PUT 'https://api.jogg.ai/v1/product' \
 --header 'x-api-key: <your-api-key>' \
@@ -137,6 +141,8 @@ curl --location --request PUT 'https://api.jogg.ai/v1/product' \
 ```
 
 ### Generate Video from Product Information
+
+Please refer to the [Generate Video from Product Information](https://docs.jogg.ai/api-reference/URL-to-Video/CreateVideo) for the full options of enums.
 
 #### With Visual Style
 
@@ -210,6 +216,8 @@ Response example:
 ### Get the generated video
 
 Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
+
+Please refer to the[ GetGeneratedVideo](https://docs.jogg.ai/api-reference/GetGeneratedVideo/GetGeneratedVideo) for the full options of enums.
 
 ```bash
 curl --location --request GET 'https://api.jogg.ai/v1/project?project_id=fa6228c0f52c4f3986e88f7ffa5d2864' \
