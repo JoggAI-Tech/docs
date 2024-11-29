@@ -13,6 +13,8 @@ Using the JoggAI API, you can create videos with avatars from library. In this t
 
 Creating Avatar videos, supporting the configuration of various video settings including script, aspect ratio, screen style, avatar, and voice.
 
+Please refer to the [Create Talking Avatar Videos](https://docs.jogg.ai/api-reference/Create-Avatar-Videos/CreateAvatarVideo) for more details.
+
 ```bash
 
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking_avatar' \
