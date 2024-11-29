@@ -15,7 +15,8 @@ First, create your Instant Avatar on the [Create Instant Avatar page](https://
 
 Creating Avatar videos, supporting the configuration of various video settings including script, aspect ratio, screen style, avatar, and voice.
 
-Please refer to the [Create Talking Avatar Videos](https://docs.jogg.ai/api-reference/Create-Avatar-Videos/CreateAvatarVideo) for more details and refer to the next section for obtaining the avatar_id and voice_id.
+Please refer to the [Create Talking Avatar Videos](https://docs.jogg.ai/api-reference/Create-Avatar-Videos/CreateAvatarVideo) for more details and refer to the next section for obtaining the avatar\_id and voice\_id.
+
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking_avatar' \
 --header 'x-api-key: <your-api-key>' \
@@ -121,16 +122,17 @@ Response example:
 
 ```json
 {
+    "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
     "msg": "success",
     "data": {
         "id": "fa6228c0f52c4f3986e88f7ffa5d2864",
         "title": "welcome to jogg.ai",
-        "status": 4,
-        "status_desc": "success",
-        "video_duration": 6,
         "video_url": "https://res.jogg.ai/video.webm",
         "cover_url": "https://res.jogg.ai/cover.png",
+        "video_duration": 6,
+        "status_code": 4,
+        "status_desc": "success",
         "created_at": 1732806631
     }
 }
