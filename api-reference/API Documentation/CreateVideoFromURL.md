@@ -13,7 +13,7 @@ With our API, you can upload a URL to generate a video. Simply provide a URL, an
 
 * You need a JoggAI account with API access.
 
-* You need to go through the Get your API key
+* You need to go through the [Get your API key](https://docs.jogg.ai/api-reference/QuickStart/GettingStarted)
 
 ### Main Steps
 
