@@ -21,7 +21,6 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking
 --header 'Content-Type: application/json' \
 --data-raw '{
     "script": "Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!",
-    "audio_url": "",
     "aspect_ratio": 0,
     "screen_style": 1,
     "avatar_id": 127,
