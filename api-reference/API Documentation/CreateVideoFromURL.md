@@ -163,8 +163,12 @@ Response example:
 
 ```json
 {
+    "rid": "864ecc09edbc22041a7312fb4ffb0cd2",
     "code": 0,
-    "msg": "success"
+    "msg": "success",
+    "data": {
+        "project_id": "7321782d69884a869400beb255e3ca91"
+    }
 }
 ```
 
@@ -194,8 +198,12 @@ Response example:
 
 ```json
 {
+    "rid": "864ecc09edbc22041a7312fb4ffb0cd2",
     "code": 0,
-    "msg": "success"
+    "msg": "success",
+    "data": {
+        "project_id": "7321782d69884a869400beb255e3ca91"
+    }
 }
 ```
 
