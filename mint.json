@@ -151,15 +151,17 @@
         "api-reference/Template/GetMyTemplate"
 
       ]
-    }
-  ],
-      {
+    },
+    {
       "group": "Music",
       "pages": [
         "api-reference/Music/GetMusic"
 
       ]
     }
+    
+  ],
+
   ],
   "footerSocials": {
     "x": "https://x.com/Jogg_ai",
