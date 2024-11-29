@@ -45,6 +45,7 @@ Here’s an example response:
 sign\_url: Use this URL to upload the file.
 
 #### Use cURL to Upload the File
+
 Use the following cURL command to upload the file to the server. Make sure to replace \<file-binary-data> with the actual binary data of the file.
 
 ```bash
@@ -82,7 +83,6 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking
     "screen_style": 1,
     "avatar_id": 127,
     "avatar_type": 0,
-    "voice_id": "en-US-ChristopherNeural",
     "caption": true   
 }'
 ```
