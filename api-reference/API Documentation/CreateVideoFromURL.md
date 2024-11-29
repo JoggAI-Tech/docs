@@ -3,7 +3,19 @@ title: 'Create Video from URL'
 description: 'How to create video from URL.'
 ---
 
-### Description
+## Introduction
+
+With our API, you can upload a URL to generate a video. Simply provide a URL, and we will analyze and extract the product information for you. You can customize the product information and video settings, such as aspect ratio, video length, language, script style, and visual style. This allows you to quickly create a tailored video.![](c323c87b74bc41d4bf0a2e3065b5b10c.jpg)
+
+## Quick Start
+
+### Prerequisite
+
+* You need a creatify.ai account with API access.
+
+* You need to go through the Get your API key
+
+### Main Steps
 
 Generate a video from a URL in the following three steps:
 
@@ -123,4 +135,5 @@ Response example:
 Note: After initiating video generation, you can use the project\_id to query the generation status through the /open/prj\_info endpoint.
 
 ### Get the generated video
-Use the project_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video_url.
+
+Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
