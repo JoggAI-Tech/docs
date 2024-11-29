@@ -1,6 +1,7 @@
 openapi: 3.0.1
 
 info:
+
   title: OpenAPI Render API
 
   description: A sample API that demonstrates features in the OpenAPI specification
@@ -948,7 +949,7 @@ paths:
 
                   description: |
 
-                    Avatar id from Jogg Avatar or Your Avatar.
+                    Avatar id from Public Avatar or Custom Avatar.
 
                   example: 1
 
@@ -1204,7 +1205,7 @@ paths:
 
                   type: integer
 
-                  description: 'Source type of the avatar. 0: jogg avatar, 1: your avatar'
+                  description: 'Source type of the avatar. 0: public avatar, 1: custom avatar'
 
                   enum:
 
@@ -1345,20 +1346,6 @@ paths:
 
                           example: welcome to jogg.ai
 
-                        status_desc:
-
-                          type: string
-
-                          description: Description of current progress
-
-                          example: processing
-
-                        status_code:
-
-                          type: integer
-
-                          description: Current status
-
                         video_duration:
 
                           type: integer
@@ -1382,6 +1369,20 @@ paths:
                           description: URL to the cover image
 
                           example: https://res.jogg.ai/cover.jpg
+
+                        status_code:
+
+                          type: integer
+
+                          description: Current status
+
+                        status_desc:
+
+                          type: string
+
+                          description: Description of current progress
+
+                          example: processing
 
                         created_at:
 
@@ -1780,7 +1781,7 @@ paths:
 
                                 example: https://res.jogg.ai/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png
 
-                              avatar_status:
+                              status:
 
                                 type: integer
 
