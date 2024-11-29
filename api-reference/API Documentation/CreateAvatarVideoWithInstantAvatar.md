@@ -21,7 +21,7 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking
 --header 'Content-Type: application/json' \
 --data-raw '{
     "script": "Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!",
-    "audio_script": "",
+    "audio_url": "",
     "aspect_ratio": 0,
     "screen_style": 1,
     "avatar_id": 127,
@@ -35,10 +35,11 @@ Response example:
 
 ```json
 {
+    "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
     "msg": "success",
     "data": {
-        "project_id": "<project-id>"    # Project ID for status query
+        "project_id": "<project-id>"   
     }
 }
 ```
@@ -58,12 +59,13 @@ Response example:
 
 ```json
 {
+    "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
     "msg": "success",
     "data": {
         "avatars": [
             {
-                "avatar_id": 81,       
+                "avatar_id": 81,
                 "name": "Amanda outdoors",
                 "cover_url": "<avatar-cover-url>",
                 "api_only": false,
@@ -85,13 +87,14 @@ Response example:
 
 ```json
 {
+    "rid": "d43b3a5999e31b7e7a62ee5ef84d411d",
     "code": 0,
     "msg": "success",
     "data": {
         "voices": [
             {
                 "name": "Emily",
-                "voice_id": "8xUNyTgckMBsX4jn4Lxf",   
+                "voice_id": "8xUNyTgckMBsX4jn4Lxf",
                 "audition_url": "<voice-audio-url>",
                 "language": "english"
             }
