@@ -19,7 +19,7 @@ Click the avatar, then click 'API'
 ![](/images/img01.png)
 You can obtain the API ID and API Key.
 
-![](3AC09D43-80AB-48BD-A51F-29886E7D883C.png)
+![](/images/APIKey.png)
 
 ### Consumption
 
