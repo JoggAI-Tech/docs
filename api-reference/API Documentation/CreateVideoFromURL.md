@@ -147,13 +147,14 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
     "aspect_ratio": 0,
     "video_length":"15",
     "language": "english",
-    "caption": true,
     "avatar_id": 127,
     "avatar_type":0,
     "visual_style": "FullScreen",
     "script_style": "Don't Worry",
     "voice_id":"en-US-ChristopherNeural",
-    "template_type": "public"
+    "template_type": "public",
+    "override_script": "",
+    "caption": true
     }
 ```
 
@@ -191,7 +192,9 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
     "script_style": "Don't Worry",
     "template_id":0,
     "voice_id":"en-US-ChristopherNeural",
-    "template_type": "public"
+    "template_type": "public",
+    "override_script": "",
+    "caption": true
 }
 ```
 
