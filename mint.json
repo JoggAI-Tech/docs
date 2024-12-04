@@ -118,6 +118,7 @@
 
       ]
     },
+    {
       "group": "AI Scripts",
       "pages": [
         "api-reference/AI-Scripts/AI-Scripts"
