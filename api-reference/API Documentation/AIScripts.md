@@ -9,4 +9,4 @@ Using the JoggAI API, you can generate AI scripts effortlessly. Simply provide t
 
 ## Quick Start
 
-### Create Talking Avatar Video
+### Generate Scripts from product
