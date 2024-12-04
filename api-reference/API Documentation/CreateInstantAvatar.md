@@ -7,6 +7,8 @@ description: "How to create instant avatar."
 
 You can customize your avatar using the Create Instant Avatar API. Input the video path via `origin_url` to create your digital avatar.
 
+Recommended input video specifications: 1080P at 30FPS. If you provide a video with higher specifications, we will automatically convert it to that specification.
+
 ### Base URL
 
 \`https://api-services.jogg.ai\`
