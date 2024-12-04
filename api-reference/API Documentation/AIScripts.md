@@ -60,6 +60,10 @@ Response example:
 }
 ```
 
+### Use the script for video generation.
+
+You can replace the script using the `override_script` parameter in the Generate Video from Product Information endpoint.
+
 ## Consumption
 
 Each time you call the AI Scripts API, it will consume 0.2 API Credit.
