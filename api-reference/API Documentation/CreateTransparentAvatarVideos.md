@@ -3,9 +3,11 @@ title: "Create Transparent Avatar Videos in WebM/MP4 Format"
 description: "How to create transparent avatar videos in WebM/MP4 format."
 ---
 
-You can export videos in MP4 format with a green screen or in WebM format with a transparent background (coming soon).
+You can export videos in MP4 format with a green screen or in WebM format with a transparent background.
 
 Use the Create Talking Avatar Video API to control the output format by selecting the desired video specification with the `screen_style` parameter. This parameter controls the background style, allowing you to choose between videos with a background, green screen videos, or videos with a transparent background.
+
+Please note: If you need to output a **WebM** video with a transparent channel, please set the `caption` to false; otherwise, the WebM video cannot be generated.
 
 ### Create Talking Avatar Video
 
