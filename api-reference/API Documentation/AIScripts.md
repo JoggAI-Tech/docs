@@ -62,7 +62,7 @@ Response example:
 
 ### Use the script for video generation.
 
-You can replace the script using the `override_script` parameter in the [Generate Video from Product Information](https://docs.jogg.ai/api-reference/API%20Documentation/CreateVideoFromURL#generate-video-from-product-information) endpoint.
+You can replace the script using the `override_script` parameter in the [Generate Video from Product Information](https://docs.jogg.ai/api-reference/URL-to-Video/CreateVideo) endpoint.
 
 ## Consumption
 
