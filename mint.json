@@ -80,6 +80,7 @@
           ]        
           },     
         "api-reference/API Documentation/CreateVideoFromURL",
+        
         {
           "group":"Create Video from Templates(coming soon)",
           "pages":[
@@ -113,6 +114,12 @@
       "group": "Get Generated Video",
       "pages": [
         "api-reference/GetGeneratedVideo/GetGeneratedVideo"
+
+      ]
+    },
+      "group": "AI Scripts",
+      "pages": [
+        "api-reference/AI-Scripts/AI-Scripts"
 
       ]
     },
