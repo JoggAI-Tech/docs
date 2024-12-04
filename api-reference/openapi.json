@@ -2741,16 +2741,27 @@ paths:
                           example: https://res.jogg.ai/cover.jpg
 
 
-
                         status_code:
-
-
 
                           type: integer
 
-
-
                           description: Current status
+
+                          enum:
+
+                            - 1 start
+
+                            - 2 waiting
+                                  
+                            - 3 processing
+
+                            - 4 success
+        
+                            - 5 failed
+
+                            - 99 deleted
+
+                          example: 4
 
 
 
