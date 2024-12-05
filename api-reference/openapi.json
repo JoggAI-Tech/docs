@@ -1,2959 +1,7754 @@
 openapi: 3.0.1
 
+
+
 info:
 
-title: OpenAPI Render API
 
-description: A sample API that demonstrates features in the OpenAPI specification
 
-license:
+  title: OpenAPI Render API
 
-name: MIT
 
-version: 1.0.0
+
+  description: A sample API that demonstrates features in the OpenAPI specification
+
+
+
+  license:
+
+
+
+    name: MIT
+
+
+
+  version: 1.0.0
+
+
 
 servers:
 
-* url: [https://api.jogg.ai/v1](https://api.jogg.ai/v1)
+
+
+  - url: https://api.jogg.ai/v1
+
+
 
 security:
 
-* apiKeyAuth: \[]
+
+
+  - apiKeyAuth: []
+
+
 
 tags:
 
-* name: Create Video from URLdescription: |-Product video generation workflow:
 
-  1. First call POST /product to crawl product information
 
-  2. Optionally call PUT /product to modify product details using the product\_id from step 1
+  - name: Create Video from URL
 
-  3. Finally call POST /create\_video\_from\_url to generate video using the product\_id from step 1
+
+
+    description: |-
+
+
+
+      Product video generation workflow:
+
+
+
+        1. First call POST /product to crawl product information
+
+
+
+        2. Optionally call PUT /product to modify product details using the product_id from step 1
+
+
+
+        3. Finally call POST /create_video_from_url to generate video using the product_id from step 1
+
+
 
 paths:
 
-/create\_video\_with\_variable:
 
-post:
 
-description: Renders a template with specified variables
+  /create_video_with_variable:
 
-requestBody:
+    
 
-content:
+    post:
 
-application/json:
 
-schema:
 
-type: object
+      description: Renders a template with specified variables
 
-properties:
 
-text:
 
-type: string
+      requestBody:
 
-example: default
 
-lang:
 
-type: string
+        content:
 
-description: Language for text-to-speech conversion
 
-enum:
 
-* english
+          application/json:
 
-* filipino
 
-* french
 
-* german
+            schema:
 
-* hindi
 
-* indonesian
 
-* italian
+              type: object
 
-* japanese
 
-* korean
 
-* malay
+              properties:
 
-* portuguese
 
-* russian
 
-* spanish
+                text:
 
-* thai
 
-* vietnamese
 
-* arabic
+                  type: string
 
-* greek
 
-* turkish
 
-* slovenian
+                  example: default
 
-* croatian
 
-* romanian
 
-* chinese
+                lang:
 
-* bengali
 
-* urdu
 
-* hungarian
+                  type: string
 
-* traditional-chinese
 
-* polish
 
-example: english
+                  description: Language for text-to-speech conversion
 
-template\_id:
 
-type: integer
 
-example: 96
+                  enum:
 
-template\_type:
 
-type: string
 
-example: custom
+                    - english
 
-dp\_id:
 
-type: integer
 
-example: 0
+                    - filipino
 
-timbre\_id:
 
-type: integer
 
-example: 0
+                    - french
 
-without\_tts:
 
-type: integer
 
-example: 1
+                    - german
 
-variables:
 
-type: array
 
-items:
+                    - hindi
 
-type: object
 
-properties:
 
-name:
+                    - indonesian
 
-type: string
 
-type:
 
-type: string
+                    - italian
 
-properties:
 
-type: object
 
-additionalProperties: true
+                    - japanese
 
-required:
 
-* text
 
-* lang
+                    - korean
 
-* template\_id
 
-* template\_type
 
-* variables
+                    - malay
 
-required: true
 
-responses:
 
-'200':
+                    - portuguese
 
-description: "Success"
 
-content:
 
-application/json:
+                    - russian
 
-schema:
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
+                    - spanish
 
-* type: objectproperties:data:type: objectproperties:project\_id:type: integerdescription: "Created project ID"
 
-/products:
 
-get:
+                    - thai
 
-tags:
 
-* URL to Video
 
-summary: Get products
+                    - vietnamese
 
-description: Get list of products
 
-responses:
 
-'200':
+                    - arabic
 
-description: "Success"
 
-content:
 
-application/json:
+                    - greek
 
-schema:
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
+                    - turkish
 
-* type: objectproperties:data:type: arrayitems:type: objectproperties:product\_id:type: stringdescription: Product ID - Save this for Step 2 (PUT /open/product) if you need to update product information & Step 3 (POST /create\_video\_from\_url) need to use product\_id.example: NTQ0MTkzNjgurl:type: stringdescription: URL of the product to crawlexample: [https://res.jogg.ai.com/product\_urlname:type:](https://res.jogg.ai.com/product_urlname:type:) stringdescription: Product nameexample: 'Physicians Formula Happy Booster Heart Blush Glow \&amp; Mood Boosting, Rose, Dermatologist Tested'description:type: stringdescription: Product introduction and selling pointsexample: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. 'target\_audience:type: stringdescription: Target audience for the productexample: 'Tech-savvy millennials interested in sustainable living solutions.'media:type: arraydescription: Media resources array (will replace existing media if provided)items:type: objectproperties:type:type: integerdescription: 'Media type (1: image, 2: video)'enum:example: 1name:type: stringdescription: Media nameexample: 'media.jpg'url:type: stringdescription: Media URLexample: 'https://res.jogg.ai/media.jpg'description:type: stringdescription: Media descriptionexample: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow.'
 
-  * 1
 
-  * 2
+                    - slovenian
 
-/product:
 
-post:
 
-tags:
+                    - croatian
 
-* URL to Video
 
-summary: 'Step 1: Upload URL to get product Information.'
 
-description: |-
+                    - romanian
 
-Get product information by crawling the provided URL. The response contains two important IDs:
 
-* product\_id: Used in Step 2 & Step 3 for updating product information and creating the video.
 
-requestBody:
+                    - chinese
 
-required: true
 
-content:
 
-application/json:
+                    - bengali
 
-schema:
 
-type: object
 
-properties:
+                    - urdu
 
-url:
 
-type: string
 
-description: URL of the product to crawl
+                    - hungarian
 
-example: [https://res.jogg.ai.com/product\_url](https://res.jogg.ai.com/product_url)
 
-required:
 
-* url
+                    - traditional-chinese
 
-responses:
 
-'200':
 
-description: "Success"
+                    - polish
 
-content:
 
-application/json:
 
-schema:
+                  example: english
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:product\_id:type: stringdescription: Product ID - Save this for Step 2 (PUT /open/product) if you need to update product information & Step 3 (POST /create\_video\_from\_url) need to use product\_id.example: NTQ0MTkzNjgurl:type: stringdescription: URL of the product to crawlexample: [https://res.jogg.ai.com/product\_urlname:type:](https://res.jogg.ai.com/product_urlname:type:) stringdescription: Product nameexample: 'Physicians Formula Happy Booster Heart Blush Glow \&amp; Mood Boosting, Rose, Dermatologist Tested'description:type: stringdescription: Product introduction and selling pointsexample: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. 'target\_audience:type: stringdescription: Target audience for the productexample: ''media:type: arraydescription: Media resources array (will replace existing media if provided)items:type: objectproperties:type:type: integerdescription: 'Media type (1: image, 2: video)'enum:example: 1name:type: stringdescription: Media nameexample: 'media.jpg'url:type: stringdescription: Media URLexample: 'https://res.jogg.ai/media.jpg'description:type: stringdescription: Media descriptionexample: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow.'
+                template_id:
 
-  * 1
 
-  * 2
 
-put:
+                  type: integer
 
-tags:
 
-* URL to Video
 
-summary: 'Step 2 (Optional): Update Product Information'
+                  example: 96
 
-description: Optional step to update product details. Use the product\_id received from Step 1 (POST /open/product response)
 
-requestBody:
 
-required: true
+                template_type:
 
-content:
 
-application/json:
 
-schema:
+                  type: string
 
-type: object
 
-required:
 
-* product\_id
+                  example: custom
 
-properties:
 
-product\_id:
 
-type: string
+                dp_id:
 
-description: Product ID obtained from Step 1 (POST /open/product) response data.id
 
-example: 3924
 
-name:
+                  type: integer
 
-type: string
 
-description: Product name
 
-example: 'Physicians Formula Happy Booster Heart Blush Glow \&amp; Mood Boosting, Rose, Dermatologist Tested'
+                  example: 0
 
-description:
 
-type: string
 
-description: Product introduction and selling points
+                timbre_id:
 
-example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
 
-target\_audience:
 
-type: string
+                  type: integer
 
-description: Target audience for the product
 
-example: ''
 
-media:
+                  example: 0
 
-type: array
 
-description: Media resources array (will replace existing media if provided)
 
-items:
+                without_tts:
 
-type: object
 
-properties:
 
-type:
+                  type: integer
 
-type: integer
 
-description: 'Media type (1: image, 2: video)'
 
-enum:
+                  example: 1
 
-* 1
 
-* 2
 
-example: 1
+                variables:
 
-name:
 
-type: string
 
-description: Media name
+                  type: array
 
-example: 'media.jpg'
 
-url:
 
-type: string
+                  items:
 
-description: Media URL
 
-example: 'https://res.jogg.ai/media.jpg'
 
-description:
+                    type: object
 
-type: string
 
-description: Media description
 
-example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow.'
+                    properties:
 
-responses:
 
-'200':
 
-description: Product updated successfully
+                      name:
 
-content:
 
-application/json:
 
-schema:
+                        type: string
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
 
-/ai\_scripts:
+                      type:
 
-post:
 
-tags:
 
-* AI Scripts
+                        type: string
 
-summary: Generate Scripts from product.
 
-description: Simply provide the product information or the product\_id generated in the Upload URL to create product, and you can create several different styles of product introduction scripts.If you do not provide the product\_id, then the product's name and description are required.
 
-requestBody:
+                      properties:
 
-content:
 
-application/json:
 
-schema:
+                        type: object
 
-type: object
 
-properties:
 
-product\_id:
+                        additionalProperties: true
 
-type: string
 
-description: Simply provide the product information or the product\_id generated at the "Upload URL to Create Product" endpoint, and you can create several different styles of product introduction scripts.
 
-example: NTQ0MTkzNjg
+              required:
 
-name:
 
-type: string
 
-description: Product name
+                - text
 
-example: Owala FreeSip Insulated Stainless Steel Water Bottle with Straw for Sports.
 
-description:
 
-type: string
+                - lang
 
-description: Product introduction and selling points
 
-example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
 
-target\_audience:
+                - template_id
 
-type: string
 
-description: Target audience for the product
 
-example: ''
+                - template_type
 
-video\_length:
 
-type: string
 
-description: Video Length.
+                - variables
 
-example: "15"
 
-enum:
 
-* "15"
+        required: true
 
-* "30"
 
-* "60"
 
-language:
+      responses:
 
-type: string
 
-description: |
 
-Script generation language (defaults to English if not specified):
+        '200':
 
-* english - English
 
-* filipino - Filipino
 
-* french - French
+          description: "Success"
 
-* german - German
 
-* hindi - Hindi
 
-* indonesian - Indonesian
+          content:
 
-* italian - Italian
 
-* japanese - Japanese
 
-* korean - Korean
+            application/json:
 
-* malay - Malay
 
-* portuguese - Portuguese
 
-* russian - Russian
+              schema:
 
-* spanish - Spanish
 
-* thai - Thai
 
-* vietnamese - Vietnamese
+                allOf:
 
-* arabic - Arabic
 
-* greek - Greek
 
-* turkish - Turkish
+                - $ref: '#/components/schemas/BaseResponse'
 
-* slovenian - Slovenian
 
-* croatian - Croatian
 
-* romanian - Romanian
+                - type: object
 
-* chinese - Simplified Chinese
 
-* bengali - Bengali
 
-* urdu - Urdu
+                  properties:
 
-* hungarian - Hungarian
 
-* traditional-chinese - Traditional Chinese
 
-* polish - Polish
+                    data:
 
-* cantonese - Cantonese
 
-* danish - Danish
 
-* malayalam - Malayalam
+                      type: object
 
-* tamil - Tamil
 
-* telugu - Telugu
 
-* czech - Czech
+                      properties:
 
-* hebrew - Hebrew
 
-* zulu - Zulu
 
-* swedish - Swedish
+                        project_id:
 
-* lithuanian - Lithuanian
 
-* dutch - Dutch
 
-* flemish - Flemish
+                          type: integer
 
-* norwegian - Norwegian
 
-* finnish - Finnish
 
-* bulgarian - Bulgarian
+                          description: "Created project ID"
 
-* latvian - Latvian
 
-* ukrainian - Ukrainian
 
-* mongolian - Mongolian
+  /products:
 
-* persian - Persian
 
-* odia - Odia
 
-* assamese - Assamese
+    get:
 
-* kannada - Kannada
 
-* tagalog - Tagalog
 
-* amharic - Amharic
+      tags:
 
-* serbian - Serbian
 
-* slovak - Slovak
 
-* swahili - Swahili
+        - URL to Video 
 
-enum:
 
-* "english"
 
-* "filipino"
+      summary: Get products
 
-* "french"
 
-* "german"
 
-* "hindi"
+      description: Get list of products
 
-* "indonesian"
 
-* "italian"
 
-* "japanese"
+      responses:
 
-* "korean"
 
-* "malay"
 
-* "portuguese"
+        '200':
 
-* "russian"
 
-* "spanish"
 
-* "thai"
+          description: "Success"
 
-* "vietnamese"
 
-* "arabic"
 
-* "greek"
+          content:
 
-* "turkish"
 
-* "slovenian"
 
-* "croatian"
+            application/json:
 
-* "romanian"
 
-* "chinese"
 
-* "bengali"
+              schema:
 
-* "urdu"
 
-* "hungarian"
 
-* "traditional-chinese"
+                allOf:
 
-* "polish"
 
-* "cantonese"
 
-* "danish"
+                - $ref: '#/components/schemas/BaseResponse'
 
-* "malayalam"
 
-* "tamil"
 
-* "telugu"
+                - type: object
 
-* "czech"
 
-* "hebrew"
 
-* "zulu"
+                  properties:
 
-* "swedish"
 
-* "lithuanian"
 
-* "dutch"
+                    data:
 
-* "flemish"
 
-* "norwegian"
 
-* "finnish"
+                      type: array
 
-* "bulgarian"
 
-* "latvian"
 
-* "ukrainian"
+                      items:
 
-* "mongolian"
 
-* "persian"
 
-* "odia"
+                        type: object
 
-* "assamese"
 
-* "kannada"
 
-* "tagalog"
+                        properties:
 
-* "amharic"
 
-* "serbian"
 
-* "slovak"
+                          product_id:
 
-* "swahili"
 
-default: "english"
 
-example: "english"
+                            type: string
 
-required: true
 
-responses:
 
-'200':
+                            description: Product ID - Save this for Step 2 (PUT /open/product) if you need to update product information & Step 3 (POST /create_video_from_url) need to use product_id.
 
-description: "Success"
 
-content:
 
-application/json:
+                            example: NTQ0MTkzNjg
 
-schema:
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
+                          url:
 
-* type: objectproperties:data:type: objectproperties:generated\_scripts:type: arrayitems:type: objectproperties:script\_paragraphs:type: stringdescription: Script Paragraphs.default: "Ever tried drinking water while running? It's like a comedy show!You either spill it all over or look like a fish out of water.Then I found the Owala FreeSip bottle—game changer."example: "Ever tried drinking water while running? It's like a comedy show!You either spill it all over or look like a fish out of water.Then I found the Owala FreeSip bottle—game changer."script\_style:type: stringdescription: Script Style.default: Storytime.example: Storytime.
 
-/create\_video\_from\_url:
 
-post:
+                            type: string
 
-tags:
 
-* URL to Video
 
-summary: 'Step 3: Generate Video from Product Information'
+                            description: URL of the product to crawl
 
-description: Final step to generate the product video. Use the product\_id received from Step 1 (POST /product response)
 
-requestBody:
 
-content:
+                            example: https://res.jogg.ai.com/product_url
 
-application/json:
 
-schema:
 
-type: object
+                          name:
 
-properties:
 
-product\_id:
 
-type: string
+                            type: string
 
-description: Product ID obtained from Step 1 (POST /product) response data.product\_id
 
-example: 8xUNyTgckMBsX4jn4Lxf
 
-aspect\_ratio:
+                            description: Product name
 
-type: integer
 
-description: |
 
-Video aspect ratio:
+                            example: 'Physicians Formula Happy Booster Heart Blush Glow &amp;amp; Mood Boosting, Rose, Dermatologist Tested'
 
-* 0 - Portrait \[9:16]
 
-* 1 - Landscape \[16:9]
 
-* 2 - Square \[1:1]
+                          description:
 
-enum: \[0, 1, 2]
 
-example: 0
 
-video\_length:
+                            type: string
 
-type: string
 
-description: Video Length.
 
-example: "15"
+                            description: Product introduction and selling points
 
-enum:
 
-* "15"
 
-* "30"
+                            example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
 
-* "60"
 
-language:
 
-type: string
+                          target_audience:
 
-description: |
 
-Script generation language (defaults to English if not specified):
 
-* english - English
+                            type: string
 
-* filipino - Filipino
 
-* french - French
 
-* german - German
+                            description: Target audience for the product
 
-* hindi - Hindi
 
-* indonesian - Indonesian
 
-* italian - Italian
+                            example: 'Tech-savvy millennials interested in sustainable living solutions.'
 
-* japanese - Japanese
 
-* korean - Korean
 
-* malay - Malay
+                          media:
 
-* portuguese - Portuguese
 
-* russian - Russian
 
-* spanish - Spanish
+                            type: array
 
-* thai - Thai
 
-* vietnamese - Vietnamese
 
-* arabic - Arabic
+                            description: Media resources array (will replace existing media if provided)
 
-* greek - Greek
 
-* turkish - Turkish
 
-* slovenian - Slovenian
+                            items:
 
-* croatian - Croatian
 
-* romanian - Romanian
 
-* chinese - Simplified Chinese
+                              type: object
 
-* bengali - Bengali
 
-* urdu - Urdu
 
-* hungarian - Hungarian
+                              properties:
 
-* traditional-chinese - Traditional Chinese
 
-* polish - Polish
 
-* cantonese - Cantonese
+                                type:
 
-* danish - Danish
 
-* malayalam - Malayalam
 
-* tamil - Tamil
+                                  type: integer
 
-* telugu - Telugu
 
-* czech - Czech
 
-* hebrew - Hebrew
+                                  description: 'Media type (1: image, 2: video)'
 
-* zulu - Zulu
 
-* swedish - Swedish
 
-* lithuanian - Lithuanian
+                                  enum:
 
-* dutch - Dutch
 
-* flemish - Flemish
 
-* norwegian - Norwegian
+                                    - 1
 
-* finnish - Finnish
 
-* bulgarian - Bulgarian
 
-* latvian - Latvian
+                                    - 2
 
-* ukrainian - Ukrainian
 
-* mongolian - Mongolian
 
-* persian - Persian
+                                  example: 1
 
-* odia - Odia
 
-* assamese - Assamese
 
-* kannada - Kannada
+                                name:
 
-* tagalog - Tagalog
 
-* amharic - Amharic
 
-* serbian - Serbian
+                                  type: string
 
-* slovak - Slovak
 
-* swahili - Swahili
 
-enum:
+                                  description: Media name
 
-* "english"
 
-* "filipino"
 
-* "french"
+                                  example: 'media.jpg'
 
-* "german"
 
-* "hindi"
 
-* "indonesian"
+                                url:
 
-* "italian"
 
-* "japanese"
 
-* "korean"
+                                  type: string
 
-* "malay"
 
-* "portuguese"
 
-* "russian"
+                                  description: Media URL
 
-* "spanish"
 
-* "thai"
 
-* "vietnamese"
+                                  example: 'https://res.jogg.ai/media.jpg'
 
-* "arabic"
 
-* "greek"
 
-* "turkish"
 
-* "slovenian"
 
-* "croatian"
+                                description:
 
-* "romanian"
 
-* "chinese"
 
-* "bengali"
+                                  type: string
 
-* "urdu"
 
-* "hungarian"
 
-* "traditional-chinese"
+                                  description: Media description
 
-* "polish"
 
-* "cantonese"
 
-* "danish"
+                                  example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow.'
 
-* "malayalam"
 
-* "tamil"
 
-* "telugu"
+  /product:
 
-* "czech"
+        
 
-* "hebrew"
+    post:
 
-* "zulu"
 
-* "swedish"
 
-* "lithuanian"
+      tags:
 
-* "dutch"
 
-* "flemish"
 
-* "norwegian"
+        - URL to Video 
 
-* "finnish"
 
-* "bulgarian"
 
-* "latvian"
+      summary: 'Step 1: Upload URL to get product Information.'
 
-* "ukrainian"
 
-* "mongolian"
 
-* "persian"
+      description: |-
 
-* "odia"
 
-* "assamese"
 
-* "kannada"
+        Get product information by crawling the provided URL. The response contains two important IDs:
 
-* "tagalog"
 
-* "amharic"
 
-* "serbian"
+        - product_id: Used in Step 2 & Step 3 for updating product information and creating the video.
 
-* "slovak"
 
-* "swahili"
 
-default: "english"
+      requestBody:
 
-example: "english"
 
-avatar\_id:
 
-type: integer
+        required: true
 
-description: |
 
-Avatar id from Jogg Avatar or Your Avatar.
 
-example: 1
+        content:
 
-avatar\_type:
 
-type: integer
 
-description: |
+          application/json:
 
-Avatar source type:
 
-* 0 - Public avatars
 
-* 1 - Custom avatars
+            schema:
 
-enum:
 
-* 0
 
-* 1
+              type: object
 
-example: 0
 
-voice\_id:
 
-type: string
+              properties:
 
-description: |
 
-Voice id from voice list.
 
-example: en-US-ChristopherNeural
+                url:
 
-script\_style:
 
-type: string
 
-description: |
+                  type: string
 
-Script writing style for video content:
 
-* Don't Worry - Casual and reassuring tone
 
-* Storytime - Narrative and engaging storytelling approach
+                  description: URL of the product to crawl
 
-* Discovery - Exploratory and revealing style
 
-* Data - Fact-based and analytical presentation
 
-* Top 3 reasons - List-based persuasive format
+                  example: https://res.jogg.ai.com/product_url
 
-* Light marketing - Soft-sell marketing approach
 
-enum:
 
-* "Don't Worry"
+              required:
 
-* "Storytime"
 
-* "Discovery"
 
-* "Data"
+                - url
 
-* "Top 3 reasons"
 
-* "Light marketing"
 
-example: "Storytime"
+      responses:
 
-visual\_style:
 
-type: string
 
-description: |
+        '200':
 
-Visual style of the video from visual list(GET /visual)
 
-example: "Simple split screen template"
 
-template\_id:
+          description: "Success"
 
-type: integer
 
-description: Template ID from template library or custom template
 
-example: 0
+          content:
 
-template\_type:
 
-type: string
 
-description: |
+            application/json:
 
-Template source type:
 
-* public - Template from template library
 
-* custom - Template from my templates
+              schema:
 
-example: custom
 
-enum:
 
-* public
+                allOf:
 
-* custom
 
-override\_script:
 
-type: string
+                - $ref: '#/components/schemas/BaseResponse'
 
-description: You can enter the script you want to use here to override the existing script.
 
-example: ''
 
-caption:
+                - type: object
 
-type: boolean
 
-description: |
 
-Controls subtitle rendering:
+                  properties:
 
-* true - Show subtitles
 
-* false - Hide subtitles
 
-example: true
+                    data:
 
-required:
 
-* product\_id
 
-* aspect\_ratio
+                      type: object
 
-* video\_length
 
-* language
 
-* avatar\_id
+                      properties:
 
-* avatar\_type
 
-* template\_type
 
-* script\_style
+                        product_id:
 
-responses:
 
-'200':
 
-description: "Success"
+                          type: string
 
-content:
 
-application/json:
 
-schema:
+                          description: Product ID - Save this for Step 2 (PUT /open/product) if you need to update product information & Step 3 (POST /create_video_from_url) need to use product_id.
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:project\_id:type: integerdescription: "Created project ID"
+                          example: NTQ0MTkzNjg
 
-/preview:
 
-post:
 
-tags:
+                        url:
 
-* URL to Video
 
-summary: 'Step 3: Preview from Product Information'
 
-description: You can generate a preview video using the product\_id obtained from the Upload URL to create a product. Set the relevant video parameters to create the preview. You can obtain the preview video result using the project_id at the Get Generated Video endpoint. 
+                          type: string
 
-requestBody:
 
-content:
 
-application/json:
+                          description: URL of the product to crawl
 
-schema:
 
-type: object
 
-properties:
+                          example: https://res.jogg.ai.com/product_url
 
-product\_id:
 
-type: string
 
-description: Product ID obtained from Step 1 (POST /product) response data.product\_id
+                        name:
 
-example: 8xUNyTgckMBsX4jn4Lxf
 
-aspect\_ratio:
 
-type: integer
+                          type: string
 
-description: |
 
-Video aspect ratio:
 
-* 0 - Portrait \[9:16]
+                          description: Product name
 
-* 1 - Landscape \[16:9]
 
-* 2 - Square \[1:1]
 
-enum: \[0, 1, 2]
+                          example: 'Physicians Formula Happy Booster Heart Blush Glow &amp;amp; Mood Boosting, Rose, Dermatologist Tested'
 
-example: 0
 
-video\_length:
 
-type: string
+                        description:
 
-description: Video Length.
 
-example: "15"
 
-enum:
+                          type: string
 
-* "15"
 
-* "30"
 
-* "60"
+                          description: Product introduction and selling points
 
-language:
 
-type: string
 
-description: |
+                          example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
 
-Script generation language (defaults to English if not specified):
 
-* english - English
 
-* filipino - Filipino
+                        target_audience:
 
-* french - French
 
-* german - German
 
-* hindi - Hindi
+                          type: string
 
-* indonesian - Indonesian
 
-* italian - Italian
 
-* japanese - Japanese
+                          description: Target audience for the product
 
-* korean - Korean
 
-* malay - Malay
 
-* portuguese - Portuguese
+                          example: ''
 
-* russian - Russian
 
-* spanish - Spanish
 
-* thai - Thai
+                        media:
 
-* vietnamese - Vietnamese
 
-* arabic - Arabic
 
-* greek - Greek
+                          type: array
 
-* turkish - Turkish
 
-* slovenian - Slovenian
 
-* croatian - Croatian
+                          description: Media resources array (will replace existing media if provided)
 
-* romanian - Romanian
 
-* chinese - Simplified Chinese
 
-* bengali - Bengali
+                          items:
 
-* urdu - Urdu
 
-* hungarian - Hungarian
 
-* traditional-chinese - Traditional Chinese
+                            type: object
 
-* polish - Polish
 
-* cantonese - Cantonese
 
-* danish - Danish
+                            properties:
 
-* malayalam - Malayalam
 
-* tamil - Tamil
 
-* telugu - Telugu
+                              type:
 
-* czech - Czech
 
-* hebrew - Hebrew
 
-* zulu - Zulu
+                                type: integer
 
-* swedish - Swedish
 
-* lithuanian - Lithuanian
 
-* dutch - Dutch
+                                description: 'Media type (1: image, 2: video)'
 
-* flemish - Flemish
 
-* norwegian - Norwegian
 
-* finnish - Finnish
+                                enum:
 
-* bulgarian - Bulgarian
 
-* latvian - Latvian
 
-* ukrainian - Ukrainian
+                                  - 1
 
-* mongolian - Mongolian
 
-* persian - Persian
 
-* odia - Odia
+                                  - 2
 
-* assamese - Assamese
 
-* kannada - Kannada
 
-* tagalog - Tagalog
+                                example: 1
 
-* amharic - Amharic
 
-* serbian - Serbian
 
-* slovak - Slovak
+                              name:
 
-* swahili - Swahili
 
-enum:
 
-* "english"
+                                type: string
 
-* "filipino"
 
-* "french"
 
-* "german"
+                                description: Media name
 
-* "hindi"
 
-* "indonesian"
 
-* "italian"
+                                example: 'media.jpg'
 
-* "japanese"
 
-* "korean"
 
-* "malay"
+                              url:
 
-* "portuguese"
 
-* "russian"
 
-* "spanish"
+                                type: string
 
-* "thai"
 
-* "vietnamese"
 
-* "arabic"
+                                description: Media URL
 
-* "greek"
 
-* "turkish"
 
-* "slovenian"
+                                example: 'https://res.jogg.ai/media.jpg'
 
-* "croatian"
 
-* "romanian"
 
-* "chinese"
 
-* "bengali"
 
-* "urdu"
+                              description:
 
-* "hungarian"
 
-* "traditional-chinese"
 
-* "polish"
+                                type: string
 
-* "cantonese"
 
-* "danish"
 
-* "malayalam"
+                                description: Media description
 
-* "tamil"
 
-* "telugu"
 
-* "czech"
+                                example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow.'
 
-* "hebrew"
 
-* "zulu"
 
-* "swedish"
+                        
 
-* "lithuanian"
 
-* "dutch"
 
-* "flemish"
+    put:
 
-* "norwegian"
 
-* "finnish"
 
-* "bulgarian"
+      tags:
 
-* "latvian"
 
-* "ukrainian"
 
-* "mongolian"
+        - URL to Video 
 
-* "persian"
 
-* "odia"
 
-* "assamese"
+      summary: 'Step 2 (Optional): Update Product Information'
 
-* "kannada"
 
-* "tagalog"
 
-* "amharic"
+      description: Optional step to update product details. Use the product_id received from Step 1 (POST /open/product response)
 
-* "serbian"
 
-* "slovak"
 
-* "swahili"
+      requestBody:
 
-default: "english"
 
-example: "english"
 
-avatar\_id:
+        required: true
 
-type: integer
 
-description: |
 
-Avatar id from Jogg Avatar or Your Avatar.
+        content:
 
-example: 1
 
-avatar\_type:
 
-type: integer
+          application/json:
 
-description: |
 
-Avatar source type:
 
-* 0 - Public avatars
+            schema:
 
-* 1 - Custom avatars
 
-enum:
 
-* 0
+              type: object
 
-* 1
 
-example: 0
 
-voice\_id:
+              required:
 
-type: string
 
-description: |
 
-Voice id from voice list.
+                - product_id
 
-example: en-US-ChristopherNeural
 
-script\_style:
 
-type: string
+              properties:
 
-description: |
 
-Script writing style for video content:
 
-* Don't Worry - Casual and reassuring tone
+                product_id:
 
-* Storytime - Narrative and engaging storytelling approach
 
-* Discovery - Exploratory and revealing style
 
-* Data - Fact-based and analytical presentation
+                  type: string
 
-* Top 3 reasons - List-based persuasive format
 
-* Light marketing - Soft-sell marketing approach
 
-enum:
+                  description: Product ID obtained from Step 1 (POST /open/product) response data.id
 
-* "Don't Worry"
 
-* "Storytime"
 
-* "Discovery"
+                  example: 3924
 
-* "Data"
 
-* "Top 3 reasons"
 
-* "Light marketing"
+                name:
 
-example: "Storytime"
 
-visual\_style:
 
-type: string
+                  type: string
 
-description: |
 
-Visual style of the video from visual list(GET /visual)
 
-example: "Simple split screen template"
+                  description: Product name
 
-template\_id:
 
-type: integer
 
-description: Template ID from template library or custom template
+                  example: 'Physicians Formula Happy Booster Heart Blush Glow &amp;amp; Mood Boosting, Rose, Dermatologist Tested'
 
-example: 0
 
-template\_type:
 
-type: string
+                description:
 
-description: |
 
-Template source type:
 
-* public - Template from template library
+                  type: string
 
-* custom - Template from my templates
 
-example: custom
 
-enum:
+                  description: Product introduction and selling points
 
-* public
 
-* custom
 
-override\_script:
+                  example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
 
-type: string
 
-description: You can enter the script you want to use here to override the existing script.
 
-example: ''
+                target_audience:
 
-caption:
 
-type: boolean
 
-description: |
+                  type: string
 
-Controls subtitle rendering:
 
-* true - Show subtitles
 
-* false - Hide subtitles
+                  description: Target audience for the product
 
-example: true
 
-required:
 
-* product\_id
+                  example: ''
 
-* aspect\_ratio
 
-* video\_length
 
-* language
+                media:
 
-* avatar\_id
 
-* avatar\_type
 
-* template\_type
+                  type: array
 
-* script\_style
 
-responses:
 
-'200':
+                  description: Media resources array (will replace existing media if provided)
 
-description: "Success"
 
-content:
 
-application/json:
+                  items:
 
-schema:
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
+                    type: object
 
-* type: objectproperties:data:type: objectproperties:project\_id:type: integerdescription: "Created project ID"
 
-/create\_video\_from\_talking\_avatar:
 
-post:
+                    properties:
 
-tags:
 
-* Create Avatar Videos
 
-summary: Create Talking Avatar Video
+                      type:
 
-description: Creates a talking avatar video with specified parameters
 
-requestBody:
 
-content:
+                        type: integer
 
-application/json:
 
-schema:
 
-type: object
+                        description: 'Media type (1: image, 2: video)'
 
-properties:
 
-script:
 
-type: string
+                        enum:
 
-description: Script content for the avatar to speak. Must provide either script or audio\_script
 
-example: Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!
 
-audio\_url:
+                          - 1
 
-type: string
 
-description: Url for Audio, either script or audio\_url must be provided, but not both.
 
-example: [https://res.jogg.ai/audio.mp3](https://res.jogg.ai/audio.mp3)
+                          - 2
 
-aspect\_ratio:
 
-type: integer
 
-description: 'Aspect ratio of the output video. 0: \[9:16], 1: \[16:9], 2: \[1:1]'
+                        example: 1
 
-enum:
 
-* 0
 
-* 1
+                      name:
 
-* 2
 
-example: 0
 
-screen\_style:
+                        type: string
 
-type: integer
 
-description: 'Background style. 1: with background, 2: green screen, 3: webm'
 
-enum:
+                        description: Media name
 
-* 1
 
-* 2
 
-* 3
+                        example: 'media.jpg'
 
-example: 1
 
-avatar\_id:
 
-type: integer
+                      url:
 
-description: ID of the avatar to use
 
-example: 81
 
-avatar\_type:
+                        type: string
 
-type: integer
 
-description: 'Source type of the avatar. 0: jogg avatar, 1: your avatar'
 
-enum:
+                        description: Media URL
 
-* 0
 
-* 1
 
-example: 0
+                        example: 'https://res.jogg.ai/media.jpg'
 
-voice\_id:
 
-type: string
 
-description: ID of the text-to-speech voice to use
 
-example: en-US-ChristopherNeural
 
-caption:
+                      description:
 
-type: boolean
 
-description: 'Subtitle option. true: enable subtitles, false: disable subtitles'
 
-enum:
+                        type: string
 
-* true
 
-* false
 
-required:
+                        description: Media description
 
-* screen\_style
 
-* avatar\_id
 
-* avatar\_type
+                        example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow.'
 
-* voice\_id
 
-required: true
 
-responses:
 
-'200':
 
-description: "Success"
 
-content:
 
-application/json:
+      responses:
 
-schema:
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
+        '200':
 
-* type: objectproperties:data:type: objectproperties:project\_id:type: integerdescription: "Created project ID"
 
-/project:
 
-get:
+          description: Product updated successfully
 
-tags:
 
-* Get Generated Video
 
-summary: Get Project Information
+          content:
 
-description: Get information about a specific project using its ID.
 
-parameters:
 
-* name: project\_idin: queryrequired: trueschema:type: stringdescription: The ID of the project to retrieve information for.
+            application/json:
 
-responses:
 
-'200':
 
-description: "Success"
+              schema:
 
-content:
 
-application/json:
 
-schema:
+                allOf:
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:id:type: stringdescription: Project IDexample: fa6228c0f52c4f3986e88f7ffa5d2864title:type: stringdescription: Project titleexample: welcome to jogg.aivideo\_duration:type: integerdescription: Video duration in secondsexample: 6video\_url:type: stringdescription: URL to the video outputexample: [https://res.jogg.ai/video.mp4cover\_url:type:](https://res.jogg.ai/video.mp4cover_url:type:) stringdescription: URL to the cover imageexample: [https://res.jogg.ai/cover.jpgstatus\_code:type:](https://res.jogg.ai/cover.jpgstatus_code:type:) integerdescription: |enum: \[1, 2, 3, 4, 5, 99]example: 4status\_desc:type: stringdescription: Description of current progressexample: processingcreated\_at:type: integerdescription: Creation timestampexample: 1732806631
+                - $ref: '#/components/schemas/BaseResponse'
 
-  * 1 - start
 
-  * 2 - waiting
 
-  * 3 - processing
 
-  * 4 - success
 
-  * 5 - failed
+  /ai_scripts:
 
-  * 99 - deleted
 
-/upload/asset:
 
-post:
+    post:
 
-tags:
 
-* Upload File
 
-summary: Get Signed URL
+      tags:
 
-description: Generate a signed URL for file upload. Use the `sign_url` obtained here to upload your file.
 
-requestBody:
 
-description: Data required for file upload
+        - AI Scripts
 
-content:
 
-application/json:
 
-schema:
+      summary: Generate Scripts from product.
 
-type: object
 
-properties:
 
-filename:
+      description: Simply provide the product information or the product_id generated in the Upload URL to create product, and you can create several different styles of product introduction scripts.If you do not provide the product_id, then the product's name and description are required.
 
-type: string
 
-example: 1.jpg
 
-required:
+      requestBody:
 
-* filename
 
-required: true
 
-responses:
+        content:
 
-'200':
 
-description: "Success"
 
-content:
+          application/json:
 
-application/json:
 
-schema:
 
-allOf:
+            schema:
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:sign\_url:type: stringdescription: Use the sign\_url to upload your file with a PUT request, including the file data in the request body. This is a direct upload to the signed URL.asset\_id:type: stringdescription: URL after file upload
 
-/musics:
+              type: object
 
-get:
 
-tags:
 
-* Music
+              properties:
 
-summary: Get Music List
 
-description: Get a list of jogg music
 
-responses:
+                product_id:
 
-'200':
 
-description: Success
 
-content:
+                  type: string
 
-application/json:
 
-schema:
 
-allOf:
+                  description: Simply provide the product information or the product_id generated at the "Upload URL to Create Product" endpoint, and you can create several different styles of product introduction scripts.
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:avatars:type: arrayitems:type: objectproperties:id:type: integerdescription: Music IDexample: 1name:type: stringdescription: Music nameexample: Amanda outdoorsmusic\_url:type: stringdescription: URL of the cover imageexample: [https://res.jogg.ai/music/example.mp3duration:type:](https://res.jogg.ai/music/example.mp3duration:type:) integerdescription: music durationexample: 81
 
-/musics/custom:
+                  example: NTQ0MTkzNjg
 
-get:
 
-tags:
 
-* Music
+                name:
 
-summary: Get Music List
 
-description: Get a list of your music
 
-responses:
+                  type: string
 
-'200':
 
-description: Success
 
-content:
+                  description: Product name
 
-application/json:
 
-schema:
 
-allOf:
+                  example: Owala FreeSip Insulated Stainless Steel Water Bottle with Straw for Sports.
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:avatars:type: arrayitems:type: objectproperties:id:type: integerdescription: Music IDexample: 1name:type: stringdescription: Music nameexample: Amanda outdoorsmusic\_url:type: stringdescription: URL of the cover imageexample: [https://res.jogg.ai/music.mp3duration:type:](https://res.jogg.ai/music.mp3duration:type:) integerdescription: music durationexample: 81
 
-/avatars:
+                description:
 
-get:
 
-tags:
 
-* Avatar
+                  type: string
 
-summary: Get Avatar List
 
-description: Get a list of available avatars with specified filters
 
-parameters:
+                  description: Product introduction and selling points
 
-* $ref: '#/components/parameters/AspectRatioSearch'
 
-responses:
 
-'200':
+                  example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
 
-description: Success
 
-content:
 
-application/json:
+                target_audience:
 
-schema:
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
+                  type: string
 
-* type: objectproperties:data:type: objectproperties:avatars:type: arrayitems:type: objectproperties:avatar\_id:type: integerdescription: Avatar IDexample: 81name:type: stringdescription: Avatar nameexample: Amanda outdoorscover\_url:type: stringdescription: URL of the cover imageexample: [https://res.jogg.ai/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png](https://res.jogg.ai/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png)
 
-/avatars/custom:
 
-get:
+                  description: Target audience for the product
 
-tags:
 
-* Avatar
 
-summary: Get Your Avatar List
+                  example: ''
 
-description: Get a list of your avatar
 
-responses:
 
-'200':
+                video_length:
 
-description: Success
 
-content:
 
-application/json:
+                  type: string
 
-schema:
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
+                  description: Video Length.
 
-* type: objectproperties:data:type: objectproperties:avatars:type: arrayitems:type: objectproperties:avatar\_id:type: integerdescription: Avatar IDexample: 81name:type: stringdescription: Avatar nameexample: Amanda outdoorscover\_url:type: stringdescription: URL of the cover imageexample: [https://res.jogg.ai/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.pngstatus:type:](https://res.jogg.ai/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.pngstatus:type:) integerdescription: 'Production status: 0:in progress, 1:success, 2:failed'enum:fail\_msg:type: stringdescription: Failure message when product\_status is 2example: ""
 
-  * 0 processing
 
-  * 1 success
+                  example: "15"
 
-  * 2 failed
 
-/voices:
 
-get:
+                  enum:
 
-tags:
 
-* Voice
 
-summary: Get Voice List
+                    - "15"
 
-description: Retrieve a list of available voice with specified gender filter
 
-parameters:
 
-* name: genderin: querydescription: Filter voices by gender (female/male)required: falseschema:type: stringenum:
+                    - "30"
 
-  * female
 
-  * male
 
-* name: languagein: querydescription: |Filter voices by language:required: falseschema:type: stringenum:
+                    - "60"
 
-  * english
 
-  * filipino
 
-  * french
+                language:
 
-  * german
 
-  * hindi
 
-  * indonesian
+                  type: string
 
-  * italian
 
-  * japanese
 
-  * korean
+                  description: |
 
-  * malay
 
-  * portuguese
 
-  * russian
+                    Script generation language (defaults to English if not specified):
 
-  * spanish
 
-  * thai
 
-  * vietnamese
+                    * english - English
 
-  * arabic
 
-  * greek
 
-  * turkish
+                    * filipino - Filipino
 
-  * slovenian
 
-  * croatian
 
-  * romanian
+                    * french - French
 
-  * chinese
 
-  * bengali
 
-  * urdu
+                    * german - German
 
-  * hungarian
 
-  * traditional-chinese
 
-  * polish
+                    * hindi - Hindi
 
-  * cantonese
 
-  * danish
 
-  * malayalam
+                    * indonesian - Indonesian
 
-  * tamil
 
-  * telugu
 
-  * czech
+                    * italian - Italian
 
-  * hebrew
 
-  * zulu
 
-  * swedish
+                    * japanese - Japanese
 
-  * lithuanian
 
-  * dutch
 
-  * flemish
+                    * korean - Korean
 
-  * norwegian
 
-  * finnish
 
-  * bulgarian
+                    * malay - Malay
 
-  * latvian
 
-  * ukrainian
 
-  * mongolian
+                    * portuguese - Portuguese
 
-  * persian
 
-  * odia
 
-  * assamese
+                    * russian - Russian
 
-  * kannada
 
-  * tagalog
 
-  * amharic
+                    * spanish - Spanish
 
-  * serbian
 
-  * slovak
 
-  * swahili
+                    * thai - Thai
 
-  - english - English
 
-  - filipino - Filipino
 
-  - french - French
+                    * vietnamese - Vietnamese
 
-  - german - German
 
-  - hindi - Hindi
 
-  - indonesian - Indonesian
+                    * arabic - Arabic
 
-  - italian - Italian
 
-  - japanese - Japanese
 
-  - korean - Korean
+                    * greek - Greek
 
-  - malay - Malay
 
-  - portuguese - Portuguese
 
-  - russian - Russian
+                    * turkish - Turkish
 
-  - spanish - Spanish
 
-  - thai - Thai
 
-  - vietnamese - Vietnamese
+                    * slovenian - Slovenian
 
-  - arabic - Arabic
 
-  - greek - Greek
 
-  - turkish - Turkish
+                    * croatian - Croatian
 
-  - slovenian - Slovenian
 
-  - croatian - Croatian
 
-  - romanian - Romanian
+                    * romanian - Romanian
 
-  - chinese - Simplified Chinese
 
-  - bengali - Bengali
 
-  - urdu - Urdu
+                    * chinese - Simplified Chinese
 
-  - hungarian - Hungarian
 
-  - traditional-chinese - Traditional Chinese
 
-  - polish - Polish
+                    * bengali - Bengali
 
-  - cantonese - Cantonese
 
-  - danish - Danish
 
-  - malayalam - Malayalam
+                    * urdu - Urdu
 
-  - tamil - Tamil
 
-  - telugu - Telugu
 
-  - czech - Czech
+                    * hungarian - Hungarian
 
-  - hebrew - Hebrew
 
-  - zulu - Zulu
 
-  - swedish - Swedish
+                    * traditional-chinese - Traditional Chinese
 
-  - lithuanian - Lithuanian
 
-  - dutch - Dutch
 
-  - flemish - Flemish
+                    * polish - Polish
 
-  - norwegian - Norwegian
 
-  - finnish - Finnish
 
-  - bulgarian - Bulgarian
+                    * cantonese - Cantonese
 
-  - latvian - Latvian
 
-  - ukrainian - Ukrainian
 
-  - mongolian - Mongolian
+                    * danish - Danish
 
-  - persian - Persian
 
-  - odia - Odia
 
-  - assamese - Assamese
+                    * malayalam - Malayalam
 
-  - kannada - Kannada
 
-  - tagalog - Tagalog
 
-  - amharic - Amharic
+                    * tamil - Tamil
 
-  - serbian - Serbian
 
-  - slovak - Slovak
 
-  - swahili - Swahili
+                    * telugu - Telugu
 
-responses:
 
-'200':
 
-description: Success
+                    * czech - Czech
 
-content:
 
-application/json:
 
-schema:
+                    * hebrew - Hebrew
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:total:type: integerdescription: Total number of voicesexample: 10voices:type: arrayitems:type: objectproperties:name:type: stringdescription: Voice nameexample: Emilyvoice\_id:type: stringdescription: Language identifierexample: en-US-ChristopherNeuralaudition\_url:type: stringdescription: URL for the audition audio fileexample: [https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3language:type:](https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3language:type:) stringdescription: Language of the voiceexample: english
+                    * zulu - Zulu
 
-/voices/custom:
 
-get:
 
-tags:
+                    * swedish - Swedish
 
-* Voice
 
-summary: Get Your Voice List
 
-description: Retrieve a list of your available voice with specified gender filter
+                    * lithuanian - Lithuanian
 
-parameters:
 
-* name: languagein: querydescription: |Filter voices by language:required: falseschema:type: stringenum:
 
-  * english
+                    * dutch - Dutch
 
-  * filipino
 
-  * french
 
-  * german
+                    * flemish - Flemish
 
-  * hindi
 
-  * indonesian
 
-  * italian
+                    * norwegian - Norwegian
 
-  * japanese
 
-  * korean
 
-  * malay
+                    * finnish - Finnish
 
-  * portuguese
 
-  * russian
 
-  * spanish
+                    * bulgarian - Bulgarian
 
-  * thai
 
-  * vietnamese
 
-  * arabic
+                    * latvian - Latvian
 
-  * greek
 
-  * turkish
 
-  * slovenian
+                    * ukrainian - Ukrainian
 
-  * croatian
 
-  * romanian
 
-  * chinese
+                    * mongolian - Mongolian
 
-  * bengali
 
-  * urdu
 
-  * hungarian
+                    * persian - Persian
 
-  * traditional-chinese
 
-  * polish
 
-  * cantonese
+                    * odia - Odia
 
-  * danish
 
-  * malayalam
 
-  * tamil
+                    * assamese - Assamese
 
-  * telugu
 
-  * czech
 
-  * hebrew
+                    * kannada - Kannada
 
-  * zulu
 
-  * swedish
 
-  * lithuanian
+                    * tagalog - Tagalog
 
-  * dutch
 
-  * flemish
 
-  * norwegian
+                    * amharic - Amharic
 
-  * finnish
 
-  * bulgarian
 
-  * latvian
+                    * serbian - Serbian
 
-  * ukrainian
 
-  * mongolian
 
-  * persian
+                    * slovak - Slovak
 
-  * odia
 
-  * assamese
 
-  * kannada
+                    * swahili - Swahili
 
-  * tagalog
 
-  * amharic
 
-  * serbian
+                  enum:
 
-  * slovak
 
-  * swahili
 
-  - english - English
+                    - "english"
 
-  - filipino - Filipino
 
-  - french - French
 
-  - german - German
+                    - "filipino"
 
-  - hindi - Hindi
 
-  - indonesian - Indonesian
 
-  - italian - Italian
+                    - "french"
 
-  - japanese - Japanese
 
-  - korean - Korean
 
-  - malay - Malay
+                    - "german"
 
-  - portuguese - Portuguese
 
-  - russian - Russian
 
-  - spanish - Spanish
+                    - "hindi"
 
-  - thai - Thai
 
-  - vietnamese - Vietnamese
 
-  - arabic - Arabic
+                    - "indonesian"
 
-  - greek - Greek
 
-  - turkish - Turkish
 
-  - slovenian - Slovenian
+                    - "italian"
 
-  - croatian - Croatian
 
-  - romanian - Romanian
 
-  - chinese - Simplified Chinese
+                    - "japanese"
 
-  - bengali - Bengali
 
-  - urdu - Urdu
 
-  - hungarian - Hungarian
+                    - "korean"
 
-  - traditional-chinese - Traditional Chinese
 
-  - polish - Polish
 
-  - cantonese - Cantonese
+                    - "malay"
 
-  - danish - Danish
 
-  - malayalam - Malayalam
 
-  - tamil - Tamil
+                    - "portuguese"
 
-  - telugu - Telugu
 
-  - czech - Czech
 
-  - hebrew - Hebrew
+                    - "russian"
 
-  - zulu - Zulu
 
-  - swedish - Swedish
 
-  - lithuanian - Lithuanian
+                    - "spanish"
 
-  - dutch - Dutch
 
-  - flemish - Flemish
 
-  - norwegian - Norwegian
+                    - "thai"
 
-  - finnish - Finnish
 
-  - bulgarian - Bulgarian
 
-  - latvian - Latvian
+                    - "vietnamese"
 
-  - ukrainian - Ukrainian
 
-  - mongolian - Mongolian
 
-  - persian - Persian
+                    - "arabic"
 
-  - odia - Odia
 
-  - assamese - Assamese
 
-  - kannada - Kannada
+                    - "greek"
 
-  - tagalog - Tagalog
 
-  - amharic - Amharic
 
-  - serbian - Serbian
+                    - "turkish"
 
-  - slovak - Slovak
 
-  - swahili - Swahili
 
-responses:
+                    - "slovenian"
 
-'200':
 
-description: Success
 
-content:
+                    - "croatian"
 
-application/json:
 
-schema:
 
-allOf:
+                    - "romanian"
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:total:type: integerdescription: Total number of voicesexample: 14voices:type: arrayitems:type: objectproperties:name:type: stringdescription: Voice nameexample: Emilyvoice\_id:type: stringdescription: Language identifierexample: en-US-ChristopherNeuralaudition\_url:type: stringdescription: URL for the audition audio fileexample: [https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3language:type:](https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3language:type:) stringdescription: Language of the voiceexample: english
 
-/avatar/create:
+                    - "chinese"
 
-post:
 
-tags:
 
-* Avatar
+                    - "bengali"
 
-summary: "Create an instant avatar"
 
-requestBody:
 
-required: true
+                    - "urdu"
 
-content:
 
-application/json:
 
-schema:
+                    - "hungarian"
 
-type: object
 
-required:
 
-* origin\_url
+                    - "traditional-chinese"
 
-* name
 
-properties:
 
-origin\_url:
+                    - "polish"
 
-type: string
 
-description: "Instant avatar URL"
 
-name:
+                    - "cantonese"
 
-type: string
 
-description: "Instant avatar name"
 
-responses:
+                    - "danish"
 
-'200':
 
-description: "Success"
 
-content:
+                    - "malayalam"
 
-application/json:
 
-schema:
 
-allOf:
+                    - "tamil"
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:avatar\_id:type: integerdescription: "Created instant avatar ID"
 
-/avatar/custom/delete:
+                    - "telugu"
 
-delete:
 
-tags:
 
-* Avatar
+                    - "czech"
 
-summary: "Delete an instant avatar"
 
-parameters:
 
-* name: avatar\_idin: queryrequired: truedescription: "Avatar ID to delete"schema:type: integer
+                    - "hebrew"
 
-responses:
 
-'200':
 
-description: "Success"
+                    - "zulu"
 
-content:
 
-application/json:
 
-schema:
+                    - "swedish"
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
 
-/visual\_styles:
+                    - "lithuanian"
 
-get:
 
-tags:
 
-* Visual Style
+                    - "dutch"
 
-summary: Get Visual Style
 
-description: Get list of Visual Style
 
-parameters:
+                    - "flemish"
 
-* $ref: '#/components/parameters/AspectRatioParam'
 
-responses:
 
-'200':
+                    - "norwegian"
 
-description: "Success"
 
-content:
 
-application/json:
+                    - "finnish"
 
-schema:
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
+                    - "bulgarian"
 
-* type: objectproperties:data:type: objectproperties:visual\_styles:type: arrayitems:type: objectproperties:id:type: integerexample: 2400name:type: stringexample: Simple split screen template
 
-/templates:
 
-get:
+                    - "latvian"
 
-tags:
 
-* Template
 
-summary: Get templates
+                    - "ukrainian"
 
-description: Get list of templates
 
-parameters:
 
-* $ref: '#/components/parameters/AspectRatioParam'
+                    - "mongolian"
 
-responses:
 
-'200':
 
-description: "Success"
+                    - "persian"
 
-content:
 
-application/json:
 
-schema:
+                    - "odia"
 
-allOf:
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:templates:type: arrayitems:type: objectproperties:id:type: integerexample: 136name:type: stringexample: roborock Q7 Max+ Robot Vacuum Cleaner, Hands-Free Cleaning for up to 7 Weeks, Robotic Vacuum with APP-Controlled Mopping, 4200Pa Suction, No-Mop\&amp;No-Go Zones, 180mins Runtime.cover\_url:type: stringexample: [https://res.jogg.ai/cover.pngpreview\_url:type:](https://res.jogg.ai/cover.pngpreview_url:type:) stringexample: [https://res.jogg.ai/preview.pngaspect\_ratio:type:](https://res.jogg.ai/preview.pngaspect_ratio:type:) integerdescription: |Video aspect ratio:enum: \[0, 1, 2]example: 0
+                    - "assamese"
 
-  * 0 - Portrait \[9:16]
 
-  * 1 - Landscape \[16:9]
 
-  * 2 - Square \[1:1]
+                    - "kannada"
 
-/templates/custom:
 
-get:
 
-tags:
+                    - "tagalog"
 
-* Template
 
-summary: Get custom templates
 
-description: Get list of your custom templates
+                    - "amharic"
 
-parameters:
 
-* $ref: '#/components/parameters/AspectRatioParam'
 
-responses:
+                    - "serbian"
 
-'200':
 
-description: "Success"
 
-content:
+                    - "slovak"
 
-application/json:
 
-schema:
 
-allOf:
+                    - "swahili"
 
-* $ref: '#/components/schemas/BaseResponse'
 
-* type: objectproperties:data:type: objectproperties:templates:type: arrayitems:type: objectproperties:id:type: integerexample: 2400name:type: stringexample: Anker USB C Charger, 735 Charger (Nano II 65cover\_url:type: stringexample: [https://res.jogg.ai/cover.png](https://res.jogg.ai/cover.png)
+
+                  default: "english"
+
+
+
+                  example: "english"
+
+
+
+        required: true
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                      data:
+
+
+
+                        type: object
+
+
+
+                        properties:
+
+
+
+                          generated_scripts:
+
+
+
+                            type: array
+
+
+
+                            items:
+
+
+
+                              type: object
+
+
+
+                              properties:
+
+
+
+                                script_paragraphs:
+
+
+
+                                  type: string
+
+
+
+                                  description: Script Paragraphs.
+
+
+
+                                  default: "Ever tried drinking water while running? It's like a comedy show!You either spill it all over or look like a fish out of water.Then I found the Owala FreeSip bottle—game changer."
+
+
+
+                                  example: "Ever tried drinking water while running? It's like a comedy show!You either spill it all over or look like a fish out of water.Then I found the Owala FreeSip bottle—game changer."
+
+
+
+                                script_style:
+
+
+
+                                  type: string
+
+
+
+                                  description: Script Style.
+
+
+
+                                  default: Storytime.
+
+
+
+                                  example: Storytime.
+
+
+
+  /create_video_from_url:
+
+
+
+    post:
+
+
+
+      tags:
+
+
+
+        - URL to Video 
+
+
+
+      summary: 'Step 3: Generate Video from Product Information'
+
+
+
+      description: Final step to generate the product video. Use the product_id received from Step 1 (POST /product response)
+
+
+
+      requestBody:
+
+
+
+        content:
+
+
+
+          application/json:
+
+
+
+            schema:
+
+
+
+              type: object
+
+
+
+              properties:
+
+
+
+                product_id:
+
+
+
+                  type: string
+
+
+
+                  description: Product ID obtained from Step 1 (POST /product) response data.product_id
+
+
+
+                  example: 8xUNyTgckMBsX4jn4Lxf
+
+
+
+                aspect_ratio:
+
+
+
+                  type: integer
+
+
+
+                  description: |
+
+
+
+                    Video aspect ratio:
+
+
+
+                    * 0 - Portrait [9:16]
+
+
+
+                    * 1 - Landscape [16:9]
+
+
+
+                    * 2 - Square [1:1]
+
+
+
+                  enum: [0, 1, 2]
+
+
+
+                  example: 0
+
+                  
+
+                video_length:
+
+
+
+                  type: string
+
+
+
+                  description: Video Length.
+
+
+
+                  example: "15"
+
+
+
+                  enum:
+
+
+
+                    - "15"
+
+
+
+                    - "30"
+
+
+
+                    - "60"                  
+
+
+
+                language:
+
+
+
+                  type: string
+
+
+
+                  description: |
+
+
+
+                    Script generation language (defaults to English if not specified):
+
+
+
+                    * english - English
+
+
+
+                    * filipino - Filipino
+
+
+
+                    * french - French
+
+
+
+                    * german - German
+
+
+
+                    * hindi - Hindi
+
+
+
+                    * indonesian - Indonesian
+
+
+
+                    * italian - Italian
+
+
+
+                    * japanese - Japanese
+
+
+
+                    * korean - Korean
+
+
+
+                    * malay - Malay
+
+
+
+                    * portuguese - Portuguese
+
+
+
+                    * russian - Russian
+
+
+
+                    * spanish - Spanish
+
+
+
+                    * thai - Thai
+
+
+
+                    * vietnamese - Vietnamese
+
+
+
+                    * arabic - Arabic
+
+
+
+                    * greek - Greek
+
+
+
+                    * turkish - Turkish
+
+
+
+                    * slovenian - Slovenian
+
+
+
+                    * croatian - Croatian
+
+
+
+                    * romanian - Romanian
+
+
+
+                    * chinese - Simplified Chinese
+
+
+
+                    * bengali - Bengali
+
+
+
+                    * urdu - Urdu
+
+
+
+                    * hungarian - Hungarian
+
+
+
+                    * traditional-chinese - Traditional Chinese
+
+
+
+                    * polish - Polish
+
+
+
+                    * cantonese - Cantonese
+
+
+
+                    * danish - Danish
+
+
+
+                    * malayalam - Malayalam
+
+
+
+                    * tamil - Tamil
+
+
+
+                    * telugu - Telugu
+
+
+
+                    * czech - Czech
+
+
+
+                    * hebrew - Hebrew
+
+
+
+                    * zulu - Zulu
+
+
+
+                    * swedish - Swedish
+
+
+
+                    * lithuanian - Lithuanian
+
+
+
+                    * dutch - Dutch
+
+
+
+                    * flemish - Flemish
+
+
+
+                    * norwegian - Norwegian
+
+
+
+                    * finnish - Finnish
+
+
+
+                    * bulgarian - Bulgarian
+
+
+
+                    * latvian - Latvian
+
+
+
+                    * ukrainian - Ukrainian
+
+
+
+                    * mongolian - Mongolian
+
+
+
+                    * persian - Persian
+
+
+
+                    * odia - Odia
+
+
+
+                    * assamese - Assamese
+
+
+
+                    * kannada - Kannada
+
+
+
+                    * tagalog - Tagalog
+
+
+
+                    * amharic - Amharic
+
+
+
+                    * serbian - Serbian
+
+
+
+                    * slovak - Slovak
+
+
+
+                    * swahili - Swahili
+
+
+
+                  enum:
+
+
+
+                    - "english"
+
+
+
+                    - "filipino"
+
+
+
+                    - "french"
+
+
+
+                    - "german"
+
+
+
+                    - "hindi"
+
+
+
+                    - "indonesian"
+
+
+
+                    - "italian"
+
+
+
+                    - "japanese"
+
+
+
+                    - "korean"
+
+
+
+                    - "malay"
+
+
+
+                    - "portuguese"
+
+
+
+                    - "russian"
+
+
+
+                    - "spanish"
+
+
+
+                    - "thai"
+
+
+
+                    - "vietnamese"
+
+
+
+                    - "arabic"
+
+
+
+                    - "greek"
+
+
+
+                    - "turkish"
+
+
+
+                    - "slovenian"
+
+
+
+                    - "croatian"
+
+
+
+                    - "romanian"
+
+
+
+                    - "chinese"
+
+
+
+                    - "bengali"
+
+
+
+                    - "urdu"
+
+
+
+                    - "hungarian"
+
+
+
+                    - "traditional-chinese"
+
+
+
+                    - "polish"
+
+
+
+                    - "cantonese"
+
+
+
+                    - "danish"
+
+
+
+                    - "malayalam"
+
+
+
+                    - "tamil"
+
+
+
+                    - "telugu"
+
+
+
+                    - "czech"
+
+
+
+                    - "hebrew"
+
+
+
+                    - "zulu"
+
+
+
+                    - "swedish"
+
+
+
+                    - "lithuanian"
+
+
+
+                    - "dutch"
+
+
+
+                    - "flemish"
+
+
+
+                    - "norwegian"
+
+
+
+                    - "finnish"
+
+
+
+                    - "bulgarian"
+
+
+
+                    - "latvian"
+
+
+
+                    - "ukrainian"
+
+
+
+                    - "mongolian"
+
+
+
+                    - "persian"
+
+
+
+                    - "odia"
+
+
+
+                    - "assamese"
+
+
+
+                    - "kannada"
+
+
+
+                    - "tagalog"
+
+
+
+                    - "amharic"
+
+
+
+                    - "serbian"
+
+
+
+                    - "slovak"
+
+
+
+                    - "swahili"
+
+
+
+                  default: "english"
+
+
+
+                  example: "english"
+
+
+
+                avatar_id:
+
+
+
+                  type: integer
+
+
+
+                  description: |
+
+
+
+                    Avatar id from Jogg Avatar or Your Avatar.
+
+
+
+                  example: 1
+
+
+
+                avatar_type:
+
+
+
+                  type: integer 
+
+
+
+                  description: |
+
+
+
+                    Avatar source type:
+
+
+
+                    * 0 - Public avatars
+
+
+
+                    * 1 - Custom avatars
+
+
+
+                  enum:
+
+
+
+                    - 0
+
+
+
+                    - 1
+
+
+
+                  example: 0
+
+
+
+                voice_id:
+
+
+
+                  type: string
+
+
+
+                  description: |
+
+
+
+                    Voice id from voice list.
+
+
+
+                  example: en-US-ChristopherNeural
+
+
+
+                script_style:
+
+
+
+                  type: string
+
+
+
+                  description: |
+
+
+
+                    Script writing style for video content:
+
+
+
+                    * Don't Worry - Casual and reassuring tone
+
+
+
+                    * Storytime - Narrative and engaging storytelling approach
+
+
+
+                    * Discovery - Exploratory and revealing style
+
+
+
+                    * Data - Fact-based and analytical presentation
+
+
+
+                    * Top 3 reasons - List-based persuasive format
+
+
+
+                    * Light marketing - Soft-sell marketing approach
+
+
+
+                  enum:
+
+
+
+                    - "Don't Worry"
+
+
+
+                    - "Storytime"
+
+
+
+                    - "Discovery"
+
+
+
+                    - "Data"
+
+
+
+                    - "Top 3 reasons"
+
+
+
+                    - "Light marketing"
+
+
+
+                  example: "Storytime"
+
+
+
+                visual_style:
+
+
+
+                  type: string
+
+
+
+                  description: |
+
+
+
+                    Visual style of the video from visual list(GET /visual)
+
+
+
+                  example: "Simple split screen template"
+
+
+
+                template_id:
+
+
+
+                  type: integer
+
+
+
+                  description: Template ID from template library or custom template
+
+
+
+                  example: 0
+
+
+
+
+
+                template_type:
+
+
+
+                  type: string
+
+
+
+                  description: | 
+
+
+
+                    Template source type:
+
+
+
+                    * public - Template from template library
+
+
+
+                    * custom - Template from my templates
+
+
+
+                  example: custom
+
+
+
+                  enum:
+
+
+
+                    - public
+
+
+
+                    - custom
+
+
+
+                override_script:
+
+
+
+                  type: string
+
+
+
+                  description: You can enter the script you want to use here to override the existing script.
+
+
+
+                  example: ''
+
+
+
+                caption:
+
+
+
+                  type: boolean
+
+
+
+                  description: |
+
+
+
+                    Controls subtitle rendering:
+
+
+
+                    * true - Show subtitles
+
+
+
+                    * false - Hide subtitles
+
+
+
+                  example: true
+
+
+
+
+
+              required:
+
+
+
+                - product_id
+
+
+
+                - aspect_ratio
+
+
+
+                - video_length
+
+
+
+                - language
+
+
+
+                - avatar_id
+
+
+
+                - avatar_type
+
+
+
+                - template_type
+
+
+
+                - script_style
+
+
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        project_id:
+
+
+
+                          type: integer
+
+
+
+                          description: "Created project ID"
+
+
+
+  /preview:
+
+
+
+    post:
+
+  
+
+      tags:
+
+  
+
+        - URL to Video 
+
+  
+
+      summary: 'Step 3: Preview from Product Information'
+
+  
+
+      description: You can generate a preview video using the product_id obtained from the Upload URL to create a product. Set the relevant video parameters to create the preview.
+
+  
+
+      requestBody:
+
+  
+
+        content:
+
+  
+
+          application/json:
+
+  
+
+            schema:
+
+  
+
+              type: object
+
+  
+
+              properties:
+
+  
+
+                product_id:
+
+  
+
+                  type: string
+
+  
+
+                  description: Product ID obtained from Step 1 (POST /product) response data.product_id
+
+  
+
+                  example: 8xUNyTgckMBsX4jn4Lxf
+
+  
+
+                aspect_ratio:
+
+  
+
+                  type: integer
+
+  
+
+                  description: |
+
+  
+
+                    Video aspect ratio:
+
+  
+
+                    * 0 - Portrait [9:16]
+
+  
+
+                    * 1 - Landscape [16:9]
+
+  
+
+                    * 2 - Square [1:1]
+
+  
+
+                  enum: [0, 1, 2]
+
+  
+
+                  example: 0
+
+                  
+
+                video_length:
+
+  
+
+                  type: string
+
+  
+
+                  description: Video Length.
+
+  
+
+                  example: "15"
+
+  
+
+                  enum:
+
+  
+
+                    - "15"
+
+  
+
+                    - "30"
+
+  
+
+                    - "60"                  
+
+  
+
+                language:
+
+  
+
+                  type: string
+
+  
+
+                  description: |
+
+  
+
+                    Script generation language (defaults to English if not specified):
+
+  
+
+                    * english - English
+
+  
+
+                    * filipino - Filipino
+
+  
+
+                    * french - French
+
+  
+
+                    * german - German
+
+  
+
+                    * hindi - Hindi
+
+  
+
+                    * indonesian - Indonesian
+
+  
+
+                    * italian - Italian
+
+  
+
+                    * japanese - Japanese
+
+  
+
+                    * korean - Korean
+
+  
+
+                    * malay - Malay
+
+  
+
+                    * portuguese - Portuguese
+
+  
+
+                    * russian - Russian
+
+  
+
+                    * spanish - Spanish
+
+  
+
+                    * thai - Thai
+
+  
+
+                    * vietnamese - Vietnamese
+
+  
+
+                    * arabic - Arabic
+
+  
+
+                    * greek - Greek
+
+  
+
+                    * turkish - Turkish
+
+  
+
+                    * slovenian - Slovenian
+
+  
+
+                    * croatian - Croatian
+
+  
+
+                    * romanian - Romanian
+
+  
+
+                    * chinese - Simplified Chinese
+
+  
+
+                    * bengali - Bengali
+
+  
+
+                    * urdu - Urdu
+
+  
+
+                    * hungarian - Hungarian
+
+  
+
+                    * traditional-chinese - Traditional Chinese
+
+  
+
+                    * polish - Polish
+
+  
+
+                    * cantonese - Cantonese
+
+  
+
+                    * danish - Danish
+
+  
+
+                    * malayalam - Malayalam
+
+  
+
+                    * tamil - Tamil
+
+  
+
+                    * telugu - Telugu
+
+  
+
+                    * czech - Czech
+
+  
+
+                    * hebrew - Hebrew
+
+  
+
+                    * zulu - Zulu
+
+  
+
+                    * swedish - Swedish
+
+  
+
+                    * lithuanian - Lithuanian
+
+  
+
+                    * dutch - Dutch
+
+  
+
+                    * flemish - Flemish
+
+  
+
+                    * norwegian - Norwegian
+
+  
+
+                    * finnish - Finnish
+
+  
+
+                    * bulgarian - Bulgarian
+
+  
+
+                    * latvian - Latvian
+
+  
+
+                    * ukrainian - Ukrainian
+
+  
+
+                    * mongolian - Mongolian
+
+  
+
+                    * persian - Persian
+
+  
+
+                    * odia - Odia
+
+  
+
+                    * assamese - Assamese
+
+  
+
+                    * kannada - Kannada
+
+  
+
+                    * tagalog - Tagalog
+
+  
+
+                    * amharic - Amharic
+
+  
+
+                    * serbian - Serbian
+
+  
+
+                    * slovak - Slovak
+
+  
+
+                    * swahili - Swahili
+
+  
+
+                  enum:
+
+  
+
+                    - "english"
+
+  
+
+                    - "filipino"
+
+  
+
+                    - "french"
+
+  
+
+                    - "german"
+
+  
+
+                    - "hindi"
+
+  
+
+                    - "indonesian"
+
+  
+
+                    - "italian"
+
+  
+
+                    - "japanese"
+
+  
+
+                    - "korean"
+
+  
+
+                    - "malay"
+
+  
+
+                    - "portuguese"
+
+  
+
+                    - "russian"
+
+  
+
+                    - "spanish"
+
+  
+
+                    - "thai"
+
+  
+
+                    - "vietnamese"
+
+  
+
+                    - "arabic"
+
+  
+
+                    - "greek"
+
+  
+
+                    - "turkish"
+
+  
+
+                    - "slovenian"
+
+  
+
+                    - "croatian"
+
+  
+
+                    - "romanian"
+
+  
+
+                    - "chinese"
+
+  
+
+                    - "bengali"
+
+  
+
+                    - "urdu"
+
+  
+
+                    - "hungarian"
+
+  
+
+                    - "traditional-chinese"
+
+  
+
+                    - "polish"
+
+  
+
+                    - "cantonese"
+
+  
+
+                    - "danish"
+
+  
+
+                    - "malayalam"
+
+  
+
+                    - "tamil"
+
+  
+
+                    - "telugu"
+
+  
+
+                    - "czech"
+
+  
+
+                    - "hebrew"
+
+  
+
+                    - "zulu"
+
+  
+
+                    - "swedish"
+
+  
+
+                    - "lithuanian"
+
+  
+
+                    - "dutch"
+
+  
+
+                    - "flemish"
+
+  
+
+                    - "norwegian"
+
+  
+
+                    - "finnish"
+
+  
+
+                    - "bulgarian"
+
+  
+
+                    - "latvian"
+
+  
+
+                    - "ukrainian"
+
+  
+
+                    - "mongolian"
+
+  
+
+                    - "persian"
+
+  
+
+                    - "odia"
+
+  
+
+                    - "assamese"
+
+  
+
+                    - "kannada"
+
+  
+
+                    - "tagalog"
+
+  
+
+                    - "amharic"
+
+  
+
+                    - "serbian"
+
+  
+
+                    - "slovak"
+
+  
+
+                    - "swahili"
+
+  
+
+                  default: "english"
+
+  
+
+                  example: "english"
+
+  
+
+                avatar_id:
+
+  
+
+                  type: integer
+
+  
+
+                  description: |
+
+  
+
+                    Avatar id from Jogg Avatar or Your Avatar.
+
+  
+
+                  example: 1
+
+  
+
+                avatar_type:
+
+  
+
+                  type: integer 
+
+  
+
+                  description: |
+
+  
+
+                    Avatar source type:
+
+  
+
+                    * 0 - Public avatars
+
+  
+
+                    * 1 - Custom avatars
+
+  
+
+                  enum:
+
+  
+
+                    - 0
+
+  
+
+                    - 1
+
+  
+
+                  example: 0
+
+  
+
+                voice_id:
+
+  
+
+                  type: string
+
+  
+
+                  description: |
+
+  
+
+                    Voice id from voice list.
+
+  
+
+                  example: en-US-ChristopherNeural
+
+  
+
+                script_style:
+
+  
+
+                  type: string
+
+  
+
+                  description: |
+
+  
+
+                    Script writing style for video content:
+
+  
+
+                    * Don't Worry - Casual and reassuring tone
+
+  
+
+                    * Storytime - Narrative and engaging storytelling approach
+
+  
+
+                    * Discovery - Exploratory and revealing style
+
+  
+
+                    * Data - Fact-based and analytical presentation
+
+  
+
+                    * Top 3 reasons - List-based persuasive format
+
+  
+
+                    * Light marketing - Soft-sell marketing approach
+
+  
+
+                  enum:
+
+  
+
+                    - "Don't Worry"
+
+  
+
+                    - "Storytime"
+
+  
+
+                    - "Discovery"
+
+  
+
+                    - "Data"
+
+  
+
+                    - "Top 3 reasons"
+
+  
+
+                    - "Light marketing"
+
+  
+
+                  example: "Storytime"
+
+  
+
+                visual_style:
+
+  
+
+                  type: string
+
+  
+
+                  description: |
+
+  
+
+                    Visual style of the video from visual list(GET /visual)
+
+  
+
+                  example: "Simple split screen template"
+
+  
+
+                template_id:
+
+  
+
+                  type: integer
+
+  
+
+                  description: Template ID from template library or custom template
+
+  
+
+                  example: 0
+
+  
+
+  
+
+                template_type:
+
+  
+
+                  type: string
+
+  
+
+                  description: | 
+
+  
+
+                    Template source type:
+
+  
+
+                    * public - Template from template library
+
+  
+
+                    * custom - Template from my templates
+
+  
+
+                  example: custom
+
+  
+
+                  enum:
+
+  
+
+                    - public
+
+  
+
+                    - custom
+
+  
+
+                override_script:
+
+  
+
+                  type: string
+
+  
+
+                  description: You can enter the script you want to use here to override the existing script.
+
+  
+
+                  example: ''
+
+  
+
+                caption:
+
+  
+
+                  type: boolean
+
+  
+
+                  description: |
+
+  
+
+                    Controls subtitle rendering:
+
+  
+
+                    * true - Show subtitles
+
+  
+
+                    * false - Hide subtitles
+
+  
+
+                  example: true
+
+  
+
+  
+
+              required:
+
+  
+
+                - product_id
+
+  
+
+                - aspect_ratio
+
+  
+
+                - video_length
+
+  
+
+                - language
+
+  
+
+                - avatar_id
+
+  
+
+                - avatar_type
+
+  
+
+                - template_type
+
+  
+
+                - script_style
+
+  
+
+  
+
+      responses:
+
+  
+
+        '200':
+
+  
+
+          description: "Success"
+
+  
+
+          content:
+
+  
+
+            application/json:
+
+  
+
+              schema:
+
+  
+
+                allOf:
+
+  
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+  
+
+                - type: object
+
+  
+
+                  properties:
+
+  
+
+                    data:
+
+  
+
+                      type: object
+
+  
+
+                      properties:
+
+  
+
+                        project_id:
+
+  
+
+                          type: integer
+
+  
+
+                          description: "Created project ID"
+
+                          
+
+
+
+  /create_video_from_talking_avatar:
+
+
+
+    post:
+
+
+
+      tags:
+
+
+
+      - Create Avatar Videos
+
+
+
+      summary: Create Talking Avatar Video
+
+
+
+      description: Creates a talking avatar video with specified parameters
+
+
+
+      requestBody:
+
+
+
+        content:
+
+
+
+          application/json:
+
+
+
+            schema:
+
+
+
+              type: object
+
+
+
+              properties:
+
+
+
+                script:
+
+
+
+                  type: string
+
+
+
+                  description: Script content for the avatar to speak. Must provide either script or audio_script
+
+
+
+                  example: Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!
+
+
+
+                audio_url:
+
+
+
+                  type: string
+
+
+
+                  description: Url for Audio, either script or audio_url must be provided, but not both.
+
+
+
+                  example: https://res.jogg.ai/audio.mp3
+
+
+
+                aspect_ratio:
+
+
+
+                  type: integer
+
+
+
+                  description: 'Aspect ratio of the output video. 0: [9:16], 1: [16:9], 2: [1:1]'
+
+
+
+                  enum:
+
+
+
+                    - 0
+
+
+
+                    - 1
+
+
+
+                    - 2
+
+
+
+                  example: 0
+
+
+
+                screen_style:
+
+
+
+                  type: integer
+
+
+
+                  description: 'Background style. 1: with background, 2: green screen, 3: webm'
+
+
+
+                  enum:
+
+
+
+                    - 1
+
+
+
+                    - 2
+
+
+
+                    - 3
+
+
+
+                  example: 1
+
+
+
+                avatar_id:
+
+
+
+                  type: integer
+
+
+
+                  description: ID of the avatar to use
+
+
+
+                  example: 81
+
+
+
+                avatar_type:
+
+
+
+                  type: integer
+
+
+
+                  description: 'Source type of the avatar. 0: jogg avatar, 1: your avatar'
+
+
+
+                  enum:
+
+
+
+                    - 0
+
+
+
+                    - 1
+
+
+
+                  example: 0
+
+
+
+                voice_id:
+
+
+
+                  type: string
+
+
+
+                  description: ID of the text-to-speech voice to use
+
+
+
+                  example: en-US-ChristopherNeural
+
+
+
+                caption:
+
+
+
+                  type: boolean
+
+
+
+                  description: 'Subtitle option. true: enable subtitles, false: disable subtitles'
+
+
+
+                  enum:
+
+
+
+                    - true
+
+
+
+                    - false
+
+
+
+              required:
+
+
+
+                - screen_style
+
+
+
+                - avatar_id
+
+
+
+                - avatar_type
+
+
+
+                - voice_id
+
+
+
+        required: true
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        project_id:
+
+
+
+                          type: integer
+
+
+
+                          description: "Created project ID"
+
+  /project:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+      - Get Generated Video
+
+
+
+      summary: Get Project Information
+
+
+
+      description: Get information about a specific project using its ID.
+
+
+
+      parameters:
+
+
+
+        - name: project_id
+
+
+
+          in: query
+
+
+
+          required: true
+
+
+
+          schema:
+
+
+
+            type: string
+
+
+
+          description: The ID of the project to retrieve information for.
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        id:
+
+
+
+                          type: string
+
+
+
+                          description: Project ID
+
+
+
+                          example: fa6228c0f52c4f3986e88f7ffa5d2864
+
+
+
+                        title:
+
+
+
+                          type: string
+
+
+
+                          description: Project title
+
+
+
+                          example: welcome to jogg.ai
+
+
+
+                        video_duration:
+
+
+
+                          type: integer
+
+
+
+                          description: Video duration in seconds
+
+
+
+                          example: 6
+
+
+
+                        video_url:
+
+
+
+                          type: string
+
+
+
+                          description: URL to the video output
+
+
+
+                          example: https://res.jogg.ai/video.mp4
+
+
+
+                        cover_url:
+
+
+
+                          type: string
+
+
+
+                          description: URL to the cover image
+
+
+
+                          example: https://res.jogg.ai/cover.jpg
+
+
+
+                        status_code:
+
+                          type: integer
+
+                          description: |
+
+
+
+                            * 1 - start
+
+
+
+                            * 2 - waiting
+
+
+
+                            * 3 - processing
+
+
+
+                            * 4 - success
+
+
+
+                            * 5 - failed
+
+
+
+                            * 99 - deleted
+
+                          enum: [1, 2, 3, 4, 5, 99]
+
+                          example: 4
+
+
+
+                        status_desc:
+
+
+
+                          type: string
+
+
+
+                          description: Description of current progress
+
+
+
+                          example: processing
+
+
+
+                        created_at:
+
+
+
+                          type: integer
+
+
+
+                          description: Creation timestamp
+
+
+
+                          example: 1732806631
+
+
+
+
+
+
+
+  /upload/asset:
+
+
+
+    post:
+
+
+
+      tags:
+
+
+
+      - Upload File
+
+
+
+      summary: Get Signed URL
+
+
+
+      description: Generate a signed URL for file upload. Use the `sign_url` obtained here to upload your file.
+
+
+
+      requestBody:
+
+
+
+        description: Data required for file upload
+
+
+
+        content:
+
+
+
+          application/json:
+
+
+
+            schema:
+
+
+
+              type: object
+
+
+
+              properties:
+
+
+
+                filename:
+
+
+
+                  type: string
+
+
+
+                  example: 1.jpg
+
+
+
+              required:
+
+
+
+                - filename
+
+
+
+        required: true
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                      data:
+
+
+
+                        type: object
+
+
+
+                        properties:
+
+
+
+                          sign_url:
+
+
+
+                            type: string
+
+
+
+                            description: Use the sign_url to upload your file with a PUT request, including the file data in the request body. This is a direct upload to the signed URL.
+
+
+
+                          asset_id:
+
+
+
+                            type: string
+
+
+
+                            description: URL after file upload
+
+
+
+
+
+  /musics:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+      - Music
+
+
+
+      summary: Get Music List
+
+
+
+      description: Get a list of jogg music
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: Success
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        avatars:
+
+
+
+                          type: array
+
+
+
+                          items:
+
+
+
+                            type: object
+
+
+
+                            properties:
+
+
+
+                              id:
+
+
+
+                                type: integer
+
+
+
+                                description: Music ID
+
+
+
+                                example: 1
+
+
+
+                              name:
+
+
+
+                                type: string
+
+
+
+                                description: Music name
+
+
+
+                                example: Amanda outdoors
+
+
+
+                              music_url:
+
+
+
+                                type: string
+
+
+
+                                description: URL of the cover image
+
+
+
+                                example: https://res.jogg.ai/music/example.mp3
+
+
+
+                              
+
+                              duration:
+
+
+
+                                type: integer
+
+
+
+                                description: music duration
+
+
+
+                                example: 81
+
+
+
+  /musics/custom:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+      - Music
+
+
+
+      summary: Get Music List
+
+
+
+      description: Get a list of your music
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: Success
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        avatars:
+
+
+
+                          type: array
+
+
+
+                          items:
+
+
+
+                            type: object
+
+
+
+                            properties:
+
+
+
+                              id:
+
+
+
+                                type: integer
+
+
+
+                                description: Music ID
+
+
+
+                                example: 1
+
+
+
+                              name:
+
+
+
+                                type: string
+
+
+
+                                description: Music name
+
+
+
+                                example: Amanda outdoors
+
+
+
+                              music_url:
+
+
+
+                                type: string
+
+
+
+                                description: URL of the cover image
+
+
+
+                                example: https://res.jogg.ai/music.mp3
+
+
+
+                              
+
+                              duration:
+
+
+
+                                type: integer
+
+
+
+                                description: music duration
+
+
+
+                                example: 81
+
+
+
+  /avatars:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+      - Avatar
+
+
+
+      summary: Get Avatar List
+
+
+
+      description: Get a list of available avatars with specified filters
+
+
+
+      parameters:
+
+
+
+      - $ref: '#/components/parameters/AspectRatioSearch'
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: Success
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        avatars:
+
+
+
+                          type: array
+
+
+
+                          items:
+
+
+
+                            type: object
+
+
+
+                            properties:
+
+
+
+                              avatar_id:
+
+
+
+                                type: integer
+
+
+
+                                description: Avatar ID
+
+
+
+                                example: 81
+
+
+
+                              name:
+
+
+
+                                type: string
+
+
+
+                                description: Avatar name
+
+
+
+                                example: Amanda outdoors
+
+
+
+                              cover_url:
+
+
+
+                                type: string
+
+
+
+                                description: URL of the cover image
+
+
+
+                                example: https://res.jogg.ai/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png
+
+
+
+  /avatars/custom:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+        - Avatar
+
+
+
+      summary: Get Your Avatar List
+
+
+
+      description: Get a list of your avatar
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: Success
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        avatars:
+
+
+
+                          type: array
+
+
+
+                          items:
+
+
+
+                            type: object
+
+
+
+                            properties:
+
+
+
+                              avatar_id:
+
+
+
+                                type: integer
+
+
+
+                                description: Avatar ID
+
+
+
+                                example: 81
+
+
+
+                              name:
+
+
+
+                                type: string
+
+
+
+                                description: Avatar name
+
+
+
+                                example: Amanda outdoors
+
+
+
+                              cover_url:
+
+
+
+                                type: string
+
+
+
+                                description: URL of the cover image
+
+
+
+                                example: https://res.jogg.ai/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png
+
+
+
+                              status:
+
+
+
+                                type: integer
+
+
+
+                                description: 'Production status: 0:in progress, 1:success, 2:failed'
+
+
+
+                                enum:
+
+
+
+                                  - 0 processing
+
+
+
+                                  - 1 success
+
+
+
+                                  - 2 failed
+
+
+
+                              fail_msg:
+
+
+
+                                type: string
+
+
+
+                                description: Failure message when product_status is 2
+
+
+
+                                example: ""
+
+
+
+  /voices:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+      - Voice
+
+
+
+      summary: Get Voice List
+
+
+
+      description: Retrieve a list of available voice with specified gender filter
+
+
+
+      parameters:
+
+
+
+        - name: gender
+
+
+
+          in: query
+
+
+
+          description: Filter voices by gender (female/male)
+
+
+
+          required: false
+
+
+
+          schema:
+
+
+
+            type: string
+
+
+
+            enum:
+
+
+
+              - female
+
+
+
+              - male
+
+
+
+        - name: language
+
+
+
+          in: query
+
+
+
+          description: |
+
+
+
+            Filter voices by language:
+
+
+
+            * english - English
+
+
+
+            * filipino - Filipino
+
+
+
+            * french - French  
+
+
+
+            * german - German
+
+
+
+            * hindi - Hindi
+
+
+
+            * indonesian - Indonesian
+
+
+
+            * italian - Italian
+
+
+
+            * japanese - Japanese
+
+
+
+            * korean - Korean
+
+
+
+            * malay - Malay
+
+
+
+            * portuguese - Portuguese
+
+
+
+            * russian - Russian
+
+
+
+            * spanish - Spanish
+
+
+
+            * thai - Thai
+
+
+
+            * vietnamese - Vietnamese
+
+
+
+            * arabic - Arabic
+
+
+
+            * greek - Greek
+
+
+
+            * turkish - Turkish
+
+
+
+            * slovenian - Slovenian
+
+
+
+            * croatian - Croatian
+
+
+
+            * romanian - Romanian
+
+
+
+            * chinese - Simplified Chinese
+
+
+
+            * bengali - Bengali
+
+
+
+            * urdu - Urdu
+
+
+
+            * hungarian - Hungarian
+
+
+
+            * traditional-chinese - Traditional Chinese
+
+
+
+            * polish - Polish
+
+
+
+            * cantonese - Cantonese
+
+
+
+            * danish - Danish
+
+
+
+            * malayalam - Malayalam
+
+
+
+            * tamil - Tamil
+
+
+
+            * telugu - Telugu
+
+
+
+            * czech - Czech
+
+
+
+            * hebrew - Hebrew
+
+
+
+            * zulu - Zulu
+
+
+
+            * swedish - Swedish
+
+
+
+            * lithuanian - Lithuanian
+
+
+
+            * dutch - Dutch
+
+
+
+            * flemish - Flemish
+
+
+
+            * norwegian - Norwegian
+
+
+
+            * finnish - Finnish
+
+
+
+            * bulgarian - Bulgarian
+
+
+
+            * latvian - Latvian
+
+
+
+            * ukrainian - Ukrainian
+
+
+
+            * mongolian - Mongolian
+
+
+
+            * persian - Persian
+
+
+
+            * odia - Odia
+
+
+
+            * assamese - Assamese
+
+
+
+            * kannada - Kannada
+
+
+
+            * tagalog - Tagalog
+
+
+
+            * amharic - Amharic
+
+
+
+            * serbian - Serbian
+
+
+
+            * slovak - Slovak
+
+
+
+            * swahili - Swahili
+
+
+
+          required: false
+
+
+
+          schema:
+
+
+
+            type: string
+
+
+
+            enum:
+
+
+
+              - english
+
+
+
+              - filipino
+
+
+
+              - french
+
+
+
+              - german
+
+
+
+              - hindi
+
+
+
+              - indonesian
+
+
+
+              - italian
+
+
+
+              - japanese
+
+
+
+              - korean
+
+
+
+              - malay
+
+
+
+              - portuguese
+
+
+
+              - russian
+
+
+
+              - spanish
+
+
+
+              - thai
+
+
+
+              - vietnamese
+
+
+
+              - arabic
+
+
+
+              - greek
+
+
+
+              - turkish
+
+
+
+              - slovenian
+
+
+
+              - croatian
+
+
+
+              - romanian
+
+
+
+              - chinese
+
+
+
+              - bengali
+
+
+
+              - urdu
+
+
+
+              - hungarian
+
+
+
+              - traditional-chinese
+
+
+
+              - polish
+
+
+
+              - cantonese
+
+
+
+              - danish
+
+
+
+              - malayalam
+
+
+
+              - tamil
+
+
+
+              - telugu
+
+
+
+              - czech
+
+
+
+              - hebrew
+
+
+
+              - zulu
+
+
+
+              - swedish
+
+
+
+              - lithuanian
+
+
+
+              - dutch
+
+
+
+              - flemish
+
+
+
+              - norwegian
+
+
+
+              - finnish
+
+
+
+              - bulgarian
+
+
+
+              - latvian
+
+
+
+              - ukrainian
+
+
+
+              - mongolian
+
+
+
+              - persian
+
+
+
+              - odia
+
+
+
+              - assamese
+
+
+
+              - kannada
+
+
+
+              - tagalog
+
+
+
+              - amharic
+
+
+
+              - serbian
+
+
+
+              - slovak
+
+
+
+              - swahili
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: Success
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        total:
+
+
+
+                          type: integer
+
+
+
+                          description: Total number of voices
+
+
+
+                          example: 10
+
+
+
+                        voices:
+
+
+
+                          type: array
+
+
+
+                          items:
+
+
+
+                            type: object
+
+
+
+                            properties:
+
+
+
+                              name:
+
+
+
+                                type: string
+
+
+
+                                description: Voice name
+
+
+
+                                example: Emily
+
+
+
+                              voice_id:
+
+
+
+                                type: string
+
+
+
+                                description: Language identifier
+
+
+
+                                example: en-US-ChristopherNeural
+
+
+
+                              audition_url:
+
+
+
+                                type: string
+
+
+
+                                description: URL for the audition audio file
+
+
+
+                                example: https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3
+
+
+
+                              language:
+
+
+
+                                type: string
+
+
+
+                                description: Language of the voice
+
+
+
+                                example: english
+
+
+
+  /voices/custom:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+      - Voice
+
+
+
+      summary: Get Your Voice List
+
+
+
+      description: Retrieve a list of your available voice with specified gender filter
+
+
+
+      parameters:
+
+
+
+        - name: language
+
+
+
+          in: query
+
+
+
+          description: |
+
+
+
+            Filter voices by language:
+
+
+
+            * english - English
+
+
+
+            * filipino - Filipino
+
+
+
+            * french - French  
+
+
+
+            * german - German
+
+
+
+            * hindi - Hindi
+
+
+
+            * indonesian - Indonesian
+
+
+
+            * italian - Italian
+
+
+
+            * japanese - Japanese
+
+
+
+            * korean - Korean
+
+
+
+            * malay - Malay
+
+
+
+            * portuguese - Portuguese
+
+
+
+            * russian - Russian
+
+
+
+            * spanish - Spanish
+
+
+
+            * thai - Thai
+
+
+
+            * vietnamese - Vietnamese
+
+
+
+            * arabic - Arabic
+
+
+
+            * greek - Greek
+
+
+
+            * turkish - Turkish
+
+
+
+            * slovenian - Slovenian
+
+
+
+            * croatian - Croatian
+
+
+
+            * romanian - Romanian
+
+
+
+            * chinese - Simplified Chinese
+
+
+
+            * bengali - Bengali
+
+
+
+            * urdu - Urdu
+
+
+
+            * hungarian - Hungarian
+
+
+
+            * traditional-chinese - Traditional Chinese
+
+
+
+            * polish - Polish
+
+
+
+            * cantonese - Cantonese
+
+
+
+            * danish - Danish
+
+
+
+            * malayalam - Malayalam
+
+
+
+            * tamil - Tamil
+
+
+
+            * telugu - Telugu
+
+
+
+            * czech - Czech
+
+
+
+            * hebrew - Hebrew
+
+
+
+            * zulu - Zulu
+
+
+
+            * swedish - Swedish
+
+
+
+            * lithuanian - Lithuanian
+
+
+
+            * dutch - Dutch
+
+
+
+            * flemish - Flemish
+
+
+
+            * norwegian - Norwegian
+
+
+
+            * finnish - Finnish
+
+
+
+            * bulgarian - Bulgarian
+
+
+
+            * latvian - Latvian
+
+
+
+            * ukrainian - Ukrainian
+
+
+
+            * mongolian - Mongolian
+
+
+
+            * persian - Persian
+
+
+
+            * odia - Odia
+
+
+
+            * assamese - Assamese
+
+
+
+            * kannada - Kannada
+
+
+
+            * tagalog - Tagalog
+
+
+
+            * amharic - Amharic
+
+
+
+            * serbian - Serbian
+
+
+
+            * slovak - Slovak
+
+
+
+            * swahili - Swahili
+
+
+
+          required: false
+
+
+
+          schema:
+
+
+
+            type: string
+
+
+
+            enum:
+
+
+
+              - english
+
+
+
+              - filipino
+
+
+
+              - french
+
+
+
+              - german
+
+
+
+              - hindi
+
+
+
+              - indonesian
+
+
+
+              - italian
+
+
+
+              - japanese
+
+
+
+              - korean
+
+
+
+              - malay
+
+
+
+              - portuguese
+
+
+
+              - russian
+
+
+
+              - spanish
+
+
+
+              - thai
+
+
+
+              - vietnamese
+
+
+
+              - arabic
+
+
+
+              - greek
+
+
+
+              - turkish
+
+
+
+              - slovenian
+
+
+
+              - croatian
+
+
+
+              - romanian
+
+
+
+              - chinese
+
+
+
+              - bengali
+
+
+
+              - urdu
+
+
+
+              - hungarian
+
+
+
+              - traditional-chinese
+
+
+
+              - polish
+
+
+
+              - cantonese
+
+
+
+              - danish
+
+
+
+              - malayalam
+
+
+
+              - tamil
+
+
+
+              - telugu
+
+
+
+              - czech
+
+
+
+              - hebrew
+
+
+
+              - zulu
+
+
+
+              - swedish
+
+
+
+              - lithuanian
+
+
+
+              - dutch
+
+
+
+              - flemish
+
+
+
+              - norwegian
+
+
+
+              - finnish
+
+
+
+              - bulgarian
+
+
+
+              - latvian
+
+
+
+              - ukrainian
+
+
+
+              - mongolian
+
+
+
+              - persian
+
+
+
+              - odia
+
+
+
+              - assamese
+
+
+
+              - kannada
+
+
+
+              - tagalog
+
+
+
+              - amharic
+
+
+
+              - serbian
+
+
+
+              - slovak
+
+
+
+              - swahili
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: Success
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        total:
+
+
+
+                          type: integer
+
+
+
+                          description: Total number of voices
+
+
+
+                          example: 14
+
+
+
+                        voices:
+
+
+
+                          type: array
+
+
+
+                          items:
+
+
+
+                            type: object
+
+
+
+                            properties:
+
+
+
+                              name:
+
+
+
+                                type: string
+
+
+
+                                description: Voice name
+
+
+
+                                example: Emily
+
+
+
+                              voice_id:
+
+
+
+                                type: string
+
+
+
+                                description: Language identifier
+
+
+
+                                example: en-US-ChristopherNeural
+
+
+
+                              audition_url:
+
+
+
+                                type: string
+
+
+
+                                description: URL for the audition audio file
+
+
+
+                                example: https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3
+
+
+
+                              language:
+
+
+
+                                type: string
+
+
+
+                                description: Language of the voice
+
+
+
+                                example: english
+
+
+
+
+
+  /avatar/create:
+
+
+
+    post:
+
+
+
+      tags:
+
+
+
+        - Avatar
+
+
+
+      summary: "Create an instant avatar"
+
+
+
+      requestBody:
+
+
+
+        required: true
+
+
+
+        content:
+
+
+
+          application/json:
+
+
+
+            schema:
+
+
+
+              type: object
+
+
+
+              required:
+
+
+
+                - origin_url
+
+
+
+                - name
+
+
+
+              properties:
+
+
+
+                origin_url:
+
+
+
+                  type: string
+
+
+
+                  description: "Instant avatar URL"
+
+
+
+                name:
+
+
+
+                  type: string
+
+
+
+                  description: "Instant avatar name"
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                - type: object
+
+
+
+                  properties:
+
+
+
+                    data:
+
+
+
+                      type: object
+
+
+
+                      properties:
+
+
+
+                        avatar_id:
+
+
+
+                          type: integer
+
+
+
+                          description: "Created instant avatar ID"
+
+
+
+  /avatar/custom/delete:
+
+
+
+    delete:
+
+
+
+      tags:
+
+
+
+        - Avatar
+
+
+
+      summary: "Delete an instant avatar"
+
+
+
+      parameters:
+
+
+
+        - name: avatar_id
+
+
+
+          in: query
+
+
+
+          required: true
+
+
+
+          description: "Avatar ID to delete"
+
+
+
+          schema:
+
+
+
+            type: integer
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+
+
+  /visual_styles:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+        - Visual Style
+
+
+
+      summary: Get Visual Style
+
+
+
+      description: Get list of Visual Style
+
+
+
+      parameters:
+
+
+
+        - $ref: '#/components/parameters/AspectRatioParam'
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                  - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                  - type: object
+
+
+
+                    properties:
+
+
+
+                      data:
+
+
+
+                        type: object
+
+
+
+                        properties:
+
+
+
+                          visual_styles:
+
+
+
+                            type: array
+
+
+
+                            items:
+
+
+
+                              type: object
+
+
+
+                              properties:
+
+
+
+                                id:
+
+
+
+                                  type: integer
+
+
+
+                                  example: 2400
+
+
+
+                                name:
+
+
+
+                                  type: string
+
+
+
+                                  example: Simple split screen template
+
+
+
+  /templates:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+        - Template
+
+
+
+      summary: Get templates
+
+
+
+      description: Get list of templates
+
+
+
+      parameters:
+
+
+
+        - $ref: '#/components/parameters/AspectRatioParam'
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                  - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                  - type: object
+
+
+
+                    properties:
+
+
+
+                      data:
+
+
+
+                        type: object
+
+
+
+                        properties:
+
+
+
+                          templates:
+
+
+
+                            type: array
+
+
+
+                            items:
+
+
+
+                              type: object
+
+
+
+                              properties:
+
+
+
+                                id:
+
+
+
+                                  type: integer
+
+
+
+                                  example: 136
+
+
+
+                                name:
+
+
+
+                                  type: string
+
+
+
+                                  example: roborock Q7 Max+ Robot Vacuum Cleaner, Hands-Free Cleaning for up to 7 Weeks, Robotic Vacuum with APP-Controlled Mopping, 4200Pa Suction, No-Mop&amp;amp;No-Go Zones, 180mins Runtime.
+
+
+
+                                cover_url:
+
+
+
+                                  type: string
+
+
+
+                                  example: https://res.jogg.ai/cover.png
+
+
+
+                                preview_url:
+
+
+
+                                  type: string
+
+
+
+                                  example: https://res.jogg.ai/preview.png
+
+
+
+                                aspect_ratio:
+
+
+
+                                  type: integer
+
+                
+
+                                  description: |
+
+                
+
+                                    Video aspect ratio:
+
+                
+
+                                    * 0 - Portrait [9:16]
+
+                
+
+                                    * 1 - Landscape [16:9]
+
+                
+
+                                    * 2 - Square [1:1]
+
+                
+
+                                  enum: [0, 1, 2]
+
+                
+
+                                  example: 0
+
+
+
+  /templates/custom:
+
+
+
+    get:
+
+
+
+      tags:
+
+
+
+        - Template  
+
+
+
+      summary: Get custom templates
+
+
+
+      description: Get list of your custom templates
+
+
+
+      parameters:
+
+
+
+        - $ref: '#/components/parameters/AspectRatioParam'
+
+
+
+      responses:
+
+
+
+        '200':
+
+
+
+          description: "Success"
+
+
+
+          content:
+
+
+
+            application/json:
+
+
+
+              schema:
+
+
+
+                allOf:
+
+
+
+                  - $ref: '#/components/schemas/BaseResponse'
+
+
+
+                  - type: object
+
+
+
+                    properties:
+
+
+
+                      data:
+
+
+
+                        type: object
+
+
+
+                        properties:
+
+
+
+                          templates:
+
+
+
+                            type: array
+
+
+
+                            items:
+
+
+
+                              type: object
+
+
+
+                              properties:
+
+
+
+                                id:
+
+
+
+                                  type: integer
+
+
+
+                                  example: 2400
+
+
+
+                                name:
+
+
+
+                                  type: string
+
+
+
+                                  example: Anker USB C Charger, 735 Charger (Nano II 65
+
+
+
+                                cover_url:
+
+
+
+                                  type: string
+
+
+
+                                  example: https://res.jogg.ai/cover.png
+
+
 
 components:
 
-parameters:
 
-PageParam:
 
-name: page
+  parameters:
 
-in: query
 
-description: Page number
 
-required: false
+    PageParam:
 
-schema:
 
-type: integer
 
-minimum: 1
+      name: page
 
-default: 1
 
-PageSizeParam:
 
-name: page\_size
+      in: query
 
-in: query
 
-description: Page size
 
-required: false
+      description: Page number
 
-schema:
 
-type: integer
 
-minimum: 1
+      required: false
 
-maximum: 100
 
-default: 20
 
-AspectRatioParam:
+      schema:
 
-name: aspect\_ratio
 
-in: query
 
-description: |
+        type: integer
 
-Screen aspect ratio:
 
-* -1 - All
 
-* 0 - \[9:16]
+        minimum: 1
 
-* 1 - \[16:9]
 
-* 2 - \[1:1]
 
-required: false
+        default: 1
 
-schema:
 
-type: integer
 
-enum: \[-1, 0, 1, 2]
 
-default: -1
 
-AspectRatioSearch:
 
-name: aspect\_ratio
 
-in: query
+    PageSizeParam:
 
-description: |
 
-Screen aspect ratio:
 
-* 0 - \[9:16]
+      name: page_size
 
-* 1 - \[16:9]
 
-* 2 - \[1:1]
 
-required: false
+      in: query
 
-schema:
 
-type: integer
 
-enum: \[0, 1, 2]
+      description: Page size
 
-default: 0
 
-schemas:
 
-Error:
+      required: false
 
-required:
 
-* code
 
-* msg
+      schema:
 
-type: object
 
-properties:
 
-code:
+        type: integer
 
-type: integer
 
-format: int32
 
-msg:
+        minimum: 1
 
-type: string
 
-BaseResponse:
 
-type: object
+        maximum: 100
 
-required:
 
-* code
 
-* msg
+        default: 20
 
-properties:
 
-code:
 
-type: integer
 
-description: |
 
-Business status code:
 
-* 0 - Success
 
-* 10104 - Record not found
+    AspectRatioParam:
 
-* 10105 - Invalid API key
 
-* 18020 - Insufficient credit
 
-* 18025 - No permission to call APIs.
+      name: aspect_ratio
 
-* 40000 - Parameter error
 
-* 50000 - System error
 
-msg:
+      in: query
 
-type: string
 
-description: Response message
 
-# 分页基础结构
+      description: |
 
-PageInfo:
 
-type: object
 
-properties:
+        Screen aspect ratio:
 
-total\_count:
 
-type: integer
 
-description: "Total number of items"
+        * -1 - All
 
-total\_page:
 
-type: integer
 
-description: "Total number of pages"
+        * 0 - [9:16]
 
-securitySchemes:
 
-apiKeyAuth:
 
-type: apiKey
+        * 1 - [16:9]
 
-in: header
 
-name: x-api-key
+
+        * 2 - [1:1]
+
+
+
+      required: false
+
+
+
+      schema:
+
+
+
+        type: integer
+
+
+
+        enum: [-1, 0, 1, 2]
+
+
+
+        default: -1
+
+
+
+
+
+
+
+    AspectRatioSearch:
+
+
+
+      name: aspect_ratio
+
+
+
+      in: query
+
+
+
+      description: |
+
+
+
+        Screen aspect ratio:
+
+
+
+        * 0 - [9:16]
+
+
+
+        * 1 - [16:9]
+
+
+
+        * 2 - [1:1]
+
+
+
+      required: false
+
+
+
+      schema:
+
+
+
+        type: integer
+
+
+
+        enum: [0, 1, 2]
+
+
+
+        default: 0
+
+
+
+  schemas:
+
+
+
+    Error:
+
+
+
+      required:
+
+
+
+        - code
+
+
+
+        - msg
+
+
+
+      type: object
+
+
+
+      properties:
+
+
+
+        code:
+
+
+
+          type: integer
+
+
+
+          format: int32
+
+
+
+        msg:
+
+
+
+          type: string
+
+
+
+    BaseResponse:
+
+
+
+      type: object
+
+
+
+      required:
+
+
+
+        - code
+
+
+
+        - msg
+
+
+
+      properties:
+
+
+
+        code:
+
+
+
+          type: integer
+
+
+
+          description: |
+
+
+
+            Business status code:
+
+
+
+            * 0 - Success
+
+
+
+            * 10104 - Record not found
+
+
+
+            * 10105 - Invalid API key
+
+
+
+            * 18020 - Insufficient credit
+
+
+
+            * 18025 - No permission to call APIs.
+
+
+
+            * 40000 - Parameter error
+
+
+
+            * 50000 - System error
+
+
+
+        msg:
+
+
+
+          type: string
+
+
+
+          description: Response message
+
+
+
+    # 分页基础结构
+
+
+
+    PageInfo:
+
+
+
+      type: object
+
+
+
+      properties:
+
+
+
+        total_count:
+
+
+
+          type: integer
+
+
+
+          description: "Total number of items"
+
+
+
+        total_page:
+
+
+
+          type: integer
+
+
+
+          description: "Total number of pages"
+
+
+
+
+
+
+
+  securitySchemes:
+
+
+
+    apiKeyAuth:
+
+
+
+      type: apiKey
+
+
+
+      in: header
+
+
+
+      name: x-api-key
+
