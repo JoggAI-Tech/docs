@@ -14,6 +14,8 @@ Using the JoggAI API, you can generate AI scripts effortlessly. Simply provide t
 Provide the product information or the `product_id` generated at the "Upload URL to Create Product" endpoint, and you can create several different styles of product introduction scripts.
 If you do not provide the `product_id`, then the product's `name` and `description` are required.
 
+Please refer to the [AI Scripts](https://docs.jogg.ai/api-reference/AI-Scripts/AI-Scripts) for more details.
+
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/ai_scripts' \
 --header 'x-api-key: <your-api-key>' \
