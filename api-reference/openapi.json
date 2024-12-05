@@ -2986,6 +2986,980 @@ paths:
 
                           description: "Created project ID"
 
+
+
+  /preview:
+
+
+
+    post:
+
+  
+
+      tags:
+
+  
+
+        - URL to Video 
+
+  
+
+      summary: 'Step 3: Preview from Product Information'
+
+  
+
+      description: You can generate a preview video using the product_id obtained from the Upload URL to create a product. Set the relevant video parameters to create the preview.
+
+  
+
+      requestBody:
+
+  
+
+        content:
+
+  
+
+          application/json:
+
+  
+
+            schema:
+
+  
+
+              type: object
+
+  
+
+              properties:
+
+  
+
+                product_id:
+
+  
+
+                  type: string
+
+  
+
+                  description: Product ID obtained from Step 1 (POST /product) response data.product_id
+
+  
+
+                  example: 8xUNyTgckMBsX4jn4Lxf
+
+  
+
+                aspect_ratio:
+
+  
+
+                  type: integer
+
+  
+
+                  description: |
+
+  
+
+                    Video aspect ratio:
+
+  
+
+                    * 0 - Portrait [9:16]
+
+  
+
+                    * 1 - Landscape [16:9]
+
+  
+
+                    * 2 - Square [1:1]
+
+  
+
+                  enum: [0, 1, 2]
+
+  
+
+                  example: 0
+
+                  
+
+                video_length:
+
+  
+
+                  type: string
+
+  
+
+                  description: Video Length.
+
+  
+
+                  example: "15"
+
+  
+
+                  enum:
+
+  
+
+                    - "15"
+
+  
+
+                    - "30"
+
+  
+
+                    - "60"                  
+
+  
+
+                language:
+
+  
+
+                  type: string
+
+  
+
+                  description: |
+
+  
+
+                    Script generation language (defaults to English if not specified):
+
+  
+
+                    * english - English
+
+  
+
+                    * filipino - Filipino
+
+  
+
+                    * french - French
+
+  
+
+                    * german - German
+
+  
+
+                    * hindi - Hindi
+
+  
+
+                    * indonesian - Indonesian
+
+  
+
+                    * italian - Italian
+
+  
+
+                    * japanese - Japanese
+
+  
+
+                    * korean - Korean
+
+  
+
+                    * malay - Malay
+
+  
+
+                    * portuguese - Portuguese
+
+  
+
+                    * russian - Russian
+
+  
+
+                    * spanish - Spanish
+
+  
+
+                    * thai - Thai
+
+  
+
+                    * vietnamese - Vietnamese
+
+  
+
+                    * arabic - Arabic
+
+  
+
+                    * greek - Greek
+
+  
+
+                    * turkish - Turkish
+
+  
+
+                    * slovenian - Slovenian
+
+  
+
+                    * croatian - Croatian
+
+  
+
+                    * romanian - Romanian
+
+  
+
+                    * chinese - Simplified Chinese
+
+  
+
+                    * bengali - Bengali
+
+  
+
+                    * urdu - Urdu
+
+  
+
+                    * hungarian - Hungarian
+
+  
+
+                    * traditional-chinese - Traditional Chinese
+
+  
+
+                    * polish - Polish
+
+  
+
+                    * cantonese - Cantonese
+
+  
+
+                    * danish - Danish
+
+  
+
+                    * malayalam - Malayalam
+
+  
+
+                    * tamil - Tamil
+
+  
+
+                    * telugu - Telugu
+
+  
+
+                    * czech - Czech
+
+  
+
+                    * hebrew - Hebrew
+
+  
+
+                    * zulu - Zulu
+
+  
+
+                    * swedish - Swedish
+
+  
+
+                    * lithuanian - Lithuanian
+
+  
+
+                    * dutch - Dutch
+
+  
+
+                    * flemish - Flemish
+
+  
+
+                    * norwegian - Norwegian
+
+  
+
+                    * finnish - Finnish
+
+  
+
+                    * bulgarian - Bulgarian
+
+  
+
+                    * latvian - Latvian
+
+  
+
+                    * ukrainian - Ukrainian
+
+  
+
+                    * mongolian - Mongolian
+
+  
+
+                    * persian - Persian
+
+  
+
+                    * odia - Odia
+
+  
+
+                    * assamese - Assamese
+
+  
+
+                    * kannada - Kannada
+
+  
+
+                    * tagalog - Tagalog
+
+  
+
+                    * amharic - Amharic
+
+  
+
+                    * serbian - Serbian
+
+  
+
+                    * slovak - Slovak
+
+  
+
+                    * swahili - Swahili
+
+  
+
+                  enum:
+
+  
+
+                    - "english"
+
+  
+
+                    - "filipino"
+
+  
+
+                    - "french"
+
+  
+
+                    - "german"
+
+  
+
+                    - "hindi"
+
+  
+
+                    - "indonesian"
+
+  
+
+                    - "italian"
+
+  
+
+                    - "japanese"
+
+  
+
+                    - "korean"
+
+  
+
+                    - "malay"
+
+  
+
+                    - "portuguese"
+
+  
+
+                    - "russian"
+
+  
+
+                    - "spanish"
+
+  
+
+                    - "thai"
+
+  
+
+                    - "vietnamese"
+
+  
+
+                    - "arabic"
+
+  
+
+                    - "greek"
+
+  
+
+                    - "turkish"
+
+  
+
+                    - "slovenian"
+
+  
+
+                    - "croatian"
+
+  
+
+                    - "romanian"
+
+  
+
+                    - "chinese"
+
+  
+
+                    - "bengali"
+
+  
+
+                    - "urdu"
+
+  
+
+                    - "hungarian"
+
+  
+
+                    - "traditional-chinese"
+
+  
+
+                    - "polish"
+
+  
+
+                    - "cantonese"
+
+  
+
+                    - "danish"
+
+  
+
+                    - "malayalam"
+
+  
+
+                    - "tamil"
+
+  
+
+                    - "telugu"
+
+  
+
+                    - "czech"
+
+  
+
+                    - "hebrew"
+
+  
+
+                    - "zulu"
+
+  
+
+                    - "swedish"
+
+  
+
+                    - "lithuanian"
+
+  
+
+                    - "dutch"
+
+  
+
+                    - "flemish"
+
+  
+
+                    - "norwegian"
+
+  
+
+                    - "finnish"
+
+  
+
+                    - "bulgarian"
+
+  
+
+                    - "latvian"
+
+  
+
+                    - "ukrainian"
+
+  
+
+                    - "mongolian"
+
+  
+
+                    - "persian"
+
+  
+
+                    - "odia"
+
+  
+
+                    - "assamese"
+
+  
+
+                    - "kannada"
+
+  
+
+                    - "tagalog"
+
+  
+
+                    - "amharic"
+
+  
+
+                    - "serbian"
+
+  
+
+                    - "slovak"
+
+  
+
+                    - "swahili"
+
+  
+
+                  default: "english"
+
+  
+
+                  example: "english"
+
+  
+
+                avatar_id:
+
+  
+
+                  type: integer
+
+  
+
+                  description: |
+
+  
+
+                    Avatar id from Jogg Avatar or Your Avatar.
+
+  
+
+                  example: 1
+
+  
+
+                avatar_type:
+
+  
+
+                  type: integer 
+
+  
+
+                  description: |
+
+  
+
+                    Avatar source type:
+
+  
+
+                    * 0 - Public avatars
+
+  
+
+                    * 1 - Custom avatars
+
+  
+
+                  enum:
+
+  
+
+                    - 0
+
+  
+
+                    - 1
+
+  
+
+                  example: 0
+
+  
+
+                voice_id:
+
+  
+
+                  type: string
+
+  
+
+                  description: |
+
+  
+
+                    Voice id from voice list.
+
+  
+
+                  example: en-US-ChristopherNeural
+
+  
+
+                script_style:
+
+  
+
+                  type: string
+
+  
+
+                  description: |
+
+  
+
+                    Script writing style for video content:
+
+  
+
+                    * Don't Worry - Casual and reassuring tone
+
+  
+
+                    * Storytime - Narrative and engaging storytelling approach
+
+  
+
+                    * Discovery - Exploratory and revealing style
+
+  
+
+                    * Data - Fact-based and analytical presentation
+
+  
+
+                    * Top 3 reasons - List-based persuasive format
+
+  
+
+                    * Light marketing - Soft-sell marketing approach
+
+  
+
+                  enum:
+
+  
+
+                    - "Don't Worry"
+
+  
+
+                    - "Storytime"
+
+  
+
+                    - "Discovery"
+
+  
+
+                    - "Data"
+
+  
+
+                    - "Top 3 reasons"
+
+  
+
+                    - "Light marketing"
+
+  
+
+                  example: "Storytime"
+
+  
+
+                visual_style:
+
+  
+
+                  type: string
+
+  
+
+                  description: |
+
+  
+
+                    Visual style of the video from visual list(GET /visual)
+
+  
+
+                  example: "Simple split screen template"
+
+  
+
+                template_id:
+
+  
+
+                  type: integer
+
+  
+
+                  description: Template ID from template library or custom template
+
+  
+
+                  example: 0
+
+  
+
+  
+
+                template_type:
+
+  
+
+                  type: string
+
+  
+
+                  description: | 
+
+  
+
+                    Template source type:
+
+  
+
+                    * public - Template from template library
+
+  
+
+                    * custom - Template from my templates
+
+  
+
+                  example: custom
+
+  
+
+                  enum:
+
+  
+
+                    - public
+
+  
+
+                    - custom
+
+  
+
+                override_script:
+
+  
+
+                  type: string
+
+  
+
+                  description: You can enter the script you want to use here to override the existing script.
+
+  
+
+                  example: ''
+
+  
+
+                caption:
+
+  
+
+                  type: boolean
+
+  
+
+                  description: |
+
+  
+
+                    Controls subtitle rendering:
+
+  
+
+                    * true - Show subtitles
+
+  
+
+                    * false - Hide subtitles
+
+  
+
+                  example: true
+
+  
+
+  
+
+              required:
+
+  
+
+                - product_id
+
+  
+
+                - aspect_ratio
+
+  
+
+                - video_length
+
+  
+
+                - language
+
+  
+
+                - avatar_id
+
+  
+
+                - avatar_type
+
+  
+
+                - template_type
+
+  
+
+                - script_style
+
+  
+
+  
+
+      responses:
+
+  
+
+        '200':
+
+  
+
+          description: "Success"
+
+  
+
+          content:
+
+  
+
+            application/json:
+
+  
+
+              schema:
+
+  
+
+                allOf:
+
+  
+
+                - $ref: '#/components/schemas/BaseResponse'
+
+  
+
+                - type: object
+
+  
+
+                  properties:
+
+  
+
+                    data:
+
+  
+
+                      type: object
+
+  
+
+                      properties:
+
+  
+
+                        project_id:
+
+  
+
+                          type: integer
+
+  
+
+                          description: "Created project ID"
+
+                          
+
+
+
   /create_video_from_talking_avatar:
 
 
