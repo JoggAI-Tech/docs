@@ -102,9 +102,7 @@
       "pages": [
         "api-reference/URL-to-Video/UploadURL",
         "api-reference/URL-to-Video/UpdateProduct",
-        "api-reference/URL-to-Video/CreateVideo",
-        "api-reference/URL-to-Video/GeneratePreview"
-      ]
+        "api-reference/URL-to-Video/CreateVideo"      ]
     },
     {
       "group": "Create Avatar Videos",
