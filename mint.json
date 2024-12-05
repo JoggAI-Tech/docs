@@ -103,7 +103,7 @@
         "api-reference/URL-to-Video/UploadURL",
         "api-reference/URL-to-Video/UpdateProduct",
         "api-reference/URL-to-Video/CreateVideo",
-        "api-reference/AI-Scripts/AI-Scripts"
+        "api-reference/URL-to-Video/GeneratePreview"
         ]
     },
     {
