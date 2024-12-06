@@ -3008,7 +3008,7 @@ paths:
 
   
 
-      description: You can generate a preview video using the product_id obtained from the Upload URL to create a product. Set the relevant video parameters to create the preview.
+      description: You can generate a preview video using the product_id obtained from the Upload URL to create a product. Set the relevant video parameters to create the preview.You can obtain the preview video result using the project_id at the Get Generated Video endpoint.
 
   
 
