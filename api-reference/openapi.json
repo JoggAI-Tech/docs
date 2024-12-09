@@ -2,15 +2,7 @@ openapi: 3.0.1
 
 
 
-
-
-
-
 info:
-
-
-
-
 
 
 
@@ -18,15 +10,7 @@ info:
 
 
 
-
-
-
-
   description: A sample API that demonstrates features in the OpenAPI specification
-
-
-
-
 
 
 
@@ -34,15 +18,7 @@ info:
 
 
 
-
-
-
-
     name: MIT
-
-
-
-
 
 
 
@@ -50,15 +26,7 @@ info:
 
 
 
-
-
-
-
 servers:
-
-
-
-
 
 
 
@@ -66,15 +34,7 @@ servers:
 
 
 
-
-
-
-
 security:
-
-
-
-
 
 
 
@@ -82,15 +42,7 @@ security:
 
 
 
-
-
-
-
 tags:
-
-
-
-
 
 
 
@@ -98,15 +50,7 @@ tags:
 
 
 
-
-
-
-
     description: |-
-
-
-
-
 
 
 
@@ -114,15 +58,7 @@ tags:
 
 
 
-
-
-
-
         1. First call POST /product to crawl product information
-
-
-
-
 
 
 
@@ -130,15 +66,7 @@ tags:
 
 
 
-
-
-
-
         3. Finally call POST /create_video_from_url to generate video using the product_id from step 1
-
-
-
-
 
 
 
@@ -146,23 +74,11 @@ paths:
 
 
 
-
-
-
-
   /create_video_with_variable:
-
-
 
     
 
-
-
     post:
-
-
-
-
 
 
 
@@ -170,15 +86,7 @@ paths:
 
 
 
-
-
-
-
       requestBody:
-
-
-
-
 
 
 
@@ -186,15 +94,7 @@ paths:
 
 
 
-
-
-
-
           application/json:
-
-
-
-
 
 
 
@@ -202,15 +102,7 @@ paths:
 
 
 
-
-
-
-
               type: object
-
-
-
-
 
 
 
@@ -218,23 +110,11 @@ paths:
 
 
 
-
-
-
-
                 text:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -242,23 +122,11 @@ paths:
 
 
 
-
-
-
-
                 lang:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -266,15 +134,7 @@ paths:
 
 
 
-
-
-
-
                   enum:
-
-
-
-
 
 
 
@@ -282,15 +142,7 @@ paths:
 
 
 
-
-
-
-
                     - filipino
-
-
-
-
 
 
 
@@ -298,15 +150,7 @@ paths:
 
 
 
-
-
-
-
                     - german
-
-
-
-
 
 
 
@@ -314,15 +158,7 @@ paths:
 
 
 
-
-
-
-
                     - indonesian
-
-
-
-
 
 
 
@@ -330,15 +166,7 @@ paths:
 
 
 
-
-
-
-
                     - japanese
-
-
-
-
 
 
 
@@ -346,15 +174,7 @@ paths:
 
 
 
-
-
-
-
                     - malay
-
-
-
-
 
 
 
@@ -362,15 +182,7 @@ paths:
 
 
 
-
-
-
-
                     - russian
-
-
-
-
 
 
 
@@ -378,15 +190,7 @@ paths:
 
 
 
-
-
-
-
                     - thai
-
-
-
-
 
 
 
@@ -394,15 +198,7 @@ paths:
 
 
 
-
-
-
-
                     - arabic
-
-
-
-
 
 
 
@@ -410,15 +206,7 @@ paths:
 
 
 
-
-
-
-
                     - turkish
-
-
-
-
 
 
 
@@ -426,15 +214,7 @@ paths:
 
 
 
-
-
-
-
                     - croatian
-
-
-
-
 
 
 
@@ -442,15 +222,7 @@ paths:
 
 
 
-
-
-
-
                     - chinese
-
-
-
-
 
 
 
@@ -458,15 +230,7 @@ paths:
 
 
 
-
-
-
-
                     - urdu
-
-
-
-
 
 
 
@@ -474,15 +238,7 @@ paths:
 
 
 
-
-
-
-
                     - traditional-chinese
-
-
-
-
 
 
 
@@ -490,15 +246,7 @@ paths:
 
 
 
-
-
-
-
                   example: english
-
-
-
-
 
 
 
@@ -506,15 +254,7 @@ paths:
 
 
 
-
-
-
-
                   type: integer
-
-
-
-
 
 
 
@@ -522,15 +262,7 @@ paths:
 
 
 
-
-
-
-
                 template_type:
-
-
-
-
 
 
 
@@ -538,15 +270,7 @@ paths:
 
 
 
-
-
-
-
                   example: custom
-
-
-
-
 
 
 
@@ -554,23 +278,11 @@ paths:
 
 
 
-
-
-
-
                   type: integer
 
 
 
-
-
-
-
                   example: 0
-
-
-
-
 
 
 
@@ -578,15 +290,7 @@ paths:
 
 
 
-
-
-
-
                   type: integer
-
-
-
-
 
 
 
@@ -594,15 +298,7 @@ paths:
 
 
 
-
-
-
-
                 without_tts:
-
-
-
-
 
 
 
@@ -610,15 +306,7 @@ paths:
 
 
 
-
-
-
-
                   example: 1
-
-
-
-
 
 
 
@@ -626,15 +314,7 @@ paths:
 
 
 
-
-
-
-
                   type: array
-
-
-
-
 
 
 
@@ -642,15 +322,7 @@ paths:
 
 
 
-
-
-
-
                     type: object
-
-
-
-
 
 
 
@@ -658,23 +330,11 @@ paths:
 
 
 
-
-
-
-
                       name:
 
 
 
-
-
-
-
                         type: string
-
-
-
-
 
 
 
@@ -682,15 +342,7 @@ paths:
 
 
 
-
-
-
-
                         type: string
-
-
-
-
 
 
 
@@ -698,15 +350,7 @@ paths:
 
 
 
-
-
-
-
                         type: object
-
-
-
-
 
 
 
@@ -714,15 +358,7 @@ paths:
 
 
 
-
-
-
-
               required:
-
-
-
-
 
 
 
@@ -730,15 +366,7 @@ paths:
 
 
 
-
-
-
-
                 - lang
-
-
-
-
 
 
 
@@ -746,15 +374,7 @@ paths:
 
 
 
-
-
-
-
                 - template_type
-
-
-
-
 
 
 
@@ -762,15 +382,7 @@ paths:
 
 
 
-
-
-
-
         required: true
-
-
-
-
 
 
 
@@ -778,15 +390,7 @@ paths:
 
 
 
-
-
-
-
         '200':
-
-
-
-
 
 
 
@@ -794,15 +398,7 @@ paths:
 
 
 
-
-
-
-
           content:
-
-
-
-
 
 
 
@@ -810,15 +406,7 @@ paths:
 
 
 
-
-
-
-
               schema:
-
-
-
-
 
 
 
@@ -826,15 +414,7 @@ paths:
 
 
 
-
-
-
-
                 - $ref: '#/components/schemas/BaseResponse'
-
-
-
-
 
 
 
@@ -842,23 +422,11 @@ paths:
 
 
 
-
-
-
-
                   properties:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -866,15 +434,7 @@ paths:
 
 
 
-
-
-
-
                       properties:
-
-
-
-
 
 
 
@@ -882,15 +442,7 @@ paths:
 
 
 
-
-
-
-
                           type: integer
-
-
-
-
 
 
 
@@ -898,15 +450,7 @@ paths:
 
 
 
-
-
-
-
   /products:
-
-
-
-
 
 
 
@@ -914,15 +458,7 @@ paths:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -930,15 +466,7 @@ paths:
 
 
 
-
-
-
-
       summary: Get products
-
-
-
-
 
 
 
@@ -946,15 +474,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -962,15 +482,7 @@ paths:
 
 
 
-
-
-
-
           description: "Success"
-
-
-
-
 
 
 
@@ -978,15 +490,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -994,15 +498,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -1010,15 +506,7 @@ paths:
 
 
 
-
-
-
-
                 - type: object
-
-
-
-
 
 
 
@@ -1026,15 +514,7 @@ paths:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -1042,15 +522,7 @@ paths:
 
 
 
-
-
-
-
                       items:
-
-
-
-
 
 
 
@@ -1058,15 +530,7 @@ paths:
 
 
 
-
-
-
-
                         properties:
-
-
-
-
 
 
 
@@ -1074,15 +538,7 @@ paths:
 
 
 
-
-
-
-
                             type: string
-
-
-
-
 
 
 
@@ -1090,15 +546,7 @@ paths:
 
 
 
-
-
-
-
                             example: NTQ0MTkzNjg
-
-
-
-
 
 
 
@@ -1106,15 +554,7 @@ paths:
 
 
 
-
-
-
-
                             type: string
-
-
-
-
 
 
 
@@ -1122,15 +562,7 @@ paths:
 
 
 
-
-
-
-
                             example: https://res.jogg.ai.com/product_url
-
-
-
-
 
 
 
@@ -1138,15 +570,7 @@ paths:
 
 
 
-
-
-
-
                             type: string
-
-
-
-
 
 
 
@@ -1154,15 +578,7 @@ paths:
 
 
 
-
-
-
-
                             example: 'Physicians Formula Happy Booster Heart Blush Glow &amp;amp; Mood Boosting, Rose, Dermatologist Tested'
-
-
-
-
 
 
 
@@ -1170,15 +586,7 @@ paths:
 
 
 
-
-
-
-
                             type: string
-
-
-
-
 
 
 
@@ -1186,15 +594,7 @@ paths:
 
 
 
-
-
-
-
                             example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
-
-
-
-
 
 
 
@@ -1202,15 +602,7 @@ paths:
 
 
 
-
-
-
-
                             type: string
-
-
-
-
 
 
 
@@ -1218,15 +610,7 @@ paths:
 
 
 
-
-
-
-
                             example: 'Tech-savvy millennials interested in sustainable living solutions.'
-
-
-
-
 
 
 
@@ -1234,15 +618,7 @@ paths:
 
 
 
-
-
-
-
                             type: array
-
-
-
-
 
 
 
@@ -1250,15 +626,7 @@ paths:
 
 
 
-
-
-
-
                             items:
-
-
-
-
 
 
 
@@ -1266,15 +634,7 @@ paths:
 
 
 
-
-
-
-
                               properties:
-
-
-
-
 
 
 
@@ -1282,15 +642,7 @@ paths:
 
 
 
-
-
-
-
                                   type: integer
-
-
-
-
 
 
 
@@ -1298,15 +650,7 @@ paths:
 
 
 
-
-
-
-
                                   enum:
-
-
-
-
 
 
 
@@ -1314,15 +658,7 @@ paths:
 
 
 
-
-
-
-
                                     - 2
-
-
-
-
 
 
 
@@ -1330,23 +666,11 @@ paths:
 
 
 
-
-
-
-
                                 name:
 
 
 
-
-
-
-
                                   type: string
-
-
-
-
 
 
 
@@ -1354,15 +678,7 @@ paths:
 
 
 
-
-
-
-
                                   example: 'media.jpg'
-
-
-
-
 
 
 
@@ -1370,23 +686,11 @@ paths:
 
 
 
-
-
-
-
                                   type: string
 
 
 
-
-
-
-
                                   description: Media URL
-
-
-
-
 
 
 
@@ -1396,17 +700,7 @@ paths:
 
 
 
-
-
-
-
-
-
                                 description:
-
-
-
-
 
 
 
@@ -1414,15 +708,7 @@ paths:
 
 
 
-
-
-
-
                                   description: Media description
-
-
-
-
 
 
 
@@ -1430,23 +716,11 @@ paths:
 
 
 
-
-
-
-
   /product:
-
-
 
         
 
-
-
     post:
-
-
-
-
 
 
 
@@ -1454,15 +728,7 @@ paths:
 
 
 
-
-
-
-
         - URL to Video 
-
-
-
-
 
 
 
@@ -1470,15 +736,7 @@ paths:
 
 
 
-
-
-
-
       description: |-
-
-
-
-
 
 
 
@@ -1486,15 +744,7 @@ paths:
 
 
 
-
-
-
-
         - product_id: Used in Step 2 & Step 3 for updating product information and creating the video.
-
-
-
-
 
 
 
@@ -1502,15 +752,7 @@ paths:
 
 
 
-
-
-
-
         required: true
-
-
-
-
 
 
 
@@ -1518,15 +760,7 @@ paths:
 
 
 
-
-
-
-
           application/json:
-
-
-
-
 
 
 
@@ -1534,15 +768,7 @@ paths:
 
 
 
-
-
-
-
               type: object
-
-
-
-
 
 
 
@@ -1550,15 +776,7 @@ paths:
 
 
 
-
-
-
-
                 url:
-
-
-
-
 
 
 
@@ -1566,15 +784,7 @@ paths:
 
 
 
-
-
-
-
                   description: URL of the product to crawl
-
-
-
-
 
 
 
@@ -1582,15 +792,7 @@ paths:
 
 
 
-
-
-
-
               required:
-
-
-
-
 
 
 
@@ -1598,15 +800,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -1614,15 +808,7 @@ paths:
 
 
 
-
-
-
-
           description: "Success"
-
-
-
-
 
 
 
@@ -1630,15 +816,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -1646,15 +824,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -1662,15 +832,7 @@ paths:
 
 
 
-
-
-
-
                 - type: object
-
-
-
-
 
 
 
@@ -1678,15 +840,7 @@ paths:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -1694,15 +848,7 @@ paths:
 
 
 
-
-
-
-
                       properties:
-
-
-
-
 
 
 
@@ -1710,15 +856,7 @@ paths:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -1726,15 +864,7 @@ paths:
 
 
 
-
-
-
-
                           example: NTQ0MTkzNjg
-
-
-
-
 
 
 
@@ -1742,15 +872,7 @@ paths:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -1758,15 +880,7 @@ paths:
 
 
 
-
-
-
-
                           example: https://res.jogg.ai.com/product_url
-
-
-
-
 
 
 
@@ -1774,15 +888,7 @@ paths:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -1790,15 +896,7 @@ paths:
 
 
 
-
-
-
-
                           example: 'Physicians Formula Happy Booster Heart Blush Glow &amp;amp; Mood Boosting, Rose, Dermatologist Tested'
-
-
-
-
 
 
 
@@ -1806,15 +904,7 @@ paths:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -1822,15 +912,7 @@ paths:
 
 
 
-
-
-
-
                           example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
-
-
-
-
 
 
 
@@ -1838,15 +920,7 @@ paths:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -1854,15 +928,7 @@ paths:
 
 
 
-
-
-
-
                           example: ''
-
-
-
-
 
 
 
@@ -1870,15 +936,7 @@ paths:
 
 
 
-
-
-
-
                           type: array
-
-
-
-
 
 
 
@@ -1886,15 +944,7 @@ paths:
 
 
 
-
-
-
-
                           items:
-
-
-
-
 
 
 
@@ -1902,15 +952,7 @@ paths:
 
 
 
-
-
-
-
                             properties:
-
-
-
-
 
 
 
@@ -1918,15 +960,7 @@ paths:
 
 
 
-
-
-
-
                                 type: integer
-
-
-
-
 
 
 
@@ -1934,15 +968,7 @@ paths:
 
 
 
-
-
-
-
                                 enum:
-
-
-
-
 
 
 
@@ -1950,15 +976,7 @@ paths:
 
 
 
-
-
-
-
                                   - 2
-
-
-
-
 
 
 
@@ -1966,23 +984,11 @@ paths:
 
 
 
-
-
-
-
                               name:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -1990,15 +996,7 @@ paths:
 
 
 
-
-
-
-
                                 example: 'media.jpg'
-
-
-
-
 
 
 
@@ -2006,23 +1004,11 @@ paths:
 
 
 
-
-
-
-
                                 type: string
 
 
 
-
-
-
-
                                 description: Media URL
-
-
-
-
 
 
 
@@ -2032,17 +1018,7 @@ paths:
 
 
 
-
-
-
-
-
-
                               description:
-
-
-
-
 
 
 
@@ -2050,15 +1026,7 @@ paths:
 
 
 
-
-
-
-
                                 description: Media description
-
-
-
-
 
 
 
@@ -2066,15 +1034,7 @@ paths:
 
 
 
-
-
-
-
                         
-
-
-
-
 
 
 
@@ -2082,15 +1042,7 @@ paths:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -2098,15 +1050,7 @@ paths:
 
 
 
-
-
-
-
       summary: 'Step 2 (Optional): Update Product Information'
-
-
-
-
 
 
 
@@ -2114,15 +1058,7 @@ paths:
 
 
 
-
-
-
-
       requestBody:
-
-
-
-
 
 
 
@@ -2130,15 +1066,7 @@ paths:
 
 
 
-
-
-
-
         content:
-
-
-
-
 
 
 
@@ -2146,15 +1074,7 @@ paths:
 
 
 
-
-
-
-
             schema:
-
-
-
-
 
 
 
@@ -2162,15 +1082,7 @@ paths:
 
 
 
-
-
-
-
               required:
-
-
-
-
 
 
 
@@ -2178,15 +1090,7 @@ paths:
 
 
 
-
-
-
-
               properties:
-
-
-
-
 
 
 
@@ -2194,15 +1098,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -2210,15 +1106,7 @@ paths:
 
 
 
-
-
-
-
                   example: 3924
-
-
-
-
 
 
 
@@ -2226,15 +1114,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -2242,15 +1122,7 @@ paths:
 
 
 
-
-
-
-
                   example: 'Physicians Formula Happy Booster Heart Blush Glow &amp;amp; Mood Boosting, Rose, Dermatologist Tested'
-
-
-
-
 
 
 
@@ -2258,15 +1130,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -2274,15 +1138,7 @@ paths:
 
 
 
-
-
-
-
                   example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
-
-
-
-
 
 
 
@@ -2290,15 +1146,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -2306,15 +1154,7 @@ paths:
 
 
 
-
-
-
-
                   example: ''
-
-
-
-
 
 
 
@@ -2322,15 +1162,7 @@ paths:
 
 
 
-
-
-
-
                   type: array
-
-
-
-
 
 
 
@@ -2338,15 +1170,7 @@ paths:
 
 
 
-
-
-
-
                   items:
-
-
-
-
 
 
 
@@ -2354,15 +1178,7 @@ paths:
 
 
 
-
-
-
-
                     properties:
-
-
-
-
 
 
 
@@ -2370,15 +1186,7 @@ paths:
 
 
 
-
-
-
-
                         type: integer
-
-
-
-
 
 
 
@@ -2386,15 +1194,7 @@ paths:
 
 
 
-
-
-
-
                         enum:
-
-
-
-
 
 
 
@@ -2402,15 +1202,7 @@ paths:
 
 
 
-
-
-
-
                           - 2
-
-
-
-
 
 
 
@@ -2418,23 +1210,11 @@ paths:
 
 
 
-
-
-
-
                       name:
 
 
 
-
-
-
-
                         type: string
-
-
-
-
 
 
 
@@ -2442,15 +1222,7 @@ paths:
 
 
 
-
-
-
-
                         example: 'media.jpg'
-
-
-
-
 
 
 
@@ -2458,23 +1230,11 @@ paths:
 
 
 
-
-
-
-
                         type: string
 
 
 
-
-
-
-
                         description: Media URL
-
-
-
-
 
 
 
@@ -2484,17 +1244,7 @@ paths:
 
 
 
-
-
-
-
-
-
                       description:
-
-
-
-
 
 
 
@@ -2502,15 +1252,7 @@ paths:
 
 
 
-
-
-
-
                         description: Media description
-
-
-
-
 
 
 
@@ -2522,19 +1264,7 @@ paths:
 
 
 
-
-
-
-
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -2542,15 +1272,7 @@ paths:
 
 
 
-
-
-
-
           description: Product updated successfully
-
-
-
-
 
 
 
@@ -2558,15 +1280,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -2574,25 +1288,11 @@ paths:
 
 
 
-
-
-
-
                 allOf:
 
 
 
-
-
-
-
                 - $ref: '#/components/schemas/BaseResponse'
-
-
-
-
-
-
 
 
 
@@ -2602,23 +1302,11 @@ paths:
 
 
 
-
-
-
-
     post:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -2626,15 +1314,7 @@ paths:
 
 
 
-
-
-
-
       summary: Generate Scripts from product.
-
-
-
-
 
 
 
@@ -2642,15 +1322,7 @@ paths:
 
 
 
-
-
-
-
       requestBody:
-
-
-
-
 
 
 
@@ -2658,15 +1330,7 @@ paths:
 
 
 
-
-
-
-
           application/json:
-
-
-
-
 
 
 
@@ -2674,15 +1338,7 @@ paths:
 
 
 
-
-
-
-
               type: object
-
-
-
-
 
 
 
@@ -2690,23 +1346,11 @@ paths:
 
 
 
-
-
-
-
                 product_id:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -2714,15 +1358,7 @@ paths:
 
 
 
-
-
-
-
                   example: NTQ0MTkzNjg
-
-
-
-
 
 
 
@@ -2730,15 +1366,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -2746,15 +1374,7 @@ paths:
 
 
 
-
-
-
-
                   example: Owala FreeSip Insulated Stainless Steel Water Bottle with Straw for Sports.
-
-
-
-
 
 
 
@@ -2762,15 +1382,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -2778,15 +1390,7 @@ paths:
 
 
 
-
-
-
-
                   example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. '
-
-
-
-
 
 
 
@@ -2794,15 +1398,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -2810,15 +1406,7 @@ paths:
 
 
 
-
-
-
-
                   example: ''
-
-
-
-
 
 
 
@@ -2826,15 +1414,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -2842,15 +1422,7 @@ paths:
 
 
 
-
-
-
-
                   example: "15"
-
-
-
-
 
 
 
@@ -2858,23 +1430,11 @@ paths:
 
 
 
-
-
-
-
                     - "15"
 
 
 
-
-
-
-
                     - "30"
-
-
-
-
 
 
 
@@ -2882,15 +1442,7 @@ paths:
 
 
 
-
-
-
-
                 language:
-
-
-
-
 
 
 
@@ -2898,15 +1450,7 @@ paths:
 
 
 
-
-
-
-
                   description: |
-
-
-
-
 
 
 
@@ -2914,15 +1458,7 @@ paths:
 
 
 
-
-
-
-
                     * english - English
-
-
-
-
 
 
 
@@ -2930,15 +1466,7 @@ paths:
 
 
 
-
-
-
-
                     * french - French
-
-
-
-
 
 
 
@@ -2946,15 +1474,7 @@ paths:
 
 
 
-
-
-
-
                     * hindi - Hindi
-
-
-
-
 
 
 
@@ -2962,15 +1482,7 @@ paths:
 
 
 
-
-
-
-
                     * italian - Italian
-
-
-
-
 
 
 
@@ -2978,15 +1490,7 @@ paths:
 
 
 
-
-
-
-
                     * korean - Korean
-
-
-
-
 
 
 
@@ -2994,15 +1498,7 @@ paths:
 
 
 
-
-
-
-
                     * portuguese - Portuguese
-
-
-
-
 
 
 
@@ -3010,15 +1506,7 @@ paths:
 
 
 
-
-
-
-
                     * spanish - Spanish
-
-
-
-
 
 
 
@@ -3026,15 +1514,7 @@ paths:
 
 
 
-
-
-
-
                     * vietnamese - Vietnamese
-
-
-
-
 
 
 
@@ -3042,15 +1522,7 @@ paths:
 
 
 
-
-
-
-
                     * greek - Greek
-
-
-
-
 
 
 
@@ -3058,15 +1530,7 @@ paths:
 
 
 
-
-
-
-
                     * slovenian - Slovenian
-
-
-
-
 
 
 
@@ -3074,15 +1538,7 @@ paths:
 
 
 
-
-
-
-
                     * romanian - Romanian
-
-
-
-
 
 
 
@@ -3090,15 +1546,7 @@ paths:
 
 
 
-
-
-
-
                     * bengali - Bengali
-
-
-
-
 
 
 
@@ -3106,15 +1554,7 @@ paths:
 
 
 
-
-
-
-
                     * hungarian - Hungarian
-
-
-
-
 
 
 
@@ -3122,15 +1562,7 @@ paths:
 
 
 
-
-
-
-
                     * polish - Polish
-
-
-
-
 
 
 
@@ -3138,15 +1570,7 @@ paths:
 
 
 
-
-
-
-
                     * danish - Danish
-
-
-
-
 
 
 
@@ -3154,15 +1578,7 @@ paths:
 
 
 
-
-
-
-
                     * tamil - Tamil
-
-
-
-
 
 
 
@@ -3170,15 +1586,7 @@ paths:
 
 
 
-
-
-
-
                     * czech - Czech
-
-
-
-
 
 
 
@@ -3186,15 +1594,7 @@ paths:
 
 
 
-
-
-
-
                     * zulu - Zulu
-
-
-
-
 
 
 
@@ -3202,15 +1602,7 @@ paths:
 
 
 
-
-
-
-
                     * lithuanian - Lithuanian
-
-
-
-
 
 
 
@@ -3218,15 +1610,7 @@ paths:
 
 
 
-
-
-
-
                     * flemish - Flemish
-
-
-
-
 
 
 
@@ -3234,15 +1618,7 @@ paths:
 
 
 
-
-
-
-
                     * finnish - Finnish
-
-
-
-
 
 
 
@@ -3250,15 +1626,7 @@ paths:
 
 
 
-
-
-
-
                     * latvian - Latvian
-
-
-
-
 
 
 
@@ -3266,15 +1634,7 @@ paths:
 
 
 
-
-
-
-
                     * mongolian - Mongolian
-
-
-
-
 
 
 
@@ -3282,15 +1642,7 @@ paths:
 
 
 
-
-
-
-
                     * odia - Odia
-
-
-
-
 
 
 
@@ -3298,15 +1650,7 @@ paths:
 
 
 
-
-
-
-
                     * kannada - Kannada
-
-
-
-
 
 
 
@@ -3314,15 +1658,7 @@ paths:
 
 
 
-
-
-
-
                     * amharic - Amharic
-
-
-
-
 
 
 
@@ -3330,15 +1666,7 @@ paths:
 
 
 
-
-
-
-
                     * slovak - Slovak
-
-
-
-
 
 
 
@@ -3346,15 +1674,7 @@ paths:
 
 
 
-
-
-
-
                   enum:
-
-
-
-
 
 
 
@@ -3362,15 +1682,7 @@ paths:
 
 
 
-
-
-
-
                     - "filipino"
-
-
-
-
 
 
 
@@ -3378,15 +1690,7 @@ paths:
 
 
 
-
-
-
-
                     - "german"
-
-
-
-
 
 
 
@@ -3394,15 +1698,7 @@ paths:
 
 
 
-
-
-
-
                     - "indonesian"
-
-
-
-
 
 
 
@@ -3410,15 +1706,7 @@ paths:
 
 
 
-
-
-
-
                     - "japanese"
-
-
-
-
 
 
 
@@ -3426,15 +1714,7 @@ paths:
 
 
 
-
-
-
-
                     - "malay"
-
-
-
-
 
 
 
@@ -3442,15 +1722,7 @@ paths:
 
 
 
-
-
-
-
                     - "russian"
-
-
-
-
 
 
 
@@ -3458,15 +1730,7 @@ paths:
 
 
 
-
-
-
-
                     - "thai"
-
-
-
-
 
 
 
@@ -3474,15 +1738,7 @@ paths:
 
 
 
-
-
-
-
                     - "arabic"
-
-
-
-
 
 
 
@@ -3490,15 +1746,7 @@ paths:
 
 
 
-
-
-
-
                     - "turkish"
-
-
-
-
 
 
 
@@ -3506,15 +1754,7 @@ paths:
 
 
 
-
-
-
-
                     - "croatian"
-
-
-
-
 
 
 
@@ -3522,15 +1762,7 @@ paths:
 
 
 
-
-
-
-
                     - "chinese"
-
-
-
-
 
 
 
@@ -3538,15 +1770,7 @@ paths:
 
 
 
-
-
-
-
                     - "urdu"
-
-
-
-
 
 
 
@@ -3554,15 +1778,7 @@ paths:
 
 
 
-
-
-
-
                     - "traditional-chinese"
-
-
-
-
 
 
 
@@ -3570,15 +1786,7 @@ paths:
 
 
 
-
-
-
-
                     - "cantonese"
-
-
-
-
 
 
 
@@ -3586,15 +1794,7 @@ paths:
 
 
 
-
-
-
-
                     - "malayalam"
-
-
-
-
 
 
 
@@ -3602,15 +1802,7 @@ paths:
 
 
 
-
-
-
-
                     - "telugu"
-
-
-
-
 
 
 
@@ -3618,15 +1810,7 @@ paths:
 
 
 
-
-
-
-
                     - "hebrew"
-
-
-
-
 
 
 
@@ -3634,15 +1818,7 @@ paths:
 
 
 
-
-
-
-
                     - "swedish"
-
-
-
-
 
 
 
@@ -3650,15 +1826,7 @@ paths:
 
 
 
-
-
-
-
                     - "dutch"
-
-
-
-
 
 
 
@@ -3666,15 +1834,7 @@ paths:
 
 
 
-
-
-
-
                     - "norwegian"
-
-
-
-
 
 
 
@@ -3682,15 +1842,7 @@ paths:
 
 
 
-
-
-
-
                     - "bulgarian"
-
-
-
-
 
 
 
@@ -3698,15 +1850,7 @@ paths:
 
 
 
-
-
-
-
                     - "ukrainian"
-
-
-
-
 
 
 
@@ -3714,15 +1858,7 @@ paths:
 
 
 
-
-
-
-
                     - "persian"
-
-
-
-
 
 
 
@@ -3730,15 +1866,7 @@ paths:
 
 
 
-
-
-
-
                     - "assamese"
-
-
-
-
 
 
 
@@ -3746,15 +1874,7 @@ paths:
 
 
 
-
-
-
-
                     - "tagalog"
-
-
-
-
 
 
 
@@ -3762,15 +1882,7 @@ paths:
 
 
 
-
-
-
-
                     - "serbian"
-
-
-
-
 
 
 
@@ -3778,15 +1890,7 @@ paths:
 
 
 
-
-
-
-
                     - "swahili"
-
-
-
-
 
 
 
@@ -3794,25 +1898,12 @@ paths:
 
 
 
-
-
-
-
                   example: "english"
 
+              required: 
+                - language
 
-
-
-
-
-
-        required: 
-
-          - language
-
-
-
-
+        required: true
 
 
 
@@ -3820,15 +1911,7 @@ paths:
 
 
 
-
-
-
-
         '200':
-
-
-
-
 
 
 
@@ -3836,15 +1919,7 @@ paths:
 
 
 
-
-
-
-
           content:
-
-
-
-
 
 
 
@@ -3852,15 +1927,7 @@ paths:
 
 
 
-
-
-
-
               schema:
-
-
-
-
 
 
 
@@ -3868,15 +1935,7 @@ paths:
 
 
 
-
-
-
-
                 - $ref: '#/components/schemas/BaseResponse'
-
-
-
-
 
 
 
@@ -3884,15 +1943,7 @@ paths:
 
 
 
-
-
-
-
                   properties:
-
-
-
-
 
 
 
@@ -3900,15 +1951,7 @@ paths:
 
 
 
-
-
-
-
                         type: object
-
-
-
-
 
 
 
@@ -3916,15 +1959,7 @@ paths:
 
 
 
-
-
-
-
                           generated_scripts:
-
-
-
-
 
 
 
@@ -3932,15 +1967,7 @@ paths:
 
 
 
-
-
-
-
                             items:
-
-
-
-
 
 
 
@@ -3948,15 +1975,7 @@ paths:
 
 
 
-
-
-
-
                               properties:
-
-
-
-
 
 
 
@@ -3964,15 +1983,7 @@ paths:
 
 
 
-
-
-
-
                                   type: string
-
-
-
-
 
 
 
@@ -3980,15 +1991,7 @@ paths:
 
 
 
-
-
-
-
                                   default: "Ever tried drinking water while running? It's like a comedy show!You either spill it all over or look like a fish out of water.Then I found the Owala FreeSip bottle—game changer."
-
-
-
-
 
 
 
@@ -3996,15 +1999,7 @@ paths:
 
 
 
-
-
-
-
                                 script_style:
-
-
-
-
 
 
 
@@ -4012,15 +2007,7 @@ paths:
 
 
 
-
-
-
-
                                   description: Script Style.
-
-
-
-
 
 
 
@@ -4028,15 +2015,7 @@ paths:
 
 
 
-
-
-
-
                                   example: Storytime.
-
-
-
-
 
 
 
@@ -4044,15 +2023,7 @@ paths:
 
 
 
-
-
-
-
     post:
-
-
-
-
 
 
 
@@ -4060,15 +2031,7 @@ paths:
 
 
 
-
-
-
-
         - URL to Video 
-
-
-
-
 
 
 
@@ -4076,15 +2039,7 @@ paths:
 
 
 
-
-
-
-
       description: Final step to generate the product video. Use the product_id received from Step 1 (POST /product response)
-
-
-
-
 
 
 
@@ -4092,15 +2047,7 @@ paths:
 
 
 
-
-
-
-
         content:
-
-
-
-
 
 
 
@@ -4108,15 +2055,7 @@ paths:
 
 
 
-
-
-
-
             schema:
-
-
-
-
 
 
 
@@ -4124,15 +2063,7 @@ paths:
 
 
 
-
-
-
-
               properties:
-
-
-
-
 
 
 
@@ -4140,15 +2071,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -4156,15 +2079,7 @@ paths:
 
 
 
-
-
-
-
                   example: 8xUNyTgckMBsX4jn4Lxf
-
-
-
-
 
 
 
@@ -4172,23 +2087,11 @@ paths:
 
 
 
-
-
-
-
                   type: integer
 
 
 
-
-
-
-
                   description: |
-
-
-
-
 
 
 
@@ -4196,15 +2099,7 @@ paths:
 
 
 
-
-
-
-
                     * 0 - Portrait [9:16]
-
-
-
-
 
 
 
@@ -4212,15 +2107,7 @@ paths:
 
 
 
-
-
-
-
                     * 2 - Square [1:1]
-
-
-
-
 
 
 
@@ -4228,31 +2115,15 @@ paths:
 
 
 
-
-
-
-
                   example: 0
 
-
-
                   
-
-
 
                 video_length:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -4260,23 +2131,11 @@ paths:
 
 
 
-
-
-
-
                   example: "15"
 
 
 
-
-
-
-
                   enum:
-
-
-
-
 
 
 
@@ -4284,15 +2143,7 @@ paths:
 
 
 
-
-
-
-
                     - "30"
-
-
-
-
 
 
 
@@ -4300,15 +2151,7 @@ paths:
 
 
 
-
-
-
-
                 language:
-
-
-
-
 
 
 
@@ -4316,15 +2159,7 @@ paths:
 
 
 
-
-
-
-
                   description: |
-
-
-
-
 
 
 
@@ -4332,15 +2167,7 @@ paths:
 
 
 
-
-
-
-
                     * english - English
-
-
-
-
 
 
 
@@ -4348,15 +2175,7 @@ paths:
 
 
 
-
-
-
-
                     * french - French
-
-
-
-
 
 
 
@@ -4364,15 +2183,7 @@ paths:
 
 
 
-
-
-
-
                     * hindi - Hindi
-
-
-
-
 
 
 
@@ -4380,15 +2191,7 @@ paths:
 
 
 
-
-
-
-
                     * italian - Italian
-
-
-
-
 
 
 
@@ -4396,15 +2199,7 @@ paths:
 
 
 
-
-
-
-
                     * korean - Korean
-
-
-
-
 
 
 
@@ -4412,15 +2207,7 @@ paths:
 
 
 
-
-
-
-
                     * portuguese - Portuguese
-
-
-
-
 
 
 
@@ -4428,15 +2215,7 @@ paths:
 
 
 
-
-
-
-
                     * spanish - Spanish
-
-
-
-
 
 
 
@@ -4444,15 +2223,7 @@ paths:
 
 
 
-
-
-
-
                     * vietnamese - Vietnamese
-
-
-
-
 
 
 
@@ -4460,15 +2231,7 @@ paths:
 
 
 
-
-
-
-
                     * greek - Greek
-
-
-
-
 
 
 
@@ -4476,15 +2239,7 @@ paths:
 
 
 
-
-
-
-
                     * slovenian - Slovenian
-
-
-
-
 
 
 
@@ -4492,15 +2247,7 @@ paths:
 
 
 
-
-
-
-
                     * romanian - Romanian
-
-
-
-
 
 
 
@@ -4508,15 +2255,7 @@ paths:
 
 
 
-
-
-
-
                     * bengali - Bengali
-
-
-
-
 
 
 
@@ -4524,15 +2263,7 @@ paths:
 
 
 
-
-
-
-
                     * hungarian - Hungarian
-
-
-
-
 
 
 
@@ -4540,15 +2271,7 @@ paths:
 
 
 
-
-
-
-
                     * polish - Polish
-
-
-
-
 
 
 
@@ -4556,15 +2279,7 @@ paths:
 
 
 
-
-
-
-
                     * danish - Danish
-
-
-
-
 
 
 
@@ -4572,15 +2287,7 @@ paths:
 
 
 
-
-
-
-
                     * tamil - Tamil
-
-
-
-
 
 
 
@@ -4588,15 +2295,7 @@ paths:
 
 
 
-
-
-
-
                     * czech - Czech
-
-
-
-
 
 
 
@@ -4604,15 +2303,7 @@ paths:
 
 
 
-
-
-
-
                     * zulu - Zulu
-
-
-
-
 
 
 
@@ -4620,15 +2311,7 @@ paths:
 
 
 
-
-
-
-
                     * lithuanian - Lithuanian
-
-
-
-
 
 
 
@@ -4636,15 +2319,7 @@ paths:
 
 
 
-
-
-
-
                     * flemish - Flemish
-
-
-
-
 
 
 
@@ -4652,15 +2327,7 @@ paths:
 
 
 
-
-
-
-
                     * finnish - Finnish
-
-
-
-
 
 
 
@@ -4668,15 +2335,7 @@ paths:
 
 
 
-
-
-
-
                     * latvian - Latvian
-
-
-
-
 
 
 
@@ -4684,15 +2343,7 @@ paths:
 
 
 
-
-
-
-
                     * mongolian - Mongolian
-
-
-
-
 
 
 
@@ -4700,15 +2351,7 @@ paths:
 
 
 
-
-
-
-
                     * odia - Odia
-
-
-
-
 
 
 
@@ -4716,15 +2359,7 @@ paths:
 
 
 
-
-
-
-
                     * kannada - Kannada
-
-
-
-
 
 
 
@@ -4732,15 +2367,7 @@ paths:
 
 
 
-
-
-
-
                     * amharic - Amharic
-
-
-
-
 
 
 
@@ -4748,15 +2375,7 @@ paths:
 
 
 
-
-
-
-
                     * slovak - Slovak
-
-
-
-
 
 
 
@@ -4764,15 +2383,7 @@ paths:
 
 
 
-
-
-
-
                   enum:
-
-
-
-
 
 
 
@@ -4780,15 +2391,7 @@ paths:
 
 
 
-
-
-
-
                     - "filipino"
-
-
-
-
 
 
 
@@ -4796,15 +2399,7 @@ paths:
 
 
 
-
-
-
-
                     - "german"
-
-
-
-
 
 
 
@@ -4812,15 +2407,7 @@ paths:
 
 
 
-
-
-
-
                     - "indonesian"
-
-
-
-
 
 
 
@@ -4828,15 +2415,7 @@ paths:
 
 
 
-
-
-
-
                     - "japanese"
-
-
-
-
 
 
 
@@ -4844,15 +2423,7 @@ paths:
 
 
 
-
-
-
-
                     - "malay"
-
-
-
-
 
 
 
@@ -4860,15 +2431,7 @@ paths:
 
 
 
-
-
-
-
                     - "russian"
-
-
-
-
 
 
 
@@ -4876,15 +2439,7 @@ paths:
 
 
 
-
-
-
-
                     - "thai"
-
-
-
-
 
 
 
@@ -4892,15 +2447,7 @@ paths:
 
 
 
-
-
-
-
                     - "arabic"
-
-
-
-
 
 
 
@@ -4908,15 +2455,7 @@ paths:
 
 
 
-
-
-
-
                     - "turkish"
-
-
-
-
 
 
 
@@ -4924,15 +2463,7 @@ paths:
 
 
 
-
-
-
-
                     - "croatian"
-
-
-
-
 
 
 
@@ -4940,15 +2471,7 @@ paths:
 
 
 
-
-
-
-
                     - "chinese"
-
-
-
-
 
 
 
@@ -4956,15 +2479,7 @@ paths:
 
 
 
-
-
-
-
                     - "urdu"
-
-
-
-
 
 
 
@@ -4972,15 +2487,7 @@ paths:
 
 
 
-
-
-
-
                     - "traditional-chinese"
-
-
-
-
 
 
 
@@ -4988,15 +2495,7 @@ paths:
 
 
 
-
-
-
-
                     - "cantonese"
-
-
-
-
 
 
 
@@ -5004,15 +2503,7 @@ paths:
 
 
 
-
-
-
-
                     - "malayalam"
-
-
-
-
 
 
 
@@ -5020,15 +2511,7 @@ paths:
 
 
 
-
-
-
-
                     - "telugu"
-
-
-
-
 
 
 
@@ -5036,15 +2519,7 @@ paths:
 
 
 
-
-
-
-
                     - "hebrew"
-
-
-
-
 
 
 
@@ -5052,15 +2527,7 @@ paths:
 
 
 
-
-
-
-
                     - "swedish"
-
-
-
-
 
 
 
@@ -5068,15 +2535,7 @@ paths:
 
 
 
-
-
-
-
                     - "dutch"
-
-
-
-
 
 
 
@@ -5084,15 +2543,7 @@ paths:
 
 
 
-
-
-
-
                     - "norwegian"
-
-
-
-
 
 
 
@@ -5100,15 +2551,7 @@ paths:
 
 
 
-
-
-
-
                     - "bulgarian"
-
-
-
-
 
 
 
@@ -5116,15 +2559,7 @@ paths:
 
 
 
-
-
-
-
                     - "ukrainian"
-
-
-
-
 
 
 
@@ -5132,15 +2567,7 @@ paths:
 
 
 
-
-
-
-
                     - "persian"
-
-
-
-
 
 
 
@@ -5148,15 +2575,7 @@ paths:
 
 
 
-
-
-
-
                     - "assamese"
-
-
-
-
 
 
 
@@ -5164,15 +2583,7 @@ paths:
 
 
 
-
-
-
-
                     - "tagalog"
-
-
-
-
 
 
 
@@ -5180,15 +2591,7 @@ paths:
 
 
 
-
-
-
-
                     - "serbian"
-
-
-
-
 
 
 
@@ -5196,15 +2599,7 @@ paths:
 
 
 
-
-
-
-
                     - "swahili"
-
-
-
-
 
 
 
@@ -5212,15 +2607,7 @@ paths:
 
 
 
-
-
-
-
                   example: "english"
-
-
-
-
 
 
 
@@ -5228,23 +2615,11 @@ paths:
 
 
 
-
-
-
-
                   type: integer
 
 
 
-
-
-
-
                   description: |
-
-
-
-
 
 
 
@@ -5252,15 +2627,7 @@ paths:
 
 
 
-
-
-
-
                   example: 1
-
-
-
-
 
 
 
@@ -5268,23 +2635,11 @@ paths:
 
 
 
-
-
-
-
                   type: integer 
 
 
 
-
-
-
-
                   description: |
-
-
-
-
 
 
 
@@ -5292,15 +2647,7 @@ paths:
 
 
 
-
-
-
-
                     * 0 - Public avatars
-
-
-
-
 
 
 
@@ -5308,15 +2655,7 @@ paths:
 
 
 
-
-
-
-
                   enum:
-
-
-
-
 
 
 
@@ -5324,23 +2663,11 @@ paths:
 
 
 
-
-
-
-
                     - 1
 
 
 
-
-
-
-
                   example: 0
-
-
-
-
 
 
 
@@ -5348,23 +2675,11 @@ paths:
 
 
 
-
-
-
-
                   type: string
 
 
 
-
-
-
-
                   description: |
-
-
-
-
 
 
 
@@ -5372,39 +2687,21 @@ paths:
 
 
 
-
-
-
-
                   example: en-US-ChristopherNeural
 
-
-
                 
-
                 music_id:
-
-
 
                   type: int
 
-
-
                   description: |
-
-
 
                     Music id from music list.
 
-
-
+                  example: 1
 
 
                 script_style:
-
-
-
-
 
 
 
@@ -5412,15 +2709,7 @@ paths:
 
 
 
-
-
-
-
                   description: |
-
-
-
-
 
 
 
@@ -5428,15 +2717,7 @@ paths:
 
 
 
-
-
-
-
                     * Don't Worry - Casual and reassuring tone
-
-
-
-
 
 
 
@@ -5444,15 +2725,7 @@ paths:
 
 
 
-
-
-
-
                     * Discovery - Exploratory and revealing style
-
-
-
-
 
 
 
@@ -5460,15 +2733,7 @@ paths:
 
 
 
-
-
-
-
                     * Top 3 reasons - List-based persuasive format
-
-
-
-
 
 
 
@@ -5476,15 +2741,7 @@ paths:
 
 
 
-
-
-
-
                   enum:
-
-
-
-
 
 
 
@@ -5492,15 +2749,7 @@ paths:
 
 
 
-
-
-
-
                     - "Storytime"
-
-
-
-
 
 
 
@@ -5508,15 +2757,7 @@ paths:
 
 
 
-
-
-
-
                     - "Data"
-
-
-
-
 
 
 
@@ -5524,15 +2765,7 @@ paths:
 
 
 
-
-
-
-
                     - "Light marketing"
-
-
-
-
 
 
 
@@ -5540,15 +2773,7 @@ paths:
 
 
 
-
-
-
-
                 visual_style:
-
-
-
-
 
 
 
@@ -5556,15 +2781,7 @@ paths:
 
 
 
-
-
-
-
                   description: |
-
-
-
-
 
 
 
@@ -5572,15 +2789,7 @@ paths:
 
 
 
-
-
-
-
                   example: "Simple split screen template"
-
-
-
-
 
 
 
@@ -5588,15 +2797,7 @@ paths:
 
 
 
-
-
-
-
                   type: integer
-
-
-
-
 
 
 
@@ -5604,17 +2805,7 @@ paths:
 
 
 
-
-
-
-
                   example: 0
-
-
-
-
-
-
 
 
 
@@ -5624,15 +2815,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -5640,15 +2823,7 @@ paths:
 
 
 
-
-
-
-
                     Template source type:
-
-
-
-
 
 
 
@@ -5656,15 +2831,7 @@ paths:
 
 
 
-
-
-
-
                     * custom - Template from my templates
-
-
-
-
 
 
 
@@ -5672,15 +2839,7 @@ paths:
 
 
 
-
-
-
-
                   enum:
-
-
-
-
 
 
 
@@ -5688,15 +2847,7 @@ paths:
 
 
 
-
-
-
-
                     - custom
-
-
-
-
 
 
 
@@ -5704,15 +2855,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -5720,15 +2863,7 @@ paths:
 
 
 
-
-
-
-
                   example: ''
-
-
-
-
 
 
 
@@ -5736,15 +2871,7 @@ paths:
 
 
 
-
-
-
-
                   type: boolean
-
-
-
-
 
 
 
@@ -5752,15 +2879,7 @@ paths:
 
 
 
-
-
-
-
                     Controls subtitle rendering:
-
-
-
-
 
 
 
@@ -5768,15 +2887,7 @@ paths:
 
 
 
-
-
-
-
                     * false - Hide subtitles
-
-
-
-
 
 
 
@@ -5786,17 +2897,7 @@ paths:
 
 
 
-
-
-
-
-
-
               required:
-
-
-
-
 
 
 
@@ -5804,15 +2905,7 @@ paths:
 
 
 
-
-
-
-
                 - aspect_ratio
-
-
-
-
 
 
 
@@ -5820,15 +2913,7 @@ paths:
 
 
 
-
-
-
-
                 - language
-
-
-
-
 
 
 
@@ -5836,23 +2921,11 @@ paths:
 
 
 
-
-
-
-
                 - avatar_type
 
 
 
-
-
-
-
                 - template_type
-
-
-
-
 
 
 
@@ -5862,17 +2935,7 @@ paths:
 
 
 
-
-
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -5880,15 +2943,7 @@ paths:
 
 
 
-
-
-
-
           description: "Success"
-
-
-
-
 
 
 
@@ -5896,15 +2951,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -5912,15 +2959,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -5928,15 +2967,7 @@ paths:
 
 
 
-
-
-
-
                 - type: object
-
-
-
-
 
 
 
@@ -5944,15 +2975,7 @@ paths:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -5960,15 +2983,7 @@ paths:
 
 
 
-
-
-
-
                       properties:
-
-
-
-
 
 
 
@@ -5976,23 +2991,11 @@ paths:
 
 
 
-
-
-
-
                           type: integer
 
 
 
-
-
-
-
                           description: "Created project ID"
-
-
-
-
 
 
 
@@ -6000,1943 +3003,971 @@ paths:
 
 
 
-
-
-
-
     post:
 
-
-
   
-
-
 
       tags:
 
-
-
   
-
-
 
         - URL to Video 
 
-
-
   
-
-
 
       summary: 'Step 3: Preview from Product Information'
 
-
-
   
-
-
 
       description: You can generate a preview video using the product_id obtained from the Upload URL to create a product. Set the relevant video parameters to create the preview. You can obtain the preview video result using the project_id at the Get Generated Video endpoint.
 
-
-
   
-
-
 
       requestBody:
 
-
-
   
-
-
 
         content:
 
-
-
   
-
-
 
           application/json:
 
-
-
   
-
-
 
             schema:
 
-
-
   
-
-
 
               type: object
 
-
-
   
-
-
 
               properties:
 
-
-
   
-
-
 
                 product_id:
 
-
-
   
-
-
 
                   type: string
 
-
-
   
-
-
 
                   description: Product ID obtained from Step 1 (POST /product) response data.product_id
 
-
-
   
-
-
 
                   example: 8xUNyTgckMBsX4jn4Lxf
 
-
-
   
-
-
 
                 aspect_ratio:
 
-
-
   
-
-
 
                   type: integer
 
-
-
   
-
-
 
                   description: |
 
-
-
   
-
-
 
                     Video aspect ratio:
 
-
-
   
-
-
 
                     * 0 - Portrait [9:16]
 
-
-
   
-
-
 
                     * 1 - Landscape [16:9]
 
-
-
   
-
-
 
                     * 2 - Square [1:1]
 
-
-
   
-
-
 
                   enum: [0, 1, 2]
 
-
-
   
 
-
-
                   example: 0
-
-
 
                   
 
-
-
                 video_length:
 
-
-
   
-
-
 
                   type: string
 
-
-
   
-
-
 
                   description: Video Length.
 
-
-
   
-
-
 
                   example: "15"
 
-
-
   
-
-
 
                   enum:
 
-
-
   
-
-
 
                     - "15"
 
-
-
   
-
-
 
                     - "30"
 
-
-
   
-
-
 
                     - "60"                  
 
-
-
   
-
-
 
                 language:
 
-
-
   
-
-
 
                   type: string
 
-
-
   
-
-
 
                   description: |
 
-
-
   
-
-
 
                     Script generation language (defaults to English if not specified):
 
-
-
   
-
-
 
                     * english - English
 
-
-
   
-
-
 
                     * filipino - Filipino
 
-
-
   
-
-
 
                     * french - French
 
-
-
   
-
-
 
                     * german - German
 
-
-
   
-
-
 
                     * hindi - Hindi
 
-
-
   
-
-
 
                     * indonesian - Indonesian
 
-
-
   
-
-
 
                     * italian - Italian
 
-
-
   
-
-
 
                     * japanese - Japanese
 
-
-
   
-
-
 
                     * korean - Korean
 
-
-
   
-
-
 
                     * malay - Malay
 
-
-
   
-
-
 
                     * portuguese - Portuguese
 
-
-
   
-
-
 
                     * russian - Russian
 
-
-
   
-
-
 
                     * spanish - Spanish
 
-
-
   
-
-
 
                     * thai - Thai
 
-
-
   
-
-
 
                     * vietnamese - Vietnamese
 
-
-
   
-
-
 
                     * arabic - Arabic
 
-
-
   
-
-
 
                     * greek - Greek
 
-
-
   
-
-
 
                     * turkish - Turkish
 
-
-
   
-
-
 
                     * slovenian - Slovenian
 
-
-
   
-
-
 
                     * croatian - Croatian
 
-
-
   
-
-
 
                     * romanian - Romanian
 
-
-
   
-
-
 
                     * chinese - Simplified Chinese
 
-
-
   
-
-
 
                     * bengali - Bengali
 
-
-
   
-
-
 
                     * urdu - Urdu
 
-
-
   
-
-
 
                     * hungarian - Hungarian
 
-
-
   
-
-
 
                     * traditional-chinese - Traditional Chinese
 
-
-
   
-
-
 
                     * polish - Polish
 
-
-
   
-
-
 
                     * cantonese - Cantonese
 
-
-
   
-
-
 
                     * danish - Danish
 
-
-
   
-
-
 
                     * malayalam - Malayalam
 
-
-
   
-
-
 
                     * tamil - Tamil
 
-
-
   
-
-
 
                     * telugu - Telugu
 
-
-
   
-
-
 
                     * czech - Czech
 
-
-
   
-
-
 
                     * hebrew - Hebrew
 
-
-
   
-
-
 
                     * zulu - Zulu
 
-
-
   
-
-
 
                     * swedish - Swedish
 
-
-
   
-
-
 
                     * lithuanian - Lithuanian
 
-
-
   
-
-
 
                     * dutch - Dutch
 
-
-
   
-
-
 
                     * flemish - Flemish
 
-
-
   
-
-
 
                     * norwegian - Norwegian
 
-
-
   
-
-
 
                     * finnish - Finnish
 
-
-
   
-
-
 
                     * bulgarian - Bulgarian
 
-
-
   
-
-
 
                     * latvian - Latvian
 
-
-
   
-
-
 
                     * ukrainian - Ukrainian
 
-
-
   
-
-
 
                     * mongolian - Mongolian
 
-
-
   
-
-
 
                     * persian - Persian
 
-
-
   
-
-
 
                     * odia - Odia
 
-
-
   
-
-
 
                     * assamese - Assamese
 
-
-
   
-
-
 
                     * kannada - Kannada
 
-
-
   
-
-
 
                     * tagalog - Tagalog
 
-
-
   
-
-
 
                     * amharic - Amharic
 
-
-
   
-
-
 
                     * serbian - Serbian
 
-
-
   
-
-
 
                     * slovak - Slovak
 
-
-
   
-
-
 
                     * swahili - Swahili
 
-
-
   
-
-
 
                   enum:
 
-
-
   
-
-
 
                     - "english"
 
-
-
   
-
-
 
                     - "filipino"
 
-
-
   
-
-
 
                     - "french"
 
-
-
   
-
-
 
                     - "german"
 
-
-
   
-
-
 
                     - "hindi"
 
-
-
   
-
-
 
                     - "indonesian"
 
-
-
   
-
-
 
                     - "italian"
 
-
-
   
-
-
 
                     - "japanese"
 
-
-
   
-
-
 
                     - "korean"
 
-
-
   
-
-
 
                     - "malay"
 
-
-
   
-
-
 
                     - "portuguese"
 
-
-
   
-
-
 
                     - "russian"
 
-
-
   
-
-
 
                     - "spanish"
 
-
-
   
-
-
 
                     - "thai"
 
-
-
   
-
-
 
                     - "vietnamese"
 
-
-
   
-
-
 
                     - "arabic"
 
-
-
   
-
-
 
                     - "greek"
 
-
-
   
-
-
 
                     - "turkish"
 
-
-
   
-
-
 
                     - "slovenian"
 
-
-
   
-
-
 
                     - "croatian"
 
-
-
   
-
-
 
                     - "romanian"
 
-
-
   
-
-
 
                     - "chinese"
 
-
-
   
-
-
 
                     - "bengali"
 
-
-
   
-
-
 
                     - "urdu"
 
-
-
   
-
-
 
                     - "hungarian"
 
-
-
   
-
-
 
                     - "traditional-chinese"
 
-
-
   
-
-
 
                     - "polish"
 
-
-
   
-
-
 
                     - "cantonese"
 
-
-
   
-
-
 
                     - "danish"
 
-
-
   
-
-
 
                     - "malayalam"
 
-
-
   
-
-
 
                     - "tamil"
 
-
-
   
-
-
 
                     - "telugu"
 
-
-
   
-
-
 
                     - "czech"
 
-
-
   
-
-
 
                     - "hebrew"
 
-
-
   
-
-
 
                     - "zulu"
 
-
-
   
-
-
 
                     - "swedish"
 
-
-
   
-
-
 
                     - "lithuanian"
 
-
-
   
-
-
 
                     - "dutch"
 
-
-
   
-
-
 
                     - "flemish"
 
-
-
   
-
-
 
                     - "norwegian"
 
-
-
   
-
-
 
                     - "finnish"
 
-
-
   
-
-
 
                     - "bulgarian"
 
-
-
   
-
-
 
                     - "latvian"
 
-
-
   
-
-
 
                     - "ukrainian"
 
-
-
   
-
-
 
                     - "mongolian"
 
-
-
   
-
-
 
                     - "persian"
 
-
-
   
-
-
 
                     - "odia"
 
-
-
   
-
-
 
                     - "assamese"
 
-
-
   
-
-
 
                     - "kannada"
 
-
-
   
-
-
 
                     - "tagalog"
 
-
-
   
-
-
 
                     - "amharic"
 
-
-
   
-
-
 
                     - "serbian"
 
-
-
   
-
-
 
                     - "slovak"
 
-
-
   
-
-
 
                     - "swahili"
 
-
-
   
-
-
 
                   default: "english"
 
-
-
   
-
-
 
                   example: "english"
 
-
-
   
-
-
 
                 avatar_id:
 
-
-
   
-
-
 
                   type: integer
 
-
-
   
-
-
 
                   description: |
 
-
-
   
-
-
 
                     Avatar id from Jogg Avatar or Your Avatar.
 
-
-
   
-
-
 
                   example: 1
 
-
-
   
-
-
 
                 avatar_type:
 
-
-
   
-
-
 
                   type: integer 
 
-
-
   
-
-
 
                   description: |
 
-
-
   
-
-
 
                     Avatar source type:
 
-
-
   
-
-
 
                     * 0 - Public avatars
 
-
-
   
-
-
 
                     * 1 - Custom avatars
 
-
-
   
-
-
 
                   enum:
 
-
-
   
-
-
 
                     - 0
 
-
-
   
-
-
 
                     - 1
 
-
-
   
-
-
 
                   example: 0
 
-
-
   
-
-
 
                 voice_id:
 
-
-
   
-
-
 
                   type: string
 
-
-
   
-
-
 
                   description: |
 
-
-
   
-
-
 
                     Voice id from voice list.
 
-
-
   
-
-
 
                   example: en-US-ChristopherNeural
 
-
-
   
-
-
 
                 script_style:
 
-
-
   
-
-
 
                   type: string
 
-
-
   
-
-
 
                   description: |
 
-
-
   
-
-
 
                     Script writing style for video content:
 
-
-
   
-
-
 
                     * Don't Worry - Casual and reassuring tone
 
-
-
   
-
-
 
                     * Storytime - Narrative and engaging storytelling approach
 
-
-
   
-
-
 
                     * Discovery - Exploratory and revealing style
 
-
-
   
-
-
 
                     * Data - Fact-based and analytical presentation
 
-
-
   
-
-
 
                     * Top 3 reasons - List-based persuasive format
 
-
-
   
-
-
 
                     * Light marketing - Soft-sell marketing approach
 
-
-
   
-
-
 
                   enum:
 
-
-
   
-
-
 
                     - "Don't Worry"
 
-
-
   
-
-
 
                     - "Storytime"
 
-
-
   
-
-
 
                     - "Discovery"
 
-
-
   
-
-
 
                     - "Data"
 
-
-
   
-
-
 
                     - "Top 3 reasons"
 
-
-
   
-
-
 
                     - "Light marketing"
 
-
-
   
-
-
 
                   example: "Storytime"
 
-
-
   
-
-
 
                 visual_style:
 
-
-
   
-
-
 
                   type: string
 
-
-
   
-
-
 
                   description: |
 
-
-
   
-
-
 
                     Visual style of the video from visual list(GET /visual)
 
-
-
   
-
-
 
                   example: "Simple split screen template"
 
-
-
   
-
-
 
                 template_id:
 
-
-
   
-
-
 
                   type: integer
 
-
-
   
-
-
 
                   description: Template ID from template library or custom template
 
-
-
   
-
-
 
                   example: 0
 
-
-
   
 
-
-
   
-
-
 
                 template_type:
 
-
-
   
-
-
 
                   type: string
 
-
-
   
-
-
 
                   description: | 
 
-
-
   
-
-
 
                     Template source type:
 
-
-
   
-
-
 
                     * public - Template from template library
 
-
-
   
-
-
 
                     * custom - Template from my templates
 
-
-
   
-
-
 
                   example: custom
 
-
-
   
-
-
 
                   enum:
 
-
-
   
-
-
 
                     - public
 
-
-
   
-
-
 
                     - custom
 
-
-
   
-
-
 
                 override_script:
 
-
-
   
-
-
 
                   type: string
 
-
-
   
-
-
 
                   description: You can enter the script you want to use here to override the existing script.
 
-
-
   
-
-
 
                   example: ''
 
-
-
   
-
-
 
                 caption:
 
-
-
   
-
-
 
                   type: boolean
 
-
-
   
-
-
 
                   description: |
 
-
-
   
-
-
 
                     Controls subtitle rendering:
 
-
-
   
-
-
 
                     * true - Show subtitles
 
-
-
   
-
-
 
                     * false - Hide subtitles
 
-
-
   
-
-
 
                   example: true
 
-
-
   
 
-
-
   
-
-
 
               required:
 
-
-
   
-
-
 
                 - product_id
 
-
-
   
-
-
 
                 - aspect_ratio
 
-
-
   
-
-
 
                 - video_length
 
-
-
   
-
-
 
                 - language
 
-
-
   
-
-
 
                 - avatar_id
 
-
-
   
-
-
 
                 - avatar_type
 
-
-
   
-
-
 
                 - template_type
 
-
-
   
-
-
 
                 - script_style
 
-
-
   
 
-
-
   
-
-
 
       responses:
 
-
-
   
-
-
 
         '200':
 
-
-
   
-
-
 
           description: "Success"
 
-
-
   
-
-
 
           content:
 
-
-
   
-
-
 
             application/json:
 
-
-
   
-
-
 
               schema:
 
-
-
   
-
-
 
                 allOf:
 
-
-
   
-
-
 
                 - $ref: '#/components/schemas/BaseResponse'
 
-
-
   
-
-
 
                 - type: object
 
-
-
   
-
-
 
                   properties:
 
-
-
   
-
-
 
                     data:
 
-
-
   
-
-
 
                       type: object
 
-
-
   
-
-
 
                       properties:
 
-
-
   
-
-
 
                         project_id:
 
-
-
   
-
-
 
                           type: integer
 
-
-
   
-
-
 
                           description: "Created project ID"
 
-
-
                           
-
-
-
-
 
 
 
@@ -7944,23 +3975,11 @@ paths:
 
 
 
-
-
-
-
     post:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -7968,15 +3987,7 @@ paths:
 
 
 
-
-
-
-
       summary: Create Talking Avatar Video
-
-
-
-
 
 
 
@@ -7984,15 +3995,7 @@ paths:
 
 
 
-
-
-
-
       requestBody:
-
-
-
-
 
 
 
@@ -8000,15 +4003,7 @@ paths:
 
 
 
-
-
-
-
           application/json:
-
-
-
-
 
 
 
@@ -8016,15 +4011,7 @@ paths:
 
 
 
-
-
-
-
               type: object
-
-
-
-
 
 
 
@@ -8032,23 +4019,11 @@ paths:
 
 
 
-
-
-
-
                 script:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -8056,15 +4031,7 @@ paths:
 
 
 
-
-
-
-
                   example: Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!
-
-
-
-
 
 
 
@@ -8072,15 +4039,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -8088,15 +4047,7 @@ paths:
 
 
 
-
-
-
-
                   example: https://res.jogg.ai/audio.mp3
-
-
-
-
 
 
 
@@ -8104,15 +4055,7 @@ paths:
 
 
 
-
-
-
-
                   type: integer
-
-
-
-
 
 
 
@@ -8120,15 +4063,7 @@ paths:
 
 
 
-
-
-
-
                   enum:
-
-
-
-
 
 
 
@@ -8136,15 +4071,7 @@ paths:
 
 
 
-
-
-
-
                     - 1
-
-
-
-
 
 
 
@@ -8152,15 +4079,7 @@ paths:
 
 
 
-
-
-
-
                   example: 0
-
-
-
-
 
 
 
@@ -8168,15 +4087,7 @@ paths:
 
 
 
-
-
-
-
                   type: integer
-
-
-
-
 
 
 
@@ -8184,23 +4095,11 @@ paths:
 
 
 
-
-
-
-
                   enum:
 
 
 
-
-
-
-
                     - 1
-
-
-
-
 
 
 
@@ -8208,15 +4107,7 @@ paths:
 
 
 
-
-
-
-
                     - 3
-
-
-
-
 
 
 
@@ -8224,23 +4115,11 @@ paths:
 
 
 
-
-
-
-
                 avatar_id:
 
 
 
-
-
-
-
                   type: integer
-
-
-
-
 
 
 
@@ -8248,15 +4127,7 @@ paths:
 
 
 
-
-
-
-
                   example: 81
-
-
-
-
 
 
 
@@ -8264,15 +4135,7 @@ paths:
 
 
 
-
-
-
-
                   type: integer
-
-
-
-
 
 
 
@@ -8280,15 +4143,7 @@ paths:
 
 
 
-
-
-
-
                   enum:
-
-
-
-
 
 
 
@@ -8296,15 +4151,7 @@ paths:
 
 
 
-
-
-
-
                     - 1
-
-
-
-
 
 
 
@@ -8312,15 +4159,7 @@ paths:
 
 
 
-
-
-
-
                 voice_id:
-
-
-
-
 
 
 
@@ -8328,15 +4167,7 @@ paths:
 
 
 
-
-
-
-
                   description: ID of the text-to-speech voice to use
-
-
-
-
 
 
 
@@ -8344,15 +4175,7 @@ paths:
 
 
 
-
-
-
-
                 caption:
-
-
-
-
 
 
 
@@ -8360,15 +4183,7 @@ paths:
 
 
 
-
-
-
-
                   description: 'Subtitle option. true: enable subtitles, false: disable subtitles'
-
-
-
-
 
 
 
@@ -8376,15 +4191,7 @@ paths:
 
 
 
-
-
-
-
                     - true
-
-
-
-
 
 
 
@@ -8392,15 +4199,7 @@ paths:
 
 
 
-
-
-
-
               required:
-
-
-
-
 
 
 
@@ -8408,15 +4207,7 @@ paths:
 
 
 
-
-
-
-
                 - avatar_id
-
-
-
-
 
 
 
@@ -8424,15 +4215,7 @@ paths:
 
 
 
-
-
-
-
                 - voice_id
-
-
-
-
 
 
 
@@ -8440,15 +4223,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -8456,15 +4231,7 @@ paths:
 
 
 
-
-
-
-
           description: "Success"
-
-
-
-
 
 
 
@@ -8472,15 +4239,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -8488,15 +4247,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -8504,15 +4255,7 @@ paths:
 
 
 
-
-
-
-
                 - type: object
-
-
-
-
 
 
 
@@ -8520,15 +4263,7 @@ paths:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -8536,15 +4271,7 @@ paths:
 
 
 
-
-
-
-
                       properties:
-
-
-
-
 
 
 
@@ -8552,27 +4279,13 @@ paths:
 
 
 
-
-
-
-
                           type: integer
-
-
-
-
 
 
 
                           description: "Created project ID"
 
-
-
   /project:
-
-
-
-
 
 
 
@@ -8580,15 +4293,7 @@ paths:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -8596,15 +4301,7 @@ paths:
 
 
 
-
-
-
-
       summary: Get Project Information
-
-
-
-
 
 
 
@@ -8612,15 +4309,7 @@ paths:
 
 
 
-
-
-
-
       parameters:
-
-
-
-
 
 
 
@@ -8628,15 +4317,7 @@ paths:
 
 
 
-
-
-
-
           in: query
-
-
-
-
 
 
 
@@ -8644,15 +4325,7 @@ paths:
 
 
 
-
-
-
-
           schema:
-
-
-
-
 
 
 
@@ -8660,15 +4333,7 @@ paths:
 
 
 
-
-
-
-
           description: The ID of the project to retrieve information for.
-
-
-
-
 
 
 
@@ -8676,15 +4341,7 @@ paths:
 
 
 
-
-
-
-
         '200':
-
-
-
-
 
 
 
@@ -8692,15 +4349,7 @@ paths:
 
 
 
-
-
-
-
           content:
-
-
-
-
 
 
 
@@ -8708,15 +4357,7 @@ paths:
 
 
 
-
-
-
-
               schema:
-
-
-
-
 
 
 
@@ -8724,15 +4365,7 @@ paths:
 
 
 
-
-
-
-
                 - $ref: '#/components/schemas/BaseResponse'
-
-
-
-
 
 
 
@@ -8740,15 +4373,7 @@ paths:
 
 
 
-
-
-
-
                   properties:
-
-
-
-
 
 
 
@@ -8756,15 +4381,7 @@ paths:
 
 
 
-
-
-
-
                       type: object
-
-
-
-
 
 
 
@@ -8772,23 +4389,11 @@ paths:
 
 
 
-
-
-
-
                         id:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -8796,15 +4401,7 @@ paths:
 
 
 
-
-
-
-
                           example: fa6228c0f52c4f3986e88f7ffa5d2864
-
-
-
-
 
 
 
@@ -8812,15 +4409,7 @@ paths:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -8828,15 +4417,7 @@ paths:
 
 
 
-
-
-
-
                           example: welcome to jogg.ai
-
-
-
-
 
 
 
@@ -8844,15 +4425,7 @@ paths:
 
 
 
-
-
-
-
                           type: integer
-
-
-
-
 
 
 
@@ -8860,15 +4433,7 @@ paths:
 
 
 
-
-
-
-
                           example: 6
-
-
-
-
 
 
 
@@ -8876,15 +4441,7 @@ paths:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -8892,15 +4449,7 @@ paths:
 
 
 
-
-
-
-
                           example: https://res.jogg.ai/video.mp4
-
-
-
-
 
 
 
@@ -8908,15 +4457,7 @@ paths:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -8924,31 +4465,15 @@ paths:
 
 
 
-
-
-
-
                           example: https://res.jogg.ai/cover.jpg
-
-
-
-
 
 
 
                         status_code:
 
-
-
                           type: integer
 
-
-
                           description: |
-
-
-
-
 
 
 
@@ -8956,15 +4481,7 @@ paths:
 
 
 
-
-
-
-
                             * 2 - waiting
-
-
-
-
 
 
 
@@ -8972,15 +4489,7 @@ paths:
 
 
 
-
-
-
-
                             * 4 - success
-
-
-
-
 
 
 
@@ -8988,23 +4497,11 @@ paths:
 
 
 
-
-
-
-
                             * 99 - deleted
-
-
 
                           enum: [1, 2, 3, 4, 5, 99]
 
-
-
                           example: 4
-
-
-
-
 
 
 
@@ -9012,15 +4509,7 @@ paths:
 
 
 
-
-
-
-
                           type: string
-
-
-
-
 
 
 
@@ -9028,15 +4517,7 @@ paths:
 
 
 
-
-
-
-
                           example: processing
-
-
-
-
 
 
 
@@ -9044,23 +4525,11 @@ paths:
 
 
 
-
-
-
-
                           type: integer
 
 
 
-
-
-
-
                           description: Creation timestamp
-
-
-
-
 
 
 
@@ -9072,19 +4541,7 @@ paths:
 
 
 
-
-
-
-
-
-
-
-
   /upload/asset:
-
-
-
-
 
 
 
@@ -9092,15 +4549,7 @@ paths:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -9108,15 +4557,7 @@ paths:
 
 
 
-
-
-
-
       summary: Get Signed URL
-
-
-
-
 
 
 
@@ -9124,15 +4565,7 @@ paths:
 
 
 
-
-
-
-
       requestBody:
-
-
-
-
 
 
 
@@ -9140,15 +4573,7 @@ paths:
 
 
 
-
-
-
-
         content:
-
-
-
-
 
 
 
@@ -9156,15 +4581,7 @@ paths:
 
 
 
-
-
-
-
             schema:
-
-
-
-
 
 
 
@@ -9172,15 +4589,7 @@ paths:
 
 
 
-
-
-
-
               properties:
-
-
-
-
 
 
 
@@ -9188,15 +4597,7 @@ paths:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -9204,15 +4605,7 @@ paths:
 
 
 
-
-
-
-
               required:
-
-
-
-
 
 
 
@@ -9220,15 +4613,7 @@ paths:
 
 
 
-
-
-
-
         required: true
-
-
-
-
 
 
 
@@ -9236,15 +4621,7 @@ paths:
 
 
 
-
-
-
-
         '200':
-
-
-
-
 
 
 
@@ -9252,15 +4629,7 @@ paths:
 
 
 
-
-
-
-
           content:
-
-
-
-
 
 
 
@@ -9268,15 +4637,7 @@ paths:
 
 
 
-
-
-
-
               schema:
-
-
-
-
 
 
 
@@ -9284,15 +4645,7 @@ paths:
 
 
 
-
-
-
-
                 - $ref: '#/components/schemas/BaseResponse'
-
-
-
-
 
 
 
@@ -9300,15 +4653,7 @@ paths:
 
 
 
-
-
-
-
                   properties:
-
-
-
-
 
 
 
@@ -9316,15 +4661,7 @@ paths:
 
 
 
-
-
-
-
                         type: object
-
-
-
-
 
 
 
@@ -9332,23 +4669,11 @@ paths:
 
 
 
-
-
-
-
                           sign_url:
 
 
 
-
-
-
-
                             type: string
-
-
-
-
 
 
 
@@ -9356,23 +4681,11 @@ paths:
 
 
 
-
-
-
-
                           asset_id:
 
 
 
-
-
-
-
                             type: string
-
-
-
-
 
 
 
@@ -9382,17 +4695,7 @@ paths:
 
 
 
-
-
-
-
-
-
   /musics:
-
-
-
-
 
 
 
@@ -9400,15 +4703,7 @@ paths:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -9416,15 +4711,7 @@ paths:
 
 
 
-
-
-
-
       summary: Get Music List
-
-
-
-
 
 
 
@@ -9432,15 +4719,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -9448,15 +4727,7 @@ paths:
 
 
 
-
-
-
-
           description: Success
-
-
-
-
 
 
 
@@ -9464,15 +4735,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -9480,15 +4743,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -9496,15 +4751,7 @@ paths:
 
 
 
-
-
-
-
                 - type: object
-
-
-
-
 
 
 
@@ -9512,15 +4759,7 @@ paths:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -9528,15 +4767,7 @@ paths:
 
 
 
-
-
-
-
                       properties:
-
-
-
-
 
 
 
@@ -9544,15 +4775,7 @@ paths:
 
 
 
-
-
-
-
                           type: array
-
-
-
-
 
 
 
@@ -9560,15 +4783,7 @@ paths:
 
 
 
-
-
-
-
                             type: object
-
-
-
-
 
 
 
@@ -9576,15 +4791,7 @@ paths:
 
 
 
-
-
-
-
                               id:
-
-
-
-
 
 
 
@@ -9592,15 +4799,7 @@ paths:
 
 
 
-
-
-
-
                                 description: Music ID
-
-
-
-
 
 
 
@@ -9608,23 +4807,11 @@ paths:
 
 
 
-
-
-
-
                               name:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -9632,15 +4819,7 @@ paths:
 
 
 
-
-
-
-
                                 example: Amanda outdoors
-
-
-
-
 
 
 
@@ -9648,23 +4827,11 @@ paths:
 
 
 
-
-
-
-
                                 type: string
 
 
 
-
-
-
-
                                 description: URL of the cover image
-
-
-
-
 
 
 
@@ -9672,19 +4839,9 @@ paths:
 
 
 
-
-
-
-
                               
 
-
-
                               duration:
-
-
-
-
 
 
 
@@ -9692,23 +4849,11 @@ paths:
 
 
 
-
-
-
-
                                 description: music duration
 
 
 
-
-
-
-
                                 example: 81
-
-
-
-
 
 
 
@@ -9716,23 +4861,11 @@ paths:
 
 
 
-
-
-
-
     get:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -9740,15 +4873,7 @@ paths:
 
 
 
-
-
-
-
       summary: Get Music List
-
-
-
-
 
 
 
@@ -9756,15 +4881,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -9772,15 +4889,7 @@ paths:
 
 
 
-
-
-
-
           description: Success
-
-
-
-
 
 
 
@@ -9788,15 +4897,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -9804,15 +4905,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -9820,15 +4913,7 @@ paths:
 
 
 
-
-
-
-
                 - type: object
-
-
-
-
 
 
 
@@ -9836,15 +4921,7 @@ paths:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -9852,15 +4929,7 @@ paths:
 
 
 
-
-
-
-
                       properties:
-
-
-
-
 
 
 
@@ -9868,15 +4937,7 @@ paths:
 
 
 
-
-
-
-
                           type: array
-
-
-
-
 
 
 
@@ -9884,23 +4945,11 @@ paths:
 
 
 
-
-
-
-
                             type: object
 
 
 
-
-
-
-
                             properties:
-
-
-
-
 
 
 
@@ -9908,15 +4957,7 @@ paths:
 
 
 
-
-
-
-
                                 type: integer
-
-
-
-
 
 
 
@@ -9924,15 +4965,7 @@ paths:
 
 
 
-
-
-
-
                                 example: 1
-
-
-
-
 
 
 
@@ -9940,15 +4973,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -9956,15 +4981,7 @@ paths:
 
 
 
-
-
-
-
                                 example: Amanda outdoors
-
-
-
-
 
 
 
@@ -9972,23 +4989,11 @@ paths:
 
 
 
-
-
-
-
                                 type: string
 
 
 
-
-
-
-
                                 description: URL of the cover image
-
-
-
-
 
 
 
@@ -9996,27 +5001,13 @@ paths:
 
 
 
-
-
-
-
                               
-
-
 
                               duration:
 
 
 
-
-
-
-
                                 type: integer
-
-
-
-
 
 
 
@@ -10024,15 +5015,7 @@ paths:
 
 
 
-
-
-
-
                                 example: 81
-
-
-
-
 
 
 
@@ -10040,23 +5023,11 @@ paths:
 
 
 
-
-
-
-
     get:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -10064,15 +5035,7 @@ paths:
 
 
 
-
-
-
-
       summary: Get Avatar List
-
-
-
-
 
 
 
@@ -10080,15 +5043,7 @@ paths:
 
 
 
-
-
-
-
       parameters:
-
-
-
-
 
 
 
@@ -10096,15 +5051,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -10112,15 +5059,7 @@ paths:
 
 
 
-
-
-
-
           description: Success
-
-
-
-
 
 
 
@@ -10128,15 +5067,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -10144,15 +5075,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -10160,15 +5083,7 @@ paths:
 
 
 
-
-
-
-
                 - type: object
-
-
-
-
 
 
 
@@ -10176,15 +5091,7 @@ paths:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -10192,15 +5099,7 @@ paths:
 
 
 
-
-
-
-
                       properties:
-
-
-
-
 
 
 
@@ -10208,15 +5107,7 @@ paths:
 
 
 
-
-
-
-
                           type: array
-
-
-
-
 
 
 
@@ -10224,15 +5115,7 @@ paths:
 
 
 
-
-
-
-
                             type: object
-
-
-
-
 
 
 
@@ -10240,15 +5123,7 @@ paths:
 
 
 
-
-
-
-
                               avatar_id:
-
-
-
-
 
 
 
@@ -10256,15 +5131,7 @@ paths:
 
 
 
-
-
-
-
                                 description: Avatar ID
-
-
-
-
 
 
 
@@ -10272,23 +5139,11 @@ paths:
 
 
 
-
-
-
-
                               name:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -10296,15 +5151,7 @@ paths:
 
 
 
-
-
-
-
                                 example: Amanda outdoors
-
-
-
-
 
 
 
@@ -10312,15 +5159,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -10328,15 +5167,7 @@ paths:
 
 
 
-
-
-
-
                                 example: https://res.jogg.ai/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png
-
-
-
-
 
 
 
@@ -10344,23 +5175,11 @@ paths:
 
 
 
-
-
-
-
     get:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -10368,15 +5187,7 @@ paths:
 
 
 
-
-
-
-
       summary: Get Your Avatar List
-
-
-
-
 
 
 
@@ -10384,15 +5195,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -10400,15 +5203,7 @@ paths:
 
 
 
-
-
-
-
           description: Success
-
-
-
-
 
 
 
@@ -10416,15 +5211,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -10432,15 +5219,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -10448,15 +5227,7 @@ paths:
 
 
 
-
-
-
-
                 - type: object
-
-
-
-
 
 
 
@@ -10464,15 +5235,7 @@ paths:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -10480,15 +5243,7 @@ paths:
 
 
 
-
-
-
-
                       properties:
-
-
-
-
 
 
 
@@ -10496,15 +5251,7 @@ paths:
 
 
 
-
-
-
-
                           type: array
-
-
-
-
 
 
 
@@ -10512,23 +5259,11 @@ paths:
 
 
 
-
-
-
-
                             type: object
 
 
 
-
-
-
-
                             properties:
-
-
-
-
 
 
 
@@ -10536,15 +5271,7 @@ paths:
 
 
 
-
-
-
-
                                 type: integer
-
-
-
-
 
 
 
@@ -10552,15 +5279,7 @@ paths:
 
 
 
-
-
-
-
                                 example: 81
-
-
-
-
 
 
 
@@ -10568,15 +5287,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -10584,15 +5295,7 @@ paths:
 
 
 
-
-
-
-
                                 example: Amanda outdoors
-
-
-
-
 
 
 
@@ -10600,15 +5303,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -10616,15 +5311,7 @@ paths:
 
 
 
-
-
-
-
                                 example: https://res.jogg.ai/f178cf5273dd9cbd506f27426966c1ae501cae27-cover.png
-
-
-
-
 
 
 
@@ -10632,15 +5319,7 @@ paths:
 
 
 
-
-
-
-
                                 type: integer
-
-
-
-
 
 
 
@@ -10648,15 +5327,7 @@ paths:
 
 
 
-
-
-
-
                                 enum:
-
-
-
-
 
 
 
@@ -10664,15 +5335,7 @@ paths:
 
 
 
-
-
-
-
                                   - 1 success
-
-
-
-
 
 
 
@@ -10680,23 +5343,11 @@ paths:
 
 
 
-
-
-
-
                               fail_msg:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -10704,15 +5355,7 @@ paths:
 
 
 
-
-
-
-
                                 example: ""
-
-
-
-
 
 
 
@@ -10720,15 +5363,7 @@ paths:
 
 
 
-
-
-
-
     get:
-
-
-
-
 
 
 
@@ -10736,15 +5371,7 @@ paths:
 
 
 
-
-
-
-
       - Voice
-
-
-
-
 
 
 
@@ -10752,23 +5379,11 @@ paths:
 
 
 
-
-
-
-
       description: Retrieve a list of available voice with specified gender filter
 
 
 
-
-
-
-
       parameters:
-
-
-
-
 
 
 
@@ -10776,15 +5391,7 @@ paths:
 
 
 
-
-
-
-
           in: query
-
-
-
-
 
 
 
@@ -10792,15 +5399,7 @@ paths:
 
 
 
-
-
-
-
           required: false
-
-
-
-
 
 
 
@@ -10808,23 +5407,11 @@ paths:
 
 
 
-
-
-
-
             type: string
 
 
 
-
-
-
-
             enum:
-
-
-
-
 
 
 
@@ -10832,15 +5419,7 @@ paths:
 
 
 
-
-
-
-
               - male
-
-
-
-
 
 
 
@@ -10848,15 +5427,7 @@ paths:
 
 
 
-
-
-
-
           in: query
-
-
-
-
 
 
 
@@ -10864,15 +5435,7 @@ paths:
 
 
 
-
-
-
-
             Filter voices by language:
-
-
-
-
 
 
 
@@ -10880,15 +5443,7 @@ paths:
 
 
 
-
-
-
-
             * filipino - Filipino
-
-
-
-
 
 
 
@@ -10896,15 +5451,7 @@ paths:
 
 
 
-
-
-
-
             * german - German
-
-
-
-
 
 
 
@@ -10912,15 +5459,7 @@ paths:
 
 
 
-
-
-
-
             * indonesian - Indonesian
-
-
-
-
 
 
 
@@ -10928,15 +5467,7 @@ paths:
 
 
 
-
-
-
-
             * japanese - Japanese
-
-
-
-
 
 
 
@@ -10944,15 +5475,7 @@ paths:
 
 
 
-
-
-
-
             * malay - Malay
-
-
-
-
 
 
 
@@ -10960,15 +5483,7 @@ paths:
 
 
 
-
-
-
-
             * russian - Russian
-
-
-
-
 
 
 
@@ -10976,15 +5491,7 @@ paths:
 
 
 
-
-
-
-
             * thai - Thai
-
-
-
-
 
 
 
@@ -10992,15 +5499,7 @@ paths:
 
 
 
-
-
-
-
             * arabic - Arabic
-
-
-
-
 
 
 
@@ -11008,15 +5507,7 @@ paths:
 
 
 
-
-
-
-
             * turkish - Turkish
-
-
-
-
 
 
 
@@ -11024,15 +5515,7 @@ paths:
 
 
 
-
-
-
-
             * croatian - Croatian
-
-
-
-
 
 
 
@@ -11040,15 +5523,7 @@ paths:
 
 
 
-
-
-
-
             * chinese - Simplified Chinese
-
-
-
-
 
 
 
@@ -11056,15 +5531,7 @@ paths:
 
 
 
-
-
-
-
             * urdu - Urdu
-
-
-
-
 
 
 
@@ -11072,15 +5539,7 @@ paths:
 
 
 
-
-
-
-
             * traditional-chinese - Traditional Chinese
-
-
-
-
 
 
 
@@ -11088,15 +5547,7 @@ paths:
 
 
 
-
-
-
-
             * cantonese - Cantonese
-
-
-
-
 
 
 
@@ -11104,15 +5555,7 @@ paths:
 
 
 
-
-
-
-
             * malayalam - Malayalam
-
-
-
-
 
 
 
@@ -11120,15 +5563,7 @@ paths:
 
 
 
-
-
-
-
             * telugu - Telugu
-
-
-
-
 
 
 
@@ -11136,15 +5571,7 @@ paths:
 
 
 
-
-
-
-
             * hebrew - Hebrew
-
-
-
-
 
 
 
@@ -11152,15 +5579,7 @@ paths:
 
 
 
-
-
-
-
             * swedish - Swedish
-
-
-
-
 
 
 
@@ -11168,15 +5587,7 @@ paths:
 
 
 
-
-
-
-
             * dutch - Dutch
-
-
-
-
 
 
 
@@ -11184,15 +5595,7 @@ paths:
 
 
 
-
-
-
-
             * norwegian - Norwegian
-
-
-
-
 
 
 
@@ -11200,15 +5603,7 @@ paths:
 
 
 
-
-
-
-
             * bulgarian - Bulgarian
-
-
-
-
 
 
 
@@ -11216,15 +5611,7 @@ paths:
 
 
 
-
-
-
-
             * ukrainian - Ukrainian
-
-
-
-
 
 
 
@@ -11232,15 +5619,7 @@ paths:
 
 
 
-
-
-
-
             * persian - Persian
-
-
-
-
 
 
 
@@ -11248,15 +5627,7 @@ paths:
 
 
 
-
-
-
-
             * assamese - Assamese
-
-
-
-
 
 
 
@@ -11264,15 +5635,7 @@ paths:
 
 
 
-
-
-
-
             * tagalog - Tagalog
-
-
-
-
 
 
 
@@ -11280,15 +5643,7 @@ paths:
 
 
 
-
-
-
-
             * serbian - Serbian
-
-
-
-
 
 
 
@@ -11296,15 +5651,7 @@ paths:
 
 
 
-
-
-
-
             * swahili - Swahili
-
-
-
-
 
 
 
@@ -11312,15 +5659,7 @@ paths:
 
 
 
-
-
-
-
           schema:
-
-
-
-
 
 
 
@@ -11328,15 +5667,7 @@ paths:
 
 
 
-
-
-
-
             enum:
-
-
-
-
 
 
 
@@ -11344,15 +5675,7 @@ paths:
 
 
 
-
-
-
-
               - filipino
-
-
-
-
 
 
 
@@ -11360,15 +5683,7 @@ paths:
 
 
 
-
-
-
-
               - german
-
-
-
-
 
 
 
@@ -11376,15 +5691,7 @@ paths:
 
 
 
-
-
-
-
               - indonesian
-
-
-
-
 
 
 
@@ -11392,15 +5699,7 @@ paths:
 
 
 
-
-
-
-
               - japanese
-
-
-
-
 
 
 
@@ -11408,15 +5707,7 @@ paths:
 
 
 
-
-
-
-
               - malay
-
-
-
-
 
 
 
@@ -11424,15 +5715,7 @@ paths:
 
 
 
-
-
-
-
               - russian
-
-
-
-
 
 
 
@@ -11440,15 +5723,7 @@ paths:
 
 
 
-
-
-
-
               - thai
-
-
-
-
 
 
 
@@ -11456,15 +5731,7 @@ paths:
 
 
 
-
-
-
-
               - arabic
-
-
-
-
 
 
 
@@ -11472,15 +5739,7 @@ paths:
 
 
 
-
-
-
-
               - turkish
-
-
-
-
 
 
 
@@ -11488,15 +5747,7 @@ paths:
 
 
 
-
-
-
-
               - croatian
-
-
-
-
 
 
 
@@ -11504,15 +5755,7 @@ paths:
 
 
 
-
-
-
-
               - chinese
-
-
-
-
 
 
 
@@ -11520,15 +5763,7 @@ paths:
 
 
 
-
-
-
-
               - urdu
-
-
-
-
 
 
 
@@ -11536,15 +5771,7 @@ paths:
 
 
 
-
-
-
-
               - traditional-chinese
-
-
-
-
 
 
 
@@ -11552,15 +5779,7 @@ paths:
 
 
 
-
-
-
-
               - cantonese
-
-
-
-
 
 
 
@@ -11568,15 +5787,7 @@ paths:
 
 
 
-
-
-
-
               - malayalam
-
-
-
-
 
 
 
@@ -11584,15 +5795,7 @@ paths:
 
 
 
-
-
-
-
               - telugu
-
-
-
-
 
 
 
@@ -11600,15 +5803,7 @@ paths:
 
 
 
-
-
-
-
               - hebrew
-
-
-
-
 
 
 
@@ -11616,15 +5811,7 @@ paths:
 
 
 
-
-
-
-
               - swedish
-
-
-
-
 
 
 
@@ -11632,15 +5819,7 @@ paths:
 
 
 
-
-
-
-
               - dutch
-
-
-
-
 
 
 
@@ -11648,15 +5827,7 @@ paths:
 
 
 
-
-
-
-
               - norwegian
-
-
-
-
 
 
 
@@ -11664,15 +5835,7 @@ paths:
 
 
 
-
-
-
-
               - bulgarian
-
-
-
-
 
 
 
@@ -11680,15 +5843,7 @@ paths:
 
 
 
-
-
-
-
               - ukrainian
-
-
-
-
 
 
 
@@ -11696,15 +5851,7 @@ paths:
 
 
 
-
-
-
-
               - persian
-
-
-
-
 
 
 
@@ -11712,15 +5859,7 @@ paths:
 
 
 
-
-
-
-
               - assamese
-
-
-
-
 
 
 
@@ -11728,15 +5867,7 @@ paths:
 
 
 
-
-
-
-
               - tagalog
-
-
-
-
 
 
 
@@ -11744,15 +5875,7 @@ paths:
 
 
 
-
-
-
-
               - serbian
-
-
-
-
 
 
 
@@ -11760,15 +5883,7 @@ paths:
 
 
 
-
-
-
-
               - swahili
-
-
-
-
 
 
 
@@ -11776,15 +5891,7 @@ paths:
 
 
 
-
-
-
-
         '200':
-
-
-
-
 
 
 
@@ -11792,15 +5899,7 @@ paths:
 
 
 
-
-
-
-
           content:
-
-
-
-
 
 
 
@@ -11808,15 +5907,7 @@ paths:
 
 
 
-
-
-
-
               schema:
-
-
-
-
 
 
 
@@ -11824,15 +5915,7 @@ paths:
 
 
 
-
-
-
-
                 - $ref: '#/components/schemas/BaseResponse'
-
-
-
-
 
 
 
@@ -11840,15 +5923,7 @@ paths:
 
 
 
-
-
-
-
                   properties:
-
-
-
-
 
 
 
@@ -11856,15 +5931,7 @@ paths:
 
 
 
-
-
-
-
                       type: object
-
-
-
-
 
 
 
@@ -11872,15 +5939,7 @@ paths:
 
 
 
-
-
-
-
                         total:
-
-
-
-
 
 
 
@@ -11888,15 +5947,7 @@ paths:
 
 
 
-
-
-
-
                           description: Total number of voices
-
-
-
-
 
 
 
@@ -11904,15 +5955,7 @@ paths:
 
 
 
-
-
-
-
                         voices:
-
-
-
-
 
 
 
@@ -11920,15 +5963,7 @@ paths:
 
 
 
-
-
-
-
                           items:
-
-
-
-
 
 
 
@@ -11936,15 +5971,7 @@ paths:
 
 
 
-
-
-
-
                             properties:
-
-
-
-
 
 
 
@@ -11952,15 +5979,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -11968,15 +5987,7 @@ paths:
 
 
 
-
-
-
-
                                 example: Emily
-
-
-
-
 
 
 
@@ -11984,15 +5995,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -12000,15 +6003,7 @@ paths:
 
 
 
-
-
-
-
                                 example: en-US-ChristopherNeural
-
-
-
-
 
 
 
@@ -12016,15 +6011,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -12032,15 +6019,7 @@ paths:
 
 
 
-
-
-
-
                                 example: https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3
-
-
-
-
 
 
 
@@ -12048,15 +6027,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -12064,15 +6035,7 @@ paths:
 
 
 
-
-
-
-
                                 example: english
-
-
-
-
 
 
 
@@ -12080,15 +6043,7 @@ paths:
 
 
 
-
-
-
-
     get:
-
-
-
-
 
 
 
@@ -12096,15 +6051,7 @@ paths:
 
 
 
-
-
-
-
       - Voice
-
-
-
-
 
 
 
@@ -12112,15 +6059,7 @@ paths:
 
 
 
-
-
-
-
       description: Retrieve a list of your available voice with specified gender filter
-
-
-
-
 
 
 
@@ -12128,15 +6067,7 @@ paths:
 
 
 
-
-
-
-
         - name: language
-
-
-
-
 
 
 
@@ -12144,15 +6075,7 @@ paths:
 
 
 
-
-
-
-
           description: |
-
-
-
-
 
 
 
@@ -12160,15 +6083,7 @@ paths:
 
 
 
-
-
-
-
             * english - English
-
-
-
-
 
 
 
@@ -12176,15 +6091,7 @@ paths:
 
 
 
-
-
-
-
             * french - French  
-
-
-
-
 
 
 
@@ -12192,15 +6099,7 @@ paths:
 
 
 
-
-
-
-
             * hindi - Hindi
-
-
-
-
 
 
 
@@ -12208,15 +6107,7 @@ paths:
 
 
 
-
-
-
-
             * italian - Italian
-
-
-
-
 
 
 
@@ -12224,15 +6115,7 @@ paths:
 
 
 
-
-
-
-
             * korean - Korean
-
-
-
-
 
 
 
@@ -12240,15 +6123,7 @@ paths:
 
 
 
-
-
-
-
             * portuguese - Portuguese
-
-
-
-
 
 
 
@@ -12256,15 +6131,7 @@ paths:
 
 
 
-
-
-
-
             * spanish - Spanish
-
-
-
-
 
 
 
@@ -12272,15 +6139,7 @@ paths:
 
 
 
-
-
-
-
             * vietnamese - Vietnamese
-
-
-
-
 
 
 
@@ -12288,15 +6147,7 @@ paths:
 
 
 
-
-
-
-
             * greek - Greek
-
-
-
-
 
 
 
@@ -12304,15 +6155,7 @@ paths:
 
 
 
-
-
-
-
             * slovenian - Slovenian
-
-
-
-
 
 
 
@@ -12320,15 +6163,7 @@ paths:
 
 
 
-
-
-
-
             * romanian - Romanian
-
-
-
-
 
 
 
@@ -12336,15 +6171,7 @@ paths:
 
 
 
-
-
-
-
             * bengali - Bengali
-
-
-
-
 
 
 
@@ -12352,15 +6179,7 @@ paths:
 
 
 
-
-
-
-
             * hungarian - Hungarian
-
-
-
-
 
 
 
@@ -12368,15 +6187,7 @@ paths:
 
 
 
-
-
-
-
             * polish - Polish
-
-
-
-
 
 
 
@@ -12384,15 +6195,7 @@ paths:
 
 
 
-
-
-
-
             * danish - Danish
-
-
-
-
 
 
 
@@ -12400,15 +6203,7 @@ paths:
 
 
 
-
-
-
-
             * tamil - Tamil
-
-
-
-
 
 
 
@@ -12416,15 +6211,7 @@ paths:
 
 
 
-
-
-
-
             * czech - Czech
-
-
-
-
 
 
 
@@ -12432,15 +6219,7 @@ paths:
 
 
 
-
-
-
-
             * zulu - Zulu
-
-
-
-
 
 
 
@@ -12448,15 +6227,7 @@ paths:
 
 
 
-
-
-
-
             * lithuanian - Lithuanian
-
-
-
-
 
 
 
@@ -12464,15 +6235,7 @@ paths:
 
 
 
-
-
-
-
             * flemish - Flemish
-
-
-
-
 
 
 
@@ -12480,15 +6243,7 @@ paths:
 
 
 
-
-
-
-
             * finnish - Finnish
-
-
-
-
 
 
 
@@ -12496,15 +6251,7 @@ paths:
 
 
 
-
-
-
-
             * latvian - Latvian
-
-
-
-
 
 
 
@@ -12512,15 +6259,7 @@ paths:
 
 
 
-
-
-
-
             * mongolian - Mongolian
-
-
-
-
 
 
 
@@ -12528,15 +6267,7 @@ paths:
 
 
 
-
-
-
-
             * odia - Odia
-
-
-
-
 
 
 
@@ -12544,15 +6275,7 @@ paths:
 
 
 
-
-
-
-
             * kannada - Kannada
-
-
-
-
 
 
 
@@ -12560,15 +6283,7 @@ paths:
 
 
 
-
-
-
-
             * amharic - Amharic
-
-
-
-
 
 
 
@@ -12576,15 +6291,7 @@ paths:
 
 
 
-
-
-
-
             * slovak - Slovak
-
-
-
-
 
 
 
@@ -12592,15 +6299,7 @@ paths:
 
 
 
-
-
-
-
           required: false
-
-
-
-
 
 
 
@@ -12608,15 +6307,7 @@ paths:
 
 
 
-
-
-
-
             type: string
-
-
-
-
 
 
 
@@ -12624,15 +6315,7 @@ paths:
 
 
 
-
-
-
-
               - english
-
-
-
-
 
 
 
@@ -12640,15 +6323,7 @@ paths:
 
 
 
-
-
-
-
               - french
-
-
-
-
 
 
 
@@ -12656,15 +6331,7 @@ paths:
 
 
 
-
-
-
-
               - hindi
-
-
-
-
 
 
 
@@ -12672,15 +6339,7 @@ paths:
 
 
 
-
-
-
-
               - italian
-
-
-
-
 
 
 
@@ -12688,15 +6347,7 @@ paths:
 
 
 
-
-
-
-
               - korean
-
-
-
-
 
 
 
@@ -12704,15 +6355,7 @@ paths:
 
 
 
-
-
-
-
               - portuguese
-
-
-
-
 
 
 
@@ -12720,15 +6363,7 @@ paths:
 
 
 
-
-
-
-
               - spanish
-
-
-
-
 
 
 
@@ -12736,15 +6371,7 @@ paths:
 
 
 
-
-
-
-
               - vietnamese
-
-
-
-
 
 
 
@@ -12752,15 +6379,7 @@ paths:
 
 
 
-
-
-
-
               - greek
-
-
-
-
 
 
 
@@ -12768,15 +6387,7 @@ paths:
 
 
 
-
-
-
-
               - slovenian
-
-
-
-
 
 
 
@@ -12784,15 +6395,7 @@ paths:
 
 
 
-
-
-
-
               - romanian
-
-
-
-
 
 
 
@@ -12800,15 +6403,7 @@ paths:
 
 
 
-
-
-
-
               - bengali
-
-
-
-
 
 
 
@@ -12816,15 +6411,7 @@ paths:
 
 
 
-
-
-
-
               - hungarian
-
-
-
-
 
 
 
@@ -12832,15 +6419,7 @@ paths:
 
 
 
-
-
-
-
               - polish
-
-
-
-
 
 
 
@@ -12848,15 +6427,7 @@ paths:
 
 
 
-
-
-
-
               - danish
-
-
-
-
 
 
 
@@ -12864,15 +6435,7 @@ paths:
 
 
 
-
-
-
-
               - tamil
-
-
-
-
 
 
 
@@ -12880,15 +6443,7 @@ paths:
 
 
 
-
-
-
-
               - czech
-
-
-
-
 
 
 
@@ -12896,15 +6451,7 @@ paths:
 
 
 
-
-
-
-
               - zulu
-
-
-
-
 
 
 
@@ -12912,15 +6459,7 @@ paths:
 
 
 
-
-
-
-
               - lithuanian
-
-
-
-
 
 
 
@@ -12928,15 +6467,7 @@ paths:
 
 
 
-
-
-
-
               - flemish
-
-
-
-
 
 
 
@@ -12944,15 +6475,7 @@ paths:
 
 
 
-
-
-
-
               - finnish
-
-
-
-
 
 
 
@@ -12960,15 +6483,7 @@ paths:
 
 
 
-
-
-
-
               - latvian
-
-
-
-
 
 
 
@@ -12976,15 +6491,7 @@ paths:
 
 
 
-
-
-
-
               - mongolian
-
-
-
-
 
 
 
@@ -12992,15 +6499,7 @@ paths:
 
 
 
-
-
-
-
               - odia
-
-
-
-
 
 
 
@@ -13008,15 +6507,7 @@ paths:
 
 
 
-
-
-
-
               - kannada
-
-
-
-
 
 
 
@@ -13024,15 +6515,7 @@ paths:
 
 
 
-
-
-
-
               - amharic
-
-
-
-
 
 
 
@@ -13040,15 +6523,7 @@ paths:
 
 
 
-
-
-
-
               - slovak
-
-
-
-
 
 
 
@@ -13056,15 +6531,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -13072,15 +6539,7 @@ paths:
 
 
 
-
-
-
-
           description: Success
-
-
-
-
 
 
 
@@ -13088,15 +6547,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -13104,15 +6555,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -13120,15 +6563,7 @@ paths:
 
 
 
-
-
-
-
                 - type: object
-
-
-
-
 
 
 
@@ -13136,15 +6571,7 @@ paths:
 
 
 
-
-
-
-
                     data:
-
-
-
-
 
 
 
@@ -13152,15 +6579,7 @@ paths:
 
 
 
-
-
-
-
                       properties:
-
-
-
-
 
 
 
@@ -13168,15 +6587,7 @@ paths:
 
 
 
-
-
-
-
                           type: integer
-
-
-
-
 
 
 
@@ -13184,15 +6595,7 @@ paths:
 
 
 
-
-
-
-
                           example: 14
-
-
-
-
 
 
 
@@ -13200,15 +6603,7 @@ paths:
 
 
 
-
-
-
-
                           type: array
-
-
-
-
 
 
 
@@ -13216,15 +6611,7 @@ paths:
 
 
 
-
-
-
-
                             type: object
-
-
-
-
 
 
 
@@ -13232,23 +6619,11 @@ paths:
 
 
 
-
-
-
-
                               name:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -13256,15 +6631,7 @@ paths:
 
 
 
-
-
-
-
                                 example: Emily
-
-
-
-
 
 
 
@@ -13272,15 +6639,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -13288,15 +6647,7 @@ paths:
 
 
 
-
-
-
-
                                 example: en-US-ChristopherNeural
-
-
-
-
 
 
 
@@ -13304,15 +6655,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -13320,15 +6663,7 @@ paths:
 
 
 
-
-
-
-
                                 example: https://jogg-test.cds8.cn/jogg/2024-08-05/3020cde64e75c1a3a232ec325e3d1790.mp3
-
-
-
-
 
 
 
@@ -13336,15 +6671,7 @@ paths:
 
 
 
-
-
-
-
                                 type: string
-
-
-
-
 
 
 
@@ -13352,17 +6679,7 @@ paths:
 
 
 
-
-
-
-
                                 example: english
-
-
-
-
-
-
 
 
 
@@ -13372,15 +6689,7 @@ paths:
 
 
 
-
-
-
-
     post:
-
-
-
-
 
 
 
@@ -13388,15 +6697,7 @@ paths:
 
 
 
-
-
-
-
         - Avatar
-
-
-
-
 
 
 
@@ -13404,15 +6705,7 @@ paths:
 
 
 
-
-
-
-
       requestBody:
-
-
-
-
 
 
 
@@ -13420,15 +6713,7 @@ paths:
 
 
 
-
-
-
-
         content:
-
-
-
-
 
 
 
@@ -13436,15 +6721,7 @@ paths:
 
 
 
-
-
-
-
             schema:
-
-
-
-
 
 
 
@@ -13452,15 +6729,7 @@ paths:
 
 
 
-
-
-
-
               required:
-
-
-
-
 
 
 
@@ -13468,15 +6737,7 @@ paths:
 
 
 
-
-
-
-
                 - name
-
-
-
-
 
 
 
@@ -13484,23 +6745,11 @@ paths:
 
 
 
-
-
-
-
                 origin_url:
 
 
 
-
-
-
-
                   type: string
-
-
-
-
 
 
 
@@ -13508,15 +6757,7 @@ paths:
 
 
 
-
-
-
-
                 name:
-
-
-
-
 
 
 
@@ -13524,15 +6765,7 @@ paths:
 
 
 
-
-
-
-
                   description: "Instant avatar name"
-
-
-
-
 
 
 
@@ -13540,15 +6773,7 @@ paths:
 
 
 
-
-
-
-
         '200':
-
-
-
-
 
 
 
@@ -13556,15 +6781,7 @@ paths:
 
 
 
-
-
-
-
           content:
-
-
-
-
 
 
 
@@ -13572,15 +6789,7 @@ paths:
 
 
 
-
-
-
-
               schema:
-
-
-
-
 
 
 
@@ -13588,15 +6797,7 @@ paths:
 
 
 
-
-
-
-
                 - $ref: '#/components/schemas/BaseResponse'
-
-
-
-
 
 
 
@@ -13604,15 +6805,7 @@ paths:
 
 
 
-
-
-
-
                   properties:
-
-
-
-
 
 
 
@@ -13620,15 +6813,7 @@ paths:
 
 
 
-
-
-
-
                       type: object
-
-
-
-
 
 
 
@@ -13636,15 +6821,7 @@ paths:
 
 
 
-
-
-
-
                         avatar_id:
-
-
-
-
 
 
 
@@ -13652,15 +6829,7 @@ paths:
 
 
 
-
-
-
-
                           description: "Created instant avatar ID"
-
-
-
-
 
 
 
@@ -13668,23 +6837,11 @@ paths:
 
 
 
-
-
-
-
     delete:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -13692,23 +6849,11 @@ paths:
 
 
 
-
-
-
-
       summary: "Delete an instant avatar"
 
 
 
-
-
-
-
       parameters:
-
-
-
-
 
 
 
@@ -13716,15 +6861,7 @@ paths:
 
 
 
-
-
-
-
           in: query
-
-
-
-
 
 
 
@@ -13732,15 +6869,7 @@ paths:
 
 
 
-
-
-
-
           description: "Avatar ID to delete"
-
-
-
-
 
 
 
@@ -13748,15 +6877,7 @@ paths:
 
 
 
-
-
-
-
             type: integer
-
-
-
-
 
 
 
@@ -13764,15 +6885,7 @@ paths:
 
 
 
-
-
-
-
         '200':
-
-
-
-
 
 
 
@@ -13780,15 +6893,7 @@ paths:
 
 
 
-
-
-
-
           content:
-
-
-
-
 
 
 
@@ -13796,23 +6901,11 @@ paths:
 
 
 
-
-
-
-
               schema:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -13820,15 +6913,7 @@ paths:
 
 
 
-
-
-
-
   /visual_styles:
-
-
-
-
 
 
 
@@ -13836,15 +6921,7 @@ paths:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -13852,15 +6929,7 @@ paths:
 
 
 
-
-
-
-
       summary: Get Visual Style
-
-
-
-
 
 
 
@@ -13868,15 +6937,7 @@ paths:
 
 
 
-
-
-
-
       parameters:
-
-
-
-
 
 
 
@@ -13884,15 +6945,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -13900,15 +6953,7 @@ paths:
 
 
 
-
-
-
-
           description: "Success"
-
-
-
-
 
 
 
@@ -13916,15 +6961,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -13932,15 +6969,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -13948,15 +6977,7 @@ paths:
 
 
 
-
-
-
-
                   - type: object
-
-
-
-
 
 
 
@@ -13964,15 +6985,7 @@ paths:
 
 
 
-
-
-
-
                       data:
-
-
-
-
 
 
 
@@ -13980,15 +6993,7 @@ paths:
 
 
 
-
-
-
-
                         properties:
-
-
-
-
 
 
 
@@ -13996,15 +7001,7 @@ paths:
 
 
 
-
-
-
-
                             type: array
-
-
-
-
 
 
 
@@ -14012,15 +7009,7 @@ paths:
 
 
 
-
-
-
-
                               type: object
-
-
-
-
 
 
 
@@ -14028,15 +7017,7 @@ paths:
 
 
 
-
-
-
-
                                 id:
-
-
-
-
 
 
 
@@ -14044,15 +7025,7 @@ paths:
 
 
 
-
-
-
-
                                   example: 2400
-
-
-
-
 
 
 
@@ -14060,15 +7033,7 @@ paths:
 
 
 
-
-
-
-
                                   type: string
-
-
-
-
 
 
 
@@ -14076,15 +7041,7 @@ paths:
 
 
 
-
-
-
-
   /templates:
-
-
-
-
 
 
 
@@ -14092,15 +7049,7 @@ paths:
 
 
 
-
-
-
-
       tags:
-
-
-
-
 
 
 
@@ -14108,15 +7057,7 @@ paths:
 
 
 
-
-
-
-
       summary: Get templates
-
-
-
-
 
 
 
@@ -14124,15 +7065,7 @@ paths:
 
 
 
-
-
-
-
       parameters:
-
-
-
-
 
 
 
@@ -14140,15 +7073,7 @@ paths:
 
 
 
-
-
-
-
       responses:
-
-
-
-
 
 
 
@@ -14156,15 +7081,7 @@ paths:
 
 
 
-
-
-
-
           description: "Success"
-
-
-
-
 
 
 
@@ -14172,15 +7089,7 @@ paths:
 
 
 
-
-
-
-
             application/json:
-
-
-
-
 
 
 
@@ -14188,15 +7097,7 @@ paths:
 
 
 
-
-
-
-
                 allOf:
-
-
-
-
 
 
 
@@ -14204,15 +7105,7 @@ paths:
 
 
 
-
-
-
-
                   - type: object
-
-
-
-
 
 
 
@@ -14220,15 +7113,7 @@ paths:
 
 
 
-
-
-
-
                       data:
-
-
-
-
 
 
 
@@ -14236,15 +7121,7 @@ paths:
 
 
 
-
-
-
-
                         properties:
-
-
-
-
 
 
 
@@ -14252,15 +7129,7 @@ paths:
 
 
 
-
-
-
-
                             type: array
-
-
-
-
 
 
 
@@ -14268,15 +7137,7 @@ paths:
 
 
 
-
-
-
-
                               type: object
-
-
-
-
 
 
 
@@ -14284,23 +7145,11 @@ paths:
 
 
 
-
-
-
-
                                 id:
 
 
 
-
-
-
-
                                   type: integer
-
-
-
-
 
 
 
@@ -14308,23 +7157,11 @@ paths:
 
 
 
-
-
-
-
                                 name:
 
 
 
-
-
-
-
                                   type: string
-
-
-
-
 
 
 
@@ -14332,15 +7169,7 @@ paths:
 
 
 
-
-
-
-
                                 cover_url:
-
-
-
-
 
 
 
@@ -14348,15 +7177,7 @@ paths:
 
 
 
-
-
-
-
                                   example: https://res.jogg.ai/cover.png
-
-
-
-
 
 
 
@@ -14364,15 +7185,7 @@ paths:
 
 
 
-
-
-
-
                                   type: string
-
-
-
-
 
 
 
@@ -14380,79 +7193,39 @@ paths:
 
 
 
-
-
-
-
                                 aspect_ratio:
-
-
-
-
 
 
 
                                   type: integer
 
-
-
                 
-
-
 
                                   description: |
 
-
-
                 
-
-
 
                                     Video aspect ratio:
 
-
-
                 
-
-
 
                                     * 0 - Portrait [9:16]
 
-
-
                 
-
-
 
                                     * 1 - Landscape [16:9]
 
-
-
                 
-
-
 
                                     * 2 - Square [1:1]
 
-
-
                 
-
-
 
                                   enum: [0, 1, 2]
 
-
-
                 
 
-
-
                                   example: 0
-
-
-
-
 
 
 
@@ -14460,15 +7233,7 @@ paths:
 
 
 
-
-
-
-
     get:
-
-
-
-
 
 
 
@@ -14476,15 +7241,7 @@ paths:
 
 
 
-
-
-
-
         - Template  
-
-
-
-
 
 
 
@@ -14492,15 +7249,7 @@ paths:
 
 
 
-
-
-
-
       description: Get list of your custom templates
-
-
-
-
 
 
 
@@ -14508,15 +7257,7 @@ paths:
 
 
 
-
-
-
-
         - $ref: '#/components/parameters/AspectRatioParam'
-
-
-
-
 
 
 
@@ -14524,15 +7265,7 @@ paths:
 
 
 
-
-
-
-
         '200':
-
-
-
-
 
 
 
@@ -14540,15 +7273,7 @@ paths:
 
 
 
-
-
-
-
           content:
-
-
-
-
 
 
 
@@ -14556,15 +7281,7 @@ paths:
 
 
 
-
-
-
-
               schema:
-
-
-
-
 
 
 
@@ -14572,15 +7289,7 @@ paths:
 
 
 
-
-
-
-
                   - $ref: '#/components/schemas/BaseResponse'
-
-
-
-
 
 
 
@@ -14588,15 +7297,7 @@ paths:
 
 
 
-
-
-
-
                     properties:
-
-
-
-
 
 
 
@@ -14604,15 +7305,7 @@ paths:
 
 
 
-
-
-
-
                         type: object
-
-
-
-
 
 
 
@@ -14620,15 +7313,7 @@ paths:
 
 
 
-
-
-
-
                           templates:
-
-
-
-
 
 
 
@@ -14636,15 +7321,7 @@ paths:
 
 
 
-
-
-
-
                             items:
-
-
-
-
 
 
 
@@ -14652,15 +7329,7 @@ paths:
 
 
 
-
-
-
-
                               properties:
-
-
-
-
 
 
 
@@ -14668,15 +7337,7 @@ paths:
 
 
 
-
-
-
-
                                   type: integer
-
-
-
-
 
 
 
@@ -14684,23 +7345,11 @@ paths:
 
 
 
-
-
-
-
                                 name:
 
 
 
-
-
-
-
                                   type: string
-
-
-
-
 
 
 
@@ -14708,15 +7357,7 @@ paths:
 
 
 
-
-
-
-
                                 cover_url:
-
-
-
-
 
 
 
@@ -14724,15 +7365,7 @@ paths:
 
 
 
-
-
-
-
                                   example: https://res.jogg.ai/cover.png
-
-
-
-
 
 
 
@@ -14740,15 +7373,7 @@ components:
 
 
 
-
-
-
-
   parameters:
-
-
-
-
 
 
 
@@ -14756,15 +7381,7 @@ components:
 
 
 
-
-
-
-
       name: page
-
-
-
-
 
 
 
@@ -14772,15 +7389,7 @@ components:
 
 
 
-
-
-
-
       description: Page number
-
-
-
-
 
 
 
@@ -14788,15 +7397,7 @@ components:
 
 
 
-
-
-
-
       schema:
-
-
-
-
 
 
 
@@ -14804,15 +7405,7 @@ components:
 
 
 
-
-
-
-
         minimum: 1
-
-
-
-
 
 
 
@@ -14824,19 +7417,7 @@ components:
 
 
 
-
-
-
-
-
-
-
-
     PageSizeParam:
-
-
-
-
 
 
 
@@ -14844,15 +7425,7 @@ components:
 
 
 
-
-
-
-
       in: query
-
-
-
-
 
 
 
@@ -14860,15 +7433,7 @@ components:
 
 
 
-
-
-
-
       required: false
-
-
-
-
 
 
 
@@ -14876,15 +7441,7 @@ components:
 
 
 
-
-
-
-
         type: integer
-
-
-
-
 
 
 
@@ -14892,15 +7449,7 @@ components:
 
 
 
-
-
-
-
         maximum: 100
-
-
-
-
 
 
 
@@ -14912,19 +7461,7 @@ components:
 
 
 
-
-
-
-
-
-
-
-
     AspectRatioParam:
-
-
-
-
 
 
 
@@ -14932,15 +7469,7 @@ components:
 
 
 
-
-
-
-
       in: query
-
-
-
-
 
 
 
@@ -14948,15 +7477,7 @@ components:
 
 
 
-
-
-
-
         Screen aspect ratio:
-
-
-
-
 
 
 
@@ -14964,15 +7485,7 @@ components:
 
 
 
-
-
-
-
         * 0 - [9:16]
-
-
-
-
 
 
 
@@ -14980,15 +7493,7 @@ components:
 
 
 
-
-
-
-
         * 2 - [1:1]
-
-
-
-
 
 
 
@@ -14996,15 +7501,7 @@ components:
 
 
 
-
-
-
-
       schema:
-
-
-
-
 
 
 
@@ -15012,15 +7509,7 @@ components:
 
 
 
-
-
-
-
         enum: [-1, 0, 1, 2]
-
-
-
-
 
 
 
@@ -15032,19 +7521,7 @@ components:
 
 
 
-
-
-
-
-
-
-
-
     AspectRatioSearch:
-
-
-
-
 
 
 
@@ -15052,15 +7529,7 @@ components:
 
 
 
-
-
-
-
       in: query
-
-
-
-
 
 
 
@@ -15068,15 +7537,7 @@ components:
 
 
 
-
-
-
-
         Screen aspect ratio:
-
-
-
-
 
 
 
@@ -15084,15 +7545,7 @@ components:
 
 
 
-
-
-
-
         * 1 - [16:9]
-
-
-
-
 
 
 
@@ -15100,15 +7553,7 @@ components:
 
 
 
-
-
-
-
       required: false
-
-
-
-
 
 
 
@@ -15116,15 +7561,7 @@ components:
 
 
 
-
-
-
-
         type: integer
-
-
-
-
 
 
 
@@ -15132,15 +7569,7 @@ components:
 
 
 
-
-
-
-
         default: 0
-
-
-
-
 
 
 
@@ -15148,15 +7577,7 @@ components:
 
 
 
-
-
-
-
     Error:
-
-
-
-
 
 
 
@@ -15164,15 +7585,7 @@ components:
 
 
 
-
-
-
-
         - code
-
-
-
-
 
 
 
@@ -15180,15 +7593,7 @@ components:
 
 
 
-
-
-
-
       type: object
-
-
-
-
 
 
 
@@ -15196,23 +7601,11 @@ components:
 
 
 
-
-
-
-
         code:
 
 
 
-
-
-
-
           type: integer
-
-
-
-
 
 
 
@@ -15220,23 +7613,11 @@ components:
 
 
 
-
-
-
-
         msg:
 
 
 
-
-
-
-
           type: string
-
-
-
-
 
 
 
@@ -15244,15 +7625,7 @@ components:
 
 
 
-
-
-
-
       type: object
-
-
-
-
 
 
 
@@ -15260,15 +7633,7 @@ components:
 
 
 
-
-
-
-
         - code
-
-
-
-
 
 
 
@@ -15276,15 +7641,7 @@ components:
 
 
 
-
-
-
-
       properties:
-
-
-
-
 
 
 
@@ -15292,15 +7649,7 @@ components:
 
 
 
-
-
-
-
           type: integer
-
-
-
-
 
 
 
@@ -15308,15 +7657,7 @@ components:
 
 
 
-
-
-
-
             Business status code:
-
-
-
-
 
 
 
@@ -15324,15 +7665,7 @@ components:
 
 
 
-
-
-
-
             * 10104 - Record not found
-
-
-
-
 
 
 
@@ -15340,15 +7673,7 @@ components:
 
 
 
-
-
-
-
             * 18020 - Insufficient credit
-
-
-
-
 
 
 
@@ -15356,15 +7681,7 @@ components:
 
 
 
-
-
-
-
             * 40000 - Parameter error
-
-
-
-
 
 
 
@@ -15372,15 +7689,7 @@ components:
 
 
 
-
-
-
-
         msg:
-
-
-
-
 
 
 
@@ -15388,15 +7697,7 @@ components:
 
 
 
-
-
-
-
           description: Response message
-
-
-
-
 
 
 
@@ -15404,15 +7705,7 @@ components:
 
 
 
-
-
-
-
     PageInfo:
-
-
-
-
 
 
 
@@ -15420,15 +7713,7 @@ components:
 
 
 
-
-
-
-
       properties:
-
-
-
-
 
 
 
@@ -15436,15 +7721,7 @@ components:
 
 
 
-
-
-
-
           type: integer
-
-
-
-
 
 
 
@@ -15452,23 +7729,11 @@ components:
 
 
 
-
-
-
-
         total_page:
 
 
 
-
-
-
-
           type: integer
-
-
-
-
 
 
 
@@ -15480,19 +7745,7 @@ components:
 
 
 
-
-
-
-
-
-
-
-
   securitySchemes:
-
-
-
-
 
 
 
@@ -15500,15 +7753,7 @@ components:
 
 
 
-
-
-
-
       type: apiKey
-
-
-
-
 
 
 
@@ -15516,11 +7761,5 @@ components:
 
 
 
-
-
-
-
       name: x-api-key
-
-
 
