@@ -152,6 +152,7 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
     "visual_style": "FullScreen",
     "script_style": "Don't Worry",
     "voice_id":"en-US-ChristopherNeural",
+    "music_id": 62,
     "template_type": "public",
     "override_script": "",
     "caption": true
@@ -192,6 +193,7 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
     "script_style": "Don't Worry",
     "template_id":0,
     "voice_id":"en-US-ChristopherNeural",
+    "music_id": 62,
     "template_type": "public",
     "override_script": "",
     "caption": true
