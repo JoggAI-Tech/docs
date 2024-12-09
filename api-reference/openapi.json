@@ -2692,7 +2692,7 @@ paths:
                 
                 music_id:
 
-                  type: int
+                  type: integer
 
                   description: |
 
