@@ -24,4 +24,6 @@ You can obtain the API ID and API Key.
 
 The generated video consumption is based on its duration: 1 API credit is consumed for every 2 minutes of video. Less than 2 minutes is calculated as 1 API credit.
 
+The preview video consumption is based on its duration: 0.5 API credit is consumed for every 2 minutes of video. Less than 2 minutes is calculated as 0.5 API credit.
+
 Each time you call the AI Scripts API, it will consume 0.2 API Credit.
