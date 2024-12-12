@@ -15398,36 +15398,6 @@ paths:
 
 
 
-                secret:
-
-
-
-
-
-
-
-                  type: string
-
-
-
-
-
-
-
-                  description: New secret key for signature verification
-
-
-
-
-
-
-
-                  example: your-secret-key
-
-
-
-
-
 
 
                 events:
@@ -16118,14 +16088,6 @@ paths:
 
 
 
-                - secret
-
-
-
-
-
-
-
                 - events
 
 
@@ -16169,36 +16131,6 @@ paths:
                   example: https://example.com/webhook
 
 
-
-
-
-
-
-                secret:
-
-
-
-
-
-
-
-                  type: string
-
-
-
-
-
-
-
-                  description: Secret for signature verification
-
-
-
-
-
-
-
-                  example: your-secret-key
 
 
 
@@ -17609,5 +17541,6 @@ components:
 
 
       name: x-api-key
+
 
 
