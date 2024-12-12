@@ -94,7 +94,9 @@
         "api-reference/API Documentation/ReplaceScriptinTemplate",
         "api-reference/API Documentation/GetResult"
           ]        
-          }
+          },
+        "api-reference/API Documentation/Webhook"
+
                 ]
     },
     {
@@ -167,8 +169,14 @@
         "api-reference/Music/GetMusic"
 
       ]
-    }
-    
+    },
+    {
+      "group": "Webhook",
+      "pages": [
+        "api-reference/Webhook"
+
+      ]
+    }    
   ],
 
   "footerSocials": {
