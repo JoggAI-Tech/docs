@@ -26,7 +26,7 @@ curl --location --request GET 'https://api.jogg.ai/v1/webhook/endpoints' \
     {
       "endpoint_id": "b1ac30a401234c96ad128303dfb431e2",
       "url": "https://example.com/webhook",
-      "secret": "your-secret-key",
+      "secret": "a1b2c3d4e5f6g7h8",
       "status": "enabled",
       "events": ["generated_video_success"],
       "username": "jogg@gmail.com",
@@ -38,17 +38,16 @@ curl --location --request GET 'https://api.jogg.ai/v1/webhook/endpoints' \
 
 ### Add Webhook Endpoint
 
-Create a new webhook endpoint configuration.
+Create a new webhook endpoint configuration. The system will automatically generate a 16-character secret key for signature verification.
 
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/webhook/endpoint' \
 --header 'x-api-key: <your-api-key>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "url": "https://example.com/webhook",
-  "secret": "your-secret-key",
-  "events": ["generated_video_success"],
-  "status": "enabled"
+    "url": "https://example.com/webhook",
+    "events": ["generated_video_success"],
+    "status": "enabled"
 }'
 ```
 
@@ -56,29 +55,28 @@ curl --location --request POST 'https://api.jogg.ai/v1/webhook/endpoint' \
 
 ```json
 {
-  "endpoint_id": "b1ac30a401234c96ad128303dfb431e2",
-  "url": "https://example.com/webhook",
-  "secret": "your-secret-key",
-  "status": "enabled",
-  "events": ["generated_video_success"],
-  "username": "jogg@gmail.com",
-  "created_at": 1703894400
+    "endpoint_id": "b1ac30a401234c96ad128303dfb431e2",
+    "url": "https://example.com/webhook",
+    "secret": "a1b2c3d4e5f6g7h8",
+    "status": "enabled",
+    "events": ["generated_video_success"],
+    "username": "jogg@gmail.com",
+    "created_at": 1703894400
 }
 ```
 
 ### Update Webhook Endpoint
 
-Update an existing webhook endpoint configuration.
+Update an existing webhook endpoint configuration. Note that the secret key cannot be modified.
 
 ```bash
 curl --location --request PUT 'https://api.jogg.ai/v1/webhook/endpoint/{endpoint_id}' \
 --header 'x-api-key: <your-api-key>' \
 --header 'Content-Type: application/json' \
 --data-raw '{
-  "url": "https://example.com/webhook",
-  "secret": "your-secret-key",
-  "events": ["generated_video_success"],
-  "status": "enabled"
+    "url": "https://example.com/webhook",
+    "events": ["generated_video_success"],
+    "status": "enabled"
 }'
 ```
 
@@ -156,7 +154,7 @@ Triggered when video generation fails.
 
 ### Secret and Signature Verification
 
-When configuring a webhook, you must provide a secret key. This secret is used to sign webhook payloads, allowing you to verify that requests are coming from Jogg.
+When creating a webhook endpoint, the system automatically generates a 16-character secret key. This secret is used to sign webhook payloads, allowing you to verify that requests are coming from Jogg.
 
 1. All webhook URLs must use HTTPS
 
@@ -236,9 +234,7 @@ function verifyWebhookSignature(payload, signature, secret) {
 
 5. Use constant-time string comparison for signature verification
 
-6. Rotate webhook secrets periodically
-
-7. Store webhook logs for security auditing
+6. Store webhook logs for security auditing
 
 ### Implementation
 
