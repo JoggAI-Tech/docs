@@ -173,7 +173,11 @@
     {
       "group": "Webhook",
       "pages": [
-        "api-reference/Webhook"
+        "api-reference/Webhook/ListofWebhookEndpoints",
+        "api-reference/Webhook/AddWebhookEndpoint",
+        "api-reference/Webhook/UpdateWebhookEndpoint",
+        "api-reference/Webhook/DeleteWebhookEndpoint",
+        "api-reference/Webhook/ListofAvailableWebhookEvents"
 
       ]
     }    
