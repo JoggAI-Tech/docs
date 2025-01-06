@@ -9,6 +9,8 @@ You can customize your avatar using the Create Instant Avatar API. Input the vid
 
 Recommended input video specifications: 1080P at 30FPS. If you provide a video with higher specifications, we will automatically convert it to that specification.
 
+Consumption：Each API call to "Create Instant Avatar" consumes 100 credits.
+
 ### Base URL
 
 \`https://api-services.jogg.ai\`
