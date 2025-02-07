@@ -75,7 +75,7 @@
           "pages":[
         "api-reference/API Documentation/CreateAvatarVideo",
         "api-reference/API Documentation/CreateAvatarVideoWithInstantAvatar",
-        "api-reference/API Documentation/UploadAudio",
+        "api-reference/API Documentation/UsingAudioSourceasVoice",
         "api-reference/API Documentation/CreateTransparentAvatarVideos"
           ]        
           },     

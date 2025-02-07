@@ -4,6 +4,7 @@ description: 'How to create video from templates with API.'
 ---
 
 ### Request Parameters
+
 ```java
 {
     "text": "string",   # Text script replacement; default is "default"
@@ -52,7 +53,9 @@ description: 'How to create video from templates with API.'
 }
 
 ```
+
 ### Response
+
 ```java
 {
     "code": 0,
@@ -62,7 +65,9 @@ description: 'How to create video from templates with API.'
     }
 }
 ```
+
 ### Request Example
+
 ```json
 curl --location --request POST 'https://api-services.jogg.ai/open/render' 
 --header 'x-api-key: <your-api-key>' 
