@@ -49,7 +49,7 @@ sign\_url: Use this URL to upload the file.
 
 Use the following cURL command to upload the file to the server. Make sure to replace \<file-binary-data> with the actual binary data of the file.
 
-```json
+```powershell
 curl --location --request PUT '<sign_url>' \
 --header 'Content-Type: application/octet-stream' \
 --data-binary '<file-binary-data>'
