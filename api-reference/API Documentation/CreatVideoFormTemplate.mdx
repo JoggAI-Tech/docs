@@ -74,7 +74,7 @@ On the interface, define variables.
 
 You can customize variable names for the elements in the template to facilitate your identification and replacement of them. 
 
-Tip: Currently, only script content, text, image and video are supported.
+Tip: Currently, only `script content, text, image, video and avatar` are supported.
 ![](/text_element.png)
 
 ## **Step 3:** Modify Template Elements and Generate Vide&#x6F;**.**
@@ -90,10 +90,10 @@ Pass the parameters for generating the video to the template, and it will return
 
   --data-raw  '{
   	"template_id": 0,         // required；
-  	"template_type": "user",  // required；Template type; default is "user"
+  	"template_type": "user",  // required；Template type; default is "user";
   	"avatar_id": 0,           // required；Digital person ID;
   	"avatar_type": 0,         // required；Determine the source of the avatar, whether it is in a public library or created by an individual
-     "lang": "english"         // required;
+     "lang": "english"         // required;t
   	"variables": [
   		{
   			"type": "text",    
@@ -177,15 +177,14 @@ Modify Template Elements and Generate Video.
   	"template_type": "user",  // required；Template type; default is "user"
   	"avatar_id": 0,           // required；Digital person ID;
   	"avatar_type": 0,         // required；Determine the source of the avatar, whether it is in a public library or created by an individual
-     "lang": "english"         // required;
+     "lang": "english"         // required;The language;
   	"variables": [
   		{
   			"type": "text",    
   			"name": "Text_element",   // Name of the variable to be replaced as set in the template
   			"properties": {
   				"content": "test"
-  			},
-
+  			}
   		},
   		{
   			"type": "image",
@@ -235,7 +234,7 @@ Define the variable.
 Modify Template Elements and Generate Video.
 
 <CodeGroup>
-  ```javascript Resquest
+  ```powershell Resquest
   curl --location --request POST \
   --url  'https://api.jogg.ai/v1/create_video_with_template' \
   --header  'x-API-key: <your-API-key>' \
@@ -243,10 +242,10 @@ Modify Template Elements and Generate Video.
 
   --data-raw  '{
   	"template_id": 0,         // required；
-  	"template_type": "user",  // required；Template type; default is "user"
+  	"template_type": "user",  // required；Template type; default is "user";
   	"avatar_id": 0,           // required；Digital person ID;
   	"avatar_type": 0,         // required；Determine the source of the avatar, whether it is in a public library or created by an individual
-     "lang": "english"         // required;
+     "lang": "english"         // required;The language;
   	"variables": [
   		{
         "type": "script",
@@ -260,15 +259,47 @@ Modify Template Elements and Generate Video.
   }
   ```
 
-  ```
+  ```powershell Response
   {
     "data": {
       "project_id": "<video_id>"
     }
   }
   ```
+</CodeGroup>
 
+# **Replace Avatar in Template**
+
+How to replace the Avatar within the template.
+
+## **Relevant parameters**
+
+`Avatar Properties:`
+
+* `content: Avatar ID.`
+
+## **Example**
+
+Modify the Avatar ID and Generate Video.
+
+<CodeGroup>
+  ```powershell Resquest
+  curl --location --request POST \
+  --url  'https://api.jogg.ai/v1/create_video_with_template' \
+  --header  'x-API-key: <your-API-key>' \
+  --header  'Content-Type: application/json'
+
+  --data-raw  '{
+  	"template_id": 0,         // required；
+  	"template_type": "user",  // required；Template type; default is "user";
+  	"avatar_id": 0,           // required；Digital person ID;
+  	"avatar_type": 0,         // required；Determine the source of the avatar, whether it is in a public library or created by an individual
+     "lang": "english"         // required;The language;
+
+  }
   ```
+
+  ```powershell Response
   {
     "data": {
       "project_id": "<video_id>"
