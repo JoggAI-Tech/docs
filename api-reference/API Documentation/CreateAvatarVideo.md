@@ -52,13 +52,30 @@ If you want to change the Avatar or voice, you can obtain the `avatar_id` from P
 Please refer to the [Get Avatar List from Library](https://docs.jogg.ai/api-reference/Avatar/GetAvatarList) for more details.
 
 ```bash
-curl --location --request GET 'https://api.jogg.ai/v1/avatars?aspect_ratio=0' \
---header 'x-api-key: <your-api-key>'
+curl --request GET \
+  --url https://api.jogg.ai/v1/avatars?
+  aspect_ratio=0&style=0&gender=0&age=0 \
+  --header 'accept: application/json' \
+  --header 'x-api-key: <api-key>'
 ```
 
 Parameters:
 
-* `aspect_ratio`: Video aspect ratio (0: \[9:16], 1: \[16:9], 2: \[1:1])
+* `aspect_ratio`
+
+  : Video aspect ratio (0: [9:16], 1: [16:9])
+
+* `style`
+
+  : Video preset style (0: Professional, 1: Social）
+
+* `gender`
+
+  : Avatar gender(0: Male, 1: Female）
+
+* `age`
+
+  : Video aspect ratio (0: Adult, 1: Senior, 2: Yang Adult)
 
 Response example:
 
@@ -85,13 +102,25 @@ Response example:
 Please refer to the [Get Voice List form Library](https://docs.jogg.ai/api-reference/Voice/GetVoiceList) for more details.
 
 ```bash
-curl --location --request GET 'https://api.jogg.ai/v1/voices?gender=female' \
---header 'x-api-key: <your-api-key>'
+curl --request GET \
+  --url https://api.jogg.ai/v1/voices?
+  gender=0&language=0&age=0...\
+  --header 'x-api-key: <api-key>'
 ```
 
 Parameters:
 
-* `gender`: Filter by gender (female/male)
+* `gender`
+
+  : Avatar gender(0: Male, 1: Female）
+
+* `language`
+
+  : Filter voices by language
+
+* `age`
+
+  : Video aspect ratio (0: Adult, 1: Senior, 2: Yang Adult)
 
 Response example:
 
