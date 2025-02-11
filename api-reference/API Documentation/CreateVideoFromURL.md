@@ -35,14 +35,14 @@ Upload the URL to create the product and analyze the URL to retrieve product inf
 
 Please refer to the [Upload URL to create product](https://docs.jogg.ai/api-reference/URL-to-Video/UploadURL) for more details.
 
-```powershell
+```json
 curl --request POST \
   --url https://api.jogg.ai/v1/product \
   --header 'Content-Type: application/json' \
   --header 'x-api-key: <api-key>' \
   --data '{
-  "url": "https://res.jogg.ai.com/product_url", //非必填
-
+  "url": "https://res.jogg.ai.com/product_url", // Not required, if it is filled, the following product information will not take effect.
+  // If the above URL is not specified, the following product information takes effect. name, description, and media are required parameters.
   "name": "Physicians Formula Happy Booster Heart Blush Glow &amp;amp; Mood Boosting, Rose, Dermatologist Tested",
   "description": "Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. ",
   "target_audience": "",
