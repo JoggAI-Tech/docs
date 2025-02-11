@@ -54,7 +54,7 @@ Please refer to the [Get Avatar List from Library](https://docs.jogg.ai/api-refe
 ```bash
 curl --request GET \
   --url https://api.jogg.ai/v1/avatars?
-  aspect_ratio=0&style=0&gender=0&age=0 \
+  aspect_ratio=0&style=professional&gender=male&age=adult \
   --header 'accept: application/json' \
   --header 'x-api-key: <api-key>'
 ```
@@ -67,15 +67,15 @@ Parameters:
 
 * `style`
 
-  : Video preset style (0: Professional, 1: Social）
+  : Video preset style (professional, social；）
 
 * `gender`
 
-  : Avatar gender(0: Male, 1: Female）
+  : Avatar gender(female, male）
 
 * `age`
 
-  : Video aspect ratio (0: Adult, 1: Senior, 2: Yang Adult)
+  : Video aspect ratio (adult, senior,  young_adult)
 
 Response example:
 
@@ -108,7 +108,7 @@ Please refer to the [Get Voice List form Library](https://docs.jogg.ai/api-refer
 ```bash
 curl --request GET \
   --url https://api.jogg.ai/v1/voices?
-  gender=0&language=0&age=0...\
+  gender=female&language=english&age=young \
   --header 'x-api-key: <api-key>'
 ```
 
@@ -116,7 +116,7 @@ Parameters:
 
 * `gender`
 
-  : Avatar gender(0: Male, 1: Female）
+  : Avatar gender(female, male）
 
 * `language`
 
@@ -124,7 +124,7 @@ Parameters:
 
 * `age`
 
-  : Video aspect ratio (0: Adult, 1: Senior, 2: Yang Adult)
+  : Video aspect ratio (young, middle_aged, old)
 
 Response example:
 
@@ -139,7 +139,6 @@ Response example:
                 "name": "Emily",
                 "voice_id": "en-US-ChristopherNeural", 
                 "audio_url": "<audio-url>",
-                "language": "english",
                 "language": "english",
                 "gender": 0,
                 "age": 0
