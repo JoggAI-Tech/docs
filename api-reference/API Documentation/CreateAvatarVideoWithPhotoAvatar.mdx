@@ -55,29 +55,10 @@ Please refer to the [Get Photo Avatar List](https://docs.jogg.ai/api-reference/A
 
 ```bash
 curl --request GET \
-  --url https://api.jogg.ai/v1/avatars/photo_avatars?
-  aspect_ratio=0&style=0&gender=0&age=0 \
+  --url https://api.jogg.ai/v1/avatars/photo_avatars \
   --header 'accept: application/json' \
   --header 'x-api-key: <api-key>'
 ```
-
-Parameters:
-
-* `aspect_ratio`
-
-  : Video aspect ratio (0: [9:16], 1: [16:9])
-
-* `style`
-
-  : Video preset style (0: Professional, 1: Social）
-
-* `gender`
-
-  : Avatar gender(0: Male, 1: Female）
-
-* `age`
-
-  : Video aspect ratio (0: Adult, 1: Senior, 2: Yang Adult)
 
 Response example:
 
@@ -105,24 +86,9 @@ Please refer to the [Get My Voice ](https://docs.jogg.ai/api-reference/Voice/Get
 
 ```bash
 curl --request GET \
-  --url https://api.jogg.ai/v1/voices/custom?
-  gender=0&language=0&age=0 \
+  --url https://api.jogg.ai/v1/voices/custom \
   --header 'x-api-key: <api-key>'
 ```
-
-Parameters:
-
-* `gender`
-
-  : Avatar gender(0: Male, 1: Female）
-
-* `language`
-
-  : Filter voices by language
-
-* `age`
-
-  : Video aspect ratio (0: Adult, 1: Senior, 2: Yang Adult)
 
 Response example:
 
