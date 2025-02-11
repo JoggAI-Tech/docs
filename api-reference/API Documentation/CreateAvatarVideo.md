@@ -90,6 +90,10 @@ Response example:
                 "avatar_id": 81,         
                 "name": "Amanda outdoors",
                 "cover_url": "<avatar-cover-url>",
+                "aspect_ratio": 0,
+                "style": 0,
+                "gender": 0,
+                "age": 0,
                 "status": 0
             }
         ]
@@ -135,7 +139,10 @@ Response example:
                 "name": "Emily",
                 "voice_id": "en-US-ChristopherNeural", 
                 "audio_url": "<audio-url>",
-                "language": "english"
+                "language": "english",
+                "language": "english",
+                "gender": 0,
+                "age": 0
             }
         ]
     }

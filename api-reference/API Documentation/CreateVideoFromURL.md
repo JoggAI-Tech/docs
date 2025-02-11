@@ -1,6 +1,6 @@
 ---
-title: 'Create Video from URL'
-description: 'How to create video from URL.'
+title: 'Create Video from URL/Product info'
+description: 'How to create video from URL/Product info .'
 ---
 
 ## Introduction
@@ -13,13 +13,15 @@ With our API, you can upload a URL to generate a video. Simply provide a URL, an
 
 * You need a JoggAI account with API access.
 
-* You need to go through the [Get your API key](https://docs.jogg.ai/api-reference/QuickStart/GettingStarted)
+* You need to go through the 
+
+  [Get your API key](https://docs.jogg.ai/api-reference/QuickStart/GettingStarted)
 
 ### Main Steps
 
-Generate a video from a URL in the following four steps:
+Generate a video in the following four steps:
 
-1. Upload the URL to create the product and analyze the URL to retrieve product information.
+1. Upload the URL to create the product and analyze the URL to retrieve product information. Or directly upload product information.
 
 2. Update the product information if necessary(Optionally).
 
@@ -27,19 +29,33 @@ Generate a video from a URL in the following four steps:
 
 4. Get the generated video.
 
-### Upload URL to create product
+### Upload URL / Product info to create product
 
-Upload the URL to create the product and analyze the URL to retrieve product information.
+Upload the URL to create the product and analyze the URL to retrieve product information. Or directly upload product information.
 
 Please refer to the [Upload URL to create product](https://docs.jogg.ai/api-reference/URL-to-Video/UploadURL) for more details.
 
-```bash
-curl --location --request POST 'https://api.jogg.ai/v1/product' \
---header 'x-api-key: <your-api-key>' \
---header 'Content-Type: application/json' \
---data-raw '{
-    "url": "https://www.amazon.com/product-url"
-}'
+```powershell
+curl --request POST \
+  --url https://api.jogg.ai/v1/product \
+  --header 'Content-Type: application/json' \
+  --header 'x-api-key: <api-key>' \
+  --data '{
+  "url": "https://res.jogg.ai.com/product_url", //非必填
+
+  "name": "Physicians Formula Happy Booster Heart Blush Glow &amp;amp; Mood Boosting, Rose, Dermatologist Tested",
+  "description": "Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow. Multi-reflective pearls provide a soft iridescence to highlight contour and add radiance to cheeks. Experience the mood boosting effect: Infused with our Happy Boost Blend featuring Happy Skin and Euphoryl, natural plant extracts which have been shown to promote a feeling of happiness by mimicking the effect of Endorphins and helping protect the skin from environmental stress. ",
+  "target_audience": "",
+  "media": [
+    {
+      "type": 1,
+      "name": "media.jpg",
+      "url": "https://res.jogg.ai/media.jpg",
+      "description": "Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder features a fresh and vibrant mix of blushing tones infused with a pop of color to create a healthy glow."
+    }
+  ]
+  
+}
 ```
 
 Response example:
