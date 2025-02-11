@@ -67,7 +67,7 @@ Parameters:
 
 * `style`
 
-  : Video preset style (professional, social；）
+  : Video preset style (professional, social）
 
 * `gender`
 
@@ -75,7 +75,7 @@ Parameters:
 
 * `age`
 
-  : Video aspect ratio (adult, senior,  young_adult)
+  : Avatar age (adult, senior,  young_adult)
 
 <Tip>
   All query parameters are non-mandatory.
@@ -95,9 +95,9 @@ Response example:
                 "name": "Amanda outdoors",
                 "cover_url": "<avatar-cover-url>",
                 "aspect_ratio": 0,
-                "style": 0,
-                "gender": 0,
-                "age": 0,
+                "style": "social",
+                "gender": "male",
+                "age": "young",
                 "status": 0
             }
         ]
@@ -128,7 +128,7 @@ Parameters:
 
 * `age`
 
-  : Video aspect ratio (young, middle_aged, old)
+  : Avatar age (young, middle_aged, old)
 
 <Tip>
   All query parameters are non-mandatory.
@@ -147,9 +147,9 @@ Response example:
                 "name": "Emily",
                 "voice_id": "en-US-ChristopherNeural", 
                 "audio_url": "<audio-url>",
-                "language": "english",
-                "gender": 0,
-                "age": 0
+                "language": "chinese",
+                "gender": "male",
+                "age": "young"
             }
         ]
     }
