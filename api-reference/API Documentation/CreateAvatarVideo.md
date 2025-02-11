@@ -77,6 +77,10 @@ Parameters:
 
   : Video aspect ratio (adult, senior,  young_adult)
 
+<Tip>
+  All query parameters are non-mandatory.
+</Tip>
+
 Response example:
 
 ```json
@@ -125,6 +129,10 @@ Parameters:
 * `age`
 
   : Video aspect ratio (young, middle_aged, old)
+
+<Tip>
+  All query parameters are non-mandatory.
+</Tip>
 
 Response example:
 
