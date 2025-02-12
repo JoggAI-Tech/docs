@@ -748,11 +748,11 @@ paths:
 
 
 
-        Get product information by crawling the provided URL. The response contains two important IDs:
+        Get product information by crawling the provided URL or create a new product with provided information.
 
 
 
-        - product_id: Used in Step 2 & Step 3 for updating product information and creating the video.
+        The response contains product_id which is used in Step 2 & Step 3 for updating product information and creating the video.
 
 
 
@@ -800,11 +800,141 @@ paths:
 
 
 
-              required:
+                name:
 
 
 
-                - url
+                  type: string
+
+
+
+                  description: Product name
+
+
+
+                  example: 'Physicians Formula Happy Booster Heart Blush'
+
+
+
+                description:
+
+
+
+                  type: string
+
+
+
+                  description: Product introduction and selling points
+
+
+
+                  example: 'Brush on a radiant blushing glow: Ultra-soft and blendable blushing powder'
+
+
+
+                target_audience:
+
+
+
+                  type: string
+
+
+
+                  description: Target audience for the product
+
+
+
+                  example: 'Tech-savvy millennials'
+
+
+
+                media:
+
+
+
+                  type: array
+
+
+
+                  description: Media resources array
+
+
+
+                  items:
+
+
+
+                    type: object
+
+
+
+                    properties:
+
+
+
+                      type:
+
+
+
+                        type: string
+
+
+
+                        description: Media type
+
+
+
+                        example: 'image'
+
+
+
+                      name:
+
+
+
+                        type: string
+
+
+
+                        description: Media name
+
+
+
+                        example: 'product.jpg'
+
+
+
+                      url:
+
+
+
+                        type: string
+
+
+
+                        description: Media URL
+
+
+
+                        example: 'https://res.jogg.ai/media.jpg'
+
+
+
+
+
+                      description:
+
+
+
+                        type: string
+
+
+
+                        description: Media description
+
+
+
+                        example: 'Product front view'
 
 
 
@@ -5047,7 +5177,171 @@ paths:
 
 
 
-      - $ref: '#/components/parameters/AspectRatioSearch'
+      - name: aspect_ratio
+
+
+
+        in: query
+
+
+
+        description: |
+
+
+
+          Screen aspect ratio:
+
+
+
+          * 0 - [9:16]
+
+
+
+          * 1 - [16:9]
+
+
+
+          * 2 - [1:1]
+
+
+
+        required: false
+
+
+
+        schema:
+
+
+
+          type: integer
+
+
+
+          enum: [0, 1, 2]
+
+
+
+      - name: style
+
+
+
+        in: query
+
+
+
+        description: |
+
+
+
+          Avatar style:
+
+
+
+          * 0 - Professional
+
+
+
+          * 1 - Social
+
+
+
+        required: false
+
+
+
+        schema:
+
+
+
+          type: integer
+
+
+
+          enum: [0, 1]
+
+
+
+      - name: gender
+
+
+
+        in: query
+
+
+
+        description: |
+
+
+
+          Avatar gender:
+
+
+
+          * 0 - Male
+
+
+
+          * 1 - Female
+
+
+
+        required: false
+
+
+
+        schema:
+
+
+
+          type: integer
+
+
+
+          enum: [0, 1]
+
+
+
+      - name: age
+
+
+
+        in: query
+
+
+
+        description: |
+
+
+
+          Avatar age:
+
+
+
+          * 0 - Adult
+
+
+
+          * 1 - Senior
+
+
+
+          * 2 - Yang Adult
+
+
+
+        required: false
+
+
+
+        schema:
+
+
+
+          type: integer
+
+
+
+          enum: [0, 1, 2]
 
 
 
@@ -5371,23 +5665,21 @@ paths:
 
 
 
-      - Voice
+        - Voice
 
 
 
-      summary: Get Voice List
+      summary: Get Voice List from Library
 
 
 
-      description: Retrieve a list of available voice with specified gender filter
+      description: Retrieve a list of available voices with specified filters
 
 
 
       parameters:
 
-
-
-        - name: gender
+        - name: age
 
 
 
@@ -5395,7 +5687,23 @@ paths:
 
 
 
-          description: Filter voices by gender (female/male)
+          description: |
+
+
+
+            Avatar age:
+
+
+
+            * 0 - Adult
+
+
+
+            * 1 - Senior
+
+
+
+            * 2 - Yang Adult
 
 
 
@@ -5407,19 +5715,38 @@ paths:
 
 
 
-            type: string
+            type: integer
 
 
 
-            enum:
+            enum: [0, 1, 2]
+            
+
+        - name: gender
 
 
 
-              - female
+          in: query
 
 
 
-              - male
+          description: Filter voices by gender:\n* 0 - Male\n* 1 - Female
+
+
+
+          required: false
+
+
+
+          schema:
+
+
+
+            type: integer
+
+
+
+            enum: [0, 1]
 
 
 
@@ -5999,7 +6326,7 @@ paths:
 
 
 
-                                description: Language identifier
+                                description: Voice identifier
 
 
 
@@ -7419,6 +7746,10 @@ paths:
 
 
 
+
+
+
+
   /endpoints:
 
 
@@ -7853,6 +8184,10 @@ paths:
 
 
 
+                    example: "jogg@gmail.com"
+
+
+
                   created_at:
 
 
@@ -7862,6 +8197,10 @@ paths:
 
 
                     description: Creation timestamp
+
+
+
+                    example: 1703894400
 
 
 
@@ -8760,4 +9099,5 @@ components:
 
 
       name: x-api-key
+
 
