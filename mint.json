@@ -127,7 +127,8 @@
       "group": "Avatar",
       "pages": [
         "api-reference/Avatar/GetAvatarList",
-        "api-reference/Avatar/GetInstantAvatar" 
+        "api-reference/Avatar/GetInstantAvatar",
+        "api-reference/Avatar/GetPhotoAvatar"
       ]
     },
     {
