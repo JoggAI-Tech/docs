@@ -307,3 +307,33 @@ Modify the Avatar ID and Generate Video.
   }
   ```
 </CodeGroup>
+
+<Note>
+  Callout Content.
+
+  We also have a feature that we don't recommend to use very often: adding a tag to the script to implement pause in the video editor. It allows you to silence your video for a set amount of time.
+
+  > Add a pause to the script with `<break time=\"2s\" />.`
+</Note>
+
+```powershell
+curl --location --request POST \
+--url  'https://api.jogg.ai/v1/create_video_with_template' \
+--header 'x-api-key: <your-API-key>' \
+--data '{
+ 	"template_id": 0,         // required；
+	"template_type": "user",  // required；Template type; default is "user";
+	"avatar_id": 0,           // required；Set the corresponding avatar ID;
+	"avatar_type": 0,         // required；Determine the source of the avatar, whether it is in a public library or created by an individual
+   "lang": "english",         // required;The language;
+  "variables": [
+    {
+      "type": "script",
+      "name": "script_en",
+      "properties": {
+        "content": "<break time="2s" />"  // Add a pause 
+      }
+    }
+  ]
+}'
+```
