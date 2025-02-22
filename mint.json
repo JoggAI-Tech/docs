@@ -150,7 +150,7 @@
       "pages": [
         "api-reference/Template/GetTemplate",
         "api-reference/Template/GetMyTemplate",
-        "api-reference/Template/CreatVideoFormTemplate"
+        "api-reference/Template/CreateVideoFormTemplate"
 
       ]
     },
