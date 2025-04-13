@@ -133,7 +133,7 @@
         "api-reference/Avatar/CheckPhotoGenerationStatus",
         "api-reference/Avatar/GenerateAvatarNewLookPhoto",
         "api-reference/Avatar/AddMotion",
-        "api-reference/Avatar/Checkstatusofthemotiongeneration"
+        "api-reference/Avatar/CheckStatusOfTheMotionGeneration"
         
       ]
     },
