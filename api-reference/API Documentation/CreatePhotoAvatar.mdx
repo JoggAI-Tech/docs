@@ -5,7 +5,7 @@ description: "Transform static images into dynamic, talking avatars with JoggAI'
 
 To bring your photo avatars to life, here's a breakdown of the steps involved in uploading, generating, training LORA models, creating new looks, and adding motion for use in JoggAI videos:
 
-\<video   controls   className="w-full aspect-video"   src="https://res.jogg.ai/upload/sam/2025-04-13/0f0d7deb55054b8c9e4cb60e27160ee5.mp4" \>\</video\>
+<video autoPlay muted loop playsInline className="w-full aspect-video" src="https://res.jogg.ai/upload/sam/2025-04-13/0f0d7deb55054b8c9e4cb60e27160ee5.mp4" />
 
 ## Steps to Use the Photo Avatar API
 
@@ -23,7 +23,7 @@ Learn how to create customized AI avatar photos using JoggAI's API. These avatar
 
 ## **Generate AI Avatar Photo**
 
-[<u>See detailed API reference</u>](https://docs.jogg.ai/api-reference/Avatar/GenerateAIAvatarPhoto)
+[See detailed API reference](https://docs.jogg.ai/api-reference/Avatar/GenerateAIAvatarPhoto)
 
 Use this endpoint to generate AI photo avatars with customizable attributes. The following attributes are required to define the avatar's look: `avatar_styleage`, `gender`, `ethnicity`, `appearance`, `background`, `model`, `aspect_ratio`.
 
@@ -141,7 +141,7 @@ We have generated our AI Avatar photos, now we can use these `image_key` to cr
 
 **Generate Avatar New Look Photo**
 
-[<u>See detailed API reference</u>](https://docs.jogg.ai/api-reference/Avatar/GenerateAvatarNewLookPhoto)
+[See detailed API reference](https://docs.jogg.ai/api-reference/Avatar/GenerateAvatarNewLookPhoto)
 
 To generate looks for the photo avatar, you can use the Generate Avatar New Look Photo API. Provide a description in the prompt field, as well as the orientation, pose, and style.
 
@@ -184,7 +184,7 @@ curl --request POST \
 
 Using the `photo_id`.
 
-[<u>See detailed API reference</u>](https://docs.jogg.ai/api-reference/Avatar/CheckPhotoGenerationStatus)
+[See detailed API reference](https://docs.jogg.ai/api-reference/Avatar/CheckPhotoGenerationStatus)
 
 <CodeGroup>
 
@@ -304,7 +304,7 @@ curl --request POST \
 
 ## **Check status of the motion generation**
 
-[<u>See detailed API reference</u>](https://docs.jogg.ai/api-reference/Avatar/CheckStatusOfTheMotionGeneration)
+[See detailed API reference](https://docs.jogg.ai/api-reference/Avatar/CheckStatusOfTheMotionGeneration)
 
 <CodeGroup>
 
