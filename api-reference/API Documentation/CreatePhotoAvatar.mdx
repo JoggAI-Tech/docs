@@ -5,11 +5,13 @@ description: "Transform static images into dynamic, talking avatars with JoggAI'
 
 To bring your photo avatars to life, here's a breakdown of the steps involved in uploading, generating, training LORA models, creating new looks, and adding motion for use in JoggAI videos:
 
+\<video   controls   className="w-full aspect-video"   src="https://res.jogg.ai/upload/sam/2025-04-13/0f0d7deb55054b8c9e4cb60e27160ee5.mp4" \>\</video\>
+
 ## Steps to Use the Photo Avatar API
 
-1. [******Upload Existing Photos or Generate New AI Avatar Photos:******](https://www.joggai.cn/) You can upload a set of your own photos or generate new AI photos.
-2. **Create New Looks for the Avatar:** You can use prompts to generate various "looks" for the avatar, such as different clothing, scenes, or poses. This is done within the trained Avatar Group, giving you diverse outputs.
-3. [**Add Motion Programmatically**](https://docs.h)**:** You can enhance the avatars by adding dynamic motion programmatically. This includes enabling the avatar to move and adding audio to bring the avatar to life.
+1. [******Upload Existing Photos or Generate New AI Avatar Photos:******](https://docs.jogg.ai/api-reference/Avatar/GenerateAIAvatarPhoto) You can upload a set of your own photos or generate new AI photos.
+2. [**Create New Looks for the Avatar**](https://docs.jogg.ai/api-reference/Avatar/GenerateAvatarNewLookPhoto)**:** You can use prompts to generate various "looks" for the avatar, such as different clothing, scenes, or poses. This is done within the trained Avatar Group, giving you diverse outputs.
+3. [**Add Motion Programmatically**](https://docs.jogg.ai/api-reference/Avatar/AddMotion)**:** You can enhance the avatars by adding dynamic motion programmatically. This includes enabling the avatar to move and adding audio to bring the avatar to life.
 
 ## **Conclusion**
 
@@ -21,7 +23,7 @@ Learn how to create customized AI avatar photos using JoggAI's API. These avatar
 
 ## **Generate AI Avatar Photo**
 
-[<u>See detailed API reference</u>](https://docs.)
+[<u>See detailed API reference</u>](https://docs.jogg.ai/api-reference/Avatar/GenerateAIAvatarPhoto)
 
 Use this endpoint to generate AI photo avatars with customizable attributes. The following attributes are required to define the avatar's look: `avatar_styleage`, `gender`, `ethnicity`, `appearance`, `background`, `model`, `aspect_ratio`.
 
@@ -60,7 +62,7 @@ curl --location 'https://api.jogg.ai/v1/photo_avatar/photo/generate' \
 
 ## **Check Generation Status**
 
-[See detailed API reference](https://docs.)
+[See detailed API reference](https://docs.jogg.ai/api-reference/Avatar/CheckPhotoGenerationStatus)
 
 Track the progress of your avatar photo generation using the following endpoint:
 
@@ -135,11 +137,11 @@ curl --request GET \
 
 We have generated our AI Avatar photos, now we can use these `image_key` to create new looks.
 
-![Wechat IMG58 Pn](/images/WechatIMG58.png)
+## ![Wechat IMG58 Pn](/images/WechatIMG58.png)
 
-## **Generate Avatar New Look Photo**
+**Generate Avatar New Look Photo**
 
-[<u>See detailed API reference</u>](https://docs.)
+[<u>See detailed API reference</u>](https://docs.jogg.ai/api-reference/Avatar/GenerateAvatarNewLookPhoto)
 
 To generate looks for the photo avatar, you can use the Generate Avatar New Look Photo API. Provide a description in the prompt field, as well as the orientation, pose, and style.
 
@@ -180,9 +182,9 @@ curl --request POST \
 
 ## **Check status of the look generation**
 
-using the `photo_id`.
+Using the `photo_id`.
 
-[<u>See detailed API reference</u>](https://do)
+[<u>See detailed API reference</u>](https://docs.jogg.ai/api-reference/Avatar/CheckPhotoGenerationStatus)
 
 <CodeGroup>
 
@@ -250,9 +252,9 @@ curl --request GET \
 
 </CodeGroup>
 
-![Wechat IMG57 Pn](/images/WechatIMG57.png)
+## ![Wechat IMG57 Pn](/images/WechatIMG57.png)
 
-## **Conclusion**
+**Conclusion**
 
 In conclusion, By leveraging tools like the Cenerate Avatar photo and Add Looks APIs, users can upload, organize, and enhance avatars with ease.
 
@@ -262,7 +264,7 @@ Enhance your photo avatar by adding dynamic motion and immersive sound effects\!
 
 ## **Add Motion**
 
-[See detailed API reference](https://docs.he)
+[See detailed API reference](https://docs.jogg.ai/api-reference/Avatar/AddMotion)
 
 Add motion to your photo avatar by sending a POST request to the API with the avatar's ID.
 
@@ -302,7 +304,7 @@ curl --request POST \
 
 ## **Check status of the motion generation**
 
-[<u>See detailed API reference</u>](https://doc)
+[<u>See detailed API reference</u>](https://docs.jogg.ai/api-reference/Avatar/CheckStatusOfTheMotionGeneration)
 
 <CodeGroup>
 
