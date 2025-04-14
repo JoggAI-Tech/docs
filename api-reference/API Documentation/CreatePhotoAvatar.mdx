@@ -5,17 +5,25 @@ description: "Transform static images into dynamic, talking avatars with JoggAI'
 
 To bring your photo avatars to life, here's a breakdown of the steps involved in uploading, generating, training LORA models, creating new looks, and adding motion for use in JoggAI videos:
 
-<video
-  controls
-  className="w-full aspect-video"
-  src="https://res.jogg.ai/upload/sam/2025-04-13/0f0d7deb55054b8c9e4cb60e27160ee5.mp4"
-></video>
+<video controls className="w-full aspect-video" src="https://res.jogg.ai/upload/sam/2025-04-13/0f0d7deb55054b8c9e4cb60e27160ee5.mp4" />
 
 ## Steps to Use the Photo Avatar API
 
 1. [******Upload Existing Photos or Generate New AI Avatar Photos:******](https://docs.jogg.ai/api-reference/Avatar/GenerateAIAvatarPhoto) You can upload a set of your own photos or generate new AI photos.
 2. [**Create New Looks for the Avatar**](https://docs.jogg.ai/api-reference/Avatar/GenerateAvatarNewLookPhoto)**:** You can use prompts to generate various "looks" for the avatar, such as different clothing, scenes, or poses. This is done within the trained Avatar Group, giving you diverse outputs.
 3. [**Add Motion Programmatically**](https://docs.jogg.ai/api-reference/Avatar/AddMotion)**:** You can enhance the avatars by adding dynamic motion programmatically. This includes enabling the avatar to move and adding audio to bring the avatar to life.
+
+   <Tip>
+     **a. Image Generation Charges:**
+     - Each call generates four images.
+     - Each image deducts 0.05 credit.
+     - Four images deduct a total of 0.2 credit.
+
+     **b. Motion Generation Charges:**
+     - Motion 1.0 deducts 2 credits.
+     - Motion 2.0 deducts 2 credits.
+     - Motion 2.0 Pro deducts 3 credits.
+   </Tip>
 
 ## **Conclusion**
 
