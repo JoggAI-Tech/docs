@@ -6178,6 +6178,64 @@ paths:
 
 
       parameters:
+        - name: page
+
+
+
+          in: query
+
+
+
+          description: Page number
+
+
+
+          required: false
+
+
+
+          schema:
+
+
+
+            type: integer
+
+
+
+            minimum: 1
+
+
+
+            default: 1
+        - name: page_size
+
+
+
+          in: query
+
+
+
+          description: Page size
+
+
+
+          required: false
+
+
+
+          schema:
+
+
+
+            type: integer
+
+
+
+            minimum: 1
+
+
+
+            default: 10
 
         - name: age
 
