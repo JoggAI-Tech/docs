@@ -9856,7 +9856,6 @@ components:
         - image_url
         - model
         - name
-        - photo_id
         - voice_id
       type: object
       properties:
