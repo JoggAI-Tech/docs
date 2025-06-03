@@ -6280,15 +6280,15 @@ paths:
 
 
 
-            * adult
+            * young
 
 
 
-            * senior
+            * middle_aged
 
 
 
-            * yang_adult
+            * old
 
 
 
@@ -6304,7 +6304,7 @@ paths:
 
 
 
-            enum: ['adult', 'senior', 'yang_adult']
+            enum: ['young', 'middle_aged', 'old']
 
         - name: gender
 
