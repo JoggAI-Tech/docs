@@ -3230,61 +3230,46 @@ paths:
 
                     Script writing style for video content:
 
-
-
                     * Don't Worry - Casual and reassuring tone
-
-
-
-                    * Storytime - Narrative and engaging storytelling approach
-
-
-
                     * Discovery - Exploratory and revealing style
-
-
-
                     * Data - Fact-based and analytical presentation
-
-
-
                     * Top 3 reasons - List-based persuasive format
-
-
-
-                    * Light marketing - Soft-sell marketing approach
-
+                    * Soft Selling - Gentle persuasion focusing on trust-building over hard pitching
+                    * Humor & Meme - Light-hearted engagement with funny, relatable content
+                    * Feature Explainer - Clear breakdown of product/service functionalities
+                    * Soft Storytelling with Twist - Emotional narrative with an unexpected plot turn
+                    * Expert Advice - Authoritative guidance based on industry experience
+                    * Unboxing & Review - Immersive first-hand experience sharing
+                    * Challenge - Interactive task prompting audience participation
+                    * Problem/Solution - Clear identification of issues with practical remedies
+                    * Comparison - Side-by-side analysis of pros/cons for informed decisions
+                    * Creative/Innovative - Original concepts breaking conventional boundaries
+                    * Emotional Appeal - Empathetic connection through shared feelings
+                    * Immersive Storytelling - Vivid narrative creating strong audience immersion
 
 
                   enum:
 
-
-
                     - "Don't Worry"
-
-
-
-                    - "Storytime"
-
-
-
                     - "Discovery"
-
-
-
                     - "Data"
-
-
-
                     - "Top 3 reasons"
+                    - "Soft Selling"
+                    - "Humor & Meme"
+                    - "Feature Explainer"
+                    - "Soft Storytelling with Twist"
+                    - "Expert Advice"
+                    - "Unboxing & Review"
+                    - "Challenge"
+                    - "Problem/Solution"
+                    - "Comparison"
+                    - "Creative/Innovative"
+                    - "Emotional Appeal"
+                    - "Immersive Storytelling"
 
 
 
-                    - "Light marketing"
-
-
-
-                  example: "Storytime"
+                  example: "Soft Selling"
 
 
 
@@ -4192,61 +4177,45 @@ paths:
 
                     Script writing style for video content:
 
-  
-
                     * Don't Worry - Casual and reassuring tone
-
-  
-
-                    * Storytime - Narrative and engaging storytelling approach
-
-  
-
                     * Discovery - Exploratory and revealing style
-
-  
-
                     * Data - Fact-based and analytical presentation
-
-  
-
                     * Top 3 reasons - List-based persuasive format
-
-  
-
-                    * Light marketing - Soft-sell marketing approach
+                    * Soft Selling - Gentle persuasion focusing on trust-building over hard pitching
+                    * Humor & Meme - Light-hearted engagement with funny, relatable content
+                    * Feature Explainer - Clear breakdown of product/service functionalities
+                    * Soft Storytelling with Twist - Emotional narrative with an unexpected plot turn
+                    * Expert Advice - Authoritative guidance based on industry experience
+                    * Unboxing & Review - Immersive first-hand experience sharing
+                    * Challenge - Interactive task prompting audience participation
+                    * Problem/Solution - Clear identification of issues with practical remedies
+                    * Comparison - Side-by-side analysis of pros/cons for informed decisions
+                    * Creative/Innovative - Original concepts breaking conventional boundaries
+                    * Emotional Appeal - Empathetic connection through shared feelings
+                    * Immersive Storytelling - Vivid narrative creating strong audience immersion
 
   
 
                   enum:
 
-
-
                     - "Don't Worry"
-
-
-
-                    - "Storytime"
-
-
-
                     - "Discovery"
-
-
-
                     - "Data"
-
-
-
                     - "Top 3 reasons"
+                    - "Soft Selling"
+                    - "Humor & Meme"
+                    - "Feature Explainer"
+                    - "Soft Storytelling with Twist"
+                    - "Expert Advice"
+                    - "Unboxing & Review"
+                    - "Challenge"
+                    - "Problem/Solution"
+                    - "Comparison"
+                    - "Creative/Innovative"
+                    - "Emotional Appeal"
+                    - "Immersive Storytelling"
 
-
-
-                    - "Light marketing"
-
-
-
-                  example: "Storytime"
+                  example: "Soft Selling"
 
 
 
