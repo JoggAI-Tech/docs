@@ -9830,6 +9830,7 @@ components:
       properties:
         description:
           type: string
+          description: For Model 1.0, descriptions must be under 300 bytes, and for other models, they must not exceed 1500 bytes.
         image_url:
           type: string
         model:
