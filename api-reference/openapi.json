@@ -3358,13 +3358,7 @@ paths:
 
 
                 caption:
-
-
-
                   type: boolean
-
-
-
                   description: |
 
 
@@ -3382,7 +3376,10 @@ paths:
 
 
                   example: true
-
+                video_name:
+                  type: string
+                  description: If you want to specify the name of the generated video, please use this parameter.
+                  example: "My Video"
 
 
 
@@ -4652,15 +4649,12 @@ paths:
 
 
                 caption:
-
-
-
                   type: boolean
-
-
-
                   description: 'Subtitle option. true: enable subtitles, false: disable subtitles'
-
+                video_name:
+                  type: string
+                  description: If you want to specify the name of the generated video, please use this parameter.
+                  example: "My Video"
 
 
                   enum:
@@ -9844,6 +9838,9 @@ components:
           type: string
         photo_id:
           type: string
+        welcome_msg:
+          type: string
+          description: If you want to change the default greeting message of the avatar, you can use this parameter to replace it.
         voice_id:
           type: string
     GeneratePhotoReq:
