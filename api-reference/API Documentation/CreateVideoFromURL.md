@@ -1,19 +1,28 @@
 ---
-title: 'Create Video from URL/Product info'
-description: 'How to create video from URL/Product info .'
+title: "Create Video from URL/Product info"
+description: "How to create video from URL/Product info ."
 ---
 
 ## Introduction
 
-With our API, you can upload a URL to generate a video. Simply provide a URL, and we will analyze and extract the product information for you. You can customize the product information and video settings, such as aspect ratio, video length, language, script style, and visual style. This allows you to quickly create a tailored video.
+This document introduces an advanced feature: how to provide a public URL via the [Jogg.ai](http://Jogg.ai) API to have the system automatically extract content, generate a summary, and ultimately create a digital avatar narration video.
+
+### **Core Concept: Automated Content Creation Workflow**
+
+This feature is designed to automate content processing. You only need to provide a link to the content, and our AI system will handle all subsequent work.
+
+1. **Submit URL:** You provide a publicly accessible URL via the API (e.g., a news article, blog post, or Amazon/Shopify/ebay/Tiktok product link).
+2. **Content Extraction & Analysis:** The [Jogg.ai](http://Jogg.ai) server will visit the URL and intelligently extract the core text or video script content.
+3. **AI-Generated Summary:** Our artificial intelligence model will condense the extracted content into a summary script suitable for video narration.
+4. **Video Synthesis:** The system uses your specified digital avatar and voice to automatically generate a complete video based on the summary script.
+5. **Asynchronous Notification:** Like all video creation tasks, this is an **asynchronous** process. Once the task is complete, we will notify you of the result via a webhook.
 
 ## Quick Start
 
 ### Prerequisite
 
-* You need a JoggAI account with API access.
-
-* You need to go through the 
+- You need a JoggAI account with API access.
+- You need to go through the 
 
   [Get your API key](https://docs.jogg.ai/api-reference/QuickStart/GettingStarted)
 
@@ -22,11 +31,8 @@ With our API, you can upload a URL to generate a video. Simply provide a URL, an
 Generate a video in the following four steps:
 
 1. Upload the URL to create the product and analyze the URL to retrieve product information. Or directly upload product information.
-
 2. Update the product information if necessary(Optionally).
-
 3. Initiate video generation based on the product, with the option to adjust video settings.
-
 4. Get the generated video.
 
 ### Upload URL / Product info to create product
@@ -231,7 +237,7 @@ Response example:
 
 ### Get the generated video
 
-Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
+Use the project_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video_url.
 
 Please refer to the[ GetGeneratedVideo](https://docs.jogg.ai/api-reference/GetGeneratedVideo/GetGeneratedVideo) for the full options of enums.
 

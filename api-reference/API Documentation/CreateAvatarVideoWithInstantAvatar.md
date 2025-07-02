@@ -5,6 +5,10 @@ description: "How to create avatar video with instant avatars."
 
 ## Introduction
 
+Welcome to the [Jogg.ai](http://Jogg.ai) API\! This document will guide you on how to create a avatar video by calling our API.
+
+### **Core Concept: Asynchronous Processing Flow**
+
 Before you begin, it is crucial to understand that **creating an avatar video is an asynchronous operation**. This means you will not receive the final video file immediately after calling the API.
 
 The entire process is as follows:
@@ -16,15 +20,17 @@ The entire process is as follows:
    - **Webhook (Recommended):** We will send a `POST` notification to your pre-configured `webhook_url`, containing the video status and the final video playback address. This is the most efficient and reliable method.
    - **Polling (Alternative):** You can use the `project_id` to periodically call the `GET /project/{project_id}` endpoint to check the task status.
 
-> First, create your Instant Avatar on the [Create Instant Avatar page](https://app.jogg.ai/create-instant-avatar). Then, use the `My Instant Avatars` List endpoint to obtain your Avatar ID, and the `My Voices List` endpoint to retrieve your Voice for video creation.
-
 ## Quick Start
 
 ### Create Talking Avatar Video
 
-Creating Avatar videos, supporting the configuration of various video settings including script, aspect ratio, screen style, avatar, and voice.
+> First, create your Instant Avatar on the [Create Instant Avatar page](https://app.jogg.ai/create-instant-avatar). Then, use the `My Instant Avatars` List endpoint to obtain your Avatar ID, and the `My Voices List` endpoint to retrieve your Voice for video creation.
 
 Please refer to the [Create Talking Avatar Videos](https://docs.jogg.ai/api-reference/Create-Avatar-Videos/CreateAvatarVideo) for more details and refer to the next section for obtaining the avatar_id and voice_id.
+
+## Here is a code example
+
+Request Example：
 
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking_avatar' \

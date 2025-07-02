@@ -5,14 +5,21 @@ description: "create avatar video by uploading audio."
 
 ## Introduction
 
-You can create Avatar videos using your custom audio.&#x20;
-Additionally, you can adjust the Avatar using `avatar_id` and modify the voice with `voice_id`.
+This document provides a detailed guide on how to use your own audio file as a voice source to generate a digital avatar video via the [Jogg.ai](http://Jogg.ai) API. This feature allows the digital avatar model to perform lip-syncing to any voice you provide (e.g., your own recording).
 
-***
+---
+
+### **Core Concept: Audio-Driven Lip-Sync**
+
+Unlike using a preset voice (`voice_id`), the core of this feature is **"audio-first"**. You provide an audio file containing speech, and our system will analyze this audio to drive the digital avatar's mouth movements to precisely match the pronunciation in the audio.
+
+- **Asynchronous Processing:** This process is also asynchronous. After submitting the task, you will immediately receive a `project_id`, and the video will be processed in the background.
+- **Audio is Key:** The voice of the character in the video will come entirely from the audio file you provide.
+- **Automatic Lip-Sync:** The system automatically analyzes the audio waveform and phonemes to generate highly synchronized lip animations.
 
 ### Upload Audio
 
-You can upload audio to obtain your asset\_id.
+You can upload audio to obtain your asset_id.
 
 Please refer to the [Upload Media](https://docs.jogg.ai/api-reference/UploadFile/UploadFile) for more details.
 
@@ -28,7 +35,7 @@ curl --request POST \
 
 #### Obtain the Signed URL
 
-Before uploading a file, you need to obtain a signed URL via an API request.&#x20;
+Before uploading a file, you need to obtain a signed URL via an API request. 
 Here’s an example response:
 
 ```json
@@ -43,11 +50,11 @@ Here’s an example response:
 }
 ```
 
-sign\_url: Use this URL to upload the file.
+sign_url: Use this URL to upload the file.
 
 #### Use cURL to Upload the File
 
-Use the following cURL command to upload the file to the server. Make sure to replace \<file-binary-data> with the actual binary data of the file.
+Use the following cURL command to upload the file to the server. Make sure to replace \<file-binary-data\> with the actual binary data of the file.
 
 ```powershell
 curl --location --request PUT '<sign_url>' \
@@ -96,7 +103,7 @@ Response example:
 
 ### Get the generated video
 
-Use the project\_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video\_url.
+Use the project_id obtained from the "Generate Video from Product Information" step to retrieve details about the video generation, including status and duration. Access the generated video using the video_url.
 
 Please refer to the[ GetGeneratedVideo](https://docs.jogg.ai/api-reference/GetGeneratedVideo/GetGeneratedVideo) for the full options of enums.
 

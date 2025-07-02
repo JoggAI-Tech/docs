@@ -1,78 +1,83 @@
 ---
-title: 'Upload Media'
-description: 'Upload your own media resources.'
+title: "Upload Media"
+description: "Upload your own media resources."
 ---
 
 # Introduction
 
-You can create Avatar videos using your custom audio.&#x20;
+You can create Avatar videos using your custom audio. 
 Additionally, you can adjust the Avatar using `avatar_id` and modify the voice with `voice_id`.
 
-***
+---
 
-# Step 1: Obtain sign\_url and asset\_id
+# Step 1: Obtain sign_url and asset_id
 
 You can upload media to obtain your `sign_url` and `asset_id`.
 
-* `sign_url`: Used as the address to upload media.
-
-* `asset_id`: Gets the address of the uploaded resource.
+- `sign_url`: The address used for uploading asset .
+- `asset_id`: The address used for referencing as an asset.
 
 Please refer to the [Upload Media](https://docs.jogg.ai/api-reference/UploadFile/UploadFile) for more details.
 
 <CodeGroup>
-  ```powershell Request
-  curl --request POST \
-    --url https://api.jogg.ai/v1/upload/asset \
-    --header 'Content-Type: application/json' \
-    --header 'x-api-key: <api-key>' \
-  --data-raw '{
-      "filename":"1.jpg"
-  }'
-  ```
 
-  ```
-  {
-    "rid": "ab3329c49f320dba9a57d742195d930b",
-    "code": 0,
-    "msg": "<string>",
-    "data": {
-      "sign_url": "<string>",
-      "asset_id": "<string>"
-    }
+```powershell Request
+curl --request POST \
+  --url https://api.jogg.ai/v1/upload/asset \
+  --header 'Content-Type: application/json' \
+  --header 'x-api-key: <api-key>' \
+--data-raw '{
+    "filename":"1.jpg"
+}'
+```
+
+
+``` Response
+{
+  "rid": "ab3329c49f320dba9a57d742195d930b",
+  "code": 0,
+  "msg": "<string>",
+  "data": {
+    "sign_url": "<string>",
+    "asset_id": "<string>"
   }
-  ```
+}
+```
+
 </CodeGroup>
 
 <Tip>
   You can upload pictures, videos, audio and other media resources.
 </Tip>
 
-# Step 2: Use sign\_url to upload the file
+# Step 2: Use sign_url to upload the file
 
-Use the following cURL command to upload the file to the server. Make sure to replace \<file-binary-data> with the actual binary data of the file.
+Use the following cURL command to upload the file to the server. Make sure to replace \<file-binary-data\> with the actual binary data of the file.
 
 <CodeGroup>
-  ```powershell Resquest
-  curl --location --request PUT '<sign_url>' \
-  --header 'Content-Type: application/octet-stream' \
-  --data-binary '<file-binary-data>'
-  ```
 
-  ```
-  {
-      "rid": "1e66bb40e189f7fb2936330863c1468e",
-      "code": 0,
-      "msg": "success"
-  }
-  ```
+```powershell Resquest
+curl --location --request PUT '<sign_url>' \
+--header 'Content-Type: application/octet-stream' \
+--data-binary '<file-binary-data>'
+```
+
+
+``` Response
+{
+    "rid": "1e66bb40e189f7fb2936330863c1468e",
+    "code": 0,
+    "msg": "success"
+}
+```
+
 </CodeGroup>
 
 <Tip>
   Now` asset_id` is an available address to get resources.
 </Tip>
 
-# Step 3: Use asset\_id to get the file
+# Step 3: Use asset_id to get the file
 
 Here's an example:
 
@@ -90,4 +95,4 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking
 }'
 ```
 
-#
+# 

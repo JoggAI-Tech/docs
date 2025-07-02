@@ -7,8 +7,6 @@ description: "How to create avatar video with the avatars from library."
 
 Welcome to the [Jogg.ai](http://Jogg.ai) API\! This document will guide you on how to create a avatar video by calling our API.
 
-## Quick Start
-
 ### **Core Concept: Asynchronous Processing Flow**
 
 Before you begin, it is crucial to understand that **creating an avatar video is an asynchronous operation**. This means you will not receive the final video file immediately after calling the API.
@@ -22,7 +20,9 @@ The entire process is as follows:
    - **Webhook (Recommended):** We will send a `POST` notification to your pre-configured `webhook_url`, containing the video status and the final video playback address. This is the most efficient and reliable method.
    - **Polling (Alternative):** You can use the `project_id` to periodically call the `GET /project/{project_id}` endpoint to check the task status.
 
-Please refer to the [Create Talking Avatar Videos](https://docs.jogg.ai/api-reference/Create-Avatar-Videos/CreateAvatarVideo) for more details and refer to the next section for obtaining the avatar_id and voice_id.
+## Quick Start
+
+> Please refer to the [Create Talking Avatar Videos](https://docs.jogg.ai/api-reference/Create-Avatar-Videos/CreateAvatarVideo) for more details and refer to the next section for obtaining the avatar_id and voice_id.
 
 ## Here is a code example
 
