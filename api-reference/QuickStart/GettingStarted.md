@@ -16,9 +16,11 @@ Sign up to create an account at https://app.jogg.ai/register, and you'll gain ac
 ### Get API Key
 
 Click the avatar, then click 'API'
+
 ![](/images/img01.png)
 
-You can obtain the API ID and API Key.
+You can obtain the API Key. 
+
 ![](/images/APIKey.png)
 
 ### Consumption
@@ -26,18 +28,17 @@ You can obtain the API ID and API Key.
 <Tip>
   **a.The generated video consumption is based on its duration:**
 
-  - 1 API credit is consumed for every 2 minutes of video. 
-
+  - 1 API credit is consumed for every 2 minutes of video.
   - Less than 2 minutes is calculated as 1 API credit.
 
   **b.The preview video consumption is based on its duration:**
 
-  - 0.5 API credit is consumed for every 2 minutes of video. 
-
+  - 0.5 API credit is consumed for every 2 minutes of video.
   - Less than 2 minutes is calculated as 0.5 API credit.
 
   **c.Each time you call the AI Scripts API:**
-  -  it will consume 0.2 API Credit.
+
+  - it will consume 0.2 API Credit.
 
   **d. Image Generation Charges:**
 
