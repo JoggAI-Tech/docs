@@ -43,7 +43,8 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_talking
     "avatar_id": 127,
     "avatar_type": 0,
     "voice_id": "en-US-ChristopherNeural",
-    "caption": true
+    "caption": true,
+	"video_name":"my_video"   
 }'
 ```
 

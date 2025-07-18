@@ -620,47 +620,21 @@ paths:
 
 
                 voice_id:
-
-
                   type: string
-
-
-
                   description: Voice ID for text-to-speech
-
-
-
                   example: en-US-ChristopherNeural
-
-
-
                 caption:
-
-
                   type: boolean
-
-
-
                   description: Whether to enable captions
-
-
-
                   example: true
-
-
-
                 music_id:
-
-
                   type: integer
-
-
-
                   description: Background music ID
-
-
-
                   example: 1
+                video_name:
+                  type: string
+                  description: If you want to specify the name of the generated video, please use this parameter.
+                  example: "My Video"
 
 
 

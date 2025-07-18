@@ -177,7 +177,8 @@ curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
     "music_id": 62,
     "template_type": "public",
     "override_script": "",
-    "caption": true
+    "caption": true,
+	"video_name":"my_video"
     }
 ```
 
