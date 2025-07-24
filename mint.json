@@ -55,9 +55,10 @@
     {
       "group": "Get Started",
       "pages": [
-        "welcome",
-        "quickstart",
-        "InstantAvatar"
+        "WelcometoJoggAI",
+        "CreateAIAvatarVideos",
+        "CreateAIAvatarVideos",
+        "JoggAI API"
       ]
     },
     {
