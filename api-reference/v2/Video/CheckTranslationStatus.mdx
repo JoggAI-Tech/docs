@@ -1,0 +1,25 @@
+---
+title: "Check Translation Status"
+openapi: "GET /v2/video_translate/{video_translate_id}"
+---
+
+Get the current status and details of a video translation task.
+
+## Example Usage
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/video_translate/vt_123456' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Translate Video" href="/api-reference/v2/Video/VideoTranslate">
+    Translate videos
+  </Card>
+  <Card title="Video Translation Guide" href="/api-reference/v2/API%20Documentation/VideoTranslation">
+    Complete translation workflow
+  </Card>
+</CardGroup>

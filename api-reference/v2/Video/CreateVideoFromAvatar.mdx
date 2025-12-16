@@ -1,6 +1,6 @@
 ---
 title: "Create Video from Avatar"
-openapi: "POST /open/v2/create_video_from_avatar"
+openapi: "POST /v2/create_video_from_avatar"
 ---
 
 Create a talking avatar video by providing a script, avatar ID, and voice ID. This endpoint generates videos with AI avatars speaking your provided text.
@@ -9,7 +9,7 @@ Create a talking avatar video by providing a script, avatar ID, and voice ID. Th
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_avatar' \
+  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{

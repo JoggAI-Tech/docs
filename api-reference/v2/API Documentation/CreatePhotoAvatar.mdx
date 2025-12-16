@@ -50,10 +50,10 @@ Photo avatar creation is a **2-step asynchronous process**:
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| POST | `/open/v2/photo_avatar/photo/generate` | Generate photo avatar |
-| GET | `/open/v2/photo_avatar/photo` | List your photo avatars |
-| GET | `/open/v2/photo_avatar/photo/{id}` | Get specific avatar status |
-| POST | `/open/v2/photo_avatar/add_motion` | Add motion to avatar |
+| POST | `/v2/photo_avatar/photo/generate` | Generate photo avatar |
+| GET | `/v2/photo_avatar/photo` | List your photo avatars |
+| GET | `/v2/photo_avatar/photo?photo_id={id}` | Get photo generation status |
+| POST | `/v2/photo_avatar/add_motion` | Add motion to avatar |
 
 ---
 
@@ -63,7 +63,7 @@ Upload a portrait photo to create an avatar:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/photo_avatar/photo/generate' \
+  --url 'https://api.jogg.ai/v2/photo_avatar/photo/generate' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -96,7 +96,7 @@ Avatar generation takes 2-5 minutes. Save the `task_id` to check status.
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/photo_avatar/photo' \
+  --url 'https://api.jogg.ai/v2/photo_avatar/photo' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -132,7 +132,7 @@ Create a video with your photo avatar:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_avatar' \
+  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -159,7 +159,7 @@ Enhance avatar with realistic movements:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/photo_avatar/add_motion' \
+  --url 'https://api.jogg.ai/v2/photo_avatar/add_motion' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -186,7 +186,7 @@ curl --request POST \
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/photo_avatar/add_motion?task_id=motion_xyz789' \
+  --url 'https://api.jogg.ai/v2/photo_avatar?motion_id=motion_xyz789' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 

@@ -31,7 +31,7 @@ List your photo avatars:
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/avatars/photo_avatars' \
+  --url 'https://api.jogg.ai/v2/avatars/photo_avatars' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -62,7 +62,7 @@ Use the photo avatar in video creation:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_avatar' \
+  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{

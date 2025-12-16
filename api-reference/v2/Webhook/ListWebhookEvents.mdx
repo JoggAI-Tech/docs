@@ -1,60 +1,121 @@
 ---
 title: "List Webhook Events"
-openapi: "GET /open/v2/events"
+openapi: "GET /v2/events"
 ---
 
-获取所有可订阅的 Webhook 事件类型列表。
+Get a list of all available webhook event types that you can subscribe to.
 
-每种事件类型代表系统中的特定操作或状态变化。
+Each event type represents a specific action or status change in the system.
 
-## 使用场景
+## Use Cases
 
-- 查看所有可用的事件类型
-- 选择需要订阅的事件
-- 了解事件命名规范
+- View all available event types
+- Select events to subscribe to
+- Understand event naming conventions
 
-## 常见事件类型
+## Available Event Types
 
-### 视频相关事件
+### Video Generation Events
 
-- **video.completed** - 视频生成完成
-- **video.failed** - 视频生成失败
-- **video.processing** - 视频处理中
+| Event Type | Description |
+|------------|-------------|
+| `generated_product_video_success` | Product video generation succeeded |
+| `generated_product_video_failed` | Product video generation failed |
+| `generated_avatar_video_success` | Avatar video generation succeeded |
+| `generated_avatar_video_failed` | Avatar video generation failed |
+| `generated_template_video_success` | Template video generation succeeded |
+| `generated_template_video_failed` | Template video generation failed |
+| `generated_translate_video_success` | Video translation succeeded |
+| `generated_translate_video_failed` | Video translation failed |
 
-### Avatar 相关事件
+### Avatar Generation Events
 
-- **avatar.created** - Avatar 创建成功
-- **avatar.failed** - Avatar 创建失败
+| Event Type | Description |
+|------------|-------------|
+| `generated_photo_avatar_success` | Photo avatar creation succeeded |
+| `generated_photo_avatar_failed` | Photo avatar creation failed |
+| `generated_product_avatar_success` | Product avatar creation succeeded |
+| `generated_product_avatar_failed` | Product avatar creation failed |
+
+### AI Script Generation Events
+
+| Event Type | Description |
+|------------|-------------|
+| `generated_script_success` | AI script generation succeeded |
+| `generated_script_failed` | AI script generation failed |
 
 <Tip>
-建议至少订阅 `*.completed` 和 `*.failed` 事件，以便及时了解任务的最终状态。
+We recommend subscribing to at least `*_success` and `*_failed` events to stay informed about task completion status.
 </Tip>
 
-## Webhook 有效载荷示例
+## Webhook Payload Examples
 
-当事件触发时，您的端点将收到类似以下的 JSON 载荷：
+When an event is triggered, your endpoint will receive a JSON payload similar to the following:
+
+### Video Generation Success Event
 
 ```json
 {
-  "event": "video.completed",
+  "event_id": "evt_123456789",
+  "event": "generated_avatar_video_success",
   "timestamp": 1732806631,
   "data": {
     "video_id": "video_123456",
     "status": "completed",
-    "video_url": "https://res.jogg.ai/video.mp4"
+    "video_url": "https://res.jogg.ai/video.mp4",
+    "cover_url": "https://res.jogg.ai/cover.jpg",
+    "duration": 30
   }
 }
 ```
 
-## 最佳实践
+### Avatar Generation Success Event
+
+```json
+{
+  "event_id": "evt_987654321",
+  "event": "generated_photo_avatar_success",
+  "timestamp": 1732806631,
+  "data": {
+    "avatar_id": 12345,
+    "status": "completed",
+    "preview_url": "https://res.jogg.ai/avatar-preview.mp4"
+  }
+}
+```
+
+### Script Generation Success Event
+
+```json
+{
+  "event": "generated_script_success",
+  "timestamp": 1732806631,
+  "data": {
+    "task_id": "task_123456",
+    "status": "completed",
+    "scripts": [
+      {
+        "script_style": "Storytime",
+        "script_paragraphs": "Your generated script content..."
+      }
+    ]
+  }
+}
+```
+
+## Best Practices
 
 <Info>
-- 使用幂等性处理：同一事件可能被发送多次
-- 实现重试机制：如果处理失败，系统会重试发送
-- 快速响应：在 5 秒内返回 2xx 状态码
-- 异步处理：收到事件后立即返回，然后异步处理业务逻辑
+- **Use idempotent processing**: The same event may be sent multiple times, ensure your logic handles this
+- **Implement retry logic**: The system will retry sending webhooks if processing fails
+- **Respond quickly**: Return a 2xx status code within 5 seconds to avoid timeouts
+- **Process asynchronously**: Return 200 immediately after receiving the event, then process business logic asynchronously
+- **Verify signatures**: Use the webhook secret to verify request authenticity
 </Info>
 
+## Event Naming Convention
 
+All events follow the `generated_{resource}_{status}` naming pattern:
 
-
+- `{resource}`: Resource type (e.g., `avatar_video`, `product_avatar`, `script`)
+- `{status}`: Status (`success` or `failed`)

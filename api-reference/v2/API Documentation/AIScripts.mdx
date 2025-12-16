@@ -49,7 +49,7 @@ sequenceDiagram
     participant AI
     
     Note over Client,AI: Step 1: Submit Request
-    Client->>API: POST /ai_scripts {product_id, language, length}
+    Client->>API: POST /ai_scripts {product_info, language, video_length_seconds, script_style}
     API->>AI: Generate scripts
     API-->>Client: 200 OK {task_id}
     
@@ -83,20 +83,28 @@ AI script generation typically completes in **10-30 seconds**. You can start pol
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `product_id` | string | * | Product ID (required if no name) |
-| `name` | string | * | Product name (required if no product_id) |
-| `description` | string | ❌ | Product description and selling points |
-| `target_audience` | string | ❌ | Target audience description |
-| `video_length` | string | ✅ | "15", "30", or "60" seconds |
 | `language` | string | ✅ | Script language (e.g., "english") |
+| `video_length_seconds` | string | ✅ | "15", "30", or "60" seconds |
+| `script_style` | string | ✅ | Script style: "Don't Worry", "Storytime", "Discovery", "Data", "Top 3 reasons", "Light marketing" |
+| `product_info` | object | ✅ | Product information object |
+| `product_info.source_type` | string | ✅ | "id" or "details" |
+| `product_info.data` | object | ✅ | Product data based on source_type |
+| `product_info.data.id` | string | * | Product ID (required when source_type is "id") |
+| `product_info.data.name` | string | * | Product name (required when source_type is "details") |
+| `product_info.data.description` | string | * | Product description (required when source_type is "details") |
+| `target_audience` | string | ❌ | Target audience description (optional) |
 
 **Response Fields:**
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `task_id` | string | Task ID to check generation status |
+| `task_id` | string | Task ID from script generation request |
 | `status` | string | pending/processing/completed/failed |
-| `scripts` | array | Generated script variations (when completed) |
+| `data` | object | Script generation results (only present when status is 'completed') |
+| `data.generated_scripts` | array | Generated scripts in different styles |
+| `data.generated_scripts[].script_style` | string | Style of the script (e.g., "Storytime", "Discovery") |
+| `data.generated_scripts[].script_paragraphs` | array | The generated script content as an array of paragraphs |
+| `err_msg` | string | Error message (only present when status is 'failed') |
 
 ---
 
@@ -110,13 +118,19 @@ Use an existing product to generate scripts:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/ai_scripts' \
+  --url 'https://api.jogg.ai/v2/ai_scripts' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "product_id": "NTQ0MTkzNjg",
-    "video_length": "30",
-    "language": "english"
+    "language": "english",
+    "video_length_seconds": "30",
+    "script_style": "Storytime",
+    "product_info": {
+      "source_type": "id",
+      "data": {
+        "id": "NTQ0MTkzNjg"
+      }
+    }
   }'
 ```
 
@@ -140,7 +154,7 @@ Save the `task_id` - you'll need it to retrieve your scripts!
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/ai_scripts/results/task_123456789' \
+  --url 'https://api.jogg.ai/v2/ai_scripts/results/task_123456789' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -151,21 +165,41 @@ curl --request GET \
   "code": 0,
   "msg": "Success",
   "data": {
+    "task_id": "task_123456789",
     "status": "completed",
-    "scripts": [
-      {
-        "script_style": "Storytime",
-        "script_paragraphs": "Ever tried drinking water while running? The Owala FreeSip bottle changes everything. Its unique spout lets you sip or swig - no spills, no fuss. Plus, it keeps drinks cold for 24 hours. Perfect for gym, work, or adventures!"
-      },
-      {
-        "script_style": "Discovery",
-        "script_paragraphs": "Discover the Owala FreeSip - the water bottle that adapts to you. Sip through the straw or tilt to swig from the spout. Double-wall insulation keeps drinks ice-cold all day. Available in vibrant colors that match your style!"
-      },
-      {
-        "script_style": "Top 3 Reasons",
-        "script_paragraphs": "Three reasons to love the Owala FreeSip: One, the patented FreeSip spout for sipping or swigging. Two, 24-hour cold insulation. Three, leak-proof design for your bag. Upgrade your hydration game today!"
-      }
-    ]
+    "data": {
+      "generated_scripts": [
+        {
+          "script_style": "Storytime",
+          "script_paragraphs": [
+            "Ever tried drinking water while running?",
+            "The Owala FreeSip bottle changes everything.",
+            "Its unique spout lets you sip or swig - no spills, no fuss.",
+            "Plus, it keeps drinks cold for 24 hours.",
+            "Perfect for gym, work, or adventures!"
+          ]
+        },
+        {
+          "script_style": "Discovery",
+          "script_paragraphs": [
+            "Discover the Owala FreeSip - the water bottle that adapts to you.",
+            "Sip through the straw or tilt to swig from the spout.",
+            "Double-wall insulation keeps drinks ice-cold all day.",
+            "Available in vibrant colors that match your style!"
+          ]
+        },
+        {
+          "script_style": "Top 3 reasons",
+          "script_paragraphs": [
+            "Three reasons to love the Owala FreeSip:",
+            "One, the patented FreeSip spout for sipping or swigging.",
+            "Two, 24-hour cold insulation.",
+            "Three, leak-proof design for your bag.",
+            "Upgrade your hydration game today!"
+          ]
+        }
+      ]
+    }
   }
 }
 ```
@@ -178,15 +212,21 @@ Provide product details directly:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/ai_scripts' \
+  --url 'https://api.jogg.ai/v2/ai_scripts' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "name": "Premium Yoga Mat",
-    "description": "Eco-friendly yoga mat with superior grip and cushioning. Made from natural rubber with moisture-wicking surface. 6mm thickness provides excellent support.",
-    "target_audience": "Yoga enthusiasts and fitness lovers",
-    "video_length": "30",
-    "language": "english"
+    "language": "english",
+    "video_length_seconds": "30",
+    "script_style": "Discovery",
+    "product_info": {
+      "source_type": "details",
+      "data": {
+        "name": "Premium Yoga Mat",
+        "description": "Eco-friendly yoga mat with superior grip and cushioning. Made from natural rubber with moisture-wicking surface. 6mm thickness provides excellent support."
+      }
+    },
+    "target_audience": "Yoga enthusiasts and fitness lovers"
   }'
 ```
 
@@ -198,13 +238,19 @@ Generate punchy scripts for quick social media videos:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/ai_scripts' \
+  --url 'https://api.jogg.ai/v2/ai_scripts' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "product_id": "NTQ0MTkzNjg",
-    "video_length": "15",
-    "language": "english"
+    "language": "english",
+    "video_length_seconds": "15",
+    "script_style": "Light marketing",
+    "product_info": {
+      "source_type": "id",
+      "data": {
+        "id": "NTQ0MTkzNjg"
+      }
+    }
   }'
 ```
 
@@ -212,12 +258,25 @@ curl --request POST \
 
 ```json
 {
-  "scripts": [
-    {
-      "script_style": "Light Marketing",
-      "script_paragraphs": "Meet the Owala FreeSip - your new hydration hero! Sip or swig with one spout. Stays cold for 24 hours. Get yours today!"
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "task_id": "task_123456789",
+    "status": "completed",
+    "data": {
+      "generated_scripts": [
+        {
+          "script_style": "Light marketing",
+          "script_paragraphs": [
+            "Meet the Owala FreeSip - your new hydration hero!",
+            "Sip or swig with one spout.",
+            "Stays cold for 24 hours.",
+            "Get yours today!"
+          ]
+        }
+      ]
     }
-  ]
+  }
 }
 ```
 
@@ -229,13 +288,19 @@ Generate scripts in different languages:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/ai_scripts' \
+  --url 'https://api.jogg.ai/v2/ai_scripts' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "product_id": "NTQ0MTkzNjg",
-    "video_length": "30",
-    "language": "spanish"
+    "language": "spanish",
+    "video_length_seconds": "30",
+    "script_style": "Storytime",
+    "product_info": {
+      "source_type": "id",
+      "data": {
+        "id": "NTQ0MTkzNjg"
+      }
+    }
   }'
 ```
 
@@ -243,12 +308,26 @@ curl --request POST \
 
 ```json
 {
-  "scripts": [
-    {
-      "script_style": "Storytime",
-      "script_paragraphs": "¿Alguna vez intentaste beber agua mientras corres? La botella Owala FreeSip lo cambia todo. Su boquilla única te permite sorber o tragar - sin derrames, sin problemas. Además, mantiene las bebidas frías durante 24 horas. ¡Perfecto para el gimnasio, trabajo o aventuras!"
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "task_id": "task_123456789",
+    "status": "completed",
+    "data": {
+      "generated_scripts": [
+        {
+          "script_style": "Storytime",
+          "script_paragraphs": [
+            "¿Alguna vez intentaste beber agua mientras corres?",
+            "La botella Owala FreeSip lo cambia todo.",
+            "Su boquilla única te permite sorber o tragar - sin derrames, sin problemas.",
+            "Además, mantiene las bebidas frías durante 24 horas.",
+            "¡Perfecto para el gimnasio, trabajo o aventuras!"
+          ]
+        }
+      ]
     }
-  ]
+  }
 }
 ```
 
@@ -264,7 +343,7 @@ Poll to check if scripts are ready:
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/ai_scripts/results/task_123456789' \
+  --url 'https://api.jogg.ai/v2/ai_scripts/results/task_123456789' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -275,6 +354,7 @@ curl --request GET \
   "code": 0,
   "msg": "Success",
   "data": {
+    "task_id": "task_123456789",
     "status": "processing"
   }
 }
@@ -287,8 +367,25 @@ curl --request GET \
   "code": 0,
   "msg": "Success",
   "data": {
+    "task_id": "task_123456789",
     "status": "completed",
-    "scripts": [...]
+    "data": {
+      "generated_scripts": [...]
+    }
+  }
+}
+```
+
+**Response (Failed):**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "task_id": "task_123456789",
+    "status": "failed",
+    "err_msg": "Failed to generate script"
   }
 }
 ```
@@ -425,10 +522,10 @@ When choosing from multiple generated scripts:
   
   <Accordion title="Wrong language or tone">
     **Solution:**
-    - Verify `language` parameter
-    - Try different script styles
-    - Provide target audience description
-    - Add context about brand personality in description
+    - Verify `language` parameter is correct
+    - Try different `script_style` options
+    - Provide `target_audience` description
+    - Add context about brand personality in product description
   </Accordion>
   
   <Accordion title="Task stays in processing">

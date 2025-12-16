@@ -1,0 +1,25 @@
+---
+title: "Check Product Avatar Status"
+openapi: "GET /v2/product_avatar"
+---
+
+Get the status and details of image to product avatar conversion.
+
+## Example Usage
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/product_avatar?motion_id=motion_123456' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Add Motion to Product Avatar" href="/api-reference/v2/Avatar/AddMotionToProductAvatar">
+    Convert image to product avatar
+  </Card>
+  <Card title="Generate Product Avatar Image" href="/api-reference/v2/Avatar/GenerateProductAvatarImage">
+    Generate product avatar images
+  </Card>
+</CardGroup>

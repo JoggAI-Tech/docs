@@ -1,0 +1,33 @@
+---
+title: "Add Motion to Product Avatar"
+openapi: "POST /v2/product_avatar/add_motion"
+---
+
+Create a product avatar from generated image with motion and voice.
+
+## Example Usage
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/v2/product_avatar/add_motion' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "generation_id": "gen_123",
+    "name": "Product Presenter",
+    "voice_id": "en-US-ChristopherNeural",
+    "description": "Professional presentation motion",
+    "aspect_ratio": "portrait"
+  }'
+```
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Generate Product Avatar Image" href="/api-reference/v2/Avatar/GenerateProductAvatarImage">
+    Generate product avatar images first
+  </Card>
+  <Card title="Check Status" href="/api-reference/v2/Avatar/CheckProductAvatarStatus">
+    Check product avatar status
+  </Card>
+</CardGroup>

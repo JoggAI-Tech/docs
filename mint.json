@@ -95,9 +95,16 @@
         "api-reference/v2/Video/CreateVideoFromAvatar",
         "api-reference/v2/Video/GetAvatarVideo",
         "api-reference/v2/Video/CreateVideoFromProduct",
-        "api-reference/v2/Video/CreateVideoWithTemplate",
+        "api-reference/v2/Video/SubmitPreviewList",
+        "api-reference/v2/Video/RenderSinglePreview",
+        "api-reference/v2/Video/GetProductPreviews",
         "api-reference/v2/Video/GetProductVideo",
+        "api-reference/v2/Video/GetProductVideos",
+        "api-reference/v2/Video/CreateVideoWithTemplate",
+        "api-reference/v2/Video/GetTemplateVideo",
+        "api-reference/v2/Video/GetTemplateVideos",
         "api-reference/v2/Video/VideoTranslate",
+        "api-reference/v2/Video/CheckTranslationStatus",
         "api-reference/v2/Video/GetTargetLanguages"
       ]
     },
@@ -107,8 +114,16 @@
         "api-reference/v2/Avatar/GetPublicAvatars",
         "api-reference/v2/Avatar/GetCustomAvatars",
         "api-reference/v2/Avatar/GetPhotoAvatars",
+        "api-reference/v2/Avatar/GetProductAvatars",
         "api-reference/v2/Avatar/GeneratePhotoAvatar",
-        "api-reference/v2/Avatar/GetPhotoAvatarStatus"
+        "api-reference/v2/Avatar/CheckPhotoGenerationStatus",
+        "api-reference/v2/Avatar/AddMotionToPhotoAvatar",
+        "api-reference/v2/Avatar/CheckMotionStatus",
+        "api-reference/v2/Avatar/GetPhotoAvatarStatus",
+        "api-reference/v2/Avatar/GenerateProductAvatarImage",
+        "api-reference/v2/Avatar/CheckProductAvatarGenerationStatus",
+        "api-reference/v2/Avatar/AddMotionToProductAvatar",
+        "api-reference/v2/Avatar/CheckProductAvatarStatus"
       ]
     },
     {
@@ -139,7 +154,7 @@
       "group": "Product",
       "pages": [
         "api-reference/v2/Product/CreateProduct",
-        "api-reference/v2/Product/GetProduct"
+        "api-reference/v2/Product/UpdateProduct"
       ]
     },
     {

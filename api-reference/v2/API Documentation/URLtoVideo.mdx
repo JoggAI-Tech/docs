@@ -65,7 +65,7 @@ sequenceDiagram
     alt Webhook
         Queue->>Client: POST /webhook {video_url}
     else Polling
-        Client->>API: GET /product_video/{id}
+        Client->>API: GET /product_video/{product_video_id}
         API-->>Client: {video_url, status}
     end
 ```
@@ -87,7 +87,7 @@ The entire process can take **5-10 minutes** depending on video complexity. Use 
 | `GET /voices` | Get voice list | [API Reference](/api-reference/v2/Voice/GetVoices) |
 | `GET /visual_styles` | Get visual styles | [API Reference](/api-reference/v2/Asset/GetVisualStyles) |
 | `POST /create_video_from_product` | Generate video | [API Reference](/api-reference/v2/Video/CreateVideoFromProduct) |
-| `GET /product_video/{id}` | Check status | [API Reference](/api-reference/v2/Video/GetProductVideo) |
+| `GET /product_video/{product_video_id}` | Check status | [API Reference](/api-reference/v2/Video/GetProductVideo) |
 
 ### Key Parameters
 
@@ -129,7 +129,7 @@ Create a product video from a URL in 3 steps:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/product' \
+  --url 'https://api.jogg.ai/v2/product' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -161,7 +161,7 @@ curl --request POST \
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_product' \
+  --url 'https://api.jogg.ai/v2/create_video_from_product' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -193,7 +193,7 @@ curl --request POST \
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/product_video/pv_123456' \
+  --url 'https://api.jogg.ai/v2/product_video/pv_123456' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -221,7 +221,7 @@ Create video without a URL by providing product details:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/product' \
+  --url 'https://api.jogg.ai/v2/product' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -249,7 +249,7 @@ Override the AI-generated script with your own:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_product' \
+  --url 'https://api.jogg.ai/v2/create_video_from_product' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -277,7 +277,7 @@ Apply your custom template to the product video:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_product' \
+  --url 'https://api.jogg.ai/v2/create_video_from_product' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{

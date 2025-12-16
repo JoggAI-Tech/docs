@@ -7,6 +7,10 @@ description: "Receive real-time notifications when your videos are ready"
 
 JoggAI sends HTTP POST requests to your webhook endpoint when events occur (like video completion). This eliminates the need for polling and provides instant notifications.
 
+<Info>
+**Webhook Limit**: Each user can create up to **20** webhook endpoints.
+</Info>
+
 <CardGroup cols={2}>
   <Card title="Real-Time Updates" icon="bolt">
     Get notified instantly when videos complete
@@ -32,11 +36,11 @@ sequenceDiagram
     participant Webhook as Your Server
     
     Note over Client,Webhook: 1. Setup (One Time)
-    Client->>API: POST /open/v2/endpoint
+    Client->>API: POST /v2/endpoint
     API-->>Client: 200 OK {endpoint_id, secret}
     
     Note over Client,Webhook: 2. Create Video
-    Client->>API: POST /open/v2/create_video_from_avatar
+    Client->>API: POST /v2/create_video_from_avatar
     API->>Queue: Queue task
     API-->>Client: 200 OK {video_id}
     
@@ -51,7 +55,7 @@ sequenceDiagram
 ```
 
 <Info>
-  Webhook requests expect a `200 OK` response within 10 seconds. Non-2xx responses trigger automatic retries.
+  Webhook requests expect a `200 OK` response within **5 seconds**. Non-2xx responses trigger automatic retries.
 </Info>
 
 ## Quick Start
@@ -59,12 +63,12 @@ sequenceDiagram
 ### Step 1: Add Webhook Endpoint
 
 ```bash
-curl --location --request POST 'https://api.jogg.ai/open/v2/endpoint' \
+curl --location --request POST 'https://api.jogg.ai/v2/endpoint' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data-raw '{
     "url": "https://example.com/webhook",
-    "events": ["video.completed", "video.failed"],
+    "events": ["generated_avatar_video_success", "generated_avatar_video_failed"],
     "status": "enabled"
   }'
 ```
@@ -80,7 +84,7 @@ curl --location --request POST 'https://api.jogg.ai/open/v2/endpoint' \
     "url": "https://example.com/webhook",
     "secret": "whsec_abc123xyz",
     "status": "enabled",
-    "events": ["video.completed", "video.failed"],
+    "events": ["generated_avatar_video_success", "generated_avatar_video_failed"],
     "username": "johndoe",
     "created_at": 1732806631
   }
@@ -166,11 +170,20 @@ verify_webhook() {
 
 | Event | Description | When Triggered |
 |-------|-------------|----------------|
-| `video.completed` | Video generation succeeded | Video is ready to download |
-| `video.failed` | Video generation failed | An error occurred during generation |
-| `video.processing` | Video is being processed | Video rendering has started |
-| `avatar.created` | Avatar creation succeeded | Avatar is ready to use |
-| `avatar.failed` | Avatar creation failed | An error occurred during avatar creation |
+| `generated_avatar_video_success` | Avatar video generation succeeded | Video is ready to download |
+| `generated_avatar_video_failed` | Avatar video generation failed | An error occurred during generation |
+| `generated_product_video_success` | Product video generation succeeded | Video is ready to download |
+| `generated_product_video_failed` | Product video generation failed | An error occurred during generation |
+| `generated_template_video_success` | Template video generation succeeded | Video is ready to download |
+| `generated_template_video_failed` | Template video generation failed | An error occurred during generation |
+| `generated_translate_video_success` | Video translation succeeded | Translated video is ready |
+| `generated_translate_video_failed` | Video translation failed | An error occurred during translation |
+| `generated_photo_avatar_success` | Photo avatar creation succeeded | Avatar is ready to use |
+| `generated_photo_avatar_failed` | Photo avatar creation failed | An error occurred during avatar creation |
+| `generated_product_avatar_success` | Product avatar creation succeeded | Avatar is ready to use |
+| `generated_product_avatar_failed` | Product avatar creation failed | An error occurred during avatar creation |
+| `generated_script_success` | AI script generation succeeded | Scripts are ready to use |
+| `generated_script_failed` | AI script generation failed | An error occurred during script generation |
 
 <Tip>
 查看 [List Webhook Events](/api-reference/v2/Webhook/ListWebhookEvents) 获取完整的事件列表。
@@ -183,7 +196,7 @@ verify_webhook() {
 ```json
 {
   "event_id": "evt_123456789",
-  "event": "video.completed",
+  "event": "generated_avatar_video_success",
   "timestamp": 1732806631,
   "data": {
     "video_id": "video_123456",
@@ -200,7 +213,7 @@ verify_webhook() {
 ```json
 {
   "event_id": "evt_123456789",
-  "event": "video.failed",
+  "event": "generated_avatar_video_failed",
   "timestamp": 1732806631,
   "data": {
     "video_id": "video_123456",
@@ -218,7 +231,7 @@ verify_webhook() {
 ```json
 {
   "event_id": "evt_987654321",
-  "event": "avatar.created",
+  "event": "generated_photo_avatar_success",
   "timestamp": 1732806631,
   "data": {
     "avatar_id": 123,
@@ -236,7 +249,7 @@ verify_webhook() {
 <AccordionGroup>
   <Accordion title="List All Webhooks">
 ```bash
-curl --request GET 'https://api.jogg.ai/open/v2/endpoints' \
+curl --request GET 'https://api.jogg.ai/v2/endpoints' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -247,12 +260,12 @@ Response includes all configured webhook endpoints with their settings.
   
   <Accordion title="Update Webhook">
 ```bash
-curl --request PUT 'https://api.jogg.ai/open/v2/endpoint/wh_123456789' \
+curl --request PUT 'https://api.jogg.ai/v2/endpoint/wh_123456789' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data-raw '{
     "url": "https://new-url.com/webhook",
-    "events": ["video.completed", "video.failed", "avatar.created"],
+    "events": ["generated_avatar_video_success", "generated_avatar_video_failed", "generated_photo_avatar_success"],
     "status": "enabled"
   }'
 ```
@@ -264,7 +277,7 @@ Note: The `secret` cannot be modified.
   
   <Accordion title="Delete Webhook">
 ```bash
-curl --request DELETE 'https://api.jogg.ai/open/v2/endpoint/wh_123456789' \
+curl --request DELETE 'https://api.jogg.ai/v2/endpoint/wh_123456789' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -273,7 +286,7 @@ curl --request DELETE 'https://api.jogg.ai/open/v2/endpoint/wh_123456789' \
   
   <Accordion title="List Available Events">
 ```bash
-curl --request GET 'https://api.jogg.ai/open/v2/events' \
+curl --request GET 'https://api.jogg.ai/v2/events' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -291,7 +304,7 @@ Returns list of all supported webhook events.
 POST /webhook HTTP/1.1
 Host: your-domain.com
 Content-Type: application/json
-X-Webhook-Event: video.completed
+X-Webhook-Event: generated_avatar_video_success
 X-Webhook-Signature: 7256c87be255861cbbe92f4a04a4500176b045a287f258e32e5b6c6b96d7f290
 User-Agent: JoggAI-Webhook/2.0
 ```

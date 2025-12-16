@@ -65,7 +65,7 @@ sequenceDiagram
     alt Webhook
         Queue->>Client: POST /webhook {video_url}
     else Polling
-        Client->>API: GET /template_video/{id}
+        Client->>API: GET /template_video/{video_id}
         API-->>Client: {video_url, status}
     end
 ```
@@ -85,7 +85,7 @@ Template videos typically take 2-5 minutes to generate. Use webhooks for best ex
 | `GET /templates/custom` | List your custom templates | [API Reference](/api-reference/v2/Template/GetTemplates) |
 | `GET /template/custom/{id}` | Get template details | [API Reference](/api-reference/v2/Template/GetTemplateById) |
 | `POST /create_video_with_template` | Create video from template | [API Reference](/api-reference/v2/Video/CreateVideoWithTemplate) |
-| `GET /template_video/{id}` | Check video status | [API Reference](/api-reference/v2/Video/CreateVideoWithTemplate) |
+| `GET /template_video/{video_id}` | Check video status | [API Reference](/api-reference/v2/Video/GetTemplateVideo) |
 
 ### Key Parameters
 
@@ -110,7 +110,7 @@ First, browse your custom templates:
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/templates/custom?aspect_ratio=0' \
+  --url 'https://api.jogg.ai/v2/templates/custom?aspect_ratio=portrait' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -135,7 +135,7 @@ curl --request GET \
 ```
 
 <Check>
-Filter by `aspect_ratio`: -1=All, 0=Portrait, 1=Landscape, 2=Square
+Filter by `aspect_ratio`: `portrait` (Portrait), `landscape` (Landscape), `square` (Square)
 </Check>
 
 ---
@@ -146,7 +146,7 @@ View template variables and requirements:
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/template/custom/1234' \
+  --url 'https://api.jogg.ai/v2/template/custom/1234' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -193,7 +193,7 @@ Use template with text customization:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_with_template' \
+  --url 'https://api.jogg.ai/v2/create_video_with_template' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -242,7 +242,7 @@ Include custom images in template:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_with_template' \
+  --url 'https://api.jogg.ai/v2/create_video_with_template' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -289,7 +289,7 @@ Use previously uploaded assets:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_with_template' \
+  --url 'https://api.jogg.ai/v2/create_video_with_template' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -326,7 +326,7 @@ Poll for video completion:
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/template_video/video_123456' \
+  --url 'https://api.jogg.ai/v2/template_video/video_123456' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 

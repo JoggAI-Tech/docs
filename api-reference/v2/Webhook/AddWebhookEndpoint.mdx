@@ -1,47 +1,144 @@
 ---
 title: "Add Webhook Endpoint"
-openapi: "POST /open/v2/endpoint"
+openapi: "POST /v2/endpoint"
 ---
 
-创建新的 Webhook 端点以接收事件通知。
+Create a new webhook endpoint to receive event notifications.
 
-您可以指定要订阅的事件类型并配置端点 URL。
+You can specify which event types to subscribe to and configure the endpoint URL.
 
-## 使用场景
+<Info>
+**Limit**: Each user can create up to **20** webhook endpoints.
+</Info>
 
-- 接收视频生成完成通知
-- 监控任务失败事件
-- 实时追踪 Avatar 创建状态
-- 集成第三方系统
+## Use Cases
 
-## 重要提示
+- Receive video generation completion notifications
+- Monitor task failure events
+- Track avatar creation status in real-time
+- Integrate with third-party systems
+
+## Important Notes
 
 <Note>
-Webhook 端点必须能够接收 POST 请求，并返回 2xx 状态码以确认接收。
+Webhook endpoints must be able to receive POST requests and return a 2xx status code within **5 seconds** to confirm receipt.
 </Note>
 
 <Warning>
-确保您的端点 URL 是公网可访问的 HTTPS 地址。
+Ensure your endpoint URL is a publicly accessible **HTTPS** address.
 </Warning>
 
-## 可用事件类型
+## Available Event Types
 
-常见的事件类型包括：
+### Video Generation Events
 
-- `video.completed` - 视频生成完成
-- `video.failed` - 视频生成失败
-- `video.processing` - 视频处理中
-- `avatar.created` - Avatar 创建成功
-- `avatar.failed` - Avatar 创建失败
+| Event | Description | When Triggered |
+|-------|-------------|----------------|
+| `generated_product_video_success` | Product video generation succeeded | Video is ready to download |
+| `generated_product_video_failed` | Product video generation failed | An error occurred during generation |
+| `generated_avatar_video_success` | Avatar video generation succeeded | Video is ready to download |
+| `generated_avatar_video_failed` | Avatar video generation failed | An error occurred during generation |
+| `generated_template_video_success` | Template video generation succeeded | Video is ready to download |
+| `generated_template_video_failed` | Template video generation failed | An error occurred during generation |
+| `generated_translate_video_success` | Video translation succeeded | Translated video is ready |
+| `generated_translate_video_failed` | Video translation failed | An error occurred during translation |
+
+### Avatar Generation Events
+
+| Event | Description | When Triggered |
+|-------|-------------|----------------|
+| `generated_photo_avatar_success` | Photo avatar creation succeeded | Avatar is ready to use |
+| `generated_photo_avatar_failed` | Photo avatar creation failed | An error occurred during avatar creation |
+| `generated_product_avatar_success` | Product avatar creation succeeded | Avatar is ready to use |
+| `generated_product_avatar_failed` | Product avatar creation failed | An error occurred during avatar creation |
+
+### AI Script Generation Events
+
+| Event | Description | When Triggered |
+|-------|-------------|----------------|
+| `generated_script_success` | AI script generation succeeded | Scripts are ready to use |
+| `generated_script_failed` | AI script generation failed | An error occurred during script generation |
 
 <Tip>
-使用 [List Webhook Events](/api-reference/v2/Webhook/ListWebhookEvents) 端点获取所有可用的事件类型。
+Use the [List Webhook Events](/api-reference/v2/Webhook/ListWebhookEvents) endpoint to get all available event types.
 </Tip>
 
-## Webhook 签名验证
+## Webhook Signature Verification
 
-每个 Webhook 请求都包含签名，用于验证请求来源的真实性。使用返回的 `secret` 来验证签名。
+Each webhook request includes a signature to verify the authenticity of the request source. Use the returned `secret` to verify the signature.
 
+### Example Request Headers
 
+```http
+POST /webhook HTTP/1.1
+Host: your-domain.com
+Content-Type: application/json
+X-Webhook-Event: generated_avatar_video_success
+X-Webhook-Signature: 7256c87be255861cbbe92f4a04a4500176b045a287f258e32e5b6c6b96d7f290
+User-Agent: JoggAI-Webhook/2.0
+```
 
+### Signature Verification Examples
 
+#### Go
+
+```go
+func VerifyWebhookSignature(payload []byte, signature, secret string) bool {
+    mac := hmac.New(sha256.New, []byte(secret))
+    mac.Write(payload)
+    expectedSignature := hex.EncodeToString(mac.Sum(nil))
+    return hmac.Equal([]byte(signature), []byte(expectedSignature))
+}
+```
+
+#### Python
+
+```python
+import hmac
+import hashlib
+
+def verify_webhook_signature(payload, signature, secret):
+    expected = hmac.new(
+        secret.encode('utf-8'),
+        payload,
+        hashlib.sha256
+    ).hexdigest()
+    return hmac.compare_digest(signature, expected)
+```
+
+#### Node.js
+
+```javascript
+const crypto = require('crypto');
+
+function verifyWebhookSignature(payload, signature, secret) {
+    const expected = crypto
+        .createHmac('sha256', secret)
+        .update(payload)
+        .digest('hex');
+    return crypto.timingSafeEqual(
+        Buffer.from(signature),
+        Buffer.from(expected)
+    );
+}
+```
+
+## Best Practices
+
+<CardGroup cols={2}>
+  <Card title="Quick Response" icon="bolt">
+    Return 200 status code within 5 seconds
+  </Card>
+  
+  <Card title="Async Processing" icon="clock">
+    Return immediately, process business logic in background
+  </Card>
+  
+  <Card title="Idempotent Handling" icon="check-double">
+    Same event may be sent multiple times, ensure idempotency
+  </Card>
+  
+  <Card title="Error Retry" icon="rotate">
+    System automatically retries failed webhooks
+  </Card>
+</CardGroup>

@@ -1,18 +1,40 @@
 ---
 title: "List Webhook Endpoints"
-openapi: "GET /open/v2/endpoints"
+openapi: "GET /v2/endpoints"
 ---
 
-获取您账户中配置的所有 Webhook 端点列表。
+Retrieve a list of all webhook endpoints configured in your account.
 
-Webhook 允许您接收 JoggAI 工作空间中事件的实时通知。
+Webhooks allow you to receive real-time notifications about events in your JoggAI workspace.
 
-## 使用场景
+<Info>
+**Limit**: Each user can create up to **20** webhook endpoints.
+</Info>
 
-- 查看所有配置的 Webhook 端点
-- 管理事件订阅
-- 监控 Webhook 状态
+## Use Cases
 
+- View all configured webhook endpoints
+- Manage event subscriptions
+- Monitor webhook status
+- Check enabled/disabled endpoints
 
+## Response Fields
 
+| Field | Type | Description |
+|-------|------|-------------|
+| `endpoint_id` | string | Unique webhook endpoint identifier |
+| `url` | string | Webhook receiver URL |
+| `secret` | string | Secret key for signature verification |
+| `status` | string | Endpoint status: `enabled` or `disabled` |
+| `events` | array | List of subscribed event types |
+| `created_at` | integer | Creation timestamp |
 
+## Best Practices
+
+<Tip>
+Regularly check webhook endpoint status to ensure critical event endpoints are `enabled`.
+</Tip>
+
+<Note>
+If you no longer need a webhook, we recommend using [Delete Webhook Endpoint](/api-reference/v2/Webhook/DeleteWebhookEndpoint) to remove it and free up your quota.
+</Note>

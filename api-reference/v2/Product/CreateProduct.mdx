@@ -1,6 +1,6 @@
 ---
 title: "Create Product"
-openapi: "POST /open/v2/product"
+openapi: "POST /v2/product"
 ---
 
 Create a product entry from a URL or manual product information. The system will extract product details automatically.
@@ -8,7 +8,7 @@ Create a product entry from a URL or manual product information. The system will
 ## Example Usage
 
 ```bash
-curl -X POST 'https://api.jogg.ai/open/v2/product' \
+curl -X POST 'https://api.jogg.ai/v2/product' \
   -H 'x-api-key: YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{

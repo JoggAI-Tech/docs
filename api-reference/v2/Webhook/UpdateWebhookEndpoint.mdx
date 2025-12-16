@@ -1,29 +1,25 @@
 ---
 title: "Update Webhook Endpoint"
-openapi: "PUT /open/v2/endpoint/{endpoint_id}"
+openapi: "PUT /v2/endpoint/{endpoint_id}"
 ---
 
-更新现有 Webhook 端点的配置，包括 URL、状态和订阅的事件。
+Update an existing webhook endpoint configuration, including URL, status, and subscribed events.
 
-## 使用场景
+## Use Cases
 
-- 修改 Webhook 接收地址
-- 更新订阅的事件类型
-- 启用或禁用 Webhook
-- 调整事件通知范围
+- Modify webhook receiver URL
+- Update subscribed event types
+- Enable or disable webhook
+- Adjust event notification scope
 
-## 状态管理
+## Status Management
 
 <Tip>
-将 `status` 设置为 `disabled` 可以暂时停止接收事件，而无需删除端点配置。
+Set `status` to `disabled` to temporarily stop receiving events without deleting the endpoint configuration.
 </Tip>
 
-## 注意事项
+## Important Notes
 
 <Warning>
-更新 Webhook 端点后，新配置将立即生效。确保新的 URL 已准备好接收请求。
+After updating the webhook endpoint, the new configuration takes effect immediately. Ensure the new URL is ready to receive requests.
 </Warning>
-
-
-
-

@@ -52,7 +52,7 @@ sequenceDiagram
     API-->>Client: 200 OK {asset_id, asset_url}
     
     Note over Client,Storage: Use in Video
-    Client->>API: POST /create_video {asset_id}
+    Client->>API: POST /create_video_from_avatar {asset_id}
     API->>Storage: Retrieve asset
     API-->>Client: Video with custom asset
 ```
@@ -92,7 +92,7 @@ Upload product photos, logos, or background images:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/upload/asset' \
+  --url 'https://api.jogg.ai/v2/upload/asset' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: multipart/form-data' \
   --form 'file=@/path/to/product.jpg' \
@@ -140,7 +140,7 @@ Upload background videos or product demos:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/upload/asset' \
+  --url 'https://api.jogg.ai/v2/upload/asset' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: multipart/form-data' \
   --form 'file=@/path/to/demo.mp4' \
@@ -188,7 +188,7 @@ Upload custom voiceovers or background music:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/upload/asset' \
+  --url 'https://api.jogg.ai/v2/upload/asset' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: multipart/form-data' \
   --form 'file=@/path/to/music.mp3' \
@@ -234,7 +234,7 @@ Reference uploaded assets in video creation:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_avatar' \
+  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{

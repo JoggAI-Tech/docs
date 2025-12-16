@@ -1,22 +1,51 @@
 ---
 title: "Create AI Script"
-openapi: "POST /open/v2/ai_scripts"
+openapi: "POST /v2/ai_scripts"
 ---
 
 Generate AI-powered video scripts based on product information. The AI will create multiple script variations optimized for your video duration.
 
 ## Example Usage
 
+### Using Product ID
+
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/ai_scripts' \
+  --url 'https://api.jogg.ai/v2/ai_scripts' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "name": "Amazing Smart Watch",
-    "description": "A smartwatch with health tracking",
-    "video_length": "30",
-    "language": "english"
+    "language": "english",
+    "video_length_seconds": "30",
+    "script_style": "Storytime",
+    "product_info": {
+      "source_type": "id",
+      "data": {
+        "id": "NTQ0MTkzNjg"
+      }
+    }
+  }'
+```
+
+### Using Product Details
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/v2/ai_scripts' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "language": "english",
+    "video_length_seconds": "30",
+    "script_style": "Discovery",
+    "product_info": {
+      "source_type": "details",
+      "data": {
+        "name": "Amazing Smart Watch",
+        "description": "A smartwatch with health tracking, fitness monitoring, and smart notifications"
+      }
+    },
+    "target_audience": "Fitness enthusiasts and tech-savvy consumers"
   }'
 ```
 

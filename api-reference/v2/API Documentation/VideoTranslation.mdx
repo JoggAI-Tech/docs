@@ -54,9 +54,9 @@ Processing time: 10-20 minutes for typical videos (varies by length)
 
 | Method | Endpoint | Description |
 |--------|----------|-------------|
-| GET | `/open/v2/video_translate/target_languages` | Get supported languages |
-| POST | `/open/v2/video_translate/` | Submit translation task |
-| GET | `/open/v2/video_translate/{translate_id}` | Check translation status |
+| GET | `/v2/video_translate/target_languages` | Get supported languages |
+| POST | `/v2/video_translate/` | Submit translation task |
+| GET | `/v2/video_translate/{video_translate_id}` | Check translation status |
 
 ---
 
@@ -66,7 +66,7 @@ List all available target languages:
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/video_translate/target_languages' \
+  --url 'https://api.jogg.ai/v2/video_translate/target_languages' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -101,7 +101,7 @@ curl --request GET \
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/video_translate/' \
+  --url 'https://api.jogg.ai/v2/video_translate/' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -134,7 +134,7 @@ Save the `video_translate_id` to check status later
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/video_translate/trans_abc123' \
+  --url 'https://api.jogg.ai/v2/video_translate/vt_123456' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -211,7 +211,7 @@ Translate product demos for international markets:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/video_translate/' \
+  --url 'https://api.jogg.ai/v2/video_translate/' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -234,7 +234,7 @@ Translate training videos for global teams:
 # Translate to multiple languages
 for lang in es fr de ja zh; do
   curl --request POST \
-    --url 'https://api.jogg.ai/open/v2/video_translate/' \
+    --url 'https://api.jogg.ai/v2/video_translate/' \
     --header 'x-api-key: YOUR_API_KEY' \
     --header 'Content-Type: application/json' \
     --data "{

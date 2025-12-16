@@ -1,0 +1,29 @@
+---
+title: "Render Video from Preview"
+openapi: "POST /v2/create_video_from_product/render_single_preview"
+---
+
+Generate final video from a selected preview.
+
+## Example Usage
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/v2/create_video_from_product/render_single_preview' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "preview_id": "preview_123"
+  }'
+```
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Submit Preview List" href="/api-reference/v2/Video/SubmitPreviewList">
+    Generate multiple previews
+  </Card>
+  <Card title="Product Videos" href="/api-reference/v2/API%20Documentation/URLtoVideo">
+    Complete product video workflow
+  </Card>
+</CardGroup>

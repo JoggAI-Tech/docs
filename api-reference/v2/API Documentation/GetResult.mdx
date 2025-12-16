@@ -50,8 +50,8 @@ stateDiagram-v2
 | Video Type | Get Status Endpoint | Documentation |
 |------------|-------------------|---------------|
 | **Avatar Videos** | `GET /avatar_video/{id}` | [API Reference](/api-reference/v2/Video/GetAvatarVideo) |
-| **Product Videos** | `GET /product_video/{id}` | [API Reference](/api-reference/v2/Video/GetProductVideo) |
-| **Template Videos** | `GET /template_video/{id}` | [API Reference](/api-reference/v2/Video/CreateVideoWithTemplate) |
+| **Product Videos** | `GET /product_video/{product_video_id}` | [API Reference](/api-reference/v2/Video/GetProductVideo) |
+| **Template Videos** | `GET /template_video/{video_id}` | [API Reference](/api-reference/v2/Video/GetTemplateVideo) |
 
 ### Status Values
 
@@ -72,7 +72,7 @@ Poll for avatar video completion:
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/avatar_video/video_123456' \
+  --url 'https://api.jogg.ai/v2/avatar_video/video_123456' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -113,7 +113,7 @@ curl --request GET \
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/product_video/pv_789012' \
+  --url 'https://api.jogg.ai/v2/product_video/pv_789012' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
@@ -203,7 +203,7 @@ sequenceDiagram
     API-->>Client: Status: completed
     
     Note over Client,API: ✅ Webhooks (Recommended)
-    Client->>API: POST /create_video (with webhook)
+    Client->>API: POST /create_video_from_avatar (with webhook)
     Note over API: Video processes
     API->>Client: POST /webhook {video_url}
 ```

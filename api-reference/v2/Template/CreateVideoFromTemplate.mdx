@@ -27,21 +27,21 @@ Templates provide a fast way to create professional videos with consistent brand
 ### Step 1: Browse Available Templates
 
 ```bash
-curl -X GET 'https://api.jogg.ai/open/v2/templates/custom' \
+curl -X GET 'https://api.jogg.ai/v2/templates/custom' \
   -H 'x-api-key: YOUR_API_KEY'
 ```
 
 ### Step 2: Get Template Details
 
 ```bash
-curl -X GET 'https://api.jogg.ai/open/v2/template/custom/tmpl_123' \
+curl -X GET 'https://api.jogg.ai/v2/template/custom/tmpl_123' \
   -H 'x-api-key: YOUR_API_KEY'
 ```
 
 ### Step 3: Create Video
 
 ```bash
-curl -X POST 'https://api.jogg.ai/open/v2/create_video_with_template' \
+curl -X POST 'https://api.jogg.ai/v2/create_video_with_template' \
   -H 'x-api-key: YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
@@ -72,7 +72,7 @@ curl -X POST 'https://api.jogg.ai/open/v2/create_video_with_template' \
 ### Step 4: Get Video Status
 
 ```bash
-curl -X GET 'https://api.jogg.ai/open/v2/template_video/vid_abc123' \
+curl -X GET 'https://api.jogg.ai/v2/template_video/vid_abc123' \
   -H 'x-api-key: YOUR_API_KEY'
 ```
 

@@ -119,7 +119,7 @@ Create a simple video with text-to-speech:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_avatar' \
+  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -157,7 +157,7 @@ Use your own audio file instead of text-to-speech:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_avatar' \
+  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -195,7 +195,7 @@ Create video with green screen for easy compositing:
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_video_from_avatar' \
+  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -233,7 +233,7 @@ Poll to check if video is ready:
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/avatar_video/video_123456' \
+  --url 'https://api.jogg.ai/v2/avatar_video/video_123456' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 

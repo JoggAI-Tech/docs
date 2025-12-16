@@ -1,0 +1,25 @@
+---
+title: "Check Photo Generation Status"
+openapi: "GET /v2/photo_avatar/photo"
+---
+
+Check the status of photo avatar generation task by photo ID.
+
+## Example Usage
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/photo_avatar/photo?photo_id=photo_123' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Generate Photo Avatar" href="/api-reference/v2/Avatar/GeneratePhotoAvatar">
+    Generate photo avatar
+  </Card>
+  <Card title="Add Motion" href="/api-reference/v2/Avatar/AddMotionToPhotoAvatar">
+    Add motion to photo avatar
+  </Card>
+</CardGroup>

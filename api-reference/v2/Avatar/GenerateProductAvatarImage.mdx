@@ -1,0 +1,37 @@
+---
+title: "Generate Product Avatar Image"
+openapi: "POST /v2/product_avatar/generation"
+---
+
+Generate product avatar images using AI with specified parameters.
+
+## Example Usage
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/v2/product_avatar/generation' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "product_image_url": "https://res.jogg.ai/product.jpg",
+    "avatar_source": {
+      "type": "id",
+      "avatar_id": 1,
+      "avatar_type": "public"
+    },
+    "quality": "high",
+    "aspect_ratio": "3:2",
+    "num_images": 4
+  }'
+```
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Check Generation Status" href="/api-reference/v2/Avatar/CheckProductAvatarGenerationStatus">
+    Check generation status by batch ID
+  </Card>
+  <Card title="Add Motion" href="/api-reference/v2/Avatar/AddMotionToProductAvatar">
+    Add motion to generated images
+  </Card>
+</CardGroup>
