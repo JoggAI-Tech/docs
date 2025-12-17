@@ -1,5 +1,5 @@
 ---
-title: "Create Video from Product URL"
+title: "Create Video from URL/Product"
 description: "Generate marketing videos automatically from product URLs or descriptions"
 ---
 
@@ -86,7 +86,9 @@ The entire process can take **5-10 minutes** depending on video complexity. Use 
 | `GET /v2/avatars/public` | Get avatar list | [API Reference](/api-reference/v2/Avatar/PublicAvatarsGet) |
 | `GET /v2/voices` | Get voice list | [API Reference](/api-reference/v2/Voice/GetVoices) |
 | `GET /v2/visual_styles` | Get visual styles | [API Reference](/api-reference/v2/Asset/GetVisualStyles) |
-| `POST /v2/create_video_from_product` | Generate video | [API Reference](/api-reference/v2/Video/CreateVideoFromProduct) |
+| `POST /v2/create_video_from_product/preview_list` | Generate previews | [API Reference](/api-reference/v2/Video/SubmitPreviewList) |
+| `POST /v2/create_video_from_product/render_single_preview` | Render final video from preview | [API Reference](/api-reference/v2/Video/RenderSinglePreview) |
+| `POST /v2/create_video_from_product` | Generate video directly | [API Reference](/api-reference/v2/Video/CreateVideoFromProduct) |
 | `GET /v2/product_video/{product_video_id}` | Check status | [API Reference](/api-reference/v2/Video/ProductVideoGet) |
 
 ### Key Parameters
@@ -194,6 +196,7 @@ Save the `product_id` from the response - you'll need it for video generation!
 
 Create video with AI-generated script:
 
+
 ```bash
 curl --request POST \
   --url 'https://api.jogg.ai/v2/create_video_from_product' \
@@ -201,14 +204,24 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "product_id": "NTIzMzc0NjI5",
-    "aspect_ratio": "portrait",
-    "video_length": "30",
-    "language": "english",
-    "avatar_id": 81,
-    "avatar_type": 0,
-    "script_style": "Storytime",
     "visual_style": "Simple Product Switch",
-    "caption": true
+    "video_spec": {
+      "aspect_ratio": "portrait",
+      "length": "30",
+      "caption": true
+    },
+    "avatar": {
+      "id": 81,
+      "type": 0
+    },
+    "voice": {
+      "id": "en-US-ChristopherNeural"
+    },
+    "audio": {},
+    "script": {
+      "style": "Storytime",
+      "language": "english"
+    }
   }'
 ```
 
@@ -288,14 +301,24 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "product_id": "NTIzMzc0NjI5",
-    "aspect_ratio": "landscape",
-    "video_length": "30",
-    "language": "english",
-    "avatar_id": 81,
-    "avatar_type": 0,
-    "script_style": "Storytime",
-    "override_script": "Check out this amazing water bottle! It keeps your drinks cold for 24 hours and features a unique FreeSip spout. Perfect for the gym or outdoor adventures!",
-    "caption": true
+    "video_spec": {
+      "aspect_ratio": "landscape",
+      "length": "30",
+      "caption": true
+    },
+    "avatar": {
+      "id": 81,
+      "type": 0
+    },
+    "voice": {
+      "id": "en-US-ChristopherNeural"
+    },
+    "audio": {},
+    "script": {
+      "style": "Storytime",
+      "language": "english"
+    },
+    "override_script": "Check out this amazing water bottle! It keeps your drinks cold for 24 hours and features a unique FreeSip spout. Perfect for the gym or outdoor adventures!"
   }'
 ```
 
@@ -305,9 +328,9 @@ Use `override_script` when you have a specific message or want full control over
 
 ---
 
-### Using Custom Template
+### Using Background Music
 
-Apply your custom template to the product video:
+Add background music to your product video:
 
 ```bash
 curl --request POST \
@@ -316,21 +339,136 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "product_id": "NTIzMzc0NjI5",
-    "aspect_ratio": "square",
-    "video_length": "15",
-    "language": "english",
-    "avatar_id": 81,
-    "avatar_type": 0,
-    "script_style": "Discovery",
-    "template_id": 1234,
-    "template_type": "custom",
-    "caption": false
+    "video_spec": {
+      "aspect_ratio": "square",
+      "length": "15",
+      "caption": false
+    },
+    "avatar": {
+      "id": 81,
+      "type": 0
+    },
+    "voice": {
+      "id": "en-US-ChristopherNeural"
+    },
+    "audio": {
+      "music_id": 13
+    },
+    "script": {
+      "style": "Discovery",
+      "language": "english"
+    }
   }'
 ```
 
 <Info>
-Get your custom template IDs using [Get Templates API](/api-reference/v2/Template/GetTemplates).
+Get available background music using [Get Music API](/api-reference/v2/Asset/GetMusic).
 </Info>
+
+---
+
+### Preview Multiple Styles
+
+Generate previews with different visual styles before committing to a final video. This is useful for testing and comparing different styles:
+
+**Step 1: Submit Preview List**
+
+Generate multiple previews with different visual styles:
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/v2/create_video_from_product/preview_list' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "product_id": "NTIzMzc0NjI5",
+    "visual_styles": ["Simple Product Switch", "Dynamic Showcase", "Elegant Presentation"],
+    "video_spec": {
+      "aspect_ratio": "portrait",
+      "length": "30",
+      "caption": true
+    },
+    "avatar": {
+      "id": 81,
+      "type": 0
+    },
+    "voice": {
+      "id": "en-US-ChristopherNeural"
+    },
+    "audio": {},
+    "script": {
+      "style": "Storytime",
+      "language": "english"
+    }
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "preview_list_id": "pl_123456",
+    "previews": [
+      {
+        "preview_id": "preview_001",
+        "visual_style": "Simple Product Switch",
+        "status": "processing"
+      },
+      {
+        "preview_id": "preview_002",
+        "visual_style": "Dynamic Showcase",
+        "status": "processing"
+      },
+      {
+        "preview_id": "preview_003",
+        "visual_style": "Elegant Presentation",
+        "status": "processing"
+      }
+    ]
+  }
+}
+```
+
+<Info>
+Preview generation typically takes **2-3 minutes**. Check preview status using the `preview_id` from the response.
+</Info>
+
+**Step 2: Render Final Video from Preview**
+
+Once previews are ready, select your preferred preview and render the final video:
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/v2/create_video_from_product/render_single_preview' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "preview_id": "preview_001"
+  }'
+```
+
+**Response:**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "product_video_id": "pv_123456"
+  }
+}
+```
+
+<Tip>
+**When to use previews:**
+- Testing multiple visual styles before committing to final video
+- Comparing different styles for A/B testing
+- Ensuring quality before generating full video
+- Saving credits by previewing first
+</Tip>
 
 ---
 
@@ -480,5 +618,21 @@ Choose the right script style for your product:
     href="/api-reference/v2/API%20Documentation/WebhookIntegration"
   >
     Automate video delivery
+  </Card>
+  
+  <Card
+    title="Submit Preview List"
+    icon="eye"
+    href="/api-reference/v2/Video/SubmitPreviewList"
+  >
+    Generate multiple previews with different styles
+  </Card>
+  
+  <Card
+    title="Render Single Preview"
+    icon="play"
+    href="/api-reference/v2/Video/RenderSinglePreview"
+  >
+    Render final video from selected preview
   </Card>
 </CardGroup>

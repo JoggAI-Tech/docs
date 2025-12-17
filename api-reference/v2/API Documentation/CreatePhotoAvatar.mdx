@@ -7,6 +7,8 @@ description: "Generate custom AI avatars from portrait photos"
 
 Transform portrait photos into talking AI avatars that can speak any script in 40+ languages. Create personalized avatars for branding, marketing, or custom content production. Photo avatars allow you to use your own face or team members' faces in videos, maintaining brand consistency across all content.
 
+<video controls className="w-full aspect-video" src="https://res.jogg.ai/upload/sam/2025-04-13/0f0d7deb55054b8c9e4cb60e27160ee5.mp4" />
+
 ### Key Features
 
 <CardGroup cols={2}>
@@ -77,8 +79,8 @@ sequenceDiagram
     Queue->>Queue: Generate motion
     
     Note over Client,Queue: Step 5: Check Motion Status
-    Client->>API: GET /v2/photo_avatar/photo?photo_id={id}&motion_id={id}
-    API-->>Client: {status}
+    Client->>API: GET /v2/photo_avatar?motion_id={id}
+    API-->>Client: {status, motion_preview_url}
 ```
 
 <Info>
@@ -97,6 +99,7 @@ sequenceDiagram
 | `GET /v2/photo_avatar/photo?photo_id={id}` | Check generation status | [API Reference](/api-reference/v2/Avatar/PhotoAvatarStatusGet) |
 | `GET /v2/avatars/photo_avatars` | List your photo avatars | [API Reference](/api-reference/v2/Avatar/PhotoAvatarsGet) |
 | `POST /v2/photo_avatar/add_motion` | Add motion to avatar | [API Reference](/api-reference/v2/Avatar/PhotoAvatarMotionAdd) |
+| `GET /v2/photo_avatar?motion_id={id}` | Check motion status | [API Reference](/api-reference/v2/Avatar/MotionStatusCheck) |
 
 ### Key Parameters
 
@@ -108,7 +111,7 @@ sequenceDiagram
 | `model` | string | ✅ | Photo generation model: "classic", "modern" |
 | `aspect_ratio` | string | ✅ | Photo aspect ratio: "portrait", "landscape", "square" |
 | `image_url` | string | ❌ | Reference image URL (your portrait photo) |
-| `ethnicity` | string | ❌ | Avatar ethnicity (optional) |
+| `ethnicity` | string | ❌ | Avatar ethnicity: "European", "African", "South Asian", "East Asian", "Middle Eastern", "South American", "North American" |
 | `background` | string | ❌ | Background description |
 | `appearance` | string | ❌ | Appearance description |
 
@@ -194,10 +197,17 @@ curl --request GET \
     "photo_id": "photo_abc123",
     "status": "success",
     "image_url_list": [
-      "https://res.jogg.ai/avatars/photo_abc123_1.jpg",
-      "https://res.jogg.ai/avatars/photo_abc123_2.jpg"
+      "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/bbb42ee5-8fa1-45b6-be47-105f97d2ca20.png",
+      "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/7406e9b3-f1a7-4bae-9bb8-efed69b52bf4.png",
+      "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/fd6a5880-9108-48d4-b501-afccec708378.png",
+      "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/711bb2f6-ac1c-46bc-94c3-c0ce3a76cef9.png"
     ],
-    "image_key_list": ["key1", "key2"]
+    "image_key_list": [
+      "joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/bbb42ee5-8fa1-45b6-be47-105f97d2ca20.png",
+      "joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/7406e9b3-f1a7-4bae-9bb8-efed69b52bf4.png",
+      "joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/fd6a5880-9108-48d4-b501-afccec708378.png",
+      "joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/711bb2f6-ac1c-46bc-94c3-c0ce3a76cef9.png"
+    ]
   }
 }
 ```
@@ -205,6 +215,17 @@ curl --request GET \
 <Tip>
 Avatar generation typically takes 2-5 minutes. Use [Webhooks](/api-reference/v2/API%20Documentation/WebhookIntegration) for instant notifications instead of polling.
 </Tip>
+
+<Info>
+**Image Generation Charges:**
+- Each call generates four images
+- Each image deducts 0.05 credit
+- Four images deduct a total of 0.2 credit
+</Info>
+
+<Check>
+We have generated our AI Avatar photos. Now we can use these `image_key` values to create new looks or use the avatar in videos.
+</Check>
 
 ---
 
@@ -308,10 +329,17 @@ curl --request GET \
     "photo_id": "photo_abc123",
     "status": "success",
     "image_url_list": [
-      "https://res.jogg.ai/avatars/photo_abc123_1.jpg",
-      "https://res.jogg.ai/avatars/photo_abc123_2.jpg"
+      "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/bbb42ee5-8fa1-45b6-be47-105f97d2ca20.png",
+      "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/7406e9b3-f1a7-4bae-9bb8-efed69b52bf4.png",
+      "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/fd6a5880-9108-48d4-b501-afccec708378.png",
+      "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/711bb2f6-ac1c-46bc-94c3-c0ce3a76cef9.png"
     ],
-    "image_key_list": ["key1", "key2"]
+    "image_key_list": [
+      "joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/bbb42ee5-8fa1-45b6-be47-105f97d2ca20.png",
+      "joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/7406e9b3-f1a7-4bae-9bb8-efed69b52bf4.png",
+      "joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/fd6a5880-9108-48d4-b501-afccec708378.png",
+      "joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/711bb2f6-ac1c-46bc-94c3-c0ce3a76cef9.png"
+    ]
   }
 }
 ```
@@ -328,8 +356,12 @@ curl --request POST \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "avatar_id": 123,
-    "motion_type": "natural"
+    "photo_id": "photo_abc123",
+    "image_url": "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/bbb42ee5-8fa1-45b6-be47-105f97d2ca20.png",
+    "name": "My Photo Avatar",
+    "voice_id": "en-US-ChristopherNeural",
+    "model": "2.0",
+    "description": "Professional avatar for marketing videos"
   }'
 ```
 
@@ -340,15 +372,14 @@ curl --request POST \
   "code": 0,
   "msg": "Success",
   "data": {
-    "task_id": "motion_xyz789",
-    "status": "processing",
-    "estimated_time": 150
+    "motion_id": "motion_xyz789",
+    "status": "processing"
   }
 }
 ```
 
 <Check>
-Save the `task_id` to check motion generation status!
+Save the `motion_id` to check motion generation status!
 </Check>
 
 ---
@@ -359,13 +390,57 @@ Check if motion generation is complete:
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/v2/photo_avatar/photo?photo_id=photo_abc123&motion_id=motion_xyz789' \
+  --url 'https://api.jogg.ai/v2/photo_avatar?motion_id=motion_xyz789' \
   --header 'x-api-key: YOUR_API_KEY'
+```
+
+**Response (Processing):**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "motion_id": "motion_xyz789",
+    "avatar_id": 123,
+    "image_url": "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/bbb42ee5-8fa1-45b6-be47-105f97d2ca20.png",
+    "name": "My Photo Avatar",
+    "status": "processing",
+    "motion_preview_url": "",
+    "voice_id": "en-US-ChristopherNeural"
+  }
+}
+```
+
+**Response (Completed):**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "motion_id": "motion_xyz789",
+    "avatar_id": 123,
+    "image_url": "https://res.jogg.ai/joggUserData/aigc/photo/25-1a0ab69d92b6449796d6e9ec0b993a3f/bbb42ee5-8fa1-45b6-be47-105f97d2ca20.png",
+    "name": "My Photo Avatar",
+    "status": "completed",
+    "motion_preview_url": "https://files2.jogg.ai/avatar/v3/motion_xyz789/full/2.0/preview_video_target.mp4",
+    "voice_id": "en-US-ChristopherNeural"
+  }
+}
 ```
 
 <Tip>
 Motion generation adds 2-3 minutes but significantly improves avatar realism and natural movement.
 </Tip>
+
+<Info>
+**Motion Generation Charges:**
+- Motion 1.0 deducts 2 credits
+- Motion 2.0 deducts 2 credits
+- Motion 2.0 Pro deducts 3 credits
+- Motion 3.0 deducts 2 credits
+</Info>
 
 ---
 

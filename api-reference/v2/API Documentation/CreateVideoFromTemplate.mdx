@@ -165,14 +165,13 @@ All variables defined in your template will be listed with their names and types
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
 | `template_id` | integer | ✅ | Template ID from template list |
-| `template_type` | string | ✅ | "common" (public) or "user" (custom) |
 | `variables` | array | ✅ | Template variables array (see Variable Types below) |
 | `avatar_id` | integer | ❌ | Override template avatar |
 | `avatar_type` | integer | ❌ | 0=Public, 1=Custom |
 | `voice_language` | string | ✅ | Voice language for text-to-speech |
 | `voice_id` | string | ❌ | Override template voice ID |
 | `video_name` | string | ❌ | Custom name for the video |
-| `caption` | boolean | ❌ | Enable subtitles (default: false) |
+| `captions_enabled` | boolean | ❌ | Enable subtitles (default: false) |
 | `webhook_url` | string | ❌ | Webhook URL for status notifications |
 
 <Warning>
@@ -277,12 +276,11 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "template_id": 1234,
-    "template_type": "user",
     "voice_language": "english",
     "voice_id": "en-US-ChristopherNeural",
     "avatar_id": 81,
     "avatar_type": 0,
-    "caption": true,
+    "captions_enabled": true,
     "variables": [
       {
         "type": "text",
@@ -379,7 +377,6 @@ curl --request POST \
   --header 'Content-Type: application/json' \
   --data '{
     "template_id": 1234,
-    "template_type": "user",
     "voice_language": "english",
     "voice_id": "en-US-ChristopherNeural",
     "avatar_id": 81,
@@ -622,7 +619,7 @@ OR
     
     **Solutions:**
     - Verify `template_id` is correct
-    - Check `template_type` is "common" or "user"
+    - Verify template_id exists and is accessible
     - List all templates to find correct ID
     - Ensure template exists in your account
   </Accordion>

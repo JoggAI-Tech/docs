@@ -102,6 +102,8 @@
         "api-reference/v2/Video/CreateVideoFromAvatar",
         "api-reference/v2/Video/AvatarVideoGet",
         "api-reference/v2/Video/CreateVideoFromProduct",
+        "api-reference/v2/Video/SubmitPreviewList",
+        "api-reference/v2/Video/RenderSinglePreview",
         "api-reference/v2/Video/ProductVideoGet",
         "api-reference/v2/Video/CreateVideoWithTemplate",
         "api-reference/v2/Video/TemplateVideoGet",

@@ -27,16 +27,16 @@ Upload custom media assets to JoggAI to enhance your videos. Include branded ima
 ### Workflow Overview
 
 <Steps>
-  <Step title="Upload Asset">
-    Upload your media file via API
+  <Step title="Get Signed URL">
+    Request upload URL with file metadata
   </Step>
   
-  <Step title="Get Asset ID">
-    Receive asset_id in response
+  <Step title="Upload File">
+    Upload file using PUT request to signed URL
   </Step>
   
-  <Step title="Use in Videos">
-    Reference asset_id in video creation
+  <Step title="Use Asset URL">
+    Use asset_url from Step 1 in video creation
   </Step>
 </Steps>
 
@@ -46,14 +46,16 @@ sequenceDiagram
     participant API
     participant Storage
     
-    Note over Client,Storage: Upload Asset
-    Client->>API: POST /upload/asset {file}
-    API->>Storage: Store file
-    API-->>Client: 200 OK {asset_id, asset_url}
+    Note over Client,Storage: Step 1: Get Signed URL
+    Client->>API: POST /v2/upload/asset {filename, content_type}
+    API-->>Client: {sign_url, asset_url}
     
-    Note over Client,Storage: Use in Video
-    Client->>API: POST /create_video_from_avatar {asset_id}
-    API->>Storage: Retrieve asset
+    Note over Client,Storage: Step 2: Upload File
+    Client->>Storage: PUT sign_url {file binary}
+    Storage-->>Client: 200 OK
+    
+    Note over Client,Storage: Step 3: Use in Video
+    Client->>API: POST /create_video_from_avatar {asset_url}
     API-->>Client: Video with custom asset
 ```
 
@@ -76,11 +78,9 @@ Assets are stored permanently and can be reused across multiple video projects.
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `file` | file | ✅ | The media file to upload |
-| `asset_type` | string | ✅ | Type: `image`, `video`, or `audio` |
-| `name` | string | ✅ | Descriptive name for the asset |
-| `description` | string | ❌ | Additional details or tags |
-| `folder` | string | ❌ | Organize into folders |
+| `filename` | string | ✅ | Name of the file to upload |
+| `content_type` | string | ✅ | MIME type (e.g., "image/jpeg", "video/mp4", "audio/mpeg") |
+| `file_size` | integer | ❌ | File size in bytes (optional) |
 
 ---
 
@@ -90,14 +90,18 @@ Assets are stored permanently and can be reused across multiple video projects.
 
 Upload product photos, logos, or background images:
 
+**Step 1: Get Signed URL**
+
 ```bash
 curl --request POST \
   --url 'https://api.jogg.ai/v2/upload/asset' \
   --header 'x-api-key: YOUR_API_KEY' \
-  --header 'Content-Type: multipart/form-data' \
-  --form 'file=@/path/to/product.jpg' \
-  --form 'asset_type=image' \
-  --form 'name=Product Photo'
+  --header 'Content-Type: application/json' \
+  --data '{
+    "filename": "product.jpg",
+    "content_type": "image/jpeg",
+    "file_size": 245678
+  }'
 ```
 
 **Response:**
@@ -107,17 +111,24 @@ curl --request POST \
   "code": 0,
   "msg": "Success",
   "data": {
-    "asset_id": "img_abc123",
-    "asset_url": "https://res.jogg.ai/assets/img_abc123.jpg",
-    "asset_type": "image",
-    "file_name": "product.jpg",
-    "file_size": 245678,
-    "width": 1920,
-    "height": 1080,
-    "uploaded_at": 1732806631
+    "sign_url": "https://storage.jogg.ai/upload/signed-url-here",
+    "asset_url": "https://res.jogg.ai/assets/img_abc123.jpg"
   }
 }
 ```
+
+**Step 2: Upload File Using PUT**
+
+```bash
+curl --request PUT \
+  --url 'https://storage.jogg.ai/upload/signed-url-here' \
+  --header 'Content-Type: image/jpeg' \
+  --data-binary '@/path/to/product.jpg'
+```
+
+<Check>
+After successful PUT upload, use the `asset_url` from Step 1 response in your video creation requests.
+</Check>
 
 **Supported Image Formats:**
 
@@ -138,14 +149,18 @@ Recommended resolution: 1920x1080 or higher
 
 Upload background videos or product demos:
 
+**Step 1: Get Signed URL**
+
 ```bash
 curl --request POST \
   --url 'https://api.jogg.ai/v2/upload/asset' \
   --header 'x-api-key: YOUR_API_KEY' \
-  --header 'Content-Type: multipart/form-data' \
-  --form 'file=@/path/to/demo.mp4' \
-  --form 'asset_type=video' \
-  --form 'name=Product Demo'
+  --header 'Content-Type: application/json' \
+  --data '{
+    "filename": "demo.mp4",
+    "content_type": "video/mp4",
+    "file_size": 8456789
+  }'
 ```
 
 **Response:**
@@ -155,17 +170,19 @@ curl --request POST \
   "code": 0,
   "msg": "Success",
   "data": {
-    "asset_id": "vid_def456",
-    "asset_url": "https://res.jogg.ai/assets/vid_def456.mp4",
-    "asset_type": "video",
-    "file_name": "demo.mp4",
-    "file_size": 8456789,
-    "duration": 30,
-    "width": 1920,
-    "height": 1080,
-    "uploaded_at": 1732806631
+    "sign_url": "https://storage.jogg.ai/upload/signed-url-here",
+    "asset_url": "https://res.jogg.ai/assets/vid_def456.mp4"
   }
 }
+```
+
+**Step 2: Upload File Using PUT**
+
+```bash
+curl --request PUT \
+  --url 'https://storage.jogg.ai/upload/signed-url-here' \
+  --header 'Content-Type: video/mp4' \
+  --data-binary '@/path/to/demo.mp4'
 ```
 
 **Supported Video Formats:**
@@ -186,14 +203,18 @@ Videos longer than 5 minutes will be rejected. Codec: H.264/H.265
 
 Upload custom voiceovers or background music:
 
+**Step 1: Get Signed URL**
+
 ```bash
 curl --request POST \
   --url 'https://api.jogg.ai/v2/upload/asset' \
   --header 'x-api-key: YOUR_API_KEY' \
-  --header 'Content-Type: multipart/form-data' \
-  --form 'file=@/path/to/music.mp3' \
-  --form 'asset_type=audio' \
-  --form 'name=Background Music'
+  --header 'Content-Type: application/json' \
+  --data '{
+    "filename": "music.mp3",
+    "content_type": "audio/mpeg",
+    "file_size": 3456789
+  }'
 ```
 
 **Response:**
@@ -203,15 +224,19 @@ curl --request POST \
   "code": 0,
   "msg": "Success",
   "data": {
-    "asset_id": "aud_ghi789",
-    "asset_url": "https://res.jogg.ai/assets/aud_ghi789.mp3",
-    "asset_type": "audio",
-    "file_name": "music.mp3",
-    "file_size": 3456789,
-    "duration": 120,
-    "uploaded_at": 1732806631
+    "sign_url": "https://storage.jogg.ai/upload/signed-url-here",
+    "asset_url": "https://res.jogg.ai/assets/aud_ghi789.mp3"
   }
 }
+```
+
+**Step 2: Upload File Using PUT**
+
+```bash
+curl --request PUT \
+  --url 'https://storage.jogg.ai/upload/signed-url-here' \
+  --header 'Content-Type: audio/mpeg' \
+  --data-binary '@/path/to/music.mp3'
 ```
 
 **Supported Audio Formats:**

@@ -1022,6 +1022,14 @@ paths:
                                   type: string
                                   description: Visual style name
                                   example: "Simple Product Switch"
+                                preview_id:
+                                  type: string
+                                  description: Preview ID (if generation successful)
+                                  example: "preview_456"
+                                err_msg:
+                                  type: string
+                                  description: Error message (if generation failed)
+                                  example: "Generation failed due to invalid parameters"
 
   /v2/create_video_from_product/render_single_preview:
     post:
