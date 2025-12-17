@@ -98,7 +98,7 @@ Response example:
 
 #### My Voices List
 
-Please refer to the [Get My Voice ](/api-reference/Voice/GetMyVoice)for more details.
+Please refer to the [Get My Voice](/api-reference/v1/Voice/GetMyVoice) for more details.
 
 ```bash
 curl --request GET \

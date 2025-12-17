@@ -118,7 +118,7 @@ Response example:
 
 #### Public Voices List
 
-Please refer to the [Get Voice List form Library](/api-reference/Voice/GetVoiceList) for more details.
+Please refer to the [Get Voice List form Library](/api-reference/v1/Voice/GetVoiceList) for more details.
 
 ```bash
 curl --request GET \

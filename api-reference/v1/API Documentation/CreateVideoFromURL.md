@@ -158,7 +158,7 @@ Please refer to the [Generate Video from Product Information](/api-reference/v1/
 #### With Visual Style
 
 Initiate a video generation task, where you can adjust video-related parameters and modify the video's layout by selecting a visual style.
-You can view [Get Visual Style](/api-reference/Visual-Style/GetVisualStyle) for more details.
+You can view [Get Visual Style](/api-reference/v1/Visual-Style/GetVisualStyle) for more details.
 
 ```bash
 curl --location --request POST 'https://api.jogg.ai/v1/create_video_from_url' \
