@@ -851,9 +851,9 @@ paths:
                       type: string
                       description: Script generation language
                       example: "english"
-                    override_script:
-                      type: string
-                      description: Override the auto-generated script
+                override_script:
+                  type: string
+                  description: Override the auto-generated script
                 webhook_url:
                   type: string
                   description: Webhook URL for status notifications
@@ -987,13 +987,13 @@ paths:
                       description: Script writing style
                       enum: ["Don't Worry", "Storytime", "Discovery", "Data", "Top 3 reasons", "Light marketing"]
                       example: "Storytime"
-                    language:
-                      type: string
-                      description: Script generation language
-                      example: "english"
-                    override_script:
-                      type: string
-                      description: Override the auto-generated script
+                language:
+                  type: string
+                  description: Script generation language
+                  example: "english"
+                override_script:
+                  type: string
+                  description: Override the auto-generated script
                 webhook_url:
                   type: string
                   description: Webhook URL for status notifications
@@ -1022,14 +1022,6 @@ paths:
                                   type: string
                                   description: Visual style name
                                   example: "Simple Product Switch"
-                                preview_id:
-                                  type: string
-                                  description: Preview ID (if generation successful)
-                                  example: "preview_456"
-                                err_msg:
-                                  type: string
-                                  description: Error message (if generation failed)
-                                  example: "Generation failed due to invalid parameters"
 
   /v2/create_video_from_product/render_single_preview:
     post:
@@ -1153,11 +1145,11 @@ paths:
                           content:
                             type: string
                             description: Variable content (text content for text type, URL for image/video type)
-                webhook_url:
-                  type: string
-                  description: Webhook URL for status notifications
-                  format: uri
-                  example: "https://example.com/webhook"
+                          webhook_url:
+                            type: string
+                            description: Webhook URL for status notifications
+                            format: uri
+                            example: "https://example.com/webhook"
                 disable_random_trans:
                   type: boolean
                   description: Disable random transitions
@@ -2005,14 +1997,55 @@ paths:
                         properties:
                           previews:
                             type: array
+                            description: List of product previews
                             items:
-                              $ref: '#/components/schemas/PreviewInfo'
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  description: Video ID
+                                  example: "video_123"
+                                title:
+                                  type: string
+                                  description: Video title
+                                  example: "My Product Preview"
+                                video_duration:
+                                  type: number
+                                  description: Video duration in seconds
+                                  example: 30.5
+                                video_url:
+                                  type: string
+                                  description: Video download URL
+                                  format: uri
+                                  example: "https://res.jogg.ai/video.mp4"
+                                cover_url:
+                                  type: string
+                                  description: Video cover image URL
+                                  format: uri
+                                  example: "https://res.jogg.ai/cover.jpg"
+                                status:
+                                  type: string
+                                  description: Video status
+                                  enum: [processing, completed, failed]
+                                  example: "completed"
+                                created_at:
+                                  type: integer
+                                  format: int64
+                                  description: Creation timestamp (Unix timestamp)
+                                  example: 1640995200
                           total:
                             type: integer
+                            format: int64
+                            description: Total number of previews
+                            example: 15
                           page:
                             type: integer
+                            description: Current page number
+                            example: 1
                           page_size:
                             type: integer
+                            description: Items per page
+                            example: 10
 
   /v2/product_video/{product_video_id}:
     get:
@@ -2093,6 +2126,11 @@ paths:
             default: 10
         - name: status
           in: query
+          description: |
+            Filter by status:
+            * 3 - Processing
+            * 4 - Success
+            * 5 - Failed
           schema:
             type: integer
             enum: [3, 4, 5]
@@ -2122,14 +2160,55 @@ paths:
                         properties:
                           videos:
                             type: array
+                            description: List of product videos
                             items:
-                              $ref: '#/components/schemas/VideoDetails'
+                              type: object
+                              properties:
+                                id:
+                                  type: string
+                                  description: Video ID
+                                  example: "video_123"
+                                title:
+                                  type: string
+                                  description: Video title
+                                  example: "My Product Video"
+                                video_duration:
+                                  type: number
+                                  description: Video duration in seconds
+                                  example: 30.5
+                                video_url:
+                                  type: string
+                                  description: Video download URL
+                                  format: uri
+                                  example: "https://res.jogg.ai/video.mp4"
+                                cover_url:
+                                  type: string
+                                  description: Video cover image URL
+                                  format: uri
+                                  example: "https://res.jogg.ai/cover.jpg"
+                                status:
+                                  type: string
+                                  description: Video status
+                                  enum: [processing, completed, failed]
+                                  example: "completed"
+                                created_at:
+                                  type: integer
+                                  format: int64
+                                  description: Creation timestamp (Unix timestamp)
+                                  example: 1640995200
                           total:
                             type: integer
+                            format: int64
+                            description: Total number of videos
+                            example: 25
                           page:
                             type: integer
+                            description: Current page number
+                            example: 1
                           page_size:
                             type: integer
+                            description: Items per page
+                            example: 10
 
   /v2/template/custom/{id}:
     get:
@@ -2325,7 +2404,52 @@ paths:
                             type: array
                             description: List of template videos
                             items:
-                              $ref: '#/components/schemas/VideoDetails'
+                              type: object
+                              properties:
+                                video_id:
+                                  type: string
+                                  description: Video ID
+                                  example: "video_123456"
+                                video_name:
+                                  type: string
+                                  description: Video name
+                                  example: "My Template Video"
+                                status:
+                                  type: string
+                                  description: Video generation status
+                                  enum: [processing, completed, failed]
+                                  example: "completed"
+                                created_at:
+                                  type: integer
+                                  format: int64
+                                  description: Creation timestamp
+                                  example: 1732806631
+                                cover_url:
+                                  type: string
+                                  description: Cover image URL
+                                  format: uri
+                                  example: "https://res.jogg.ai/cover.jpg"
+                                url:
+                                  type: string
+                                  description: Video URL
+                                  format: uri
+                                  example: "https://res.jogg.ai/video.mp4"
+                                duration_seconds:
+                                  type: number
+                                  description: Video duration in seconds
+                                  example: 30.5
+                                error:
+                                  type: object
+                                  description: Error information (only present when status is failed)
+                                  properties:
+                                    code:
+                                      type: string
+                                      description: Error code
+                                      example: "ERROR_CODE"
+                                    message:
+                                      type: string
+                                      description: Error message
+                                      example: "Video generation failed"
                           pagination:
                             $ref: '#/components/schemas/Pagination'
 
@@ -2435,13 +2559,9 @@ paths:
                         type: object
                         properties:
                           remaining_quota:
-                            type: integer
+                            type: number
                             description: Remaining API quota
-                            example: 1000
-                          total_quota:
-                            type: integer
-                            description: Total API quota
-                            example: 5000
+                            example: 1000.0
 
   /v2/user/whoami:
     get:
@@ -2614,7 +2734,7 @@ paths:
                             type: array
                             description: List of supported language codes
                             items:
-                              type: string
+                                  type: string
                             example: ["spanish", "french", "german", "japanese"]
 
   /v2/visual_styles:

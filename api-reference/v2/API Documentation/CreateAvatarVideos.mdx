@@ -5,12 +5,12 @@ description: "Generate professional videos with realistic AI avatars speaking yo
 
 ## Introduction
 
-Create engaging talking avatar videos with the JoggAI API. Select from 100+ realistic avatars, provide your script or audio, and generate professional videos in minutes.
+Create engaging talking avatar videos with the JoggAI API. Select from 300+ realistic avatars, provide your script or audio, and generate professional videos in minutes.
 
 ### Key Features
 
 <CardGroup cols={2}>
-  <Card title="100+ Avatars" icon="user">
+  <Card title="300+ Avatars" icon="user">
     Professional avatars across all demographics
   </Card>
   <Card title="40+ Languages" icon="language">
@@ -87,33 +87,36 @@ This is an asynchronous process. Don't wait for the response - use webhooks or p
 
 | Endpoint | Purpose | Documentation |
 |----------|---------|---------------|
-| `GET /avatars/public` | Get public avatar list | [API Reference](/api-reference/v2/Avatar/GetPublicAvatars) |
+| `GET /avatars/public` | Get public avatar list | [API Reference](/api-reference/v2/Avatar/PublicAvatarsGet) |
 | `GET /voices` | Get voice list | [API Reference](/api-reference/v2/Voice/GetVoices) |
 | `POST /create_video_from_avatar` | Create avatar video | [API Reference](/api-reference/v2/Video/CreateVideoFromAvatar) |
-| `GET /avatar_video/{id}` | Check video status | [API Reference](/api-reference/v2/Video/GetAvatarVideo) |
+| `GET /avatar_video/{id}` | Check video status | [API Reference](/api-reference/v2/Video/AvatarVideoGet) |
 
 ### Key Parameters
 
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `avatar_id` | integer | ✅ | Avatar ID from avatar list |
-| `avatar_type` | integer | ✅ | 0=Public, 1=Custom avatar |
-| `voice_id` | string | ✅ | Voice ID for text-to-speech |
-| `script` | string | * | Text to speak (required if no audio_url) |
-| `audio_url` | string | * | Audio file URL (required if no script) |
+| `avatar` | object | ✅ | Avatar configuration |
+| `avatar.avatar_id` | integer | ✅ | Avatar ID from avatar list |
+| `avatar.avatar_type` | integer | ✅ | 0=Public, 1=Custom avatar |
+| `voice` | object | ✅ | Voice configuration |
+| `voice.type` | string | ✅ | "script" or "audio" |
+| `voice.voice_id` | string | ✅ | Voice ID for text-to-speech |
+| `voice.script` | string | * | Text to speak (required when type is "script") |
+| `voice.audio_url` | string | * | Audio file URL (required when type is "audio") |
 | `aspect_ratio` | string | ✅ | portrait/landscape/square |
-| `screen_style` | integer | ✅ | 1=Background, 2=Green screen, 3=WebM |
+| `screen_style` | integer | ✅ | 1=Full screen, 2=Split screen, 3=Picture in picture |
 | `caption` | boolean | ❌ | Enable subtitles (default: false) |
 
 <Warning>
-You must provide either `script` (for text-to-speech) OR `audio_url` (for custom audio), but not both.
+You must provide either `voice.script` (for text-to-speech) OR `voice.audio_url` (for custom audio), but not both. Set `voice.type` to "script" or "audio" accordingly.
 </Warning>
 
 ---
 
 ## Code Examples
 
-### Scenario 1: Basic Avatar Video with Script
+### Step 1: Basic Avatar Video with Script
 
 Create a simple video with text-to-speech:
 
@@ -123,10 +126,15 @@ curl --request POST \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "avatar_id": 81,
-    "avatar_type": 0,
-    "voice_id": "en-US-ChristopherNeural",
-    "script": "Welcome to JoggAI! Create amazing videos with AI avatars in minutes.",
+    "avatar": {
+      "avatar_id": 81,
+      "avatar_type": 0
+    },
+    "voice": {
+      "type": "script",
+      "voice_id": "en-US-ChristopherNeural",
+      "script": "Welcome to JoggAI! Create amazing videos with AI avatars in minutes."
+    },
     "aspect_ratio": "portrait",
     "screen_style": 1,
     "caption": true
@@ -149,85 +157,8 @@ curl --request POST \
 Save the `video_id` to check status later!
 </Check>
 
----
 
-### Scenario 2: Avatar Video with Custom Audio
-
-Use your own audio file instead of text-to-speech:
-
-```bash
-curl --request POST \
-  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
-  --header 'x-api-key: YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "avatar_id": 81,
-    "avatar_type": 0,
-    "voice_id": "en-US-ChristopherNeural",
-    "audio_url": "https://res.jogg.ai/my-audio.mp3",
-    "aspect_ratio": "landscape",
-    "screen_style": 1,
-    "caption": false
-  }'
-```
-
-**Response:**
-
-```json
-{
-  "code": 0,
-  "msg": "Success",
-  "data": {
-    "video_id": "video_789012"
-  }
-}
-```
-
-<Tip>
-Upload audio files using the [Upload Asset](/api-reference/v2/Asset/UploadAsset) endpoint first.
-</Tip>
-
----
-
-### Scenario 3: Transparent Background (Green Screen)
-
-Create video with green screen for easy compositing:
-
-```bash
-curl --request POST \
-  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
-  --header 'x-api-key: YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "avatar_id": 81,
-    "avatar_type": 0,
-    "voice_id": "en-US-ChristopherNeural",
-    "script": "Green screen demo for video editing",
-    "aspect_ratio": "square",
-    "screen_style": 2,
-    "caption": false
-  }'
-```
-
-**Response:**
-
-```json
-{
-  "code": 0,
-  "msg": "Success",
-  "data": {
-    "video_id": "video_345678"
-  }
-}
-```
-
-<Info>
-`screen_style: 2` creates a green screen background for easy editing in tools like Adobe Premiere or Final Cut Pro.
-</Info>
-
----
-
-### Scenario 4: Check Video Status
+### Step 2: Check Video Status
 
 Poll to check if video is ready:
 
@@ -244,7 +175,7 @@ curl --request GET \
   "code": 0,
   "msg": "Success",
   "data": {
-    "id": "video_123456",
+    "video_id": "video_123456",
     "status": "processing",
     "created_at": 1732806631
   }
@@ -258,11 +189,10 @@ curl --request GET \
   "code": 0,
   "msg": "Success",
   "data": {
-    "id": "video_123456",
+    "video_id": "video_123456",
     "status": "completed",
     "video_url": "https://res.jogg.ai/videos/video_123456.mp4",
     "cover_url": "https://res.jogg.ai/covers/cover_123456.jpg",
-    "duration": 30,
     "created_at": 1732806631
   }
 }
@@ -314,7 +244,7 @@ Instead of polling, use [Webhooks](/api-reference/v2/API%20Documentation/Webhook
   <Card
     title="Avatar List API"
     icon="users"
-    href="/api-reference/v2/Avatar/GetPublicAvatars"
+    href="/api-reference/v2/Avatar/PublicAvatarsGet"
   >
     Browse available avatars
   </Card>

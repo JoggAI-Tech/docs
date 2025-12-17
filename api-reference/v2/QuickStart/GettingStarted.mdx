@@ -64,9 +64,8 @@ curl -X GET 'https://api.jogg.ai/v2/user/whoami' \
   "code": 0,
   "msg": "Success",
   "data": {
-    "userId": "user_123",
     "email": "user@example.com",
-    "credits": 100
+    "username": "johndoe"
   }
 }
 ```
@@ -87,14 +86,25 @@ curl -X GET 'https://api.jogg.ai/v2/user/whoami' \
 Here's a simple example to create an avatar video:
 
 ```bash
-curl -X POST https://api.jogg.ai/v2/video/avatar \
+  curl -X POST  https://api.jogg.ai/v2/create_video_from_avatar \
   -H "x-api-key: your_api_key_here" \
   -H "Content-Type: application/json" \
   -d '{
-    "avatar_id": "avatar_123",
-    "script": "Hello! Welcome to JoggAI API.",
-    "voice_id": "voice_456"
-  }'
+      "avatar": {
+        "avatar_type": "0",
+        "avatar_id": 412
+      },
+      "voice": {
+        "type": "script",
+        "voice_id": "MFZUKuGQUsGJPQjTS4wC",
+        "script": "测试一下"
+      },
+      "aspect_ratio": "portrait",
+      "screen_style": 1,
+      "caption": true,
+      "webhook_url": "your_webhook_url",
+      "video_name": "My Talking Avatar Video"
+    }'
 ```
 
 <Tip>
@@ -114,3 +124,5 @@ For questions or issues:
 <Note>
 Include your user ID (not API key) when contacting support.
 </Note>
+
+Looking for legacy API documentation? Click [here](/api-reference/v1/QuickStart/GettingStarted).

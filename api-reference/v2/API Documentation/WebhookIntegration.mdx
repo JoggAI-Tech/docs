@@ -180,8 +180,6 @@ verify_webhook() {
 | `generated_translate_video_failed` | Video translation failed | An error occurred during translation |
 | `generated_photo_avatar_success` | Photo avatar creation succeeded | Avatar is ready to use |
 | `generated_photo_avatar_failed` | Photo avatar creation failed | An error occurred during avatar creation |
-| `generated_product_avatar_success` | Product avatar creation succeeded | Avatar is ready to use |
-| `generated_product_avatar_failed` | Product avatar creation failed | An error occurred during avatar creation |
 | `generated_script_success` | AI script generation succeeded | Scripts are ready to use |
 | `generated_script_failed` | AI script generation failed | An error occurred during script generation |
 
@@ -323,83 +321,6 @@ User-Agent: JoggAI-Webhook/2.0
   Always verify signatures before processing webhooks. Reject requests with invalid signatures and log suspicious attempts.
 </Warning>
 
-## Best Practices
-
-**Implementation**
-- Return `200 OK` immediately (within 10 seconds)
-- Process webhook data asynchronously in background jobs
-- Don't make external API calls in the webhook handler
-- Implement idempotency using `event_id`
-- Store processed event IDs to prevent duplicate processing
-
-**Error Handling**
-- JoggAI retries failed webhooks (maximum 3 attempts with 5s delay)
-- Only 2xx responses are considered successful
-- Monitor webhook logs for delivery issues
-- Set up alerts for repeated failures
-
-**Monitoring**
-- Track delivery success rate (target: > 99%)
-- Monitor response time (target: under 1 second)
-- Track retry rate (target: under 5%)
-- Log all webhook attempts for debugging
-
-<Tip>
-  For local testing, use [ngrok](https://ngrok.com) to expose your localhost to the internet:
-  ```bash
-  ngrok http 3000
-  # Use the ngrok URL as your webhook endpoint
-  ```
-</Tip>
-
-## Common Issues
-
-<AccordionGroup>
-  <Accordion title="Webhook Not Receiving Requests">
-    **Solutions:**
-    - Verify URL is correct and publicly accessible
-    - Ensure URL uses HTTPS with valid certificate
-    - Check that webhook status is "enabled"
-    - Test endpoint with `curl` from external source
-    - Check firewall settings
-  </Accordion>
-  
-  <Accordion title="Signature Verification Fails">
-    **Solutions:**
-    - Use the correct webhook secret
-    - Include entire raw request body in calculation
-    - Don't parse JSON before verification
-    - Verify HMAC-SHA256 algorithm is used
-    - Check for extra whitespace or encoding issues
-  </Accordion>
-  
-  <Accordion title="Timeout Errors">
-    **Solutions:**
-    - Return 200 immediately (within 10 seconds)
-    - Move processing to background job
-    - Don't make external API calls in handler
-    - Optimize database queries
-  </Accordion>
-  
-  <Accordion title="Duplicate Webhooks">
-    **Solutions:**
-    - Implement idempotency using `event_id`
-    - Store processed event IDs in database
-    - Use database transactions
-    - Check timestamp to detect duplicates
-  </Accordion>
-</AccordionGroup>
-
-## Monitoring Metrics
-
-Track these metrics to ensure reliable webhook processing:
-
-| Metric | Description | Target |
-|--------|-------------|--------|
-| **Delivery Success Rate** | % of successful deliveries | > 99% |
-| **Response Time** | Time to return 200 OK | under 1 second |
-| **Retry Rate** | % of webhooks requiring retries | under 5% |
-| **Error Rate** | % of failed webhooks | under 1% |
 
 ## Related Documentation
 

@@ -5,6 +5,10 @@ openapi: "POST /v2/video_translate/"
 
 Translate an existing video into another language with voiceover and subtitles.
 
+<Warning>
+**Video Duration Limit:** Videos must be between **0-3 minutes** in length.
+</Warning>
+
 ## Example Usage
 
 ```bash
@@ -25,8 +29,7 @@ curl -X POST 'https://api.jogg.ai/v2/video_translate/' \
   <Card title="Video Translation Guide" href="/api-reference/v2/API%20Documentation/VideoTranslation">
     Learn about video translation workflow
   </Card>
-  <Card title="Get Target Languages" href="/api-reference/v2/Video/GetTargetLanguages">
+  <Card title="Get Target Languages" href="/api-reference/v2/Video/VideoTranslateTargetLanguagesList">
     See supported languages
   </Card>
 </CardGroup>
-

@@ -1,0 +1,76 @@
+---
+title: "List Template Videos"
+openapi: "GET /v2/template_videos"
+---
+
+Get paginated list of template videos with optional filtering and sorting.
+
+## Example Usage
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/template_videos?page=1&page_size=10&status=4' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+**Response:**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "data": [
+      {
+        "video_id": "video_123456",
+        "video_name": "My Template Video",
+        "status": "completed",
+        "created_at": 1732806631,
+        "cover_url": "https://res.jogg.ai/cover.jpg",
+        "url": "https://res.jogg.ai/video.mp4",
+        "duration_seconds": 30.5
+      },
+      {
+        "video_id": "video_789012",
+        "video_name": "Another Video",
+        "status": "failed",
+        "created_at": 1732806500,
+        "cover_url": null,
+        "url": null,
+        "duration_seconds": null,
+        "error": {
+          "code": "ERROR_CODE",
+          "message": "Video generation failed"
+        }
+      }
+    ],
+    "pagination": {
+      "page": 1,
+      "page_size": 10,
+      "total_items": 25,
+      "total_pages": 3
+    }
+  }
+}
+```
+
+## Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `page` | integer | ❌ | Page number (default: 1) |
+| `page_size` | integer | ❌ | Items per page, 1-100 (default: 10) |
+| `status` | integer | ❌ | Filter by status: 3=Processing, 4=Success, 5=Failed |
+| `sort_by` | string | ❌ | Sort field (default: "created_at") |
+| `sort_order` | string | ❌ | Sort order: "asc" or "desc" (default: "desc") |
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Create Video from Template" href="/api-reference/v2/Video/CreateVideoWithTemplate">
+    Create videos from templates
+  </Card>
+  <Card title="Get Template Video" href="/api-reference/v2/Video/TemplateVideoGet">
+    Get single template video details
+  </Card>
+</CardGroup>

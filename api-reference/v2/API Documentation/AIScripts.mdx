@@ -5,7 +5,7 @@ description: "Automatically generate engaging video scripts with AI"
 
 ## Introduction
 
-Generate professional marketing scripts automatically using JoggAI's AI. Provide product information or a topic, and get multiple script variations optimized for your video length and language.
+Generate professional marketing scripts automatically using JoggAI's AI. Provide product information or a topic, and get multiple script variations optimized for your video length and language. Perfect for scaling video content production across multiple products, languages, and platforms.
 
 ### Key Features
 
@@ -26,15 +26,11 @@ Generate professional marketing scripts automatically using JoggAI's AI. Provide
 
 ### Workflow Overview
 
-AI script generation is a **3-step asynchronous process**:
+AI script generation is a **2-step asynchronous process**:
 
 <Steps>
   <Step title="Submit Request">
     Send product info and requirements to AI
-  </Step>
-  
-  <Step title="AI Processing">
-    AI generates multiple script options (10-30 seconds)
   </Step>
   
   <Step title="Retrieve & Select">
@@ -49,15 +45,15 @@ sequenceDiagram
     participant AI
     
     Note over Client,AI: Step 1: Submit Request
-    Client->>API: POST /ai_scripts {product_info, language, video_length_seconds, script_style}
+    Client->>API: POST /v2/ai_scripts {product_info, language, video_length_seconds, script_style}
     API->>AI: Generate scripts
     API-->>Client: 200 OK {task_id}
     
-    Note over AI: Step 2: AI Processing (10-30s)
+    Note over AI: Processing (10-30s)
     AI->>AI: Generate multiple<br/>script variations
     
-    Note over Client,AI: Step 3: Retrieve Results
-    Client->>API: GET /ai_scripts/results/{task_id}
+    Note over Client,AI: Step 2: Retrieve Results
+    Client->>API: GET /v2/ai_scripts/results/{task_id}
     API-->>Client: 200 OK {scripts[]}
 ```
 
@@ -73,38 +69,25 @@ AI script generation typically completes in **10-30 seconds**. You can start pol
 
 | Endpoint | Purpose | Documentation |
 |----------|---------|---------------|
-| `POST /ai_scripts` | Submit script generation request | [API Reference](/api-reference/v2/Asset/CreateAIScript) |
-| `GET /ai_scripts/results/{task_id}` | Get generated scripts | [API Reference](/api-reference/v2/Asset/GetAIScriptResult) |
-| `POST /product` | Create product entry | [API Reference](/api-reference/v2/Product/CreateProduct) |
+| `POST /v2/ai_scripts` | Submit script generation request | [API Reference](/api-reference/v2/Asset/CreateAIScript) |
+| `GET /v2/ai_scripts/results/{task_id}` | Get generated scripts | [API Reference](/api-reference/v2/Asset/GetAIScriptResult) |
+| `POST /v2/product` | Create product entry | [API Reference](/api-reference/v2/Product/CreateProduct) |
 
 ### Key Parameters
 
-**Submit Request:**
-
 | Parameter | Type | Required | Description |
 |-----------|------|----------|-------------|
-| `language` | string | ✅ | Script language (e.g., "english") |
-| `video_length_seconds` | string | ✅ | "15", "30", or "60" seconds |
-| `script_style` | string | ✅ | Script style: "Don't Worry", "Storytime", "Discovery", "Data", "Top 3 reasons", "Light marketing" |
+| `language` | string | ✅ | Script language (e.g., "english", "spanish") |
+| `video_length_seconds` | string | ✅ | Video length: "15", "30", or "60" |
+| `script_style` | string | ✅ | Style: "Don't Worry", "Storytime", "Discovery", "Data", "Top 3 reasons", "Light marketing" |
 | `product_info` | object | ✅ | Product information object |
-| `product_info.source_type` | string | ✅ | "id" or "details" |
-| `product_info.data` | object | ✅ | Product data based on source_type |
-| `product_info.data.id` | string | * | Product ID (required when source_type is "id") |
-| `product_info.data.name` | string | * | Product name (required when source_type is "details") |
-| `product_info.data.description` | string | * | Product description (required when source_type is "details") |
+| `product_info.source_type` | string | ✅ | "id" (use product ID) or "details" (provide details) |
+| `product_info.data` | object | ✅ | Product data (varies by source_type) |
 | `target_audience` | string | ❌ | Target audience description (optional) |
 
-**Response Fields:**
-
-| Field | Type | Description |
-|-------|------|-------------|
-| `task_id` | string | Task ID from script generation request |
-| `status` | string | pending/processing/completed/failed |
-| `data` | object | Script generation results (only present when status is 'completed') |
-| `data.generated_scripts` | array | Generated scripts in different styles |
-| `data.generated_scripts[].script_style` | string | Style of the script (e.g., "Storytime", "Discovery") |
-| `data.generated_scripts[].script_paragraphs` | array | The generated script content as an array of paragraphs |
-| `err_msg` | string | Error message (only present when status is 'failed') |
+<Warning>
+**Product Info Required:** Either provide a `product_info.data.id` (for existing products) or `product_info.data.name` and `product_info.data.description` (for new products).
+</Warning>
 
 ---
 
@@ -114,7 +97,7 @@ AI script generation typically completes in **10-30 seconds**. You can start pol
 
 Use an existing product to generate scripts:
 
-**Step 1: Submit Request**
+#### Step 1: Submit Script Generation Request
 
 ```bash
 curl --request POST \
@@ -150,7 +133,11 @@ curl --request POST \
 Save the `task_id` - you'll need it to retrieve your scripts!
 </Check>
 
-**Step 2: Retrieve Scripts (after 15-30 seconds)**
+---
+
+#### Step 2: Retrieve Generated Scripts
+
+Wait 15-30 seconds, then retrieve your scripts:
 
 ```bash
 curl --request GET \
@@ -158,7 +145,7 @@ curl --request GET \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
-**Response:**
+**Response (Completed):**
 
 ```json
 {
@@ -204,11 +191,17 @@ curl --request GET \
 }
 ```
 
+<Tip>
+The AI generates multiple script variations automatically. Choose the style that best fits your brand and audience!
+</Tip>
+
 ---
 
-### Scenario 2: Generate Scripts without Product ID
+### Scenario 2: Generate Scripts with Product Details
 
-Provide product details directly:
+Provide product details directly without creating a product entry:
+
+#### Step 1: Submit Request with Product Details
 
 ```bash
 curl --request POST \
@@ -230,114 +223,31 @@ curl --request POST \
   }'
 ```
 
----
-
-### Scenario 3: Short 15-Second Scripts
-
-Generate punchy scripts for quick social media videos:
-
-```bash
-curl --request POST \
-  --url 'https://api.jogg.ai/v2/ai_scripts' \
-  --header 'x-api-key: YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "language": "english",
-    "video_length_seconds": "15",
-    "script_style": "Light marketing",
-    "product_info": {
-      "source_type": "id",
-      "data": {
-        "id": "NTQ0MTkzNjg"
-      }
-    }
-  }'
-```
-
-**Sample 15-Second Script Response:**
+**Response:**
 
 ```json
 {
   "code": 0,
   "msg": "Success",
   "data": {
-    "task_id": "task_123456789",
-    "status": "completed",
-    "data": {
-      "generated_scripts": [
-        {
-          "script_style": "Light marketing",
-          "script_paragraphs": [
-            "Meet the Owala FreeSip - your new hydration hero!",
-            "Sip or swig with one spout.",
-            "Stays cold for 24 hours.",
-            "Get yours today!"
-          ]
-        }
-      ]
-    }
+    "task_id": "task_987654321"
   }
 }
 ```
 
 ---
 
-### Scenario 4: Multi-Language Scripts
-
-Generate scripts in different languages:
+#### Step 2: Retrieve Generated Scripts
 
 ```bash
-curl --request POST \
-  --url 'https://api.jogg.ai/v2/ai_scripts' \
-  --header 'x-api-key: YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "language": "spanish",
-    "video_length_seconds": "30",
-    "script_style": "Storytime",
-    "product_info": {
-      "source_type": "id",
-      "data": {
-        "id": "NTQ0MTkzNjg"
-      }
-    }
-  }'
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/ai_scripts/results/task_987654321' \
+  --header 'x-api-key: YOUR_API_KEY'
 ```
-
-**Spanish Script Example:**
-
-```json
-{
-  "code": 0,
-  "msg": "Success",
-  "data": {
-    "task_id": "task_123456789",
-    "status": "completed",
-    "data": {
-      "generated_scripts": [
-        {
-          "script_style": "Storytime",
-          "script_paragraphs": [
-            "¿Alguna vez intentaste beber agua mientras corres?",
-            "La botella Owala FreeSip lo cambia todo.",
-            "Su boquilla única te permite sorber o tragar - sin derrames, sin problemas.",
-            "Además, mantiene las bebidas frías durante 24 horas.",
-            "¡Perfecto para el gimnasio, trabajo o aventuras!"
-          ]
-        }
-      ]
-    }
-  }
-}
-```
-
-<Tip>
-Supported languages include: English, Spanish, French, German, Japanese, Korean, Chinese, Portuguese, and 30+ more. See full list in the [API Reference](/api-reference/v2/Asset/CreateAIScript).
-</Tip>
 
 ---
 
-### Scenario 5: Check Generation Status
+### Scenario 3: Check Generation Status
 
 Poll to check if scripts are ready:
 
@@ -389,6 +299,113 @@ curl --request GET \
   }
 }
 ```
+
+---
+
+## Advanced Examples
+
+### Short 15-Second Scripts
+
+Generate punchy scripts for quick social media videos:
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/v2/ai_scripts' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "language": "english",
+    "video_length_seconds": "15",
+    "script_style": "Light marketing",
+    "product_info": {
+      "source_type": "id",
+      "data": {
+        "id": "NTQ0MTkzNjg"
+      }
+    }
+  }'
+```
+
+**Sample Response:**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "task_id": "task_123456789",
+    "status": "completed",
+    "data": {
+      "generated_scripts": [
+        {
+          "script_style": "Light marketing",
+          "script_paragraphs": [
+            "Meet the Owala FreeSip - your new hydration hero!",
+            "Sip or swig with one spout.",
+            "Stays cold for 24 hours.",
+            "Get yours today!"
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+---
+
+### Multi-Language Scripts
+
+Generate scripts in different languages:
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/v2/ai_scripts' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "language": "spanish",
+    "video_length_seconds": "30",
+    "script_style": "Storytime",
+    "product_info": {
+      "source_type": "id",
+      "data": {
+        "id": "NTQ0MTkzNjg"
+      }
+    }
+  }'
+```
+
+**Spanish Script Example:**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "task_id": "task_123456789",
+    "status": "completed",
+    "data": {
+      "generated_scripts": [
+        {
+          "script_style": "Storytime",
+          "script_paragraphs": [
+            "¿Alguna vez intentaste beber agua mientras corres?",
+            "La botella Owala FreeSip lo cambia todo.",
+            "Su boquilla única te permite sorber o tragar - sin derrames, sin problemas.",
+            "Además, mantiene las bebidas frías durante 24 horas.",
+            "¡Perfecto para el gimnasio, trabajo o aventuras!"
+          ]
+        }
+      ]
+    }
+  }
+}
+```
+
+<Tip>
+Supported languages include: English, Spanish, French, German, Japanese, Korean, Chinese, Portuguese, and 30+ more. See full list in the [API Reference](/api-reference/v2/Asset/CreateAIScript).
+</Tip>
 
 ---
 
@@ -449,25 +466,79 @@ The AI automatically generates scripts in multiple styles so you can choose the 
 
 ---
 
-## Best Practices
-
-### Script Selection
-
-When choosing from multiple generated scripts:
-
-1. **Match Your Brand Voice**: Select style that aligns with brand personality
-2. **Know Your Audience**: "Data" style for B2B, "Storytime" for consumers
-3. **Consider Platform**: Shorter, punchier scripts for social media
-4. **Test Different Styles**: A/B test to find what resonates
-
-### Optimization Tips
+## Tips for Best Results
 
 <Tip>
+**Script Selection:**
+- Match your brand voice by selecting style that aligns with brand personality
+- Know your audience: "Data" style for B2B, "Storytime" for consumers
+- Consider platform: Shorter, punchier scripts for social media
+- Test different styles: A/B test to find what resonates
+</Tip>
+
+**Optimization Tips:**
 - **Be specific** with product descriptions for better results
 - **Include key features** you want highlighted
 - **Specify target audience** for appropriate tone
-- **Generate multiple** times if not satisfied
-</Tip>
+- **Generate multiple times** if not satisfied with first result
+- **Provide detailed descriptions** when using `source_type: "details"`
+
+**Best Practices:**
+- Wait 15-30 seconds before checking results
+- Use product IDs when possible for better consistency
+- Generate multiple script variations and compare
+- Test different styles for the same product
+- Use appropriate video length for your platform
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Scripts are too generic">
+    **Issue:** Generated scripts lack specificity
+    
+    **Solutions:**
+    - Provide more detailed product descriptions
+    - Include specific features and benefits
+    - Specify target audience clearly
+    - Add unique selling points
+    - Use `target_audience` parameter
+  </Accordion>
+  
+  <Accordion title="Wrong language or tone">
+    **Issue:** Scripts don't match expected language or style
+    
+    **Solutions:**
+    - Verify `language` parameter is correct
+    - Try different `script_style` options
+    - Provide `target_audience` description
+    - Add context about brand personality in product description
+    - Check language spelling (e.g., "english" not "English")
+  </Accordion>
+  
+  <Accordion title="Task stays in processing">
+    **Issue:** Script generation takes longer than expected
+    
+    **Solutions:**
+    - Wait up to 60 seconds before retry
+    - Check `task_id` is correct
+    - Verify API key permissions
+    - Check product ID exists (if using `source_type: "id"`)
+    - Contact support if persists > 2 minutes
+  </Accordion>
+  
+  <Accordion title="No scripts generated">
+    **Issue:** Response shows completed but no scripts
+    
+    **Solutions:**
+    - Check `data.generated_scripts` array in response
+    - Verify product information is valid
+    - Ensure product description is detailed enough
+    - Try with different `script_style`
+    - Retry with simpler product description
+  </Accordion>
+</AccordionGroup>
 
 ---
 
@@ -506,33 +577,3 @@ When choosing from multiple generated scripts:
     Automate script generation
   </Card>
 </CardGroup>
-
----
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="Scripts are too generic">
-    **Solution:**
-    - Provide more detailed product descriptions
-    - Include specific features and benefits
-    - Specify target audience clearly
-    - Add unique selling points
-  </Accordion>
-  
-  <Accordion title="Wrong language or tone">
-    **Solution:**
-    - Verify `language` parameter is correct
-    - Try different `script_style` options
-    - Provide `target_audience` description
-    - Add context about brand personality in product description
-  </Accordion>
-  
-  <Accordion title="Task stays in processing">
-    **Solution:**
-    - Wait up to 60 seconds before retry
-    - Check task_id is correct
-    - Verify API key permissions
-    - Contact support if persists > 2 minutes
-  </Accordion>
-</AccordionGroup>

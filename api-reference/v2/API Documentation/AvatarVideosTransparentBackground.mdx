@@ -3,31 +3,65 @@ title: "Avatar Videos with Transparent Background"
 description: "Generate avatars with transparent backgrounds for easy compositing"
 ---
 
-## Overview
+## Introduction
 
 Create avatar videos with transparent backgrounds (alpha channel) for easy compositing over other content. Perfect for presentations, video editing, or web applications.
 
+### Key Features
+
+<CardGroup cols={2}>
+  <Card title="Green Screen" icon="film">
+    Chroma key background for video editing
+  </Card>
+  <Card title="Alpha Channel" icon="image">
+    True transparency with WebM format
+  </Card>
+  <Card title="Easy Compositing" icon="layer-group">
+    Overlay on any background
+  </Card>
+  <Card title="Professional Editing" icon="wand-magic">
+    Works with all major video editors
+  </Card>
+</CardGroup>
+
 <Info>
-**Specialized Scenario:** This guide focuses on creating avatar videos with transparent backgrounds for easy compositing.
+**Best for:** Overlaying avatars on presentations, adding to existing videos, website backgrounds, video editing projects, green screen replacements, and AR/VR applications.
 </Info>
 
 ---
 
-## When to Use Transparent Backgrounds
+## Quick Start
 
-**Best for:**
-- Overlaying avatars on presentations
-- Adding avatars to existing videos  
-- Website video backgrounds
-- Video editing projects
-- Green screen replacements
-- AR/VR applications
+### Related API Endpoints
+
+| Endpoint | Purpose | Documentation |
+|----------|---------|---------------|
+| `POST /create_video_from_avatar` | Create video with transparent background | [API Reference](/api-reference/v2/Video/CreateVideoFromAvatar) |
+| `GET /avatar_video/{id}` | Check video status | [API Reference](/api-reference/v2/Video/AvatarVideoGet) |
+
+### Key Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `screen_style` | integer | ✅ | **2** = Split screen (green screen), **3** = Picture in picture (WebM alpha) |
+| `avatar.avatar_id` | integer | ✅ | Choose full-body avatar for best results |
+| `avatar.avatar_type` | integer | ✅ | 0=Public, 1=Custom |
+| `voice.type` | string | ✅ | "script" for text-to-speech |
+| `voice.voice_id` | string | ✅ | Voice ID for text-to-speech |
+| `voice.script` | string | ✅ | Text for avatar to speak |
+| `aspect_ratio` | string | ✅ | portrait/landscape/square |
+
+**Output Formats:**
+- **Split Screen (screen_style: 2)**: MP4 with green background - use chroma key in video editor
+- **Picture in Picture (screen_style: 3)**: WebM with alpha channel - true transparency, no keying needed
 
 ---
 
-## Quick Example
+## Code Examples
 
-Create a video with transparent background:
+### Scenario 1: Green Screen (Split Screen)
+
+Create video with green screen for video editing:
 
 ```bash
 curl --request POST \
@@ -35,10 +69,15 @@ curl --request POST \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "avatar_id": 81,
-    "avatar_type": 0,
-    "voice_id": "en-US-ChristopherNeural",
-    "script": "Welcome! This avatar has a transparent background.",
+    "avatar": {
+      "avatar_id": 81,
+      "avatar_type": 0
+    },
+    "voice": {
+      "type": "script",
+      "voice_id": "en-US-ChristopherNeural",
+      "script": "Welcome! This avatar has a transparent background."
+    },
     "aspect_ratio": "portrait",
     "screen_style": 2,
     "caption": false
@@ -57,46 +96,6 @@ curl --request POST \
 }
 ```
 
-<Check>
-Set `screen_style: 2` for green screen or `screen_style: 3` for WebM with alpha channel
-</Check>
-
----
-
-## Key Parameters
-
-| Parameter | Value | Description |
-|-----------|-------|-------------|
-| `screen_style` | `2` | Green screen background (chroma key) |
-| `screen_style` | `3` | WebM with alpha channel (true transparency) |
-| `avatar_id` | required | Choose full-body avatar for best results |
-| `aspect_ratio` | required | portrait/landscape/square |
-
-**Output Formats:**
-- **Green Screen (screen_style: 2)**: MP4 with green background - use chroma key in video editor
-- **WebM (screen_style: 3)**: WebM with alpha channel - true transparency, no keying needed
-
----
-
-## Screen Style Options
-
-### Option 1: Green Screen (screen_style: 2)
-
-```bash
-curl --request POST \
-  --url 'https://api.jogg.ai/v2/create_video_from_avatar' \
-  --header 'x-api-key: YOUR_API_KEY' \
-  --header 'Content-Type: application/json' \
-  --data '{
-    "avatar_id": 81,
-    "avatar_type": 0,
-    "voice_id": "en-US-ChristopherNeural",
-    "script": "Your script here",
-    "aspect_ratio": "portrait",
-    "screen_style": 2
-  }'
-```
-
 **Use for:**
 - Video editing software (Premiere, Final Cut, DaVinci)
 - Broadcast applications
@@ -110,7 +109,9 @@ curl --request POST \
 
 ---
 
-### Option 2: WebM with Alpha (screen_style: 3)
+### Scenario 2: WebM with Alpha Channel
+
+Create video with true transparency:
 
 ```bash
 curl --request POST \
@@ -118,13 +119,30 @@ curl --request POST \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
-    "avatar_id": 81,
-    "avatar_type": 0,
-    "voice_id": "en-US-ChristopherNeural",
-    "script": "Your script here",
+    "avatar": {
+      "avatar_id": 81,
+      "avatar_type": 0
+    },
+    "voice": {
+      "type": "script",
+      "voice_id": "en-US-ChristopherNeural",
+      "script": "Your script here"
+    },
     "aspect_ratio": "portrait",
     "screen_style": 3
   }'
+```
+
+**Response:**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "video_id": "video_123456"
+  }
+}
 ```
 
 **Use for:**
@@ -139,76 +157,52 @@ curl --request POST \
 </video>
 ```
 
----
-
-## Compositing Examples
-
-### In Video Editors
-
-**Adobe Premiere Pro:**
-1. Import green screen video
-2. Add "Ultra Key" effect
-3. Select green color
-4. Adjust edge feathering
-
-**Final Cut Pro:**
-1. Import green screen video
-2. Add "Keyer" effect
-3. Select green background
-4. Refine edges
-
-**DaVinci Resolve:**
-1. Import green screen video
-2. Add "3D Keyer" to Effects
-3. Pick green color
-4. Fine-tune settings
+<Check>
+Set `screen_style: 2` for green screen (video editing) or `screen_style: 3` for WebM with alpha channel (web applications).
+</Check>
 
 ---
 
-### On Web
+## Use Case Examples
 
-```html
-<!-- WebM with alpha channel -->
-<div class="avatar-container">
-  <video autoplay loop muted playsinline>
-    <source src="avatar-transparent.webm" type="video/webm">
-  </video>
-  <div class="background-content">
-    <!-- Your background content here -->
-  </div>
-</div>
-
-<style>
-.avatar-container {
-  position: relative;
-}
-.avatar-container video {
-  position: absolute;
-  z-index: 10;
-}
-.background-content {
-  position: relative;
-  z-index: 1;
-}
-</style>
-```
-
----
-
-## Comparison
-
-| Feature | Green Screen (2) | WebM Alpha (3) |
-|---------|------------------|----------------|
-| **Format** | MP4 | WebM |
-| **Transparency** | Chroma key required | Native alpha channel |
-| **Compatibility** | All editors | Modern browsers/editors |
-| **File Size** | Smaller | Larger |
-| **Quality** | Good (may have green spill) | Excellent (clean edges) |
-| **Best For** | Video editing | Web applications |
+<AccordionGroup>
+  <Accordion title="Video Editing Projects">
+    Composite avatars into existing videos:
+    - Use green screen format (screen_style: 2)
+    - Import to Premiere, Final Cut, or DaVinci
+    - Apply chroma key effect
+    - Overlay on any background
+  </Accordion>
+  
+  <Accordion title="Web Applications">
+    Add avatars to websites:
+    - Use WebM with alpha (screen_style: 3)
+    - Embed in HTML5 video player
+    - Overlay on dynamic backgrounds
+    - No keying required
+  </Accordion>
+  
+  <Accordion title="Presentations">
+    Add avatars to slides:
+    - Create transparent avatar videos
+    - Overlay on presentation slides
+    - Professional appearance
+    - Easy to update
+  </Accordion>
+  
+  <Accordion title="AR/VR Applications">
+    Use avatars in immersive experiences:
+    - WebM with alpha channel
+    - True transparency
+    - Composite in 3D environments
+    - Realistic integration
+  </Accordion>
+</AccordionGroup>
 
 ---
 
-## Best Practices
+
+## Tips for Best Results
 
 <Tip>
 **Quality Tips:**
@@ -217,45 +211,10 @@ curl --request POST \
 - For web, use WebM with alpha (screen_style: 3)
 - For video editing, use green screen (screen_style: 2)
 - Avoid captions if compositing over text-heavy backgrounds
-</Tip>
-
-**Lighting Considerations:**
 - Green screen works best with even lighting
 - WebM alpha has cleaner edges
-- Test with your background before bulk production
+</Tip>
 
----
-
-## Troubleshooting
-
-<AccordionGroup>
-  <Accordion title="Green spill on edges">
-    **Issue:** Green color bleeding onto avatar
-    
-    **Solution:**
-    - Use "Spill Suppression" in video editor
-    - Increase key tolerance settings
-    - Consider using WebM with alpha instead
-  </Accordion>
-  
-  <Accordion title="WebM not supported">
-    **Issue:** Browser or editor doesn't support WebM
-    
-    **Solution:**
-    - Use green screen format (screen_style: 2)
-    - Convert WebM to other format with alpha preservation
-    - Check browser/editor compatibility
-  </Accordion>
-  
-  <Accordion title="Rough edges">
-    **Issue:** Avatar edges look jagged
-    
-    **Solution:**
-    - Adjust edge feathering in video editor
-    - Use higher quality avatar
-    - Increase key softness settings
-  </Accordion>
-</AccordionGroup>
 
 ---
 
@@ -271,10 +230,26 @@ curl --request POST \
   </Card>
   
   <Card
+    title="Get Avatar Video"
+    icon="video"
+    href="/api-reference/v2/Video/AvatarVideoGet"
+  >
+    Check video generation status
+  </Card>
+  
+  <Card
     title="API Reference"
     icon="code"
     href="/api-reference/v2/Video/CreateVideoFromAvatar"
   >
     Complete API documentation
+  </Card>
+  
+  <Card
+    title="Get Avatars"
+    icon="users"
+    href="/api-reference/v2/Avatar/PublicAvatarsGet"
+  >
+    Browse available avatars
   </Card>
 </CardGroup>

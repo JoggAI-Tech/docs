@@ -5,7 +5,7 @@ description: "Retrieve video generation status and download URLs"
 
 ## Introduction
 
-Check the status of your video generation tasks and retrieve download URLs when completed. This guide covers polling strategies and status interpretation for all video types.
+Check the status of your video generation tasks and retrieve download URLs when completed. This guide covers polling strategies and status interpretation for all video types (Avatar Videos, Product Videos, and Template Videos). Use webhooks for instant notifications or polling for status checks.
 
 ### Key Features
 
@@ -24,7 +24,9 @@ Check the status of your video generation tasks and retrieve download URLs when 
   </Card>
 </CardGroup>
 
-### Status Flow
+### Workflow Overview
+
+Video generation follows a standard status flow:
 
 ```mermaid
 stateDiagram-v2
@@ -41,6 +43,10 @@ stateDiagram-v2
     end note
 ```
 
+<Info>
+Videos typically take 2-10 minutes to generate depending on length and complexity. Use webhooks for instant notifications instead of polling.
+</Info>
+
 ---
 
 ## Quick Start
@@ -49,9 +55,9 @@ stateDiagram-v2
 
 | Video Type | Get Status Endpoint | Documentation |
 |------------|-------------------|---------------|
-| **Avatar Videos** | `GET /avatar_video/{id}` | [API Reference](/api-reference/v2/Video/GetAvatarVideo) |
-| **Product Videos** | `GET /product_video/{product_video_id}` | [API Reference](/api-reference/v2/Video/GetProductVideo) |
-| **Template Videos** | `GET /template_video/{video_id}` | [API Reference](/api-reference/v2/Video/GetTemplateVideo) |
+| **Avatar Videos** | `GET /v2/avatar_video/{id}` | [API Reference](/api-reference/v2/Video/AvatarVideoGet) |
+| **Product Videos** | `GET /v2/product_video/{product_video_id}` | [API Reference](/api-reference/v2/Video/ProductVideoGet) |
+| **Template Videos** | `GET /v2/template_video/{video_id}` | [API Reference](/api-reference/v2/Video/TemplateVideoGet) |
 
 ### Status Values
 
@@ -61,6 +67,10 @@ stateDiagram-v2
 | `processing` | Currently rendering | Wait and poll again |
 | `completed` | Video is ready | Download from `video_url` |
 | `failed` | Error occurred | Check error message |
+
+<Tip>
+**Recommended**: Use [Webhooks](/api-reference/v2/API%20Documentation/WebhookIntegration) instead of polling for better performance and instant notifications.
+</Tip>
 
 ---
 
@@ -83,7 +93,7 @@ curl --request GET \
   "code": 0,
   "msg": "Success",
   "data": {
-    "id": "video_123456",
+    "video_id": "video_123456",
     "status": "processing",
     "created_at": 1732806631
   }
@@ -97,7 +107,7 @@ curl --request GET \
   "code": 0,
   "msg": "Success",
   "data": {
-    "id": "video_123456",
+    "video_id": "video_123456",
     "status": "completed",
     "video_url": "https://res.jogg.ai/videos/video_123456.mp4",
     "cover_url": "https://res.jogg.ai/covers/video_123456.jpg",
@@ -107,14 +117,35 @@ curl --request GET \
 }
 ```
 
+<Check>
+When `status` is `completed`, download the video from `video_url`.
+</Check>
+
 ---
 
-### Scenario 2: Check Product Video Status
+### Scenario 1: Check Product Video Status
 
 ```bash
 curl --request GET \
   --url 'https://api.jogg.ai/v2/product_video/pv_789012' \
   --header 'x-api-key: YOUR_API_KEY'
+```
+
+**Response (Completed):**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "id": "pv_789012",
+    "status": "completed",
+    "video_url": "https://res.jogg.ai/videos/pv_789012.mp4",
+    "cover_url": "https://res.jogg.ai/covers/pv_789012.jpg",
+    "video_duration": 30.5,
+    "created_at": 1732806631
+  }
+}
 ```
 
 **Response (Failed):**
@@ -135,31 +166,98 @@ curl --request GET \
 }
 ```
 
+<Warning>
+If status is `failed`, check the `error` object for details and retry with corrected parameters.
+</Warning>
+
 ---
 
-## Polling Best Practices
+### Scenario 1: Check Template Video Status
 
-### Recommended Polling Strategy
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/template_video/video_123456' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
 
-<Steps>
-  <Step title="Initial Wait">
-    Wait 10-15 seconds before first poll (videos rarely complete faster)
-  </Step>
-  
-  <Step title="Frequent Checks">
-    Poll every 10 seconds for first minute
-  </Step>
-  
-  <Step title="Gradual Backoff">
-    Increase to 30 seconds, then 60 seconds
-  </Step>
-  
-  <Step title="Timeout">
-    Stop after 10 minutes and check for issues
-  </Step>
-</Steps>
+**Response (Completed):**
 
-### Polling Schedule Example
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "video_id": "video_123456",
+    "status": "completed",
+    "video_url": "https://res.jogg.ai/videos/video_123456.mp4",
+    "cover_url": "https://res.jogg.ai/covers/cover_123456.jpg",
+    "duration": 30,
+    "created_at": 1732806631
+  }
+}
+```
+
+---
+
+## Use Case Examples
+
+<AccordionGroup>
+  <Accordion title="Polling Strategy">
+    **When to Use**: When webhooks are not available or you need immediate status checks.
+    
+    **Recommended Schedule**:
+    - Wait 10-15 seconds before first poll
+    - Poll every 10 seconds for first minute
+    - Increase to 30 seconds, then 60 seconds
+    - Stop after 10 minutes and check for issues
+    
+    <Warning>
+    Do not poll faster than every 5 seconds to avoid rate limiting.
+    </Warning>
+  </Accordion>
+  
+  <Accordion title="Webhook Integration">
+    **When to Use**: Recommended for production applications.
+    
+    **Advantages**:
+    - ✅ No polling overhead
+    - ✅ Instant notifications
+    - ✅ Reduced API calls
+    - ✅ Better scalability
+    - ✅ Lower latency
+    
+    See [Webhook Integration](/api-reference/v2/API%20Documentation/WebhookIntegration) for setup.
+  </Accordion>
+  
+  <Accordion title="Batch Status Checks">
+    **When to Use**: Checking status of multiple videos.
+    
+    **Strategy**:
+    - Use list endpoints (`/v2/template_videos`, `/v2/product_videos`) to get status of multiple videos
+    - Filter by status to find completed/failed videos
+    - Process completed videos, retry failed ones
+  </Accordion>
+</AccordionGroup>
+
+---
+
+## Tips for Best Results
+
+<Tip>
+**Polling Strategy:**
+- Wait 10-15 seconds before first poll (videos rarely complete faster)
+- Poll every 10 seconds for first minute
+- Increase to 30 seconds, then 60 seconds
+- Stop after 10 minutes and check for issues
+</Tip>
+
+**Use Webhooks Instead:**
+- Use [Webhooks](/api-reference/v2/API%20Documentation/WebhookIntegration) instead of polling for better performance
+- Instant notifications when videos are ready
+- Reduced API calls and better scalability
+- Lower latency for end users
+
+**Polling Schedule:**
 
 | Time Elapsed | Poll Interval | Reason |
 |--------------|---------------|---------|
@@ -168,26 +266,7 @@ curl --request GET \
 | 5-10min | Every 60s | Handling queue delays |
 | > 10min | Stop | Likely an issue, check logs |
 
-<Warning>
-**Do not poll faster than every 5 seconds** to avoid rate limiting.
-</Warning>
-
----
-
-## Use Webhooks Instead
-
-<Tip>
-**Recommended Approach**: Use [Webhooks](/api-reference/v2/API%20Documentation/WebhookIntegration) instead of polling for better performance and user experience.
-</Tip>
-
-**Advantages of Webhooks:**
-- ✅ No polling overhead
-- ✅ Instant notifications
-- ✅ Reduced API calls
-- ✅ Better scalability
-- ✅ Lower latency
-
-**Webhook vs Polling Comparison:**
+**Webhook vs Polling:**
 
 ```mermaid
 sequenceDiagram
@@ -210,76 +289,90 @@ sequenceDiagram
 
 ---
 
-## Error Handling
-
-### Common Error Scenarios
-
-<AccordionGroup>
-  <Accordion title="Video Not Found (404)">
-    **Cause**: Invalid video ID or video was deleted
-    
-    **Solution**:
-    - Verify video ID is correct
-    - Check if video creation succeeded
-    - Video IDs are case-sensitive
-  </Accordion>
-  
-  <Accordion title="Generation Failed">
-    **Response:**
-    ```json
-    {
-      "status": "failed",
-      "error": {
-        "code": 50000,
-        "message": "Video generation failed"
-      }
-    }
-    ```
-    
-    **Common Causes**:
-    - Insufficient media quality
-    - Invalid avatar/voice combination
-    - Script too long for video length
-    - API quota exceeded
-    
-    **Solution**: Check error message and retry with corrected parameters
-  </Accordion>
-  
-  <Accordion title="Processing Timeout">
-    **Cause**: Video stuck in processing > 15 minutes
-    
-    **Solution**:
-    - Contact support with video ID
-    - Check [Status Page](https://status.jogg.ai)
-    - Retry video creation
-  </Accordion>
-</AccordionGroup>
-
----
-
 ## Response Field Reference
 
 ### Completed Video Response
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Video identifier |
-| `status` | string | Current status (completed) |
+| `video_id` / `id` | string | Video identifier |
+| `status` | string | Current status (`completed`) |
 | `video_url` | string | Download URL for MP4 file |
 | `cover_url` | string | Thumbnail/cover image URL |
-| `duration` | integer | Video length in seconds |
+| `duration` / `video_duration` | number | Video length in seconds |
 | `title` | string | Video title (if provided) |
 | `created_at` | integer | Unix timestamp of creation |
+
+### Processing Video Response
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `video_id` / `id` | string | Video identifier |
+| `status` | string | Current status (`pending` or `processing`) |
+| `created_at` | integer | Unix timestamp |
 
 ### Failed Video Response
 
 | Field | Type | Description |
 |-------|------|-------------|
-| `id` | string | Video identifier |
-| `status` | string | Status (failed) |
+| `video_id` / `id` | string | Video identifier |
+| `status` | string | Status (`failed`) |
 | `error.code` | integer | Error code |
 | `error.message` | string | Human-readable error description |
 | `created_at` | integer | Unix timestamp |
+
+---
+
+## Troubleshooting
+
+<AccordionGroup>
+  <Accordion title="Video Not Found (404)">
+    **Error**: `Video ID does not exist`
+    
+    **Solutions:**
+    - Verify video ID is correct
+    - Check if video creation succeeded
+    - Video IDs are case-sensitive
+    - Ensure you're using the correct endpoint for video type
+  </Accordion>
+  
+  <Accordion title="Generation Failed">
+    **Error**: Status is `failed` with error object
+    
+    **Common Causes:**
+    - Insufficient media quality
+    - Invalid avatar/voice combination
+    - Script too long for video length
+    - API quota exceeded
+    - Invalid template variables
+    
+    **Solutions:**
+    - Check error message in response
+    - Verify all input parameters are valid
+    - Retry with corrected parameters
+    - Check [Error Handling Guide](/api-reference/v2/QuickStart/ErrorHandling)
+  </Accordion>
+  
+  <Accordion title="Processing Timeout">
+    **Issue**: Video stuck in processing > 15 minutes
+    
+    **Solutions:**
+    - Contact support with video ID
+    - Check [Status Page](https://status.jogg.ai)
+    - Retry video creation
+    - Verify video type and parameters
+  </Accordion>
+  
+  <Accordion title="Rate Limiting">
+    **Error**: Too many requests
+    
+    **Solutions:**
+    - Reduce polling frequency (minimum 5 seconds between polls)
+    - Use webhooks instead of polling
+    - Check [Rate Limits](/api-reference/v2/QuickStart/RateLimits)
+    - Implement exponential backoff
+  </Accordion>
+</AccordionGroup>
 
 ---
 

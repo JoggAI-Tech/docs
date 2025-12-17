@@ -1,0 +1,69 @@
+---
+title: "Get Product Video List"
+openapi: "GET /v2/product_videos"
+---
+
+Retrieve paginated list of generated product videos with filtering and sorting options.
+
+## Example Usage
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/product_videos?page=1&page_size=10&status=4' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+**Response:**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "videos": [
+      {
+        "id": "video_123",
+        "title": "My Product Video",
+        "video_duration": 30.5,
+        "video_url": "https://res.jogg.ai/video.mp4",
+        "cover_url": "https://res.jogg.ai/cover.jpg",
+        "status": "completed",
+        "created_at": 1640995200
+      },
+      {
+        "id": "video_456",
+        "title": "Another Product Video",
+        "video_duration": 25.0,
+        "video_url": "https://res.jogg.ai/video2.mp4",
+        "cover_url": "https://res.jogg.ai/cover2.jpg",
+        "status": "processing",
+        "created_at": 1640995100
+      }
+    ],
+    "total": 25,
+    "page": 1,
+    "page_size": 10
+  }
+}
+```
+
+## Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `page` | integer | ❌ | Page number (default: 1) |
+| `page_size` | integer | ❌ | Items per page, 1-100 (default: 10) |
+| `status` | integer | ❌ | Filter by status: 3=Processing, 4=Success, 5=Failed |
+| `sort_by` | string | ❌ | Sort field (default: "created_at") |
+| `sort_order` | string | ❌ | Sort order: "asc" or "desc" (default: "desc") |
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Create Product Video" href="/api-reference/v2/Video/CreateVideoFromProduct">
+    Create product videos
+  </Card>
+  <Card title="Get Product Video" href="/api-reference/v2/Video/ProductVideoGet">
+    Get single product video details
+  </Card>
+</CardGroup>

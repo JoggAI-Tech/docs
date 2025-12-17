@@ -1,0 +1,69 @@
+---
+title: "Get Product Preview List"
+openapi: "GET /v2/product_previews"
+---
+
+Retrieve paginated list of product previews with filtering and sorting options. Previews are generated videos that help you choose the best style before final rendering.
+
+## Example Usage
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/product_previews?page=1&page_size=10&status=4' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+**Response:**
+
+```json
+{
+  "code": 0,
+  "msg": "Success",
+  "data": {
+    "previews": [
+      {
+        "id": "video_123",
+        "title": "My Product Preview",
+        "video_duration": 30.5,
+        "video_url": "https://res.jogg.ai/video.mp4",
+        "cover_url": "https://res.jogg.ai/cover.jpg",
+        "status": "completed",
+        "created_at": 1640995200
+      },
+      {
+        "id": "video_456",
+        "title": "Another Preview",
+        "video_duration": 25.0,
+        "video_url": "https://res.jogg.ai/video2.mp4",
+        "cover_url": "https://res.jogg.ai/cover2.jpg",
+        "status": "processing",
+        "created_at": 1640995100
+      }
+    ],
+    "total": 15,
+    "page": 1,
+    "page_size": 10
+  }
+}
+```
+
+## Parameters
+
+| Parameter | Type | Required | Description |
+|-----------|------|----------|-------------|
+| `page` | integer | ❌ | Page number (default: 1) |
+| `page_size` | integer | ❌ | Items per page, 1-100 (default: 10) |
+| `status` | integer | ❌ | Filter by status: 3=Processing, 4=Success, 5=Failed |
+| `sort_by` | string | ❌ | Sort field (default: "created_at") |
+| `sort_order` | string | ❌ | Sort order: "asc" or "desc" (default: "desc") |
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Submit Preview List" href="/doc/v2/SubmitPreviewList">
+    Generate previews
+  </Card>
+  <Card title="Product Videos" href="/api-reference/v2/API%20Documentation/URLtoVideo">
+    Complete product video workflow
+  </Card>
+</CardGroup>
