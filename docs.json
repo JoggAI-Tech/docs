@@ -1,0 +1,477 @@
+{
+  "$schema": "https://mintlify.com/docs.json",
+  "theme": "mint",
+  "name": "JoggAI API",
+  "colors": {
+    "primary": "#2E5CFF",
+    "light": "#2E5CFF",
+    "dark": "#2E5CFF"
+  },
+  "favicon": "/logo/Group 1312319951.png",
+  "navigation": {
+    "tabs": [
+      {
+        "tab": "Home",
+        "groups": [
+          {
+            "group": "Get Started",
+            "pages": [
+              "home/WelcometoJoggAI"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "API Documentation",
+        "groups": [
+          {
+            "group": "QuickStart",
+            "pages": [
+              "api-reference/v2/QuickStart/GettingStarted",
+              "api-reference/v2/QuickStart/Pricing",
+              "api-reference/v2/QuickStart/ErrorHandling",
+              "api-reference/v2/QuickStart/RateLimits"
+            ]
+          },
+          {
+            "group": "Workflows Guides",
+            "pages": [
+              {
+                "group": "Create Avatar Videos",
+                "pages": [
+                  "api-reference/v2/API Documentation/CreateAvatarVideos",
+                  "api-reference/v2/API Documentation/AvatarVideosWithPhotoAvatar",
+                  "api-reference/v2/API Documentation/AvatarVideosTransparentBackground",
+                  "api-reference/v2/API Documentation/AvatarVideosWithAudioSource"
+                ]
+              },
+              "api-reference/v2/API Documentation/URLtoVideo",
+              "api-reference/v2/API Documentation/CreateVideoFromTemplate",
+              "api-reference/v2/API Documentation/VideoTranslation",
+              "api-reference/v2/API Documentation/CreatePhotoAvatar",
+              "api-reference/v2/API Documentation/UploadMedia",
+              "api-reference/v2/API Documentation/AIScripts",
+              "api-reference/v2/API Documentation/WebhookIntegration",
+              "api-reference/v2/API Documentation/GetResult"
+            ]
+          },
+          {
+            "group": "Video",
+            "pages": [
+              "api-reference/v2/Video/CreateVideoFromAvatar",
+              "api-reference/v2/Video/AvatarVideoGet",
+              "api-reference/v2/Video/CreateVideoFromProduct",
+              "api-reference/v2/Video/SubmitPreviewList",
+              "api-reference/v2/Video/RenderSinglePreview",
+              "api-reference/v2/Video/ProductVideoGet",
+              "api-reference/v2/Video/CreateVideoWithTemplate",
+              "api-reference/v2/Video/TemplateVideoGet",
+              "api-reference/v2/Video/VideoTranslateCreate",
+              "api-reference/v2/Video/VideoTranslateGet",
+              "api-reference/v2/Video/VideoTranslateTargetLanguagesList"
+            ]
+          },
+          {
+            "group": "Avatar",
+            "pages": [
+              "api-reference/v2/Avatar/PublicAvatarsGet",
+              "api-reference/v2/Avatar/CustomAvatarsGet",
+              "api-reference/v2/Avatar/PhotoAvatarsGet",
+              "api-reference/v2/Avatar/PhotoAvatarGenerate",
+              "api-reference/v2/Avatar/PhotoAvatarStatusGet",
+              "api-reference/v2/Avatar/PhotoAvatarMotionAdd",
+              "api-reference/v2/Avatar/MotionStatusCheck"
+            ]
+          },
+          {
+            "group": "Voice",
+            "pages": [
+              "api-reference/v2/Voice/GetVoices",
+              "api-reference/v2/Voice/GetCustomVoices"
+            ]
+          },
+          {
+            "group": "Asset",
+            "pages": [
+              "api-reference/v2/Asset/CreateAIScript",
+              "api-reference/v2/Asset/GetAIScriptResult",
+              "api-reference/v2/Asset/GetMusic",
+              "api-reference/v2/Asset/GetVisualStyles",
+              "api-reference/v2/Asset/UploadAsset"
+            ]
+          },
+          {
+            "group": "Template",
+            "pages": [
+              "api-reference/v2/Template/GetTemplates",
+              "api-reference/v2/Template/GetTemplateById"
+            ]
+          },
+          {
+            "group": "Product",
+            "pages": [
+              "api-reference/v2/Product/CreateProduct",
+              "api-reference/v2/Product/UpdateProduct"
+            ]
+          },
+          {
+            "group": "User",
+            "pages": [
+              "api-reference/v2/User/GetUserInfo",
+              "api-reference/v2/User/GetRemainingQuota"
+            ]
+          },
+          {
+            "group": "Webhook",
+            "pages": [
+              "api-reference/v2/Webhook/ListWebhookEndpoints",
+              "api-reference/v2/Webhook/AddWebhookEndpoint",
+              "api-reference/v2/Webhook/UpdateWebhookEndpoint",
+              "api-reference/v2/Webhook/DeleteWebhookEndpoint",
+              "api-reference/v2/Webhook/ListWebhookEvents"
+            ]
+          }
+        ]
+      },
+      {
+        "tab": "V1",
+        "hidden": true,
+        "groups": [
+          {
+            "group": "QuickStart",
+            "pages": [
+              "api-reference/v1/QuickStart/GettingStarted"
+            ]
+          },
+          {
+            "group": "API Documentation",
+            "pages": [
+              {
+                "group": "Create Avatar Videos",
+                "pages": [
+                  "api-reference/v1/API Documentation/CreateAvatarVideo",
+                  "api-reference/v1/API Documentation/CreateAvatarVideoWithInstantAvatar",
+                  "api-reference/v1/API Documentation/CreateAvatarVideoWithPhotoAvatar",
+                  "api-reference/v1/API Documentation/UsingAudioSourceasVoice",
+                  "api-reference/v1/API Documentation/CreateTransparentAvatarVideos"
+                ]
+              },
+              "api-reference/v1/API Documentation/CreateVideoFromURL",
+              "api-reference/v1/API Documentation/CreatVideoFormTemplate",
+              "api-reference/v1/API Documentation/CreatePhotoAvatar",
+              "api-reference/v1/API Documentation/AIScripts",
+              "api-reference/v1/API Documentation/UploadMedia",
+              "api-reference/v1/API Documentation/Webhook"
+            ]
+          },
+          {
+            "group": "URL to Video",
+            "pages": [
+              "api-reference/v1/URL-to-Video/UploadURL",
+              "api-reference/v1/URL-to-Video/UpdateProduct",
+              "api-reference/v1/URL-to-Video/CreateVideo",
+              "api-reference/v1/URL-to-Video/GeneratePreview"
+            ]
+          },
+          {
+            "group": "Create Avatar Videos",
+            "pages": [
+              "api-reference/v1/Create-Avatar-Videos/CreateAvatarVideo"
+            ]
+          },
+          {
+            "group": "Get Generated Video",
+            "pages": [
+              "api-reference/v1/GetGeneratedVideo/GetGeneratedVideo"
+            ]
+          },
+          {
+            "group": "AI Scripts",
+            "pages": [
+              "api-reference/v1/AI-Scripts/AI-Scripts"
+            ]
+          },
+          {
+            "group": "Upload Media",
+            "pages": [
+              "api-reference/v1/UploadFile/UploadFile"
+            ]
+          },
+          {
+            "group": "Avatar",
+            "pages": [
+              "api-reference/v1/Avatar/GetAvatarList",
+              "api-reference/v1/Avatar/GetInstantAvatar",
+              "api-reference/v1/Avatar/GetPhotoAvatar",
+              "api-reference/v1/Avatar/GenerateAIAvatarPhoto",
+              "api-reference/v1/Avatar/CheckPhotoGenerationStatus",
+              "api-reference/v1/Avatar/GenerateAvatarNewLookPhoto",
+              "api-reference/v1/Avatar/AddMotion",
+              "api-reference/v1/Avatar/CheckStatusOfTheMotionGeneration"
+            ]
+          },
+          {
+            "group": "Voice",
+            "pages": [
+              "api-reference/v1/Voice/GetVoiceList",
+              "api-reference/v1/Voice/GetMyVoice"
+            ]
+          },
+          {
+            "group": "Visual Style",
+            "pages": [
+              "api-reference/v1/Visual-Style/GetVisualStyle"
+            ]
+          },
+          {
+            "group": "Template",
+            "pages": [
+              "api-reference/v1/Template/GetTemplate",
+              "api-reference/v1/Template/GetMyTemplate",
+              "api-reference/v1/Template/CreateVideoFormTemplate"
+            ]
+          },
+          {
+            "group": "Music",
+            "pages": [
+              "api-reference/v1/Music/GetMusic"
+            ]
+          },
+          {
+            "group": "Webhook",
+            "pages": [
+              "api-reference/v1/Webhook/ListofWebhookEndpoints",
+              "api-reference/v1/Webhook/AddWebhookEndpoint",
+              "api-reference/v1/Webhook/UpdateWebhookEndpoint",
+              "api-reference/v1/Webhook/DeleteWebhookEndpoint",
+              "api-reference/v1/Webhook/ListofAvailableWebhookEvents"
+            ]
+          }
+        ]
+      }
+    ],
+    "global": {
+      "anchors": [
+        {
+          "anchor": "Roadmap",
+          "href": "https://updates.jogg.ai/roadmap",
+          "icon": "pencil"
+        },
+        {
+          "anchor": "Changelog",
+          "href": "https://updates.jogg.ai/changelog",
+          "icon": "code"
+        },
+        {
+          "anchor": "Share Your Ideas",
+          "href": "https://updates.jogg.ai/",
+          "icon": "envelope"
+        }
+      ]
+    }
+  },
+  "logo": {
+    "light": "/logo/Group 1312320557.png",
+    "dark": "/logo/Dark-logo.png"
+  },
+  "navbar": {
+    "links": [
+      {
+        "label": "Support",
+        "href": "mailto:support@jogg.ai"
+      }
+    ],
+    "primary": {
+      "type": "button",
+      "label": "Get Started",
+      "href": "https://app.jogg.ai/"
+    }
+  },
+  "footer": {
+    "socials": {
+      "x": "https://x.com/Jogg_ai",
+      "facebook": "https://www.facebook.com/profile.php?id=61560344774204",
+      "linkedin": "https://www.linkedin.com/company/jogg-ai",
+      "youtube": "http://www.youtube.com/@joggai",
+      "discord": "https://discord.gg/RwrwZcSRCq"
+    }
+  },
+  "redirects": [
+    {
+      "source": "/WelcometoJoggAI",
+      "destination": "/home/WelcometoJoggAI"
+    },
+    {
+      "source": "/CreateAIAvatarVideos",
+      "destination": "/api-reference/v2/API Documentation/CreateAvatarVideos"
+    },
+    {
+      "source": "/AIVideoAdsinMinutes",
+      "destination": "/api-reference/v2/API Documentation/CreateAvatarVideos"
+    },
+    {
+      "source": "/JoggAIAPI",
+      "destination": "/api-reference/v2/QuickStart/GettingStarted"
+    },
+    {
+      "source": "/api-reference/QuickStart/GettingStarted",
+      "destination": "/api-reference/v2/QuickStart/GettingStarted"
+    },
+    {
+      "source": "/api-reference/API Documentation/CreateAvatarVideo",
+      "destination": "/api-reference/v2/API Documentation/CreateAvatarVideos"
+    },
+    {
+      "source": "/api-reference/API Documentation/CreateAvatarVideoWithInstantAvatar",
+      "destination": "/api-reference/v2/API Documentation/CreateAvatarVideos"
+    },
+    {
+      "source": "/api-reference/API Documentation/CreateAvatarVideoWithPhotoAvatar",
+      "destination": "/api-reference/v2/API Documentation/AvatarVideosWithPhotoAvatar"
+    },
+    {
+      "source": "/api-reference/API Documentation/UsingAudioSourceasVoice",
+      "destination": "/api-reference/v2/API Documentation/AvatarVideosWithAudioSource"
+    },
+    {
+      "source": "/api-reference/API Documentation/CreateTransparentAvatarVideos",
+      "destination": "/api-reference/v2/API Documentation/AvatarVideosTransparentBackground"
+    },
+    {
+      "source": "/api-reference/API Documentation/CreateVideoFromURL",
+      "destination": "/api-reference/v2/API Documentation/URLtoVideo"
+    },
+    {
+      "source": "/api-reference/API Documentation/CreatVideoFormTemplate",
+      "destination": "/api-reference/v2/API Documentation/CreateVideoFromTemplate"
+    },
+    {
+      "source": "/api-reference/API Documentation/CreatePhotoAvatar",
+      "destination": "/api-reference/v2/API Documentation/CreatePhotoAvatar"
+    },
+    {
+      "source": "/api-reference/API Documentation/AIScripts",
+      "destination": "/api-reference/v2/API Documentation/AIScripts"
+    },
+    {
+      "source": "/api-reference/API Documentation/UploadMedia",
+      "destination": "/api-reference/v2/API Documentation/UploadMedia"
+    },
+    {
+      "source": "/api-reference/API Documentation/Webhook",
+      "destination": "/api-reference/v2/API Documentation/WebhookIntegration"
+    },
+    {
+      "source": "/api-reference/URL-to-Video/UploadURL",
+      "destination": "/api-reference/v2/Product/CreateProduct"
+    },
+    {
+      "source": "/api-reference/URL-to-Video/UpdateProduct",
+      "destination": "/api-reference/v2/Product/UpdateProduct"
+    },
+    {
+      "source": "/api-reference/URL-to-Video/CreateVideo",
+      "destination": "/api-reference/v2/Video/CreateVideoFromProduct"
+    },
+    {
+      "source": "/api-reference/URL-to-Video/GeneratePreview",
+      "destination": "/api-reference/v2/Video/SubmitPreviewList"
+    },
+    {
+      "source": "/api-reference/Create-Avatar-Videos/CreateAvatarVideo",
+      "destination": "/api-reference/v2/API Documentation/CreateAvatarVideos"
+    },
+    {
+      "source": "/api-reference/GetGeneratedVideo/GetGeneratedVideo",
+      "destination": "/api-reference/v2/API Documentation/GetResult"
+    },
+    {
+      "source": "/api-reference/AI-Scripts/AI-Scripts",
+      "destination": "/api-reference/v2/API Documentation/AIScripts"
+    },
+    {
+      "source": "/api-reference/UploadFile/UploadFile",
+      "destination": "/api-reference/v2/API Documentation/UploadMedia"
+    },
+    {
+      "source": "/api-reference/Avatar/GetAvatarList",
+      "destination": "/api-reference/v2/Avatar/PublicAvatarsGet"
+    },
+    {
+      "source": "/api-reference/Avatar/GetInstantAvatar",
+      "destination": "/api-reference/v2/Avatar/CustomAvatarsGet"
+    },
+    {
+      "source": "/api-reference/Avatar/GetPhotoAvatar",
+      "destination": "/api-reference/v2/Avatar/PhotoAvatarsGet"
+    },
+    {
+      "source": "/api-reference/Avatar/GenerateAIAvatarPhoto",
+      "destination": "/api-reference/v2/Avatar/PhotoAvatarGenerate"
+    },
+    {
+      "source": "/api-reference/Avatar/CheckPhotoGenerationStatus",
+      "destination": "/api-reference/v2/Avatar/PhotoAvatarStatusGet"
+    },
+    {
+      "source": "/api-reference/Avatar/GenerateAvatarNewLookPhoto",
+      "destination": "/api-reference/v2/QuickStart/GettingStarted"
+    },
+    {
+      "source": "/api-reference/Avatar/AddMotion",
+      "destination": "/api-reference/v2/Avatar/PhotoAvatarMotionAdd"
+    },
+    {
+      "source": "/api-reference/Avatar/CheckStatusOfTheMotionGeneration",
+      "destination": "/api-reference/v2/Avatar/MotionStatusCheck"
+    },
+    {
+      "source": "/api-reference/Voice/GetVoiceList",
+      "destination": "/api-reference/v2/Voice/GetVoices"
+    },
+    {
+      "source": "/api-reference/Voice/GetMyVoice",
+      "destination": "/api-reference/v2/Voice/GetCustomVoices"
+    },
+    {
+      "source": "/api-reference/Visual-Style/GetVisualStyle",
+      "destination": "/api-reference/v2/Asset/GetVisualStyles"
+    },
+    {
+      "source": "/api-reference/Template/GetTemplate",
+      "destination": "/api-reference/v2/Template/GetTemplates"
+    },
+    {
+      "source": "/api-reference/Template/GetMyTemplate",
+      "destination": "/api-reference/v2/Template/GetTemplates"
+    },
+    {
+      "source": "/api-reference/Template/CreateVideoFormTemplate",
+      "destination": "/api-reference/v2/API Documentation/CreateVideoFromTemplate"
+    },
+    {
+      "source": "/api-reference/Music/GetMusic",
+      "destination": "/api-reference/v2/Asset/GetMusic"
+    },
+    {
+      "source": "/api-reference/Webhook/ListofWebhookEndpoints",
+      "destination": "/api-reference/v2/Webhook/ListWebhookEndpoints"
+    },
+    {
+      "source": "/api-reference/Webhook/AddWebhookEndpoint",
+      "destination": "/api-reference/v2/Webhook/AddWebhookEndpoint"
+    },
+    {
+      "source": "/api-reference/Webhook/UpdateWebhookEndpoint",
+      "destination": "/api-reference/v2/Webhook/UpdateWebhookEndpoint"
+    },
+    {
+      "source": "/api-reference/Webhook/DeleteWebhookEndpoint",
+      "destination": "/api-reference/v2/Webhook/DeleteWebhookEndpoint"
+    },
+    {
+      "source": "/api-reference/Webhook/ListofAvailableWebhookEvents",
+      "destination": "/api-reference/v2/Webhook/ListWebhookEvents"
+    }
+  ]
+}
