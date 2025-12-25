@@ -13,12 +13,50 @@ Each event type represents a specific action or status change in the system.
 - Select events to subscribe to
 - Understand event naming conventions
 
+## Response Example
+
+```json
+{
+  "rid": "",
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "events": [
+      "generated_video_success",
+      "generated_video_failed",
+      "create_avatar_success",
+      "create_avatar_failed",
+      "generated_image_success",
+      "generated_image_failed",
+      "generated_motion_success",
+      "generated_motion_failed",
+      "generated_product_video_success",
+      "generated_product_video_failed",
+      "generated_avatar_video_success",
+      "generated_avatar_video_failed",
+      "generated_template_video_success",
+      "generated_template_video_failed",
+      "generated_translate_video_success",
+      "generated_translate_video_failed",
+      "generated_photo_avatar_success",
+      "generated_photo_avatar_failed",
+      "generated_product_avatar_success",
+      "generated_product_avatar_failed",
+      "generated_script_success",
+      "generated_script_failed"
+    ]
+  }
+}
+```
+
 ## Available Event Types
 
 ### Video Generation Events
 
 | Event Type | Description |
 |------------|-------------|
+| `generated_video_success` | Video generation succeeded |
+| `generated_video_failed` | Video generation failed |
 | `generated_product_video_success` | Product video generation succeeded |
 | `generated_product_video_failed` | Product video generation failed |
 | `generated_avatar_video_success` | Avatar video generation succeeded |
@@ -32,6 +70,8 @@ Each event type represents a specific action or status change in the system.
 
 | Event Type | Description |
 |------------|-------------|
+| `create_avatar_success` | Avatar creation succeeded |
+| `create_avatar_failed` | Avatar creation failed |
 | `generated_photo_avatar_success` | Photo avatar creation succeeded |
 | `generated_photo_avatar_failed` | Photo avatar creation failed |
 | `generated_product_avatar_success` | Product avatar creation succeeded |
@@ -43,6 +83,20 @@ Each event type represents a specific action or status change in the system.
 |------------|-------------|
 | `generated_script_success` | AI script generation succeeded |
 | `generated_script_failed` | AI script generation failed |
+
+### Image Generation Events
+
+| Event Type | Description |
+|------------|-------------|
+| `generated_image_success` | Image generation succeeded |
+| `generated_image_failed` | Image generation failed |
+
+### Motion Generation Events
+
+| Event Type | Description |
+|------------|-------------|
+| `generated_motion_success` | Motion generation succeeded |
+| `generated_motion_failed` | Motion generation failed |
 
 <Tip>
 We recommend subscribing to at least `*_success` and `*_failed` events to stay informed about task completion status.
@@ -103,6 +157,62 @@ When an event is triggered, your endpoint will receive a JSON payload similar to
 }
 ```
 
+### Image Generation Success Event
+
+```json
+{
+  "event": "generated_image_success",
+  "timestamp": 1732806631,
+  "data": {
+    "photo_id": "photo_123456",
+    "photo_urls": [
+      "https://res.jogg.ai/image1.jpg",
+      "https://res.jogg.ai/image2.jpg"
+    ]
+  }
+}
+```
+
+### Image Generation Failed Event
+
+```json
+{
+  "event": "generated_image_failed",
+  "timestamp": 1732806631,
+  "data": {
+    "photo_id": "photo_123456",
+    "error": "Image generation failed due to invalid parameters"
+  }
+}
+```
+
+### Motion Generation Success Event
+
+```json
+{
+  "event": "generated_motion_success",
+  "timestamp": 1732806631,
+  "data": {
+    "motion_id": "motion_123456",
+    "motion_url": "https://res.jogg.ai/motion.mp4",
+    "photo_url": "https://res.jogg.ai/photo.jpg"
+  }
+}
+```
+
+### Motion Generation Failed Event
+
+```json
+{
+  "event": "generated_motion_failed",
+  "timestamp": 1732806631,
+  "data": {
+    "motion_id": "motion_123456",
+    "error": "Motion generation failed due to processing error"
+  }
+}
+```
+
 ## Best Practices
 
 <Info>
@@ -115,7 +225,9 @@ When an event is triggered, your endpoint will receive a JSON payload similar to
 
 ## Event Naming Convention
 
-All events follow the `generated_{resource}_{status}` naming pattern:
+Most events follow the `generated_{resource}_{status}` or `create_{resource}_{status}` naming pattern:
 
-- `{resource}`: Resource type (e.g., `avatar_video`, `product_avatar`, `script`)
+- `{resource}`: Resource type (e.g., `avatar_video`, `product_avatar`, `script`, `avatar`)
 - `{status}`: Status (`success` or `failed`)
+
+**Note:** Some legacy events use simpler naming (e.g., `generated_video_success`, `create_avatar_success`).

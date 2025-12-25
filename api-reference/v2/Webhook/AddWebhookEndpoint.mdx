@@ -34,6 +34,8 @@ Ensure your endpoint URL is a publicly accessible **HTTPS** address.
 
 | Event | Description | When Triggered |
 |-------|-------------|----------------|
+| `generated_video_success` | Video generation succeeded | Video is ready to download |
+| `generated_video_failed` | Video generation failed | An error occurred during generation |
 | `generated_product_video_success` | Product video generation succeeded | Video is ready to download |
 | `generated_product_video_failed` | Product video generation failed | An error occurred during generation |
 | `generated_avatar_video_success` | Avatar video generation succeeded | Video is ready to download |
@@ -47,6 +49,8 @@ Ensure your endpoint URL is a publicly accessible **HTTPS** address.
 
 | Event | Description | When Triggered |
 |-------|-------------|----------------|
+| `create_avatar_success` | Avatar creation succeeded | Avatar is ready to use |
+| `create_avatar_failed` | Avatar creation failed | An error occurred during avatar creation |
 | `generated_photo_avatar_success` | Photo avatar creation succeeded | Avatar is ready to use |
 | `generated_photo_avatar_failed` | Photo avatar creation failed | An error occurred during avatar creation |
 | `generated_product_avatar_success` | Product avatar creation succeeded | Avatar is ready to use |
@@ -58,6 +62,20 @@ Ensure your endpoint URL is a publicly accessible **HTTPS** address.
 |-------|-------------|----------------|
 | `generated_script_success` | AI script generation succeeded | Scripts are ready to use |
 | `generated_script_failed` | AI script generation failed | An error occurred during script generation |
+
+### Image Generation Events
+
+| Event | Description | When Triggered |
+|-------|-------------|----------------|
+| `generated_image_success` | Image generation succeeded | Generated images are ready |
+| `generated_image_failed` | Image generation failed | An error occurred during image generation |
+
+### Motion Generation Events
+
+| Event | Description | When Triggered |
+|-------|-------------|----------------|
+| `generated_motion_success` | Motion generation succeeded | Generated motion video is ready |
+| `generated_motion_failed` | Motion generation failed | An error occurred during motion generation |
 
 <Tip>
 Use the [List Webhook Events](/api-reference/v2/Webhook/ListWebhookEvents) endpoint to get all available event types.

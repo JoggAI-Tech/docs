@@ -170,6 +170,8 @@ verify_webhook() {
 
 | Event | Description | When Triggered |
 |-------|-------------|----------------|
+| `generated_video_success` | Video generation succeeded | Video is ready to download |
+| `generated_video_failed` | Video generation failed | An error occurred during generation |
 | `generated_avatar_video_success` | Avatar video generation succeeded | Video is ready to download |
 | `generated_avatar_video_failed` | Avatar video generation failed | An error occurred during generation |
 | `generated_product_video_success` | Product video generation succeeded | Video is ready to download |
@@ -178,13 +180,21 @@ verify_webhook() {
 | `generated_template_video_failed` | Template video generation failed | An error occurred during generation |
 | `generated_translate_video_success` | Video translation succeeded | Translated video is ready |
 | `generated_translate_video_failed` | Video translation failed | An error occurred during translation |
+| `create_avatar_success` | Avatar creation succeeded | Avatar is ready to use |
+| `create_avatar_failed` | Avatar creation failed | An error occurred during avatar creation |
 | `generated_photo_avatar_success` | Photo avatar creation succeeded | Avatar is ready to use |
 | `generated_photo_avatar_failed` | Photo avatar creation failed | An error occurred during avatar creation |
+| `generated_product_avatar_success` | Product avatar creation succeeded | Avatar is ready to use |
+| `generated_product_avatar_failed` | Product avatar creation failed | An error occurred during avatar creation |
 | `generated_script_success` | AI script generation succeeded | Scripts are ready to use |
 | `generated_script_failed` | AI script generation failed | An error occurred during script generation |
+| `generated_image_success` | Image generation succeeded | Generated images are ready |
+| `generated_image_failed` | Image generation failed | An error occurred during image generation |
+| `generated_motion_success` | Motion generation succeeded | Generated motion video is ready |
+| `generated_motion_failed` | Motion generation failed | An error occurred during motion generation |
 
 <Tip>
-查看 [List Webhook Events](/api-reference/v2/Webhook/ListWebhookEvents) 获取完整的事件列表。
+View [List Webhook Events](/api-reference/v2/Webhook/ListWebhookEvents) for the complete list of events.
 </Tip>
 
 ### Event Payloads
@@ -240,6 +250,62 @@ verify_webhook() {
 }
 ```
   </Accordion>
+  
+  <Accordion title="Image Generation Success">
+```json
+{
+  "event": "generated_image_success",
+  "timestamp": 1732806631,
+  "data": {
+    "photo_id": "photo_123456",
+    "photo_urls": [
+      "https://res.jogg.ai/image1.jpg",
+      "https://res.jogg.ai/image2.jpg"
+    ]
+  }
+}
+```
+  </Accordion>
+  
+  <Accordion title="Image Generation Failed">
+```json
+{
+  "event": "generated_image_failed",
+  "timestamp": 1732806631,
+  "data": {
+    "photo_id": "photo_123456",
+    "error": "Image generation failed due to invalid parameters"
+  }
+}
+```
+  </Accordion>
+  
+  <Accordion title="Motion Generation Success">
+```json
+{
+  "event": "generated_motion_success",
+  "timestamp": 1732806631,
+  "data": {
+    "motion_id": "motion_123456",
+    "motion_url": "https://res.jogg.ai/motion.mp4",
+    "photo_url": "https://res.jogg.ai/photo.jpg"
+  }
+}
+```
+  </Accordion>
+  
+  <Accordion title="Motion Generation Failed">
+```json
+{
+  "event": "generated_motion_failed",
+  "timestamp": 1732806631,
+  "data": {
+    "motion_id": "motion_123456",
+    "error": "Motion generation failed due to processing error"
+  }
+}
+```
+  </Accordion>
 </AccordionGroup>
 
 ## Managing Webhooks
@@ -253,7 +319,7 @@ curl --request GET 'https://api.jogg.ai/v2/endpoints' \
 
 Response includes all configured webhook endpoints with their settings.
 
-查看详情：[List Webhook Endpoints](/api-reference/v2/Webhook/ListWebhookEndpoints)
+See details: [List Webhook Endpoints](/api-reference/v2/Webhook/ListWebhookEndpoints)
   </Accordion>
   
   <Accordion title="Update Webhook">
@@ -270,7 +336,7 @@ curl --request PUT 'https://api.jogg.ai/v2/endpoint/wh_123456789' \
 
 Note: The `secret` cannot be modified.
 
-查看详情：[Update Webhook Endpoint](/api-reference/v2/Webhook/UpdateWebhookEndpoint)
+See details: [Update Webhook Endpoint](/api-reference/v2/Webhook/UpdateWebhookEndpoint)
   </Accordion>
   
   <Accordion title="Delete Webhook">
@@ -279,7 +345,7 @@ curl --request DELETE 'https://api.jogg.ai/v2/endpoint/wh_123456789' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 
-查看详情：[Delete Webhook Endpoint](/api-reference/v2/Webhook/DeleteWebhookEndpoint)
+See details: [Delete Webhook Endpoint](/api-reference/v2/Webhook/DeleteWebhookEndpoint)
   </Accordion>
   
   <Accordion title="List Available Events">
@@ -290,7 +356,7 @@ curl --request GET 'https://api.jogg.ai/v2/events' \
 
 Returns list of all supported webhook events.
 
-查看详情：[List Webhook Events](/api-reference/v2/Webhook/ListWebhookEvents)
+See details: [List Webhook Events](/api-reference/v2/Webhook/ListWebhookEvents)
   </Accordion>
 </AccordionGroup>
 
