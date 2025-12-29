@@ -1,0 +1,80 @@
+---
+title: "List Templates"
+openapi: "GET /v2/templates"
+---
+
+Retrieve a list of index templates with optional filtering by aspect ratio.
+
+## Overview
+
+This endpoint returns a list of available video templates from the template library. You can filter templates by their aspect ratio to find templates suitable for your video format.
+
+## Query Parameters
+
+| Parameter | Type | Description |
+|-----------|------|-------------|
+| `aspect_ratio` | string | Filter by aspect ratio: `portrait` (9:16), `landscape` (16:9), or `square` (1:1) |
+
+## Example Usage
+
+### Get all templates
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/templates' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+### Get portrait templates only
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/templates?aspect_ratio=portrait' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+### Get landscape templates only
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/templates?aspect_ratio=landscape' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+## Response Fields
+
+| Field | Type | Description |
+|-------|------|-------------|
+| `id` | integer | Template ID |
+| `name` | string | Template name |
+| `cover_url` | string | Template cover image URL |
+| `preview_url` | string | Template preview video URL |
+| `aspect_ratio` | integer | Aspect ratio: 0 = Portrait [9:16], 1 = Landscape [16:9], 2 = Square [1:1] |
+
+## Example Response
+
+```json
+{
+  "rid": "7abb75ebf2523038874d66cf5dfb2b02",
+  "code": 0,
+  "msg": "success",
+  "data": {
+    "templates": [
+      {
+        "id": 149,
+        "name": "Product Showcase",
+        "cover_url": "https://res.jogg.ai/template-cover.png",
+        "preview_url": "https://res.jogg.ai/template-preview.mp4",
+        "aspect_ratio": 1
+      },
+      {
+        "id": 108,
+        "name": "Toyland Cartoon Stickers",
+        "cover_url": "https://res.jogg.ai/template-cover2.png",
+        "preview_url": "https://res.jogg.ai/template-preview2.webm",
+        "aspect_ratio": 0
+      }
+    ]
+  }
+}
+```

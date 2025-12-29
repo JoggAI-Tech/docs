@@ -2461,6 +2461,93 @@ paths:
                           pagination:
                             $ref: '#/components/schemas/Pagination'
 
+  /v2/templates:
+    get:
+      tags:
+        - Template
+      summary: List index templates
+      description: |
+        Retrieve a list of index templates with optional filtering by aspect ratio.
+      parameters:
+        - name: aspect_ratio
+          in: query
+          description: |
+            Screen aspect ratio filter:
+            * portrait - Portrait [9:16]
+            * landscape - Landscape [16:9]
+            * square - Square [1:1]
+          schema:
+            type: string
+            enum: [portrait, landscape, square]
+            example: "portrait"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          templates:
+                            type: array
+                            description: List of index templates
+                            items:
+                              type: object
+                              properties:
+                                id:
+                                  type: integer
+                                  description: Template ID
+                                  example: 123
+                                name:
+                                  type: string
+                                  description: Template name
+                                  example: "Product Showcase"
+                                cover_url:
+                                  type: string
+                                  description: Template cover image URL
+                                  format: uri
+                                  example: "https://res.jogg.ai/template-cover.jpg"
+                                preview_url:
+                                  type: string
+                                  description: Template preview video URL
+                                  format: uri
+                                  example: "https://res.jogg.ai/template-preview.mp4"
+                                aspect_ratio:
+                                  type: integer
+                                  description: |
+                                    Aspect ratio:
+                                    * 0 - Portrait [9:16]
+                                    * 1 - Landscape [16:9]
+                                    * 2 - Square [1:1]
+                                  enum: [0, 1, 2]
+                                  example: 1
+              example:
+                rid: "7abb75ebf2523038874d66cf5dfb2b02"
+                code: 0
+                msg: "success"
+                data:
+                  templates:
+                    - id: 149
+                      name: "Product Showcase"
+                      cover_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-cover.png"
+                      preview_url: "https://res.jogg.ai/jogg/res/person/2025-06-27/template-preview.mp4"
+                      aspect_ratio: 1
+                    - id: 143
+                      name: "eufy Security eufyCam 3C Add-on Camera"
+                      cover_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-cover2.png"
+                      preview_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-preview2.mp4"
+                      aspect_ratio: 0
+                    - id: 108
+                      name: "Toyland Cartoon Stickers"
+                      cover_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-cover3.png"
+                      preview_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-preview3.webm"
+                      aspect_ratio: 0
+
   /v2/templates/custom:
     get:
       tags:

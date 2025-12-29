@@ -147,6 +147,7 @@
       "group": "Template",
       
       "pages": [
+        "api-reference/v2/Template/ListTemplates",
         "api-reference/v2/Template/GetTemplates",
         "api-reference/v2/Template/GetTemplateById"
       ]
