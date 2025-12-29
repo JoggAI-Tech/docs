@@ -1360,11 +1360,27 @@ paths:
                       data:
                         type: object
                         properties:
+                          avatar_id:
+                            type: integer
+                            description: Avatar ID
+                            example: 123
                           motion_id:
                             type: string
+                            description: Motion ID for tracking generation status
+                            example: "motion_456"
                           status:
                             type: string
                             description: Motion generation status
+                            enum: [pending, processing, completed, failed]
+                            example: "processing"
+              example:
+                rid: "7abb75ebf2523038874d66cf5dfb2b02"
+                code: 0
+                msg: "success"
+                data:
+                  avatar_id: 123
+                  motion_id: "motion_456"
+                  status: "processing"
 
   /v2/photo_avatar/photo:
     get:
