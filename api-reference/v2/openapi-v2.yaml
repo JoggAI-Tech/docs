@@ -1147,12 +1147,28 @@ paths:
                         description: Variable name
                       properties:
                         type: object
-                        required:
-                          - content
                         properties:
                           content:
                             type: string
-                            description: Variable content (text content for text type, URL for image/video type)
+                            description: |
+                              Variable content:
+                              * For text/script type: Required, the text content
+                              * For image/video type: Optional, can be used as URL (compatible with url field)
+                            example: "Product description text"
+                          url:
+                            type: string
+                            description: |
+                              Media resource URL for image/video type.
+                              Either url or asset_id is required for image/video type.
+                            format: uri
+                            example: "https://res.jogg.ai/media/image.jpg"
+                          asset_id:
+                            type: integer
+                            description: |
+                              Asset ID for image/video type.
+                              Obtained after uploading via /v2/upload/asset endpoint.
+                              Either url or asset_id is required for image/video type.
+                            example: 12345
                           webhook_url:
                             type: string
                             description: Webhook URL for status notifications

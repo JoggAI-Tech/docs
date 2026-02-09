@@ -7,24 +7,110 @@ Create a video using a pre-designed template. Templates provide consistent brand
 
 ## Example Usage
 
+### Basic Example with Text and Script Variables
+
 ```bash
 curl -X POST 'https://api.jogg.ai/v2/create_video_with_template' \
   -H 'x-api-key: YOUR_API_KEY' \
   -H 'Content-Type: application/json' \
   -d '{
-    "template_id": "tmpl_123",
+    "template_id": 1234,
     "video_name": "Product Showcase",
-    "script": "Check out our amazing product!",
     "avatar_id": 127,
-    "voice_id": "en-US-ChristopherNeural"
+    "avatar_type": 0,
+    "voice_language": "english",
+    "voice_id": "en-US-ChristopherNeural",
+    "variables": [
+      {
+        "type": "text",
+        "name": "product_name",
+        "properties": {
+          "content": "Amazing Smart Watch"
+        }
+      },
+      {
+        "type": "script",
+        "name": "script",
+        "properties": {
+          "content": "Check out our amazing product!"
+        }
+      }
+    ]
   }'
 ```
+
+### Example with Image Variable (URL)
+
+```bash
+curl -X POST 'https://api.jogg.ai/v2/create_video_with_template' \
+  -H 'x-api-key: YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "template_id": 1234,
+    "voice_language": "english",
+    "variables": [
+      {
+        "type": "image",
+        "name": "product_image",
+        "properties": {
+          "url": "https://example.com/product.jpg"
+        }
+      },
+      {
+        "type": "script",
+        "name": "script",
+        "properties": {
+          "content": "Check out this amazing product!"
+        }
+      }
+    ]
+  }'
+```
+
+### Example with Image Variable (Asset ID)
+
+```bash
+curl -X POST 'https://api.jogg.ai/v2/create_video_with_template' \
+  -H 'x-api-key: YOUR_API_KEY' \
+  -H 'Content-Type: application/json' \
+  -d '{
+    "template_id": 1234,
+    "voice_language": "english",
+    "variables": [
+      {
+        "type": "image",
+        "name": "product_image",
+        "properties": {
+          "asset_id": 5678
+        }
+      },
+      {
+        "type": "script",
+        "name": "script",
+        "properties": {
+          "content": "Check out this amazing product!"
+        }
+      }
+    ]
+  }'
+```
+
+## Variable Properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `content` | string | For text/script type: Required, the text content. For image/video type: Optional, can be used as URL |
+| `url` | string | Media resource URL for image/video type (choose url or asset_id) |
+| `asset_id` | integer | Asset ID for image/video type, obtained from /v2/upload/asset (choose url or asset_id) |
 
 ## Related Guides
 
 <CardGroup cols={2}>
   <Card title="Get Templates" href="/api-reference/v2/Template/GetTemplates">
     Browse available templates
+  </Card>
+  <Card title="Upload Media" href="/api-reference/v2/API Documentation/UploadMedia">
+    Upload assets to get asset_id
   </Card>
 </CardGroup>
 
