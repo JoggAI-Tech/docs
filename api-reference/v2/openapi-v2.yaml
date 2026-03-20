@@ -47,6 +47,135 @@ tags:
     description: Webhook endpoint management for event notifications
 
 paths:
+  /open/v2/create_lip_sync_video:
+    post:
+      tags:
+        - Video
+      summary: Create lip sync video task
+      description: |
+        Submit a video URL and an audio URL to create a lip sync task.
+        Use the returned task ID to poll for processing status and results.
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required:
+                - video_url
+                - audio_url
+              properties:
+                video_url:
+                  type: string
+                  format: uri
+                  description: Source video URL
+                  example: "https://res.jogg.ai/source-video.mp4"
+                audio_url:
+                  type: string
+                  format: uri
+                  description: Source audio URL
+                  example: "https://res.jogg.ai/source-audio.wav"
+                playback_type:
+                  type: string
+                  description: Playback strategy when source video is shorter than audio
+                  enum: [normal, normal_reverse, normal_reverse_by_audio]
+                  default: normal
+                  example: "normal"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          task_id:
+                            type: string
+                            description: Lip sync task ID
+                            example: "3d5c6930-d0da-4f7b-826e-cd1530f6734f"
+                          status:
+                            type: string
+                            description: Initial task status
+                            enum: [pending, processing, success, failed]
+                            example: "pending"
+
+  /open/v2/lip_sync_video/{task_id}:
+    get:
+      tags:
+        - Video
+      summary: Get lip sync task by task ID
+      description: |
+        Query lip sync task status and result by task ID.
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: Lip sync task ID
+          schema:
+            type: string
+            example: "3d5c6930-d0da-4f7b-826e-cd1530f6734f"
+      responses:
+        '200':
+          description: Success
+          content:
+            application/json:
+              schema:
+                allOf:
+                  - $ref: '#/components/schemas/BaseResponse'
+                  - type: object
+                    properties:
+                      data:
+                        type: object
+                        properties:
+                          task_id:
+                            type: string
+                            description: Lip sync task ID
+                            example: "3d5c6930-d0da-4f7b-826e-cd1530f6734f"
+                          status:
+                            type: string
+                            description: Task status
+                            enum: [pending, processing, success, failed]
+                            example: "success"
+                          created_at:
+                            type: integer
+                            description: Task creation timestamp in seconds
+                            example: 1741500000
+                          completed_at:
+                            type: integer
+                            description: Task completion timestamp in seconds, present when finished
+                            example: 1741500030
+                          data:
+                            type: object
+                            nullable: true
+                            properties:
+                              result_url:
+                                type: string
+                                format: uri
+                                description: Final output video URL
+                                example: "https://res.jogg.ai/lipsync-result.mp4"
+                              cover_url:
+                                type: string
+                                format: uri
+                                description: Final output cover URL
+                                example: "https://res.jogg.ai/lipsync-cover.jpg"
+                              duration_seconds:
+                                type: number
+                                description: Final output duration in seconds
+                                example: 12.5
+                          error:
+                            type: object
+                            nullable: true
+                            properties:
+                              message:
+                                type: string
+                                description: Failure message when status is `failed`
+                                example: "consume retry limit reached: audio duration fetch failed"
+
   /v2/ai_scripts:
     post:
       tags:

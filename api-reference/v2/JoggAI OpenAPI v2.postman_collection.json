@@ -1,0 +1,4420 @@
+{
+  "info": {
+    "_postman_id": "76a02cd2-860e-4812-bfe6-428cfd3bc247",
+    "name": "JoggAI OpenAPI v2",
+    "description": "JoggAI OpenAPI v2 provides a comprehensive suite of endpoints for creating and managing AI-powered video content.\n\n## Authentication\nAll API requests require authentication using an API key provided in the `x-api-key` header.\n\n## Base URL\nProduction: https://api.jogg.ai/v2\n\n## Rate Limiting\nAPI calls are subject to rate limiting based on your subscription plan.\n\n## Error Handling\nAll endpoints return standard HTTP status codes along with detailed error messages in the response body.\n",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "33837910"
+  },
+  "item": [
+    {
+      "name": "v2",
+      "item": [
+        {
+          "name": "ai_scripts",
+          "item": [
+            {
+              "name": "results",
+              "item": [
+                {
+                  "name": "{task_id}",
+                  "item": [
+                    {
+                      "name": "Get AI script generation status",
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/ai_scripts/results/:task_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "ai_scripts",
+                            "results",
+                            ":task_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "task_id",
+                              "value": "task_123456789",
+                              "description": "Task ID from script generation request"
+                            }
+                          ]
+                        },
+                        "description": "Check the status and retrieve results of AI script generation task.\nScripts are generated in multiple styles for variety.\n"
+                      },
+                      "response": [
+                        {
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/ai_scripts/results/:task_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "ai_scripts",
+                                "results",
+                                ":task_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "task_id",
+                                  "value": "task_123456789",
+                                  "description": "Task ID from script generation request"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"task_id\": \"task_123456789\",\n    \"status\": \"completed\",\n    \"data\": {\n      \"generated_scripts\": [\n        {\n          \"script_style\": \"Storytime\",\n          \"script_paragraphs\": [\n            \"Ever tried drinking water while running?\",\n            \"The Owala FreeSip makes it effortless...\"\n          ]\n        },\n        {\n          \"script_style\": \"Storytime\",\n          \"script_paragraphs\": [\n            \"Ever tried drinking water while running?\",\n            \"The Owala FreeSip makes it effortless...\"\n          ]\n        }\n      ]\n    },\n    \"err_msg\": \"Failed to generate script\"\n  }\n}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Submit AI script generation request",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"language\": \"english\",\n  \"video_length_seconds\": \"30\",\n  \"script_style\": \"Storytime\",\n  \"product_info\": {\n    \"source_type\": \"id\",\n    \"data\": {\n      \"id\": \"NTQ0MTkzNjg\",\n      \"name\": \"Owala FreeSip Insulated Stainless Steel Water Bottle\",\n      \"description\": \"The Owala FreeSip bottle is perfect for active lifestyles...\"\n    }\n  },\n  \"target_audience\": \"Fitness enthusiasts and outdoor adventurers\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/ai_scripts",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "ai_scripts"
+                  ]
+                },
+                "description": "Generate AI-powered video script based on product information and requirements.\nThe script generation is asynchronous - use the returned task_id to check status.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"language\": \"english\",\n  \"video_length_seconds\": \"30\",\n  \"script_style\": \"Storytime\",\n  \"product_info\": {\n    \"source_type\": \"id\",\n    \"data\": {\n      \"id\": \"NTQ0MTkzNjg\",\n      \"name\": \"Owala FreeSip Insulated Stainless Steel Water Bottle\",\n      \"description\": \"The Owala FreeSip bottle is perfect for active lifestyles...\"\n    }\n  },\n  \"target_audience\": \"Fitness enthusiasts and outdoor adventurers\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/ai_scripts",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "ai_scripts"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"task_id\": \"task_123456789\"\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "avatar_video",
+          "item": [
+            {
+              "name": "{id}",
+              "item": [
+                {
+                  "name": "Retrieve talking avatar video",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/avatar_video/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "avatar_video",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "video_123456",
+                          "description": "Video ID from video creation endpoint"
+                        }
+                      ]
+                    },
+                    "description": "Get video information and status by video ID"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/avatar_video/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "avatar_video",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "video_123456",
+                              "description": "Video ID from video creation endpoint"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"video_id\": \"video_123456\",\n    \"status\": \"completed\",\n    \"video_url\": \"https://example.com/videos/video_123456.mp4\",\n    \"cover_url\": \"https://example.com/covers/video_123456.jpg\",\n    \"created_at\": 1640995200\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "avatars",
+          "item": [
+            {
+              "name": "public",
+              "item": [
+                {
+                  "name": "Get Public Avatar List",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/avatars/public?page=1&page_size=10&aspect_ratio=portrait&style=professional&gender=female&age=young_adult&scene=news&ethnicity=north_american",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "avatars",
+                        "public"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1",
+                          "description": "Page number for pagination"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "10",
+                          "description": "Number of items per page"
+                        },
+                        {
+                          "key": "aspect_ratio",
+                          "value": "portrait",
+                          "description": "Filter by aspect ratio"
+                        },
+                        {
+                          "key": "style",
+                          "value": "professional",
+                          "description": "Filter by avatar style"
+                        },
+                        {
+                          "key": "gender",
+                          "value": "female",
+                          "description": "Filter by avatar gender"
+                        },
+                        {
+                          "key": "age",
+                          "value": "young_adult",
+                          "description": "Filter by age group"
+                        },
+                        {
+                          "key": "scene",
+                          "value": "news",
+                          "description": "Filter by scene type"
+                        },
+                        {
+                          "key": "ethnicity",
+                          "value": "north_american",
+                          "description": "Filter by ethnicity"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve list of public avatars with filtering options.\nSupports pagination and various filters including aspect ratio, style, gender, age, scene, and ethnicity.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/avatars/public?page=1&page_size=10&aspect_ratio=portrait&style=professional&gender=female&age=young_adult&scene=news&ethnicity=north_american",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "avatars",
+                            "public"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Filter by aspect ratio",
+                              "key": "aspect_ratio",
+                              "value": "portrait"
+                            },
+                            {
+                              "description": "Filter by avatar style",
+                              "key": "style",
+                              "value": "professional"
+                            },
+                            {
+                              "description": "Filter by avatar gender",
+                              "key": "gender",
+                              "value": "female"
+                            },
+                            {
+                              "description": "Filter by age group",
+                              "key": "age",
+                              "value": "young_adult"
+                            },
+                            {
+                              "description": "Filter by scene type",
+                              "key": "scene",
+                              "value": "news"
+                            },
+                            {
+                              "description": "Filter by ethnicity",
+                              "key": "ethnicity",
+                              "value": "north_american"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"avatars\": [\n      {\n        \"id\": 123,\n        \"name\": \"Professional Female\",\n        \"video_url\": \"https://example.com/video.mp4\",\n        \"cover_url\": \"https://example.com/cover.jpg\",\n        \"aspect_ratio\": 1,\n        \"style\": \"professional\",\n        \"gender\": \"female\",\n        \"age\": \"adult\"\n      },\n      {\n        \"id\": 123,\n        \"name\": \"Professional Female\",\n        \"video_url\": \"https://example.com/video.mp4\",\n        \"cover_url\": \"https://example.com/cover.jpg\",\n        \"aspect_ratio\": 1,\n        \"style\": \"professional\",\n        \"gender\": \"female\",\n        \"age\": \"adult\"\n      }\n    ]\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "custom",
+              "item": [
+                {
+                  "name": "Get Instant Avatar List",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/avatars/custom?page=1&page_size=10&name=string&status=processing",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "avatars",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1",
+                          "description": "Page number for pagination"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "10",
+                          "description": "Number of items per page"
+                        },
+                        {
+                          "key": "name",
+                          "value": "string",
+                          "description": "Avatar name filter - search avatars by name"
+                        },
+                        {
+                          "key": "status",
+                          "value": "processing",
+                          "description": "Status filter"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve list of user's instant avatars.\nReturns user's custom instant avatar collection with filtering options.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/avatars/custom?page=1&page_size=10&name=string&status=processing",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "avatars",
+                            "custom"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Avatar name filter - search avatars by name",
+                              "key": "name",
+                              "value": "string"
+                            },
+                            {
+                              "description": "Status filter",
+                              "key": "status",
+                              "value": "processing"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"avatars\": [\n      {\n        \"id\": 123,\n        \"name\": \"My Instant Avatar\",\n        \"video_url\": \"https://example.com/video.mp4\",\n        \"cover_url\": \"https://example.com/cover.jpg\",\n        \"api_only\": true,\n        \"avatar_status\": \"completed\",\n        \"fail_msg\": \"\",\n        \"avatar_url\": \"https://example.com/avatar.mp4\"\n      },\n      {\n        \"id\": 123,\n        \"name\": \"My Instant Avatar\",\n        \"video_url\": \"https://example.com/video.mp4\",\n        \"cover_url\": \"https://example.com/cover.jpg\",\n        \"api_only\": true,\n        \"avatar_status\": \"completed\",\n        \"fail_msg\": \"\",\n        \"avatar_url\": \"https://example.com/avatar.mp4\"\n      }\n    ]\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "photo_avatars",
+              "item": [
+                {
+                  "name": "Get Photo Avatar List",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/avatars/photo_avatars?page=1&page_size=10&name=string&status=processing",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "avatars",
+                        "photo_avatars"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1",
+                          "description": "Page number for pagination"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "10",
+                          "description": "Number of items per page"
+                        },
+                        {
+                          "key": "name",
+                          "value": "string",
+                          "description": "Avatar name filter"
+                        },
+                        {
+                          "key": "status",
+                          "value": "processing",
+                          "description": "Status filter"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve list of user's photo avatars.\nReturns user's photo-based avatar collection with filtering options.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/avatars/photo_avatars?page=1&page_size=10&name=string&status=processing",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "avatars",
+                            "photo_avatars"
+                          ],
+                          "query": [
+                            {
+                              "description": "Page number for pagination",
+                              "key": "page",
+                              "value": "1"
+                            },
+                            {
+                              "description": "Number of items per page",
+                              "key": "page_size",
+                              "value": "10"
+                            },
+                            {
+                              "description": "Avatar name filter",
+                              "key": "name",
+                              "value": "string"
+                            },
+                            {
+                              "description": "Status filter",
+                              "key": "status",
+                              "value": "processing"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"avatars\": [\n      {\n        \"id\": 123,\n        \"name\": \"My Photo Avatar\",\n        \"cover_url\": \"https://example.com/cover.jpg\",\n        \"status\": 1,\n        \"fail_msg\": \"\"\n      },\n      {\n        \"id\": 123,\n        \"name\": \"My Photo Avatar\",\n        \"cover_url\": \"https://example.com/cover.jpg\",\n        \"status\": 1,\n        \"fail_msg\": \"\"\n      }\n    ]\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "product_avatars",
+              "item": [
+                {
+                  "name": "List product avatars",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/avatars/product_avatars?aspect_ratio=portrait",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "avatars",
+                        "product_avatars"
+                      ],
+                      "query": [
+                        {
+                          "key": "aspect_ratio",
+                          "value": "portrait",
+                          "description": "Filter by aspect ratio"
+                        }
+                      ]
+                    },
+                    "description": "Get list of user's product avatars with optional aspect ratio filter.\nSupports filtering avatars by different aspect ratios for various video formats.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/avatars/product_avatars?aspect_ratio=portrait",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "avatars",
+                            "product_avatars"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by aspect ratio",
+                              "key": "aspect_ratio",
+                              "value": "portrait"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"product_avatars\": [\n      {\n        \"avatar_id\": 123,\n        \"name\": \"Product Presenter\",\n        \"cover_url\": \"https://example.com/cover.jpg\",\n        \"status\": 1,\n        \"fail_msg\": \"\",\n        \"avatar_url\": \"https://example.com/avatar.mp4\",\n        \"aspect_ratio\": 0,\n        \"gender\": \"female\"\n      },\n      {\n        \"avatar_id\": 123,\n        \"name\": \"Product Presenter\",\n        \"cover_url\": \"https://example.com/cover.jpg\",\n        \"status\": 1,\n        \"fail_msg\": \"\",\n        \"avatar_url\": \"https://example.com/avatar.mp4\",\n        \"aspect_ratio\": 0,\n        \"gender\": \"female\"\n      }\n    ]\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "create_video_from_avatar",
+          "item": [
+            {
+              "name": "Create talking avatar video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"avatar\": {\n    \"avatar_type\": 0,\n    \"avatar_id\": 81\n  },\n  \"voice\": {\n    \"type\": \"script\",\n    \"voice_id\": \"en-US-ChristopherNeural\",\n    \"script\": \"Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!\",\n    \"audio_url\": \"https://res.jogg.ai/audio.mp3\"\n  },\n  \"aspect_ratio\": \"portrait\",\n  \"screen_style\": 1,\n  \"caption\": true,\n  \"webhook_url\": \"https://example.com/webhook\",\n  \"video_name\": \"My Talking Avatar Video\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/create_video_from_avatar",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "create_video_from_avatar"
+                  ]
+                },
+                "description": "Create a video with talking avatar using script or audio input.\nEither provide a script for text-to-speech or upload an audio file.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"avatar\": {\n    \"avatar_type\": 0,\n    \"avatar_id\": 81\n  },\n  \"voice\": {\n    \"type\": \"script\",\n    \"voice_id\": \"en-US-ChristopherNeural\",\n    \"script\": \"Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!\",\n    \"audio_url\": \"https://res.jogg.ai/audio.mp3\"\n  },\n  \"aspect_ratio\": \"portrait\",\n  \"screen_style\": 1,\n  \"caption\": true,\n  \"webhook_url\": \"https://example.com/webhook\",\n  \"video_name\": \"My Talking Avatar Video\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/create_video_from_avatar",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "create_video_from_avatar"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"video_id\": \"video_123456\"\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Create talking avatar video Copy",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"avatar\": {\n    \"avatar_type\": 0,\n    \"avatar_id\": 100\n\n  },\n  \"voice\": {\n    \"type\": \"audio\",\n    \"voice_id\": \"en-US-ChristopherNeural\",\n    \"audio_url\": \"https://res.jogg.ai/joggUserData/user/84a18a78-ac0e-4dc1-b7cf-bd34ee2cf650/usermedia/2026-01-15/c4be5f726bd746b7b013afd6482f1889.mp3\"\n  },\n  \"aspect_ratio\": \"square\",\n  \"screen_style\": 1,\n  \"caption\": false,\n  \"video_name\": \"Cadence Talking Avatar\"\n}\n",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/create_video_from_avatar",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "create_video_from_avatar"
+                  ]
+                },
+                "description": "Create a video with talking avatar using script or audio input.\nEither provide a script for text-to-speech or upload an audio file.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"avatar\": {\n    \"avatar_type\": 0,\n    \"avatar_id\": 81\n  },\n  \"voice\": {\n    \"type\": \"script\",\n    \"voice_id\": \"en-US-ChristopherNeural\",\n    \"script\": \"Hi, welcome to JoggAI and create longer videos with Talking Avatars in minutes!\",\n    \"audio_url\": \"https://res.jogg.ai/audio.mp3\"\n  },\n  \"aspect_ratio\": \"portrait\",\n  \"screen_style\": 1,\n  \"caption\": true,\n  \"webhook_url\": \"https://example.com/webhook\",\n  \"video_name\": \"My Talking Avatar Video\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/create_video_from_avatar",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "create_video_from_avatar"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"video_id\": \"video_123456\"\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "create_video_from_product",
+          "item": [
+            {
+              "name": "preview_list",
+              "item": [
+                {
+                  "name": "Submit Preview List",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n\"preview_seconds\":5,\n\"pay_type\":1,\n  \"product_id\": \"MTUxMDk2MTAzOA\",\n  \"visual_styles\": [\n    \"Floating Avatar Voiceover\"\n  ],\n  \"video_spec\": {\n    \"length\": \"30\",\n    \"aspect_ratio\": \"landscape\",\n    \"caption\": true,\n    \"name\": \"My Product Video\"\n  },\n  \"avatar\": {\n    \"id\": 1695,\n    \"type\": 0\n  },\n  \"voice\": {\n    \"id\": \"GzE4TcXfh9rYCU9gVgPp\"\n  },\n  \"audio\": {\n    \"music_id\": 13\n  },\n  \"script\": {\n    \"style\": \"Data_stage\",\n    \"language\": \"english\"\n  },\n  \"language\": \"english\",\n  \"override_script\": \"可以的，兄弟，最后你会发现都是可以的，代码里大部分的事情无论是在浏览器端完成还是在服务器里完成都是可行的。但是，总有一个“哪方更适合做”吧？一个大屏页面的几万几十万条的数据统计，是应该后端做还是前端做？业务数据到Echarts展示数据的格式转换应该后端做还是前端做？用户数据权限的过滤应该后端做还是前端做？一个列表到底要做真分页还是假分页？列表已经返回了全量实体信息，为什么还要再增加一个详情接口？这都是日常开发时前端和后端都会去争论思考的问题，身处不同的职位，就会引入不同的立场和思考。前端需要去思考页面刷新后状态的留存，js单线程下大量数据处理的卡顿，页面dom树爆表的困境。后端也需要思考并发下服务器资源和内存的分配，可能的死锁问题，以及用户的无状态token如何处理等。前后端的“争吵”和观点输出是不可避免的。真理总是越辩越清晰的，后续讨论出的结果多半是最有利于当前现状的。但如果“前后端”都是同一个人呢？全栈模式，完美地消灭了这种“有益的摩擦”。当你自己和自己联调时，你不会给自己提挑战灵魂的问题。你不会问：“这个API设计是否RESTful？”因为你赶时间。你也不会纠结：“这个组件的可访问性够好吗？”因为你还得去部署服务器。\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/create_video_from_product/preview_list",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "create_video_from_product",
+                        "preview_list"
+                      ]
+                    },
+                    "description": "Submit multiple visual styles for preview generation from a product.\nThis allows you to generate multiple preview videos with different styles simultaneously.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"product_id\": \"NTIzMzc0NjI5\",\n  \"visual_styles\": [\n    \"Simple Product Switch\",\n    \"Dynamic Showcase\"\n  ],\n  \"video_spec\": {\n    \"length\": \"30\",\n    \"aspect_ratio\": \"landscape\",\n    \"caption\": true,\n    \"name\": \"My Product Video\"\n  },\n  \"avatar\": {\n    \"id\": 1,\n    \"type\": 0\n  },\n  \"voice\": {\n    \"id\": \"en-US-ChristopherNeural\"\n  },\n  \"audio\": {\n    \"music_id\": 13\n  },\n  \"script\": {\n    \"style\": \"Storytime\",\n    \"language\": 5566\n  },\n  \"language\": \"english\",\n  \"override_script\": \"string\",\n  \"webhook_url\": \"https://example.com/webhook\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/create_video_from_product/preview_list",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "create_video_from_product",
+                            "preview_list"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"previews\": [\n      {\n        \"visual_style\": \"Simple Product Switch\",\n        \"preview_id\": \"preview_456\",\n        \"err_msg\": \"Generation failed due to invalid parameters\"\n      },\n      {\n        \"visual_style\": \"Simple Product Switch\",\n        \"preview_id\": \"preview_456\",\n        \"err_msg\": \"Generation failed due to invalid parameters\"\n      }\n    ]\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "render_single_preview",
+              "item": [
+                {
+                  "name": "Render Video from Preview",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"preview_id\": \"preview_123\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/create_video_from_product/render_single_preview",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "create_video_from_product",
+                        "render_single_preview"
+                      ]
+                    },
+                    "description": "Generate final video from a selected preview"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"preview_id\": \"preview_123\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/create_video_from_product/render_single_preview",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "create_video_from_product",
+                            "render_single_preview"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"video_id\": \"video_789\",\n    \"status\": \"processing\"\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Generate Video from Product",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_id\": \"NTIzMzc0NjI5\",\n  \"video_spec\": {\n    \"length\": \"30\",\n    \"aspect_ratio\": \"landscape\",\n    \"caption\": true,\n    \"name\": \"My Product Video\"\n  },\n  \"avatar\": {\n    \"id\": 1,\n    \"type\": 0\n  },\n  \"voice\": {\n    \"id\": \"en-US-ChristopherNeural\"\n  },\n  \"audio\": {\n    \"music_id\": 13\n  },\n  \"script\": {\n    \"style\": \"Storytime\",\n    \"language\": \"english\"\n  },\n  \"visual_style\": \"Simple Product Switch\",\n  \"override_script\": \"string\",\n  \"webhook_url\": \"https://example.com/webhook\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/create_video_from_product",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "create_video_from_product"
+                  ]
+                },
+                "description": "Create a video from product information with customizable visual style, avatar, voice, and script.\nThis is the final step after creating a product to generate the actual video.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"product_id\": \"NTIzMzc0NjI5\",\n  \"video_spec\": {\n    \"length\": \"30\",\n    \"aspect_ratio\": \"landscape\",\n    \"caption\": true,\n    \"name\": \"My Product Video\"\n  },\n  \"avatar\": {\n    \"id\": 1,\n    \"type\": 0\n  },\n  \"voice\": {\n    \"id\": \"en-US-ChristopherNeural\"\n  },\n  \"audio\": {\n    \"music_id\": 13\n  },\n  \"script\": {\n    \"style\": \"Storytime\",\n    \"language\": \"english\"\n  },\n  \"visual_style\": \"Simple Product Switch\",\n  \"override_script\": \"string\",\n  \"webhook_url\": \"https://example.com/webhook\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/create_video_from_product",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "create_video_from_product"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"video_id\": \"video_789\",\n    \"status\": \"processing\"\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "create_video_with_template",
+          "item": [
+            {
+              "name": "Create video from template",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"template_id\": 1234,\n  \"voice_language\": \"english\",\n  \"variables\": [\n    {\n      \"type\": \"text\",\n      \"name\": \"string\",\n      \"properties\": {\n        \"content\": \"string\",\n        \"webhook_url\": \"https://example.com/webhook\"\n      }\n    },\n    {\n      \"type\": \"image\",\n      \"name\": \"string\",\n      \"properties\": {\n        \"content\": \"string\",\n        \"webhook_url\": \"https://example.com/webhook\"\n      }\n    }\n  ],\n  \"video_name\": \"My Template Video\",\n  \"avatar_id\": 1,\n  \"avatar_type\": 0,\n  \"voice_id\": \"en-US-ChristopherNeural\",\n  \"captions_enabled\": true,\n  \"background_music_id\": 1,\n  \"disable_random_trans\": false,\n  \"disable_random_moving\": false,\n  \"disable_trans\": false,\n  \"disable_moving\": false\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/create_video_with_template",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "create_video_with_template"
+                  ]
+                },
+                "description": "Create a video using a template with custom variables and settings.\nTemplates support various variable types including text, image, video, and script.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"template_id\": 1234,\n  \"voice_language\": \"english\",\n  \"variables\": [\n    {\n      \"type\": \"text\",\n      \"name\": \"string\",\n      \"properties\": {\n        \"content\": \"string\",\n        \"webhook_url\": \"https://example.com/webhook\"\n      }\n    },\n    {\n      \"type\": \"image\",\n      \"name\": \"string\",\n      \"properties\": {\n        \"content\": \"string\",\n        \"webhook_url\": \"https://example.com/webhook\"\n      }\n    }\n  ],\n  \"video_name\": \"My Template Video\",\n  \"avatar_id\": 1,\n  \"avatar_type\": 0,\n  \"voice_id\": \"en-US-ChristopherNeural\",\n  \"captions_enabled\": true,\n  \"background_music_id\": 1,\n  \"disable_random_trans\": false,\n  \"disable_random_moving\": false,\n  \"disable_trans\": false,\n  \"disable_moving\": false\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/create_video_with_template",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "create_video_with_template"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"video_id\": \"video_123456\"\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "musics",
+          "item": [
+            {
+              "name": "List background music",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/musics?page=1&page_size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "musics"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "Page number"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10",
+                      "description": "Items per page"
+                    }
+                  ]
+                },
+                "description": "Get available background music with pagination.\nSupports filtering and sorting of music tracks.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/musics?page=1&page_size=10",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "musics"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Items per page",
+                          "key": "page_size",
+                          "value": "10"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"music\": [\n      {\n        \"id\": 1,\n        \"name\": \"Upbeat Background\",\n        \"music_url\": \"https://res.jogg.ai/music/example.mp3\",\n        \"duration\": 120\n      },\n      {\n        \"id\": 1,\n        \"name\": \"Upbeat Background\",\n        \"music_url\": \"https://res.jogg.ai/music/example.mp3\",\n        \"duration\": 120\n      }\n    ],\n    \"pagination\": {\n      \"page\": 1,\n      \"page_size\": 10,\n      \"total_items\": 100,\n      \"total_pages\": 10\n    }\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "photo_avatar",
+          "item": [
+            {
+              "name": "add_motion",
+              "item": [
+                {
+                  "name": "Add Motion to Photo Avatar",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"image_url\": \"https://res.jogg.ai/upload/sam/2025-12-26/b45aac3b83c4448590590259beb58120.png\",\n  \"name\": \"My Photo Avatar\",\n  \"voice_id\": \"en-US-ChristopherNeural\",\n  \"model\": \"1.0\",\n  \"photo_id\": \"\",\n  \"description\": \"string\",\n  \"welcome_msg\": \"Hello, welcome!\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/photo_avatar/add_motion",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "photo_avatar",
+                        "add_motion"
+                      ]
+                    },
+                    "description": "Add motion to a photo avatar to make it animated"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"image_url\": \"https://res.jogg.ai/photo.jpg\",\n  \"name\": \"My Photo Avatar\",\n  \"voice_id\": \"en-US-ChristopherNeural\",\n  \"model\": \"2.0\",\n  \"photo_id\": \"string\",\n  \"description\": \"string\",\n  \"welcome_msg\": \"Hello, welcome!\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/photo_avatar/add_motion",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "photo_avatar",
+                            "add_motion"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"motion_id\": \"string\",\n    \"status\": \"string\"\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "photo",
+              "item": [
+                {
+                  "name": "generate",
+                  "item": [
+                    {
+                      "name": "Generate Photo Avatar",
+                      "request": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"age\": \"Adult\",\n  \"avatar_style\": \"Professional\",\n  \"gender\": \"Female\",\n  \"model\": \"modern\",\n  \"aspect_ratio\": \"portrait\",\n  \"ethnicity\": \"South Asian\",\n  \"background\": \"string\",\n  \"appearance\": \"string\",\n  \"image_url\": \"string\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/photo_avatar/photo/generate",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "photo_avatar",
+                            "photo",
+                            "generate"
+                          ]
+                        },
+                        "description": "Generate AI photo avatar based on provided parameters"
+                      },
+                      "response": [
+                        {
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "POST",
+                            "header": [
+                              {
+                                "key": "Content-Type",
+                                "value": "application/json"
+                              },
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "body": {
+                              "mode": "raw",
+                              "raw": "{\n  \"age\": \"Adult\",\n  \"avatar_style\": \"Professional\",\n  \"gender\": \"Female\",\n  \"model\": \"modern\",\n  \"aspect_ratio\": \"portrait\",\n  \"ethnicity\": \"South Asian\",\n  \"background\": \"string\",\n  \"appearance\": \"string\",\n  \"image_url\": \"string\"\n}",
+                              "options": {
+                                "raw": {
+                                  "headerFamily": "json",
+                                  "language": "json"
+                                }
+                              }
+                            },
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/photo_avatar/photo/generate",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "photo_avatar",
+                                "photo",
+                                "generate"
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"photo_id\": \"string\"\n  }\n}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Check Photo Generation Status",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/photo_avatar/photo?photo_id=photo_123",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "photo_avatar",
+                        "photo"
+                      ],
+                      "query": [
+                        {
+                          "key": "photo_id",
+                          "value": "photo_123",
+                          "description": "Photo ID from the generation task"
+                        }
+                      ]
+                    },
+                    "description": "Check the status of photo avatar generation task by photo ID"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/photo_avatar/photo?photo_id=photo_123",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "photo_avatar",
+                            "photo"
+                          ],
+                          "query": [
+                            {
+                              "description": "Photo ID from the generation task",
+                              "key": "photo_id",
+                              "value": "photo_123"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"photo_id\": \"photo_123\",\n    \"status\": \"success\",\n    \"image_url_list\": [\n      \"https://example.com/image1.jpg\",\n      \"https://example.com/image2.jpg\"\n    ],\n    \"image_key_list\": [\n      \"key1\",\n      \"key2\"\n    ],\n    \"msg\": null\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Check Motion Status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/photo_avatar?motion_id=25-mo_848949e643534a099206403710abc9e8",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "photo_avatar"
+                  ],
+                  "query": [
+                    {
+                      "key": "motion_id",
+                      "value": "25-mo_848949e643534a099206403710abc9e8",
+                      "description": "Motion ID from the motion generation task"
+                    }
+                  ]
+                },
+                "description": "Check the status of motion generation task by motion ID"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/photo_avatar?motion_id=motion_123",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "photo_avatar"
+                      ],
+                      "query": [
+                        {
+                          "description": "Motion ID from the motion generation task",
+                          "key": "motion_id",
+                          "value": "motion_123"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"motion_id\": \"motion_123\",\n    \"avatar_id\": 123,\n    \"image_url\": \"https://example.com/image.jpg\",\n    \"name\": \"My Photo Avatar\",\n    \"status\": \"completed\",\n    \"motion_preview_url\": \"https://example.com/preview.mp4\",\n    \"voice_id\": \"en-US-ChristopherNeural\",\n    \"error_msg\": null\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "product",
+          "item": [
+            {
+              "name": "Create Product V2",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"\",\n  \"name\": \"teest\",\n  \"description\": \"Brush on a radiant blushing glow...\",\n  \"target_audience\": \"Beauty enthusiasts\",\n  \"media\": [\n    {\n      \"type\": 1,\n      \"name\": \"product.jpg\",\n      \"url\": \"https://jogg-test.cds8.cn/joggUserData/user/f1c65bca-9c31-422d-8aaf-423c3a5c2632/usermedia/2025-12-30/176707563654154262.png\",\n      \"description\": \"Product front view\"\n    },\n    {\n      \"type\": 1,\n      \"name\": \"product.jpg\",\n      \"url\": \"https://jogg-test.cds8.cn/joggUserData/user/f1c65bca-9c31-422d-8aaf-423c3a5c2632/usermedia/2025-12-30/176707566794683603.png\",\n      \"description\": \"Product front view\"\n    },\n     {\n      \"type\": 1,\n      \"name\": \"product.jpg\",\n      \"url\": \"https://jogg-test.cds8.cn/joggUserData/user/f1c65bca-9c31-422d-8aaf-423c3a5c2632/usermedia/2025-12-30/176707566794683603.png\",\n      \"description\": \"Product front view\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/product",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "product"
+                  ]
+                },
+                "description": "Create a new product with URL analysis or manual input.\nThis is Step 1 in the product video generation workflow.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"https://www.amazon.com/product/...\",\n  \"name\": \"Physicians Formula Happy Booster Heart Blush\",\n  \"description\": \"Brush on a radiant blushing glow...\",\n  \"target_audience\": \"Beauty enthusiasts\",\n  \"media\": [\n    {\n      \"type\": 1,\n      \"name\": \"product.jpg\",\n      \"url\": \"https://res.jogg.ai/media.jpg\",\n      \"description\": \"Product front view\"\n    },\n    {\n      \"type\": 1,\n      \"name\": \"product.jpg\",\n      \"url\": \"https://res.jogg.ai/media.jpg\",\n      \"description\": \"Product front view\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/product",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "product"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"product_id\": \"NTQ0MTkzNjg\",\n    \"url\": \"string\",\n    \"name\": \"string\",\n    \"description\": \"string\",\n    \"target_audience\": \"string\",\n    \"media\": [\n      {\n        \"type\": 2,\n        \"name\": \"string\",\n        \"url\": \"string\",\n        \"description\": \"string\"\n      },\n      {\n        \"type\": 1,\n        \"name\": \"string\",\n        \"url\": \"string\",\n        \"description\": \"string\"\n      }\n    ]\n  }\n}"
+                }
+              ]
+            },
+            {
+              "name": "Update Product V2",
+              "request": {
+                "method": "PUT",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"product_id\": \"NTQ0MTkzNjg\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"target_audience\": \"string\",\n  \"media\": [\n    {\n      \"type\": 2,\n      \"name\": \"string\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"type\": 2,\n      \"name\": \"string\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/product",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "product"
+                  ]
+                },
+                "description": "Update an existing product information (Step 2 - Optional)"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"product_id\": \"NTQ0MTkzNjg\",\n  \"name\": \"string\",\n  \"description\": \"string\",\n  \"target_audience\": \"string\",\n  \"media\": [\n    {\n      \"type\": 2,\n      \"name\": \"string\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    },\n    {\n      \"type\": 2,\n      \"name\": \"string\",\n      \"url\": \"string\",\n      \"description\": \"string\"\n    }\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/product",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "product"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\"\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "product_avatar",
+          "item": [
+            {
+              "name": "add_motion",
+              "item": [
+                {
+                  "name": "Convert image to product avatar",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"generation_id\": \"gen_123\",\n  \"name\": \"Product Presenter\",\n  \"voice_id\": \"en-US-ChristopherNeural\",\n  \"description\": \"Professional presentation motion\",\n  \"model\": 0,\n  \"aspect_ratio\": \"portrait\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/product_avatar/add_motion",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "product_avatar",
+                        "add_motion"
+                      ]
+                    },
+                    "description": "Create a product avatar from generated image with motion and voice"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"generation_id\": \"gen_123\",\n  \"name\": \"Product Presenter\",\n  \"voice_id\": \"en-US-ChristopherNeural\",\n  \"description\": \"Professional presentation motion\",\n  \"model\": 0,\n  \"aspect_ratio\": \"portrait\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/product_avatar/add_motion",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "product_avatar",
+                            "add_motion"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"avatar_id\": 123,\n    \"motion_id\": \"motion_456\",\n    \"name\": \"Product Presenter\"\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "generation",
+              "item": [
+                {
+                  "name": "{batch_id}",
+                  "item": [
+                    {
+                      "name": "Check product avatar image generation status",
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/product_avatar/generation/:batch_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "product_avatar",
+                            "generation",
+                            ":batch_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "batch_id",
+                              "value": "batch_123456",
+                              "description": "Batch ID from generation request"
+                            }
+                          ]
+                        },
+                        "description": "Get the status and results of product avatar image generation by batch ID"
+                      },
+                      "response": [
+                        {
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/product_avatar/generation/:batch_id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "product_avatar",
+                                "generation",
+                                ":batch_id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "batch_id",
+                                  "value": "batch_123456",
+                                  "description": "Batch ID from generation request"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"batch_id\": \"batch_123456\",\n    \"summary\": {\n      \"total\": 4,\n      \"pending\": 1,\n      \"processing\": 1,\n      \"completed\": 1,\n      \"failed\": 1\n    },\n    \"generations\": [\n      {\n        \"generation_id\": \"gen_123\",\n        \"status\": \"completed\",\n        \"created_at\": 1640995200,\n        \"completed_at\": 1640995500,\n        \"image_id\": \"img_123\",\n        \"url\": \"https://example.com/image.jpg\"\n      },\n      {\n        \"generation_id\": \"gen_123\",\n        \"status\": \"completed\",\n        \"created_at\": 1640995200,\n        \"completed_at\": 1640995500,\n        \"image_id\": \"img_123\",\n        \"url\": \"https://example.com/image.jpg\"\n      }\n    ]\n  }\n}"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "name": "Create product avatar image",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"product_image_url\": \"https://res.jogg.ai/product.jpg\",\n  \"avatar_source\": {\n    \"type\": \"id\",\n    \"value\": \"string\",\n    \"avatar_id\": 2483,\n    \"avatar_type\": \"public\"\n  },\n  \"quality\": \"high\",\n  \"aspect_ratio\": \"3:2\",\n  \"num_images\": 4,\n  \"prompt\": \"Professional product presenter in business attire\",\n  \"webhook_url\": \"https://example.com/webhook\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/product_avatar/generation",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "product_avatar",
+                        "generation"
+                      ]
+                    },
+                    "description": "Generate product avatar images using AI with specified parameters"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"product_image_url\": \"https://res.jogg.ai/product.jpg\",\n  \"avatar_source\": {\n    \"type\": \"id\",\n    \"value\": \"string\",\n    \"avatar_id\": 2483,\n    \"avatar_type\": \"public\"\n  },\n  \"quality\": \"high\",\n  \"aspect_ratio\": \"3:2\",\n  \"num_images\": 4,\n  \"prompt\": \"Professional product presenter in business attire\",\n  \"webhook_url\": \"https://example.com/webhook\"\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/product_avatar/generation",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "product_avatar",
+                            "generation"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"batch_id\": \"batch_123456\",\n    \"total_submitted\": 4,\n    \"generations\": [\n      {\n        \"generation_id\": \"gen_123\",\n        \"status\": \"pending\",\n        \"created_at\": 1640995200\n      },\n      {\n        \"generation_id\": \"gen_123\",\n        \"status\": \"pending\",\n        \"created_at\": 1640995200\n      }\n    ]\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Check image to product avatar status",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/product_avatar?motion_id=motion_123456",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "product_avatar"
+                  ],
+                  "query": [
+                    {
+                      "key": "motion_id",
+                      "value": "motion_123456",
+                      "description": "Motion ID for the avatar creation task"
+                    }
+                  ]
+                },
+                "description": "Get the status and details of image to product avatar conversion"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/product_avatar?motion_id=motion_123456",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "product_avatar"
+                      ],
+                      "query": [
+                        {
+                          "description": "Motion ID for the avatar creation task",
+                          "key": "motion_id",
+                          "value": "motion_123456"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"avatar_id\": 123,\n    \"image_url\": \"https://example.com/image.jpg\",\n    \"motion_id\": \"motion_123456\",\n    \"motion_preview_url\": \"https://example.com/preview.mp4\",\n    \"name\": \"Product Presenter\",\n    \"status\": \"completed\",\n    \"voice_id\": \"en-US-ChristopherNeural\",\n    \"error_msg\": null\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "product_previews",
+          "item": [
+            {
+              "name": "Get Product Preview List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/product_previews?page=1&page_size=10&status=5&sort_by=created_at&sort_order=desc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "product_previews"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "status",
+                      "value": "5",
+                      "description": "Filter by status:\n* 3 - Processing\n* 4 - Success\n* 5 - Failed\n"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "created_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    }
+                  ]
+                },
+                "description": "Retrieve paginated list of product previews with filtering and sorting options.\nPreviews are generated videos that help you choose the best style before final rendering.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/product_previews?page=1&page_size=10&status=5&sort_by=created_at&sort_order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "product_previews"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Filter by status:\n* 3 - Processing\n* 4 - Success\n* 5 - Failed\n",
+                          "key": "status",
+                          "value": "5"
+                        },
+                        {
+                          "key": "sort_by",
+                          "value": "created_at"
+                        },
+                        {
+                          "key": "sort_order",
+                          "value": "desc"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"previews\": [\n      {\n        \"id\": \"video_123\",\n        \"title\": \"My Product Preview\",\n        \"video_duration\": 30.5,\n        \"video_url\": \"https://res.jogg.ai/video.mp4\",\n        \"cover_url\": \"https://res.jogg.ai/cover.jpg\",\n        \"status\": \"completed\",\n        \"created_at\": 1640995200\n      },\n      {\n        \"id\": \"video_123\",\n        \"title\": \"My Product Preview\",\n        \"video_duration\": 30.5,\n        \"video_url\": \"https://res.jogg.ai/video.mp4\",\n        \"cover_url\": \"https://res.jogg.ai/cover.jpg\",\n        \"status\": \"completed\",\n        \"created_at\": 1640995200\n      }\n    ],\n    \"total\": 15,\n    \"page\": 1,\n    \"page_size\": 10\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "product_video",
+          "item": [
+            {
+              "name": "{product_video_id}",
+              "item": [
+                {
+                  "name": "Check Product Video Status",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/product_video/:product_video_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "product_video",
+                        ":product_video_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "product_video_id",
+                          "value": "pv_123456",
+                          "description": "Product video ID"
+                        }
+                      ]
+                    },
+                    "description": "Get the current status and details of a product video generation"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/product_video/:product_video_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "product_video",
+                            ":product_video_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "product_video_id",
+                              "value": "pv_123456",
+                              "description": "Product video ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"title\": \"My Product Video\",\n    \"video_url\": \"https://example.com/video.mp4\",\n    \"cover_url\": \"https://example.com/cover.jpg\",\n    \"status\": \"completed\",\n    \"created_at\": 1640995200,\n    \"deducted_credit\": 10.5\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "product_videos",
+          "item": [
+            {
+              "name": "Get Product Video List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/product_videos?page=1&page_size=10&status=5&sort_by=created_at&sort_order=desc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "product_videos"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "status",
+                      "value": "5",
+                      "description": "Filter by status:\n* 3 - Processing\n* 4 - Success\n* 5 - Failed\n"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "created_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    }
+                  ]
+                },
+                "description": "Retrieve paginated list of generated product videos with filtering and sorting options.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/product_videos?page=1&page_size=10&status=5&sort_by=created_at&sort_order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "product_videos"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Filter by status:\n* 3 - Processing\n* 4 - Success\n* 5 - Failed\n",
+                          "key": "status",
+                          "value": "5"
+                        },
+                        {
+                          "key": "sort_by",
+                          "value": "created_at"
+                        },
+                        {
+                          "key": "sort_order",
+                          "value": "desc"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"videos\": [\n      {\n        \"id\": \"video_123\",\n        \"title\": \"My Product Video\",\n        \"video_duration\": 30.5,\n        \"video_url\": \"https://res.jogg.ai/video.mp4\",\n        \"cover_url\": \"https://res.jogg.ai/cover.jpg\",\n        \"status\": \"completed\",\n        \"created_at\": 1640995200\n      },\n      {\n        \"id\": \"video_123\",\n        \"title\": \"My Product Video\",\n        \"video_duration\": 30.5,\n        \"video_url\": \"https://res.jogg.ai/video.mp4\",\n        \"cover_url\": \"https://res.jogg.ai/cover.jpg\",\n        \"status\": \"completed\",\n        \"created_at\": 1640995200\n      }\n    ],\n    \"total\": 25,\n    \"page\": 1,\n    \"page_size\": 10\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "template",
+          "item": [
+            {
+              "name": "custom",
+              "item": [
+                {
+                  "name": "{id}",
+                  "item": [
+                    {
+                      "name": "Get specific custom template details",
+                      "request": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/template/custom/:id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "template",
+                            "custom",
+                            ":id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "id",
+                              "value": "123",
+                              "description": "Template ID"
+                            }
+                          ]
+                        },
+                        "description": "Retrieve detailed information about a specific custom template including its variables.\n"
+                      },
+                      "response": [
+                        {
+                          "name": "Success",
+                          "originalRequest": {
+                            "method": "GET",
+                            "header": [
+                              {
+                                "key": "Accept",
+                                "value": "application/json"
+                              },
+                              {
+                                "description": "Added as a part of security scheme: apikey",
+                                "key": "x-api-key",
+                                "value": "<API Key>"
+                              }
+                            ],
+                            "url": {
+                              "raw": "{{baseUrl}}/v2/template/custom/:id",
+                              "host": [
+                                "{{baseUrl}}"
+                              ],
+                              "path": [
+                                "v2",
+                                "template",
+                                "custom",
+                                ":id"
+                              ],
+                              "variable": [
+                                {
+                                  "key": "id",
+                                  "value": "123",
+                                  "description": "Template ID"
+                                }
+                              ]
+                            }
+                          },
+                          "status": "OK",
+                          "code": 200,
+                          "_postman_previewlanguage": "json",
+                          "header": [
+                            {
+                              "key": "Content-Type",
+                              "value": "application/json"
+                            }
+                          ],
+                          "cookie": [],
+                          "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"template_id\": 123,\n    \"name\": \"My Template\",\n    \"cover_url\": \"https://example.com/cover.jpg\",\n    \"preview_url\": \"https://example.com/preview.mp4\",\n    \"aspect_ratio\": 0,\n    \"variables\": [\n      {\n        \"type\": \"text\",\n        \"name\": \"title\"\n      },\n      {\n        \"type\": \"text\",\n        \"name\": \"title\"\n      }\n    ]\n  }\n}"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Get specific custom template details Copy",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/templates?aspect_ratio=landscape",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "templates"
+                  ],
+                  "query": [
+                    {
+                      "key": "aspect_ratio",
+                      "value": "landscape"
+                    }
+                  ]
+                },
+                "description": "Retrieve detailed information about a specific custom template including its variables.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/template/custom/:id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "template",
+                        "custom",
+                        ":id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "id",
+                          "value": "123",
+                          "description": "Template ID"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"template_id\": 123,\n    \"name\": \"My Template\",\n    \"cover_url\": \"https://example.com/cover.jpg\",\n    \"preview_url\": \"https://example.com/preview.mp4\",\n    \"aspect_ratio\": 0,\n    \"variables\": [\n      {\n        \"type\": \"text\",\n        \"name\": \"title\"\n      },\n      {\n        \"type\": \"text\",\n        \"name\": \"title\"\n      }\n    ]\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "template_video",
+          "item": [
+            {
+              "name": "{video_id}",
+              "item": [
+                {
+                  "name": "Get template video status and details",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/template_video/:video_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "template_video",
+                        ":video_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "video_id",
+                          "value": "video_123456789",
+                          "description": "Video ID"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve video information, status, and metadata by video ID"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/template_video/:video_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "template_video",
+                            ":video_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "video_id",
+                              "value": "video_123456789",
+                              "description": "Video ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"video_id\": \"video_123456789\",\n    \"status\": \"completed\",\n    \"created_at\": 1640995200,\n    \"completed_at\": 1640995500,\n    \"data\": {\n      \"video_name\": \"My Template Video\",\n      \"url\": \"https://example.com/video.mp4\",\n      \"cover_url\": \"https://example.com/cover.jpg\",\n      \"duration_seconds\": 30.5,\n      \"deducted_credit\": 10.5\n    }\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "template_videos",
+          "item": [
+            {
+              "name": "List template videos",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/template_videos?page=1&page_size=10&status=5&sort_by=created_at&sort_order=desc",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "template_videos"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10"
+                    },
+                    {
+                      "key": "status",
+                      "value": "5",
+                      "description": "Filter by status"
+                    },
+                    {
+                      "key": "sort_by",
+                      "value": "created_at"
+                    },
+                    {
+                      "key": "sort_order",
+                      "value": "desc"
+                    }
+                  ]
+                },
+                "description": "Get paginated list of template videos with optional filtering and sorting.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/template_videos?page=1&page_size=10&status=5&sort_by=created_at&sort_order=desc",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "template_videos"
+                      ],
+                      "query": [
+                        {
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "key": "page_size",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Filter by status",
+                          "key": "status",
+                          "value": "5"
+                        },
+                        {
+                          "key": "sort_by",
+                          "value": "created_at"
+                        },
+                        {
+                          "key": "sort_order",
+                          "value": "desc"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"data\": [\n      {\n        \"video_id\": \"video_123456\",\n        \"video_name\": \"My Template Video\",\n        \"status\": \"completed\",\n        \"created_at\": 1732806631,\n        \"cover_url\": \"https://res.jogg.ai/cover.jpg\",\n        \"url\": \"https://res.jogg.ai/video.mp4\",\n        \"duration_seconds\": 30.5,\n        \"error\": {\n          \"code\": \"ERROR_CODE\",\n          \"message\": \"Video generation failed\"\n        }\n      },\n      {\n        \"video_id\": \"video_123456\",\n        \"video_name\": \"My Template Video\",\n        \"status\": \"completed\",\n        \"created_at\": 1732806631,\n        \"cover_url\": \"https://res.jogg.ai/cover.jpg\",\n        \"url\": \"https://res.jogg.ai/video.mp4\",\n        \"duration_seconds\": 30.5,\n        \"error\": {\n          \"code\": \"ERROR_CODE\",\n          \"message\": \"Video generation failed\"\n        }\n      }\n    ],\n    \"pagination\": {\n      \"page\": 1,\n      \"page_size\": 10,\n      \"total_items\": 100,\n      \"total_pages\": 10\n    }\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "templates",
+          "item": [
+            {
+              "name": "custom",
+              "item": [
+                {
+                  "name": "List user's custom templates",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/templates/custom?aspect_ratio=portrait",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "templates",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "key": "aspect_ratio",
+                          "value": "portrait",
+                          "description": "Filter by aspect ratio"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a list of user's custom templates with optional filtering by aspect ratio.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/templates/custom?aspect_ratio=portrait",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "templates",
+                            "custom"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by aspect ratio",
+                              "key": "aspect_ratio",
+                              "value": "portrait"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"templates\": [\n      {\n        \"id\": 4905,\n        \"name\": \"string\",\n        \"cover_url\": \"string\",\n        \"preview_url\": \"string\",\n        \"aspect_ratio\": 2\n      },\n      {\n        \"id\": 9432,\n        \"name\": \"string\",\n        \"cover_url\": \"string\",\n        \"preview_url\": \"string\",\n        \"aspect_ratio\": 0\n      }\n    ]\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "upload",
+          "item": [
+            {
+              "name": "asset",
+              "item": [
+                {
+                  "name": "Upload asset file",
+                  "request": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"filename\": \"product-image.jpg\",\n  \"content_type\": \"image/jpeg\",\n  \"file_size\": 1024000\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/upload/asset",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "upload",
+                        "asset"
+                      ]
+                    },
+                    "description": "Upload an asset file and get signed URL for direct upload to cloud storage.\nUse the returned sign_url to upload your file with a PUT request.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "POST",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"filename\": \"product-image.jpg\",\n  \"content_type\": \"image/jpeg\",\n  \"file_size\": 1024000\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/upload/asset",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "upload",
+                            "asset"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"sign_url\": \"https://qgduB.nlnShEQcLssp0qCb8nrayoDMMVnARidYyg1RwS9d,VbDgLcmL6rW356ygTJ.\",\n    \"asset_url\": \"http://Pf.upwDwkvayC.idiNAS+4mOCd\"\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "user",
+          "item": [
+            {
+              "name": "remaining_quota",
+              "item": [
+                {
+                  "name": "Get Remaining Quota",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user/remaining_quota",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user",
+                        "remaining_quota"
+                      ]
+                    },
+                    "description": "Retrieve the remaining JoggAI API quota for the authenticated user"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/remaining_quota",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "remaining_quota"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"remaining_quota\": 1000\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "whoami",
+              "item": [
+                {
+                  "name": "Get Current User Information",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/user/whoami",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "user",
+                        "whoami"
+                      ]
+                    },
+                    "description": "Easily retrieve and manage your account details with JoggAI API"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/user/whoami",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "user",
+                            "whoami"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"email\": \"user@example.com\",\n    \"username\": \"johndoe\"\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "video_translate",
+          "item": [
+            {
+              "name": "{video_translate_id}",
+              "item": [
+                {
+                  "name": "Check Translation Status",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/video_translate/:video_translate_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "video_translate",
+                        ":video_translate_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "video_translate_id",
+                          "value": "vt_123456",
+                          "description": "Video translation task ID"
+                        }
+                      ]
+                    },
+                    "description": "Get the current status and details of a video translation task"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/video_translate/:video_translate_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "video_translate",
+                            ":video_translate_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "video_translate_id",
+                              "value": "vt_123456",
+                              "description": "Video translation task ID"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"video_translate_id\": \"vt_123456\",\n    \"title\": \"Translated Video Title\",\n    \"status\": \"completed\",\n    \"url\": \"https://res.jogg.ai/translated_video.mp4\",\n    \"subtitle_url\": \"https://res.jogg.ai/subtitle.srt\"\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "target_languages",
+              "item": [
+                {
+                  "name": "List Target Languages",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/video_translate/target_languages",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "video_translate",
+                        "target_languages"
+                      ]
+                    },
+                    "description": "Get the list of supported target languages for video translation"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/video_translate/target_languages",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "video_translate",
+                            "target_languages"
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"languages\": [\n      \"spanish\",\n      \"french\",\n      \"german\",\n      \"japanese\"\n    ]\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Translate Video",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"video_url\": \"https://res.jogg.ai/video.mp4\",\n  \"output_language\": \"spanish\",\n  \"title\": \"Translated Video Title\",\n  \"translate_audio_only\": false,\n  \"output_voice\": \"es-ES-ElviraNeural\",\n  \"add_subtitles\": true,\n  \"enable_dynamic_duration\": false,\n  \"callback_url\": \"https://example.com/callback\"\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/video_translate/",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "video_translate",
+                    ""
+                  ]
+                },
+                "description": "Create a video translation task with specified parameters including target language, voice, and subtitle options.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"video_url\": \"https://res.jogg.ai/video.mp4\",\n  \"output_language\": \"spanish\",\n  \"title\": \"Translated Video Title\",\n  \"translate_audio_only\": false,\n  \"output_voice\": \"es-ES-ElviraNeural\",\n  \"add_subtitles\": true,\n  \"enable_dynamic_duration\": false,\n  \"callback_url\": \"https://example.com/callback\"\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/video_translate/",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "video_translate",
+                        ""
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"video_translate_id\": \"vt_123456\"\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "visual_styles",
+          "item": [
+            {
+              "name": "List visual styles",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/visual_styles?aspect_ratio=landscape",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "visual_styles"
+                  ],
+                  "query": [
+                    {
+                      "key": "aspect_ratio",
+                      "value": "landscape",
+                      "description": "Filter by aspect ratio"
+                    }
+                  ]
+                },
+                "description": "Get available visual styles/templates filtered by aspect ratio.\nVisual styles determine the look and feel of your product videos.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/visual_styles?aspect_ratio=portrait",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "visual_styles"
+                      ],
+                      "query": [
+                        {
+                          "description": "Filter by aspect ratio",
+                          "key": "aspect_ratio",
+                          "value": "portrait"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"visual_styles\": [\n      {\n        \"id\": 2400,\n        \"name\": \"Simple split screen template\"\n      },\n      {\n        \"id\": 2400,\n        \"name\": \"Simple split screen template\"\n      }\n    ]\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "voices",
+          "item": [
+            {
+              "name": "custom",
+              "item": [
+                {
+                  "name": "Get User Timbre List",
+                  "request": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/voices/custom?language=english",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "voices",
+                        "custom"
+                      ],
+                      "query": [
+                        {
+                          "key": "language",
+                          "value": "english",
+                          "description": "Filter by language"
+                        }
+                      ]
+                    },
+                    "description": "Retrieve a list of user's custom timbres with filtering options.\nReturns user's personalized voice collection.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "GET",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/voices/custom?language=english",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "voices",
+                            "custom"
+                          ],
+                          "query": [
+                            {
+                              "description": "Filter by language",
+                              "key": "language",
+                              "value": "english"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"total\": 5,\n    \"voices\": [\n      {\n        \"name\": \"My Custom Voice\",\n        \"voice_id\": \"custom_123\",\n        \"audio_url\": \"https://res.jogg.ai/voice-sample.mp3\",\n        \"language\": \"english\"\n      },\n      {\n        \"name\": \"My Custom Voice\",\n        \"voice_id\": \"custom_123\",\n        \"audio_url\": \"https://res.jogg.ai/voice-sample.mp3\",\n        \"language\": \"english\"\n      }\n    ]\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Get Timbre List",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/voices?page=1&page_size=10",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "voices"
+                  ],
+                  "query": [
+                    {
+                      "key": "page",
+                      "value": "1",
+                      "description": "Page number for pagination"
+                    },
+                    {
+                      "key": "page_size",
+                      "value": "10",
+                      "description": "Number of items per page"
+                    },
+                    {
+                      "key": "gender",
+                      "value": "female",
+                      "description": "Filter by gender",
+                      "disabled": true
+                    },
+                    {
+                      "key": "language",
+                      "value": "english",
+                      "description": "Filter by language",
+                      "disabled": true
+                    },
+                    {
+                      "key": "age",
+                      "value": "young",
+                      "description": "Filter by age group",
+                      "disabled": true
+                    },
+                    {
+                      "key": "use_case",
+                      "value": "narrative_story",
+                      "description": "Filter by use case",
+                      "disabled": true
+                    },
+                    {
+                      "key": "only_minmax",
+                      "value": "true",
+                      "type": "text",
+                      "disabled": true
+                    },
+                    {
+                      "key": "include_minmax",
+                      "value": "true",
+                      "type": "text",
+                      "disabled": true
+                    }
+                  ]
+                },
+                "description": "Retrieve a list of available timbres with filtering options.\nSupports pagination and various filters including gender, language, age, and use case.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/voices?page=1&page_size=10&gender=female&language=english&age=young&use_case=narrative_story",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "voices"
+                      ],
+                      "query": [
+                        {
+                          "description": "Page number for pagination",
+                          "key": "page",
+                          "value": "1"
+                        },
+                        {
+                          "description": "Number of items per page",
+                          "key": "page_size",
+                          "value": "10"
+                        },
+                        {
+                          "description": "Filter by gender",
+                          "key": "gender",
+                          "value": "female"
+                        },
+                        {
+                          "description": "Filter by language",
+                          "key": "language",
+                          "value": "english"
+                        },
+                        {
+                          "description": "Filter by age group",
+                          "key": "age",
+                          "value": "young"
+                        },
+                        {
+                          "description": "Filter by use case",
+                          "key": "use_case",
+                          "value": "narrative_story"
+                        }
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"voices\": [\n      {\n        \"name\": \"Christopher\",\n        \"voice_id\": \"en-US-ChristopherNeural\",\n        \"audio_url\": \"https://res.jogg.ai/voice-sample.mp3\",\n        \"language\": \"english\",\n        \"gender\": \"male\",\n        \"age\": \"young\",\n        \"accent\": \"american\",\n        \"use_case\": \"narrative_story\"\n      },\n      {\n        \"name\": \"Christopher\",\n        \"voice_id\": \"en-US-ChristopherNeural\",\n        \"audio_url\": \"https://res.jogg.ai/voice-sample.mp3\",\n        \"language\": \"english\",\n        \"gender\": \"male\",\n        \"age\": \"young\",\n        \"accent\": \"american\",\n        \"use_case\": \"narrative_story\"\n      }\n    ],\n    \"has_more\": true\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "endpoints",
+          "item": [
+            {
+              "name": "List Webhook Endpoints",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/endpoints",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "endpoints"
+                  ]
+                },
+                "description": "Retrieve a list of all webhook endpoints configured for your account.\nWebhooks allow you to receive real-time notifications about events in your JoggAI workspace.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/endpoints",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "endpoints"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"endpoints\": [\n      {\n        \"endpoint_id\": \"wh_123456789\",\n        \"url\": \"https://your-domain.com/webhook\",\n        \"secret\": \"whsec_abc123xyz\",\n        \"status\": \"enabled\",\n        \"events\": [\n          \"generated_avatar_video_success\",\n          \"generated_avatar_video_failed\"\n        ],\n        \"username\": \"johndoe\",\n        \"created_at\": 1732806631\n      },\n      {\n        \"endpoint_id\": \"wh_123456789\",\n        \"url\": \"https://your-domain.com/webhook\",\n        \"secret\": \"whsec_abc123xyz\",\n        \"status\": \"enabled\",\n        \"events\": [\n          \"generated_avatar_video_success\",\n          \"generated_avatar_video_failed\"\n        ],\n        \"username\": \"johndoe\",\n        \"created_at\": 1732806631\n      }\n    ]\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "endpoint",
+          "item": [
+            {
+              "name": "{endpoint_id}",
+              "item": [
+                {
+                  "name": "Update Webhook Endpoint",
+                  "request": {
+                    "method": "PUT",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"https://your-domain.com/webhook\",\n  \"status\": \"enabled\",\n  \"events\": [\n    \"generated_avatar_video_success\",\n    \"generated_avatar_video_failed\",\n    \"generated_photo_avatar_success\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/endpoint/:endpoint_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "endpoint",
+                        ":endpoint_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "endpoint_id",
+                          "value": "wh_123456",
+                          "description": "Unique webhook endpoint identifier"
+                        }
+                      ]
+                    },
+                    "description": "Update an existing webhook endpoint configuration including URL, status, and subscribed events.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "PUT",
+                        "header": [
+                          {
+                            "key": "Content-Type",
+                            "value": "application/json"
+                          },
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "body": {
+                          "mode": "raw",
+                          "raw": "{\n  \"url\": \"https://your-domain.com/webhook\",\n  \"status\": \"enabled\",\n  \"events\": [\n    \"generated_avatar_video_success\",\n    \"generated_avatar_video_failed\",\n    \"generated_photo_avatar_success\"\n  ]\n}",
+                          "options": {
+                            "raw": {
+                              "headerFamily": "json",
+                              "language": "json"
+                            }
+                          }
+                        },
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/endpoint/:endpoint_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "endpoint",
+                            ":endpoint_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "endpoint_id",
+                              "value": "wh_123456",
+                              "description": "Unique webhook endpoint identifier"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"endpoint_id\": \"wh_123456789\",\n    \"url\": \"https://your-domain.com/webhook\",\n    \"secret\": \"whsec_abc123xyz\",\n    \"status\": \"enabled\",\n    \"events\": [\n      \"generated_avatar_video_success\",\n      \"generated_avatar_video_failed\"\n    ],\n    \"username\": \"johndoe\",\n    \"created_at\": 1732806631\n  }\n}"
+                    }
+                  ]
+                },
+                {
+                  "name": "Delete Webhook Endpoint",
+                  "request": {
+                    "method": "DELETE",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/endpoint/:endpoint_id",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "endpoint",
+                        ":endpoint_id"
+                      ],
+                      "variable": [
+                        {
+                          "key": "endpoint_id",
+                          "value": "d7da7e05309d44109a77d98a47b6de07",
+                          "description": "Unique webhook endpoint identifier"
+                        }
+                      ]
+                    },
+                    "description": "Remove a webhook endpoint from your account.\nThis action cannot be undone and the endpoint will stop receiving events immediately.\n"
+                  },
+                  "response": [
+                    {
+                      "name": "Success",
+                      "originalRequest": {
+                        "method": "DELETE",
+                        "header": [
+                          {
+                            "key": "Accept",
+                            "value": "application/json"
+                          },
+                          {
+                            "description": "Added as a part of security scheme: apikey",
+                            "key": "x-api-key",
+                            "value": "<API Key>"
+                          }
+                        ],
+                        "url": {
+                          "raw": "{{baseUrl}}/v2/endpoint/:endpoint_id",
+                          "host": [
+                            "{{baseUrl}}"
+                          ],
+                          "path": [
+                            "v2",
+                            "endpoint",
+                            ":endpoint_id"
+                          ],
+                          "variable": [
+                            {
+                              "key": "endpoint_id",
+                              "value": "wh_123456",
+                              "description": "Unique webhook endpoint identifier"
+                            }
+                          ]
+                        }
+                      },
+                      "status": "OK",
+                      "code": 200,
+                      "_postman_previewlanguage": "json",
+                      "header": [
+                        {
+                          "key": "Content-Type",
+                          "value": "application/json"
+                        }
+                      ],
+                      "cookie": [],
+                      "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"message\": \"webhook deleted\"\n  }\n}"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "name": "Add Webhook Endpoint",
+              "request": {
+                "method": "POST",
+                "header": [
+                  {
+                    "key": "Content-Type",
+                    "value": "application/json"
+                  },
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "body": {
+                  "mode": "raw",
+                  "raw": "{\n  \"url\": \"https://alpha-app-odyssey.jogg.ai/edge-service/test/webhook/verify-signature\",\n  \"status\": \"enabled\",\n  \"events\": [\n    \"generated_motion_success\",\n    \"generated_motion_failed\",\n    \"generated_photo_avatar_success\",\n    \"generated_photo_avatar_failed\"\n  ]\n}",
+                  "options": {
+                    "raw": {
+                      "headerFamily": "json",
+                      "language": "json"
+                    }
+                  }
+                },
+                "url": {
+                  "raw": "{{baseUrl}}/v2/endpoint",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "endpoint"
+                  ]
+                },
+                "description": "Create a new webhook endpoint to receive event notifications.\nYou can specify which events to subscribe to and configure the endpoint URL.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "POST",
+                    "header": [
+                      {
+                        "key": "Content-Type",
+                        "value": "application/json"
+                      },
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "body": {
+                      "mode": "raw",
+                      "raw": "{\n  \"url\": \"https://your-domain.com/webhook\",\n  \"status\": \"enabled\",\n  \"events\": [\n    \"generated_avatar_video_success\",\n    \"generated_avatar_video_failed\"\n  ]\n}",
+                      "options": {
+                        "raw": {
+                          "headerFamily": "json",
+                          "language": "json"
+                        }
+                      }
+                    },
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/endpoint",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "endpoint"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"endpoint_id\": \"wh_123456789\",\n    \"url\": \"https://your-domain.com/webhook\",\n    \"secret\": \"whsec_abc123xyz\",\n    \"status\": \"enabled\",\n    \"events\": [\n      \"generated_avatar_video_success\",\n      \"generated_avatar_video_failed\"\n    ],\n    \"username\": \"johndoe\",\n    \"created_at\": 1732806631\n  }\n}"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "name": "events",
+          "item": [
+            {
+              "name": "List Webhook Events",
+              "request": {
+                "method": "GET",
+                "header": [
+                  {
+                    "key": "Accept",
+                    "value": "application/json"
+                  }
+                ],
+                "url": {
+                  "raw": "{{baseUrl}}/v2/events",
+                  "host": [
+                    "{{baseUrl}}"
+                  ],
+                  "path": [
+                    "v2",
+                    "events"
+                  ]
+                },
+                "description": "Get a list of all available webhook event types that you can subscribe to.\nEach event type represents a specific action or status change in the system.\n"
+              },
+              "response": [
+                {
+                  "name": "Success",
+                  "originalRequest": {
+                    "method": "GET",
+                    "header": [
+                      {
+                        "key": "Accept",
+                        "value": "application/json"
+                      },
+                      {
+                        "description": "Added as a part of security scheme: apikey",
+                        "key": "x-api-key",
+                        "value": "<API Key>"
+                      }
+                    ],
+                    "url": {
+                      "raw": "{{baseUrl}}/v2/events",
+                      "host": [
+                        "{{baseUrl}}"
+                      ],
+                      "path": [
+                        "v2",
+                        "events"
+                      ]
+                    }
+                  },
+                  "status": "OK",
+                  "code": 200,
+                  "_postman_previewlanguage": "json",
+                  "header": [
+                    {
+                      "key": "Content-Type",
+                      "value": "application/json"
+                    }
+                  ],
+                  "cookie": [],
+                  "body": "{\n  \"code\": 0,\n  \"msg\": \"Success\",\n  \"data\": {\n    \"events\": [\n      \"generated_video_success\",\n      \"generated_video_failed\",\n      \"create_avatar_success\",\n      \"create_avatar_failed\",\n      \"generated_product_video_success\",\n      \"generated_product_video_failed\",\n      \"generated_avatar_video_success\",\n      \"generated_avatar_video_failed\",\n      \"generated_template_video_success\",\n      \"generated_template_video_failed\",\n      \"generated_translate_video_success\",\n      \"generated_translate_video_failed\",\n      \"generated_photo_avatar_success\",\n      \"generated_photo_avatar_failed\",\n      \"generated_product_avatar_success\",\n      \"generated_product_avatar_failed\",\n      \"generated_script_success\",\n      \"generated_script_failed\"\n    ]\n  }\n}"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "auth": {
+    "type": "apikey",
+    "apikey": [
+      {
+        "key": "key",
+        "value": "x-api-key",
+        "type": "string"
+      },
+      {
+        "key": "value",
+        "value": "{{apiKey}}",
+        "type": "string"
+      },
+      {
+        "key": "in",
+        "value": "header",
+        "type": "string"
+      }
+    ]
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    },
+    {
+      "listen": "test",
+      "script": {
+        "type": "text/javascript",
+        "packages": {},
+        "requests": {},
+        "exec": [
+          ""
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "baseUrl",
+      "value": "https://api.jogg.ai"
+    },
+    {
+      "key": "apiKey",
+      "value": "",
+      "type": "default"
+    }
+  ]
+}

@@ -1,0 +1,28 @@
+---
+title: "Create Lip Sync Video Task"
+openapi: "POST /open/v2/create_lip_sync_video"
+---
+
+Submit a source video URL and a source audio URL to create a lip sync video task.
+
+## Example Usage
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/open/v2/create_lip_sync_video' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "video_url": "https://res.jogg.ai/source-video.mp4",
+    "audio_url": "https://res.jogg.ai/source-audio.wav",
+    "playback_type": "normal"
+  }'
+```
+
+## Related Guides
+
+<CardGroup cols={2}>
+  <Card title="Get Lip Sync Task Status" href="/api-reference/v2/Video/GetLipSyncVideo">
+    Check task processing status and results
+  </Card>
+</CardGroup>
