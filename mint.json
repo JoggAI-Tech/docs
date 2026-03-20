@@ -87,6 +87,7 @@
         },
         "api-reference/v2/API Documentation/URLtoVideo",
         "api-reference/v2/API Documentation/CreateVideoFromTemplate",
+        "api-reference/v2/API Documentation/LipSyncVideo",
         "api-reference/v2/API Documentation/VideoTranslation",
         "api-reference/v2/API Documentation/CreatePhotoAvatar",
         "api-reference/v2/API Documentation/UploadMedia",
@@ -107,6 +108,8 @@
         "api-reference/v2/Video/ProductVideoGet",
         "api-reference/v2/Video/CreateVideoWithTemplate",
         "api-reference/v2/Video/TemplateVideoGet",
+        "api-reference/v2/Video/CreateLipSyncVideo",
+        "api-reference/v2/Video/GetLipSyncVideo",
         "api-reference/v2/Video/VideoTranslateCreate",
         "api-reference/v2/Video/VideoTranslateGet",
         "api-reference/v2/Video/VideoTranslateTargetLanguagesList"
@@ -314,7 +317,7 @@
     "x": "https://x.com/Jogg_ai",
     "facebook": "https://www.facebook.com/profile.php?id=61560344774204",
     "linkedin": "https://www.linkedin.com/company/jogg-ai",
-    "youtube": "http://www.youtube.com/@joggai",
+    "youtube": "https://www.youtube.com/@joggai",
     "discord": "https://discord.gg/RwrwZcSRCq"
   },
   "customStyles": [
