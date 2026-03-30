@@ -49,7 +49,7 @@ sequenceDiagram
     participant Queue
 
     Note over Client,API: 1. Submit Task
-    Client->>API: POST /open/v2/create_lip_sync_video
+    Client->>API: POST /v2/create_lip_sync_video
     API->>Queue: Queue lip sync task
     API-->>Client: 200 OK {task_id, status}
 
@@ -58,7 +58,7 @@ sequenceDiagram
 
     Note over Client,API: 3. Poll Result
     loop Until finished
-        Client->>API: GET /open/v2/lip_sync_video/{task_id}
+        Client->>API: GET /v2/lip_sync_video/{task_id}
         API-->>Client: {status, data?, error?}
     end
 ```
@@ -75,8 +75,8 @@ Lip sync generation is asynchronous. After submitting the task, store the return
 
 | Endpoint | Purpose | Documentation |
 |----------|---------|---------------|
-| `POST /open/v2/create_lip_sync_video` | Submit lip sync task | [API Reference](/api-reference/v2/Video/CreateLipSyncVideo) |
-| `GET /open/v2/lip_sync_video/{task_id}` | Check lip sync task status | [API Reference](/api-reference/v2/Video/GetLipSyncVideo) |
+| `POST /v2/create_lip_sync_video` | Submit lip sync task | [API Reference](/api-reference/v2/Video/CreateLipSyncVideo) |
+| `GET /v2/lip_sync_video/{task_id}` | Check lip sync task status | [API Reference](/api-reference/v2/Video/GetLipSyncVideo) |
 
 ### Key Parameters
 
@@ -118,7 +118,7 @@ The `video_url` and `audio_url` must be publicly accessible direct URLs. Tempora
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_lip_sync_video' \
+  --url 'https://api.jogg.ai/v2/create_lip_sync_video' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
@@ -151,7 +151,7 @@ Save the `task_id` from the response. You will need it to poll the lip sync task
 
 ```bash
 curl --request GET \
-  --url 'https://api.jogg.ai/open/v2/lip_sync_video/3d5c6930-d0da-4f7b-826e-cd1530f6734f' \
+  --url 'https://api.jogg.ai/v2/lip_sync_video/3d5c6930-d0da-4f7b-826e-cd1530f6734f' \
   --header 'x-api-key: YOUR_API_KEY'
 ```
 

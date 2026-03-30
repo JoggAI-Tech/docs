@@ -1,6 +1,6 @@
 ---
 title: "Create Lip Sync Video Task"
-openapi: "POST /open/v2/create_lip_sync_video"
+openapi: "POST /v2/create_lip_sync_video"
 ---
 
 Submit a source video URL and a source audio URL to create a lip sync video task.
@@ -9,7 +9,7 @@ Submit a source video URL and a source audio URL to create a lip sync video task
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/create_lip_sync_video' \
+  --url 'https://api.jogg.ai/v2/create_lip_sync_video' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{

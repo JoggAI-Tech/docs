@@ -47,7 +47,7 @@ tags:
     description: Webhook endpoint management for event notifications
 
 paths:
-  /open/v2/create_lip_sync_video:
+  /v2/create_lip_sync_video:
     post:
       tags:
         - Video
@@ -104,7 +104,7 @@ paths:
                             enum: [pending, processing, success, failed]
                             example: "pending"
 
-  /open/v2/lip_sync_video/{task_id}:
+  /v2/lip_sync_video/{task_id}:
     get:
       tags:
         - Video
