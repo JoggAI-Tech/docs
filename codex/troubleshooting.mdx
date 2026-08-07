@@ -1,0 +1,74 @@
+---
+title: "Troubleshooting"
+description: "Resolve common Smart Video installation, authorization, generation, and rendering issues."
+---
+
+## The Settings page returns 404 or does not open
+
+Do not reuse an old loopback URL or guess the port. Ask Codex to start Smart Video again:
+
+```text
+Run Smart Video preflight and open the verified Settings page when it is ready.
+```
+
+Smart Video must finish its health and Settings checks before the URL is valid.
+
+## Dependencies are missing
+
+Ask Codex to run the environment check and complete setup:
+
+```text
+Run Smart Video doctor. If dependencies are missing, run bootstrap and verify
+the installation before starting the service.
+```
+
+On macOS, install Homebrew first if it is unavailable. On Windows, ensure **App Installer** provides `winget`; Smart Video uses it to prepare required host tools.
+
+## JoggAI authorization fails
+
+Return to Settings and select **Connect JoggAI** again. Complete only the newest browser authorization request; old authorization links contain expired state and should not be reused.
+
+If authorization still fails:
+
+1. Confirm you can sign in at [app.jogg.ai](https://app.jogg.ai/).
+2. Keep the Smart Video local service running until the browser redirects to its callback.
+3. Retry from Settings so Smart Video creates a new authorization request.
+
+Do not paste access tokens, refresh tokens, or callback query values into chat.
+
+## Generation is waiting or blocked
+
+Ask Codex to inspect and resume the existing run instead of starting a new one:
+
+```text
+Check the current Smart Video run and resume it from its saved checkpoint.
+Do not resubmit completed JoggAI generation tasks.
+```
+
+Smart Video pauses when the outcome of a JoggAI submission is unknown. This prevents duplicate paid work. A missing local file does not by itself mean the remote task failed.
+
+## The editor opens, but MP4 export fails
+
+This usually means the project is available for repair but is missing a required render asset. Ask Codex to inspect the current project and regenerate or restore only the missing local dependency.
+
+```text
+Inspect the current project's render readiness. Keep completed media and repair
+only the missing assets before rendering again.
+```
+
+## Local speech is unavailable
+
+Run `doctor` and `bootstrap` again. Local speech components are prepared in the managed user cache during explicit bootstrap, not from a developer source directory. Talking-avatar generation requires JoggAI authorization.
+
+Local Media must be selected before a project submits work to JoggAI. It cannot be used to silently replace an in-progress JoggAI run.
+
+## Get help
+
+Contact [support@jogg.ai](mailto:support@jogg.ai) with:
+
+- Your operating system
+- The Smart Video plugin version shown in Codex
+- The run or project ID, if available
+- The exact error message
+
+Do not include OAuth tokens, API keys, signed media URLs, or private source material.

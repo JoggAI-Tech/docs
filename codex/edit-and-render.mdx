@@ -1,0 +1,54 @@
+---
+title: "Edit and Render"
+description: "Refine a Smart Video project in conversation or in the local editor, then export an MP4."
+---
+
+Every Smart Video result is an editable local project. Continue in the same Codex conversation to preserve the project context, or ask Codex to open a specific existing project.
+
+## Edit by conversation
+
+Ask for a focused change and state what must remain unchanged.
+
+```text
+Keep the narration and timing. Replace only the B-roll in the second scene,
+then open the editor for review.
+```
+
+```text
+Change the first motion-graphic scene to a comparison layout. Preserve the
+approved colors, facts, voice, and all other scenes.
+```
+
+```text
+Use a different JoggAI voice for the whole project and regenerate only the
+dependent audio and avatar scenes.
+```
+
+Smart Video keeps completed generation checkpoints and approved motion-graphic scenes. It does not automatically repeat paid JoggAI work when a local downstream file can be rebuilt.
+
+## Edit in the Studio
+
+Use the local editor to adjust the timeline directly, including:
+
+- Clip order and duration
+- Narration, captions, and caption styling
+- B-roll selection, crop, and audio state
+- Avatar placement and framing
+- Motion graphics, charts, and overlays
+- Background music and volume
+
+B-roll starts muted by default. Turn on a clip's source audio in the editor only when it is useful to the story.
+
+## Render the MP4
+
+After review, ask Codex to render the current project:
+
+```text
+Render the current Smart Video project as an MP4.
+```
+
+The renderer uses the locally managed SmartVideo runtime. No developer checkout or separate renderer path is required. Codex returns the local output path when rendering completes.
+
+<Warning>
+Opening the editor and exporting are separate checks. The editor may open an incomplete project for repair, but rendering will stop if required audio, video, or motion-graphic assets are still missing.
+</Warning>

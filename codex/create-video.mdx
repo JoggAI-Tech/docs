@@ -1,0 +1,62 @@
+---
+title: "Create a Video"
+description: "Authorize JoggAI, describe a Smart Video project, and review the generated result."
+---
+
+## Start with a complete request
+
+For the best first result, include:
+
+- Topic or source material
+- Target duration
+- Output language
+- Landscape or vertical format
+- Talking-avatar placement
+- Any required facts, assets, or brand guidance
+
+```text
+Create a 3-minute landscape video explaining solid-state batteries in English.
+Use a talking avatar only in the opening and closing scenes. Use B-roll and
+motion graphics for the body, include subtitles, and keep the tone technical.
+```
+
+The requested duration is a planning target. Smart Video measures the completed narration and uses its real timing for scenes, subtitles, motion graphics, and the final render.
+
+## Connect media services
+
+Before planning a new video, Smart Video starts its local service and returns a ready Settings page. Choose one media source explicitly.
+
+<Tabs>
+  <Tab title="JoggAI OAuth">
+    Select **Connect JoggAI** and complete authorization in the browser. JoggAI provides the voices and avatars visible to your account and Space.
+
+    Smart Video stores authorization in macOS Keychain or Windows protected storage. Access and refresh tokens are not written to project files or shown to Codex.
+  </Tab>
+  <Tab title="Local Media">
+    Select **Local Media** before generation starts to use supported on-device TTS and ASR. Talking-avatar generation requires JoggAI authorization.
+
+    Local Media is a deliberate alternative, not an automatic fallback. A project that has already submitted JoggAI generation work will stay on JoggAI so paid work is not duplicated.
+  </Tab>
+</Tabs>
+
+<Note>
+Do not open or bookmark a guessed `localhost` or `127.0.0.1` port. The port changes between sessions. Always use the Settings or editor URL returned after Smart Video reports that the service is ready.
+</Note>
+
+## Review the production flow
+
+Smart Video turns the request into a structured brief, narration, shot strategies, visual scenes, and a local timeline. Depending on the plan, it can combine:
+
+- Voiceover and timed subtitles
+- Talking-avatar opening, closing, or full-video scenes
+- Muted-by-default B-roll that can be unmuted in the editor
+- HTML motion graphics and ECharts visualizations
+- Background music and transitions
+
+Motion-graphic scenes are generated and visually checked before media generation continues. If a scene needs correction, Codex repairs that scene without replacing already approved work.
+
+## Open the project
+
+When the project is ready, Codex returns an editor URL. The editor opens locally and defaults to English; Chinese is available from the interface language setting.
+
+An incomplete project can still open for inspection and repair. Final MP4 export remains strict and waits until all required render assets are available.
