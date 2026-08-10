@@ -1,0 +1,70 @@
+---
+title: "Smart Video for Codex"
+description: "Create and edit complete JoggAI videos from a conversation in the Codex desktop app."
+mode: "wide"
+---
+
+Smart Video is the JoggAI video creation plugin for the Codex desktop app. Describe the video you need, review the generated project in a local editor, and export an MP4 without assembling the timeline by hand.
+
+<CardGroup cols={2}>
+  <Card title="Install Smart Video" icon="download" href="/codex/install">
+    Add the JoggAI marketplace and let Smart Video prepare its local runtime.
+  </Card>
+  <Card title="Create your first video" icon="circle-play" href="/codex/create-video">
+    Start with a topic, target duration, format, and avatar preference.
+  </Card>
+  <Card title="Edit and export" icon="sliders" href="/codex/edit-and-render">
+    Refine the project by chat or in the timeline editor, then render an MP4.
+  </Card>
+  <Card title="Troubleshooting" icon="wrench" href="/codex/troubleshooting">
+    Resolve setup, authorization, generation, and rendering issues safely.
+  </Card>
+</CardGroup>
+
+## What Smart Video can create
+
+- Long-form landscape or vertical videos from a topic or source brief
+- JoggAI voiceovers and selected talking-avatar scenes
+- B-roll sequences with subtitles and background music
+- HTML motion graphics and data-driven charts
+- Editable local projects and final MP4 files
+
+You can choose where talking avatars appear, including opening only, opening and closing, every scene, or nowhere. The final project remains editable, so you can change narration, media, captions, timing, volume, and layout before export.
+
+## How it works
+
+<Steps>
+  <Step title="Describe the video">
+    Give Codex the subject, target length, language, aspect ratio, and any avatar or style preferences.
+  </Step>
+  <Step title="Choose media services">
+    Smart Video opens a verified local Settings page. Connect JoggAI for cloud voices and avatars, or explicitly choose Local Media for supported on-device TTS and ASR.
+  </Step>
+  <Step title="Review the production plan">
+    Codex plans the narration, shot strategy, B-roll, motion graphics, and timeline before submitting generation work.
+  </Step>
+  <Step title="Edit and render">
+    Open the local editor to review or adjust the result, then ask Codex to render the final MP4.
+  </Step>
+</Steps>
+
+## Example prompts
+
+```text
+Create a 3-minute video about how AI is changing manufacturing.
+Use a talking avatar only in the opening and closing scenes.
+```
+
+```text
+Create a 90-second vertical product explainer from this brief.
+Use B-roll, subtitles, and motion graphics, with no talking avatar.
+```
+
+```text
+Open my latest Smart Video project, shorten the middle section,
+replace the second B-roll clip, and render a new MP4.
+```
+
+<Note>
+Smart Video runs in the Codex desktop app because it needs access to a local editor, workspace, and renderer. A browser-only Codex session cannot install or run the desktop plugin on your machine.
+</Note>

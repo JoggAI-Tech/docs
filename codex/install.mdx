@@ -1,0 +1,74 @@
+---
+title: "Install Smart Video"
+description: "Install the JoggAI Smart Video plugin in the Codex desktop app on macOS or Windows."
+---
+
+Smart Video supports macOS and Windows. Install it in the Codex desktop app on the computer where you want to create and render videos.
+
+## Install from Plugins
+
+<Steps>
+  <Step title="Open Plugins">
+    Open **Plugins** from the Codex desktop app sidebar.
+  </Step>
+  <Step title="Add a marketplace">
+    Select **Create**, then **Add marketplace**.
+  </Step>
+  <Step title="Add the JoggAI repository">
+    Paste the following Git repository URL and confirm:
+
+    ```text
+    https://github.com/JoggAI-Tech/jogg-skills.git
+    ```
+  </Step>
+  <Step title="Install Smart Video">
+    Open the **Personal** tab, find **Smart Video**, and select **Install**.
+  </Step>
+</Steps>
+
+The plugin source is available at
+[JoggAI-Tech/jogg-skills/plugins/smart-video](https://github.com/JoggAI-Tech/jogg-skills/tree/main/plugins/smart-video).
+
+After installation, start a new conversation so Codex loads the plugin. Try:
+
+```text
+Start Smart Video and help me create a 3-minute video.
+```
+
+## Install from the bundled Codex CLI
+
+You can also install from a terminal with the Codex CLI bundled with the desktop app:
+
+```bash
+codex plugin marketplace add JoggAI-Tech/jogg-skills --ref main
+codex plugin add smart-video@jogg-skills
+```
+
+<Warning>
+Use the Codex CLI that belongs to your desktop app installation. A separate CLI installation may use a different plugin directory and will not make the plugin available in the desktop app.
+</Warning>
+
+## First-run setup
+
+The first Smart Video request checks the local environment before starting the Studio:
+
+1. `doctor` reports missing requirements without changing your computer.
+2. `bootstrap` installs and verifies the pinned SmartVideo runtime when required.
+3. `preflight` starts the local service and checks both the health and Settings pages.
+4. Codex shows the Settings URL only after the service is ready.
+
+Approve the bootstrap step when Codex asks to install missing dependencies. Normal video commands do not install software.
+
+### Platform requirements
+
+| Requirement | macOS | Windows |
+| --- | --- | --- |
+| Package manager | Existing Homebrew installation | Windows Package Manager (`winget`) |
+| Shell support | Terminal and Bash | PowerShell and Git Bash |
+| Runtime tools | Node.js 22+, Python 3.10+, Chrome, `jq`, FFmpeg | Node.js 22+, Python 3.10+, Chrome, `jq`, FFmpeg |
+
+Smart Video keeps managed dependencies outside the plugin directory under your Codex user data. Plugin updates do not remove existing projects or JoggAI authorization.
+
+<Tip>
+You do not need to configure a source checkout, renderer path, npm package path, or project directory. Smart Video creates a new workspace for each video unless you explicitly ask to reuse one.
+</Tip>
