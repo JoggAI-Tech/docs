@@ -22,7 +22,10 @@ Run Smart Video doctor. If dependencies are missing, run bootstrap and verify
 the installation before starting the service.
 ```
 
-On macOS, install Homebrew first if it is unavailable. On Windows, ensure **App Installer** provides `winget`; Smart Video uses it to prepare required host tools.
+On macOS, Node.js and FFmpeg are installed and verified in Smart Video's managed
+user directory without Homebrew. Other missing host tools may still require
+Homebrew. On Windows, ensure **App Installer** provides `winget`; Smart Video
+uses it to prepare required host tools.
 
 ## JoggAI authorization fails
 
@@ -61,6 +64,12 @@ only the missing assets before rendering again.
 Run `doctor` and `bootstrap` again. Local speech components are prepared in the managed user cache during explicit bootstrap, not from a developer source directory. Talking-avatar generation requires JoggAI authorization.
 
 Local Media must be selected before a project submits work to JoggAI. It cannot be used to silently replace an in-progress JoggAI run.
+
+## The local avatar pack is missing
+
+Open [Local avatar resources](/avatar-resources) and run the listed install command. The pack is stored in the Smart Video managed data directory, so plugin upgrades do not remove it.
+
+After installation, restart Smart Video and refresh the Avatar panel. If the runtime then reports `avatar_execution: jogg_remote`, connect JoggAI; the resource pack does not provide the local execution component.
 
 ## Get help
 
