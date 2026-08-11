@@ -1,0 +1,113 @@
+---
+title: "Local avatar resources"
+description: "Download and manage optional local avatar packs for Smart Video."
+---
+
+Local avatar packs are optional. You do not need these downloads when Smart Video is connected to JoggAI and uses cloud avatars. Each presenter is distributed as an independent, versioned pack; installing one does not remove another.
+
+<div className="grid grid-cols-1 md:grid-cols-2 gap-5 my-6">
+  <div>
+    <video
+      className="w-full aspect-video rounded-lg border border-gray-200 dark:border-gray-800 object-cover"
+      src="https://res-intl.jogg.ai/joggUserData/motion/26-mo_2fa129cd8ab749389f2e517968587566/2ca35484ebb0d907a8b08c80cc963531.mp4"
+      poster="/images/avatar-resources/classroom-presenter.jpg"
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      tabIndex={0}
+      aria-label="Classroom Presenter preview"
+      onMouseEnter={(event) => event.currentTarget.play()}
+      onMouseLeave={(event) => { event.currentTarget.pause(); event.currentTarget.currentTime = 0; }}
+      onFocus={(event) => event.currentTarget.play()}
+      onBlur={(event) => { event.currentTarget.pause(); event.currentTarget.currentTime = 0; }}
+    />
+    <p className="mt-2 mb-0 font-semibold">Classroom Presenter</p>
+  </div>
+  <div>
+    <video
+      className="w-full aspect-video rounded-lg border border-gray-200 dark:border-gray-800 object-cover"
+      src="https://res-intl.jogg.ai/joggUserData/motion/26-mo_24dc560111ba4ab386a9c8a495786e24/ce6b414b061c44744f95854cc030ac38.mp4"
+      poster="/images/avatar-resources/office-presenter.jpg"
+      muted
+      loop
+      playsInline
+      preload="metadata"
+      tabIndex={0}
+      aria-label="Office Presenter preview"
+      onMouseEnter={(event) => event.currentTarget.play()}
+      onMouseLeave={(event) => { event.currentTarget.pause(); event.currentTarget.currentTime = 0; }}
+      onFocus={(event) => event.currentTarget.play()}
+      onBlur={(event) => { event.currentTarget.pause(); event.currentTarget.currentTime = 0; }}
+    />
+    <p className="mt-2 mb-0 font-semibold">Office Presenter</p>
+  </div>
+</div>
+
+## Classroom Presenter
+
+| | |
+| --- | --- |
+| Resource ID | `classroom-presenter` |
+| Avatar ID | `2ca35484ebb0d907a8b08c80cc963531` |
+| Version | `1.0.0` |
+| Download size | 280.4 MiB |
+| Platforms | macOS and Windows |
+| SHA-256 | `322a42e6bb12f7a3c41f8f5a99d7f7fbca334b6e7eba8d1388df3e8134104e8b` |
+
+<Card title="Download Classroom Presenter" icon="download" href="https://github.com/JoggAI-Tech/jogg-skills/releases/download/smart-video-avatar-classroom-presenter-v1.0.0/smart-video-avatar-classroom-presenter-1.0.0.tar.gz">
+  Download the versioned Classroom Presenter resource archive directly.
+</Card>
+
+```bash
+npx --yes @joggai/smartvideo@latest resources install classroom-presenter
+```
+
+## Office Presenter
+
+| | |
+| --- | --- |
+| Resource ID | `office-presenter` |
+| Avatar ID | `ce6b414b061c44744f95854cc030ac38` |
+| Version | `1.0.0` |
+| Download size | 218.2 MiB |
+| Platforms | macOS and Windows |
+| SHA-256 | `71f8db719131c066444d7b25558334ae12d407cb999205980b3896bc0f105770` |
+
+<Card title="Download Office Presenter" icon="download" href="https://github.com/JoggAI-Tech/jogg-skills/releases/download/smart-video-avatar-office-presenter-v1.0.0/smart-video-avatar-office-presenter-1.0.0.tar.gz">
+  Download the versioned Office Presenter resource archive directly.
+</Card>
+
+```bash
+npx --yes @joggai/smartvideo@latest resources install office-presenter
+```
+
+The installer downloads the selected archive, verifies its SHA-256 checksum, checks every archive path, and activates an aggregate catalog atomically. Smart Video stores installed packs below `~/.codex/smartvideo/resources/avatar-packs/`, outside the versioned Codex plugin cache. Reinstalling or upgrading the plugin does not delete them.
+
+After installation, return to the Smart Video editor and select **Refresh** in the Avatar panel. Restart the local Smart Video service if it was already running before the install.
+
+## Manage installed resources
+
+List every available pack and its installation state:
+
+```bash
+npx --yes @joggai/smartvideo@latest resources list --json
+```
+
+Check, update, or remove one pack by resource ID:
+
+```bash
+npx --yes @joggai/smartvideo@latest resources status classroom-presenter --json
+npx --yes @joggai/smartvideo@latest resources update classroom-presenter
+npx --yes @joggai/smartvideo@latest resources remove classroom-presenter
+```
+
+<Note>
+  These packs contain avatar presentation assets. Local avatar generation also requires a compatible Smart Video local execution component. If your installed runtime reports `avatar_execution: jogg_remote`, connect JoggAI to generate talking-avatar video; installing these packs alone does not replace that runtime component.
+</Note>
+
+## Troubleshooting
+
+If checksum verification fails, do not bypass it. Retry on a stable network. Smart Video keeps the previous active resources unchanged when a download or validation fails.
+
+If the editor still shows the download prompt after a successful install, restart Smart Video so the local service receives the new managed catalog path, then refresh the Avatar panel.

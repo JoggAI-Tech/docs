@@ -63,9 +63,14 @@ Approve the bootstrap step when Codex asks to install missing dependencies. Norm
 
 | Requirement | macOS | Windows |
 | --- | --- | --- |
-| Package manager | Existing Homebrew installation | Windows Package Manager (`winget`) |
+| Package manager | Not required for Node.js or FFmpeg | Windows Package Manager (`winget`) |
 | Shell support | Terminal and Bash | PowerShell and Git Bash |
 | Runtime tools | Node.js 22+, Python 3.10+, Chrome, `jq`, FFmpeg | Node.js 22+, Python 3.10+, Chrome, `jq`, FFmpeg |
+
+On macOS, Smart Video installs pinned Node.js and FFmpeg builds under its managed
+user directory and verifies their checksums. It does not use Homebrew for either
+tool. Bootstrap may still offer Homebrew for other missing host tools such as
+Python, `jq`, or Chrome.
 
 Smart Video keeps managed dependencies outside the plugin directory under your Codex user data. Plugin updates do not remove existing projects or JoggAI authorization.
 
