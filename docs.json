@@ -22,21 +22,6 @@
         ]
       },
       {
-        "tab": "Codex",
-        "groups": [
-          {
-            "group": "Smart Video",
-            "pages": [
-              "codex",
-              "codex/install",
-              "codex/create-video",
-              "codex/edit-and-render",
-              "codex/troubleshooting"
-            ]
-          }
-        ]
-      },
-      {
         "tab": "API Documentation",
         "groups": [
           {
