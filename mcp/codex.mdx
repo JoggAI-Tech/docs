@@ -82,12 +82,6 @@ finishes. Do not create a duplicate task while one is running.
 
 Codex only sees tools allowed by the OAuth scopes you approved. Destructive operations, such as deleting a webhook endpoint, remain clearly marked in the tool definition and still require the corresponding write scope.
 
-Provider image and video tools appear automatically after the server contract is
-updated and Codex refreshes `tools/list`; no npm installer update is required.
-These create tools are marked destructive because they consume the selected
-Space's API credits. Store the returned task ID and use the matching read-only
-image or video task tool instead of replaying a timed-out submission.
-
 ## OAuth callback behavior
 
 The JoggAI `codex` OAuth client accepts the dynamic loopback callback created by Codex for this MCP resource. Let `codex mcp login` choose the local port and callback path.

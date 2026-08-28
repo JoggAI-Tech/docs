@@ -48,8 +48,6 @@
               "api-reference/v2/API Documentation/URLtoVideo",
               "api-reference/v2/API Documentation/CreateVideoFromTemplate",
               "api-reference/v2/API Documentation/VideoTranslation",
-              "api-reference/v2/API Documentation/ProviderImages",
-              "api-reference/v2/API Documentation/ProviderVideos",
               "api-reference/v2/API Documentation/CreatePhotoAvatar",
               "api-reference/v2/API Documentation/UploadMedia",
               "api-reference/v2/API Documentation/AIScripts",
@@ -71,29 +69,6 @@
               "api-reference/v2/Video/VideoTranslateCreate",
               "api-reference/v2/Video/VideoTranslateGet",
               "api-reference/v2/Video/VideoTranslateTargetLanguagesList"
-            ]
-          },
-          {
-            "group": "Provider Images",
-            "pages": [
-              "api-reference/v2/ProviderImages/GoogleGenerateImages",
-              "api-reference/v2/ProviderImages/ArkGenerateImages",
-              "api-reference/v2/ProviderImages/OpenAIGenerateImages",
-              "api-reference/v2/ProviderImages/GetImageTask"
-            ]
-          },
-          {
-            "group": "Provider Videos",
-            "pages": [
-              "api-reference/v2/ProviderVideos/RunwayGenerateVideo",
-              "api-reference/v2/ProviderVideos/KlingGenerateVideo",
-              "api-reference/v2/ProviderVideos/ArkGenerateVideo",
-              "api-reference/v2/ProviderVideos/GoogleGenerateVideo",
-              "api-reference/v2/ProviderVideos/MiniMaxGenerateVideo",
-              "api-reference/v2/ProviderVideos/PixVerseGenerateVideo",
-              "api-reference/v2/ProviderVideos/OpenAIGenerateVideo",
-              "api-reference/v2/ProviderVideos/AlibabaGenerateVideo",
-              "api-reference/v2/ProviderVideos/GetVideoTask"
             ]
           },
           {
