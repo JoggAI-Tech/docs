@@ -30,7 +30,7 @@ The npm installer runs the following native flow with public client ID
 
 ```bash
 claude mcp add-json --scope user JoggAI \
-  '{"type":"http","url":"https://api.jogg.ai/mcp","oauth":{"clientId":"claude","callbackPort":5555,"scopes":"openid account.read quota.read catalog.read asset.read asset.write script.generate voice.generate image.generate video.generate product.read product.write webhook.read webhook.write"}}'
+  '{"type":"http","url":"https://api.jogg.ai/mcp","oauth":{"clientId":"claude","callbackPort":5555,"scopes":"openid account.read quota.read catalog.read asset.read asset.write script.generate image.generate video.generate product.read product.write webhook.read webhook.write"}}'
 
 claude mcp login JoggAI
 ```
@@ -58,7 +58,6 @@ The installer preserves unrelated servers and atomically adds this entry to
           "asset.read",
           "asset.write",
           "script.generate",
-          "voice.generate",
           "image.generate",
           "video.generate",
           "product.read",

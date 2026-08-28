@@ -68,8 +68,8 @@ Only explicitly registered `/open/v2` operations are available as tools. JoggAI 
   <Card title="Avatars and images" icon="image">
     Generate photo avatars, product avatar images, and motion for supported avatar types.
   </Card>
-  <Card title="Video and audio" icon="film">
-    Create avatar, product, and template videos; synthesize speech; transcribe audio; translate video; and create lip sync tasks.
+  <Card title="Video workflows" icon="film">
+    Create avatar, product, and template videos; translate video; and create lip sync tasks.
   </Card>
   <Card title="Products" icon="box">
     Create and update products, generate previews, render a selected preview, and check product video results.
@@ -86,7 +86,7 @@ agent to submit generation work or modify webhook endpoints.
 
 ## Long-running jobs and uploads
 
-Video generation, translation, speech synthesis, transcription, and other long-running work remain asynchronous. The agent submits a job, keeps its task ID, and calls the corresponding status tool until the job completes.
+Video generation, translation, and other long-running work remain asynchronous. The agent submits a job, keeps its task ID, and calls the corresponding status tool until the job completes.
 
 For uploads, an MCP tool returns a signed upload URL. The client uploads the file directly to object storage, so large file bytes do not pass through the MCP JSON-RPC request.
 
