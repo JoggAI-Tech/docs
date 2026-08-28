@@ -37,14 +37,14 @@ The request is rejected when the model is unavailable or the combination has no 
     Call the explicit provider endpoint and retain the returned `task_id`.
   </Step>
   <Step title="Poll one status endpoint">
-    Call `GET /open/v2/videos/tasks/{task_id}` until the task succeeds or fails.
+    Call `GET /v2/videos/tasks/{task_id}` until the task succeeds or fails.
     Do not replay a billable create request because polling timed out.
   </Step>
 </Steps>
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/runway/videos/generations' \
+  --url 'https://api.jogg.ai/v2/runway/videos/generations' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{

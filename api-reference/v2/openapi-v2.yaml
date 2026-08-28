@@ -9,7 +9,7 @@ info:
     All API requests require authentication using an API key provided in the `x-api-key` header.
     
     ## Base URL
-    Production: https://api.jogg.ai/open/v2
+    Production: https://api.jogg.ai/v2
     
     ## Rate Limiting
     API calls are subject to rate limiting based on your subscription plan.
@@ -51,7 +51,7 @@ tags:
     description: Provider-compatible asynchronous video generation
 
 paths:
-  /open/v2/audio/tts/synthesize:
+  /v2/audio/tts/synthesize:
     post:
       operationId: jogg_post_audio_tts_synthesize
       x-mcp-scope: voice.generate
@@ -83,7 +83,7 @@ paths:
         '200':
           description: Audio task result
 
-  /open/v2/audio/tts/tasks/{task_id}:
+  /v2/audio/tts/tasks/{task_id}:
     get:
       operationId: jogg_get_audio_tts_tasks_task_id
       x-mcp-scope: voice.generate
@@ -102,7 +102,7 @@ paths:
         '200':
           description: Audio task status
 
-  /open/v2/audio/asr/transcribe:
+  /v2/audio/asr/transcribe:
     post:
       operationId: jogg_post_audio_asr_transcribe
       x-mcp-scope: voice.generate
@@ -133,7 +133,7 @@ paths:
         '200':
           description: Transcription task
 
-  /open/v2/audio/asr/tasks/{task_id}:
+  /v2/audio/asr/tasks/{task_id}:
     get:
       operationId: jogg_get_audio_asr_tasks_task_id
       x-mcp-scope: voice.generate
@@ -152,7 +152,7 @@ paths:
         '200':
           description: Transcription task status
 
-  /open/v2/ai_scripts:
+  /v2/ai_scripts:
     post:
       operationId: jogg_post_ai_scripts
       x-mcp-scope: script.generate
@@ -312,7 +312,7 @@ paths:
                             description: Task ID to check script generation status
                             example: "task_123456789"
 
-  /open/v2/ai_scripts/results/{task_id}:
+  /v2/ai_scripts/results/{task_id}:
     get:
       operationId: jogg_get_ai_scripts_results_task_id
       x-mcp-scope: script.generate
@@ -379,7 +379,7 @@ paths:
                             description: Error message (only present when status is 'failed')
                             example: "Failed to generate script"
 
-  /open/v2/avatar_video/{id}:
+  /v2/avatar_video/{id}:
     get:
       operationId: jogg_get_avatar_video_id
       x-mcp-scope: video.generate
@@ -434,7 +434,7 @@ paths:
                             description: Video creation timestamp (Unix timestamp)
                             example: 1640995200
 
-  /open/v2/avatars/public:
+  /v2/avatars/public:
     get:
       operationId: jogg_get_avatars_public
       x-mcp-scope: catalog.read
@@ -544,7 +544,7 @@ paths:
                                   enum: [adult, senior, young_adult]
                                   example: "adult"
 
-  /open/v2/avatars/custom:
+  /v2/avatars/custom:
     get:
       operationId: jogg_get_avatars_custom
       x-mcp-scope: catalog.read
@@ -626,7 +626,7 @@ paths:
                                   format: uri
                                   example: "https://example.com/avatar.mp4"
 
-  /open/v2/avatars/photo_avatars:
+  /v2/avatars/photo_avatars:
     get:
       operationId: jogg_get_avatars_photo_avatars
       x-mcp-scope: catalog.read
@@ -694,7 +694,7 @@ paths:
                                   description: Failure message (if failed)
                                   example: ""
 
-  /open/v2/avatars/product_avatars:
+  /v2/avatars/product_avatars:
     get:
       operationId: jogg_get_avatars_product_avatars
       x-mcp-scope: catalog.read
@@ -770,7 +770,7 @@ paths:
                                   description: Gender
                                   example: "female"
 
-  /open/v2/create_video_from_avatar:
+  /v2/create_video_from_avatar:
     post:
       operationId: jogg_post_create_video_from_avatar
       x-mcp-scope: video.generate
@@ -884,7 +884,7 @@ paths:
                             description: Created video ID
                             example: "video_123456"
 
-  /open/v2/create_video_from_product:
+  /v2/create_video_from_product:
     post:
       operationId: jogg_post_create_video_from_product
       x-mcp-scope: video.generate
@@ -1026,7 +1026,7 @@ paths:
                             enum: [processing, completed, failed]
                             example: "processing"
 
-  /open/v2/create_video_from_product/preview_list:
+  /v2/create_video_from_product/preview_list:
     post:
       operationId: jogg_post_create_video_from_product_preview_list
       x-mcp-scope: video.generate
@@ -1196,7 +1196,7 @@ paths:
                                   description: Error message (if generation failed)
                                   example: "Generation failed due to invalid parameters"
 
-  /open/v2/create_video_from_product/render_single_preview:
+  /v2/create_video_from_product/render_single_preview:
     post:
       operationId: jogg_post_create_video_from_product_render_single_preview
       x-mcp-scope: video.generate
@@ -1243,7 +1243,7 @@ paths:
                             enum: [processing, completed, failed]
                             example: "processing"
 
-  /open/v2/create_video_with_template:
+  /v2/create_video_with_template:
     post:
       operationId: jogg_post_create_video_with_template
       x-mcp-scope: video.generate
@@ -1374,7 +1374,7 @@ paths:
                             description: Created video ID
                             example: "video_123456"
 
-  /open/v2/musics:
+  /v2/musics:
     get:
       operationId: jogg_get_musics
       x-mcp-scope: catalog.read
@@ -1423,7 +1423,7 @@ paths:
                           pagination:
                             $ref: '#/components/schemas/Pagination'
 
-  /open/v2/photo_avatar:
+  /v2/photo_avatar:
     get:
       operationId: jogg_get_photo_avatar
       x-mcp-scope: video.generate
@@ -1491,7 +1491,7 @@ paths:
                             nullable: true
                             example: null
 
-  /open/v2/photo_avatar/add_motion:
+  /v2/photo_avatar/add_motion:
     post:
       operationId: jogg_post_photo_avatar_add_motion
       x-mcp-scope: video.generate
@@ -1567,7 +1567,7 @@ paths:
                             type: string
                             description: Motion generation status
 
-  /open/v2/photo_avatar/photo:
+  /v2/photo_avatar/photo:
     get:
       operationId: jogg_get_photo_avatar_photo
       x-mcp-scope: image.generate
@@ -1626,7 +1626,7 @@ paths:
                             nullable: true
                             example: null
 
-  /open/v2/photo_avatar/photo/generate:
+  /v2/photo_avatar/photo/generate:
     post:
       operationId: jogg_post_photo_avatar_photo_generate
       x-mcp-scope: image.generate
@@ -1704,7 +1704,7 @@ paths:
                           photo_id:
                             type: string
 
-  /open/v2/product:
+  /v2/product:
     post:
       operationId: jogg_post_product
       x-mcp-scope: product.write
@@ -1829,7 +1829,7 @@ paths:
               schema:
                 $ref: '#/components/schemas/BaseResponse'
 
-  /open/v2/product_avatar:
+  /v2/product_avatar:
     get:
       operationId: jogg_get_product_avatar
       x-mcp-scope: video.generate
@@ -1898,7 +1898,7 @@ paths:
                             nullable: true
                             example: null
 
-  /open/v2/product_avatar/add_motion:
+  /v2/product_avatar/add_motion:
     post:
       operationId: jogg_post_product_avatar_add_motion
       x-mcp-scope: video.generate
@@ -1974,7 +1974,7 @@ paths:
                             description: Avatar name
                             example: "Product Presenter"
 
-  /open/v2/product_avatar/generation:
+  /v2/product_avatar/generation:
     post:
       operationId: jogg_post_product_avatar_generation
       x-mcp-scope: image.generate
@@ -2091,7 +2091,7 @@ paths:
                                   description: Creation timestamp
                                   example: 1640995200
 
-  /open/v2/product_avatar/generation/{batch_id}:
+  /v2/product_avatar/generation/{batch_id}:
     get:
       operationId: jogg_get_product_avatar_generation_batch_id
       x-mcp-scope: image.generate
@@ -2183,7 +2183,7 @@ paths:
                                   format: uri
                                   example: "https://example.com/image.jpg"
 
-  /open/v2/product_previews:
+  /v2/product_previews:
     get:
       operationId: jogg_get_product_previews
       x-mcp-scope: product.read
@@ -2295,7 +2295,7 @@ paths:
                             description: Items per page
                             example: 10
 
-  /open/v2/product_video/{product_video_id}:
+  /v2/product_video/{product_video_id}:
     get:
       operationId: jogg_get_product_video_product_video_id
       x-mcp-scope: product.read
@@ -2355,7 +2355,7 @@ paths:
                             description: Credits deducted for this video
                             example: 10.5
 
-  /open/v2/product_videos:
+  /v2/product_videos:
     get:
       operationId: jogg_get_product_videos
       x-mcp-scope: product.read
@@ -2461,7 +2461,7 @@ paths:
                             description: Items per page
                             example: 10
 
-  /open/v2/template/custom/{id}:
+  /v2/template/custom/{id}:
     get:
       operationId: jogg_get_template_custom_id
       x-mcp-scope: video.generate
@@ -2531,7 +2531,7 @@ paths:
                                   description: Variable name
                                   example: "title"
 
-  /open/v2/template_video/{video_id}:
+  /v2/template_video/{video_id}:
     get:
       operationId: jogg_get_template_video_video_id
       x-mcp-scope: video.generate
@@ -2608,7 +2608,7 @@ paths:
                                 description: Credits deducted for this video
                                 example: 10.5
 
-  /open/v2/template_videos:
+  /v2/template_videos:
     get:
       operationId: jogg_get_template_videos
       x-mcp-scope: video.generate
@@ -2716,7 +2716,7 @@ paths:
                           pagination:
                             $ref: '#/components/schemas/Pagination'
 
-  /open/v2/templates:
+  /v2/templates:
     get:
       operationId: jogg_get_templates
       x-mcp-scope: catalog.read
@@ -2829,7 +2829,7 @@ paths:
                                   enum: [0, 1, 2]
                                   example: 1
 
-  /open/v2/templates/custom:
+  /v2/templates/custom:
     get:
       operationId: jogg_get_templates_custom
       x-mcp-scope: catalog.read
@@ -2866,7 +2866,7 @@ paths:
                             items:
                               $ref: '#/components/schemas/TemplateInfo'
 
-  /open/v2/upload/asset:
+  /v2/upload/asset:
     post:
       operationId: jogg_post_upload_asset
       x-mcp-scope: asset.write
@@ -2923,7 +2923,7 @@ paths:
                             description: Asset URL after upload
                             format: uri
 
-  /open/v2/user/remaining_quota:
+  /v2/user/remaining_quota:
     get:
       operationId: jogg_get_user_remaining_quota
       x-mcp-scope: quota.read
@@ -2951,7 +2951,7 @@ paths:
                             description: Remaining API quota
                             example: 1000.0
 
-  /open/v2/user/whoami:
+  /v2/user/whoami:
     get:
       operationId: jogg_get_user_whoami
       x-mcp-scope: account.read
@@ -2983,7 +2983,7 @@ paths:
                             description: User display name
                             example: "johndoe"
 
-  /open/v2/video_translate/:
+  /v2/video_translate/:
     post:
       operationId: jogg_post_video_translate
       x-mcp-scope: video.generate
@@ -3057,7 +3057,7 @@ paths:
                             description: Translation task ID
                             example: "vt_123456"
 
-  /open/v2/video_translate/{video_translate_id}:
+  /v2/video_translate/{video_translate_id}:
     get:
       operationId: jogg_get_video_translate_video_translate_id
       x-mcp-scope: video.generate
@@ -3112,7 +3112,7 @@ paths:
                             format: uri
                             example: "https://res.jogg.ai/subtitle.srt"
 
-  /open/v2/video_translate/target_languages:
+  /v2/video_translate/target_languages:
     get:
       operationId: jogg_get_video_translate_target_languages
       x-mcp-scope: video.generate
@@ -3142,7 +3142,7 @@ paths:
                               type: string
                             example: ["spanish", "french", "german", "japanese"]
 
-  /open/v2/create_lip_sync_video:
+  /v2/create_lip_sync_video:
     post:
       operationId: jogg_post_create_lip_sync_video
       x-mcp-scope: video.generate
@@ -3205,7 +3205,7 @@ paths:
                             enum: [pending, processing, success, failed]
                             example: "pending"
 
-  /open/v2/lip_sync_video:
+  /v2/lip_sync_video:
     get:
       operationId: jogg_get_lip_sync_video
       x-mcp-scope: video.generate
@@ -3302,7 +3302,7 @@ paths:
                                 description: Failure message when status is `failed`
                                 example: "consume retry limit reached: audio duration fetch failed"
 
-  /open/v2/lip_sync_video/{task_id}:
+  /v2/lip_sync_video/{task_id}:
     get:
       operationId: jogg_get_lip_sync_video_task_id
       x-mcp-scope: video.generate
@@ -3379,7 +3379,7 @@ paths:
                                 description: Failure message when status is `failed`
                                 example: "consume retry limit reached: audio duration fetch failed"
 
-  /open/v2/visual_styles:
+  /v2/visual_styles:
     get:
       operationId: jogg_get_visual_styles
       x-mcp-scope: catalog.read
@@ -3427,7 +3427,7 @@ paths:
                                   description: Visual style name
                                   example: "Simple split screen template"
 
-  /open/v2/voices:
+  /v2/voices:
     get:
       operationId: jogg_get_voices
       x-mcp-scope: catalog.read
@@ -3525,7 +3525,7 @@ paths:
                             description: Whether there are more results
                             example: true
 
-  /open/v2/voices/custom:
+  /v2/voices/custom:
     get:
       operationId: jogg_get_voices_custom
       x-mcp-scope: catalog.read
@@ -3585,7 +3585,7 @@ paths:
                                   description: Voice language
                                   example: "english"
 
-  /open/v2/endpoints:
+  /v2/endpoints:
     get:
       operationId: jogg_get_endpoints
       x-mcp-scope: webhook.read
@@ -3615,7 +3615,7 @@ paths:
                             items:
                               $ref: '#/components/schemas/WebhookEndpoint'
 
-  /open/v2/endpoint:
+  /v2/endpoint:
     post:
       operationId: jogg_post_endpoint
       x-mcp-scope: webhook.write
@@ -3667,7 +3667,7 @@ paths:
                       data:
                         $ref: '#/components/schemas/WebhookEndpoint'
 
-  /open/v2/endpoint/{endpoint_id}:
+  /v2/endpoint/{endpoint_id}:
     put:
       operationId: jogg_put_endpoint_endpoint_id
       x-mcp-scope: webhook.write
@@ -3762,7 +3762,7 @@ paths:
                             type: string
                             example: "webhook deleted"
 
-  /open/v2/events:
+  /v2/events:
     get:
       operationId: jogg_get_events
       x-mcp-scope: webhook.read
@@ -3816,7 +3816,7 @@ paths:
                               - "generated_script_success"
                               - "generated_script_failed"
 
-  /open/v2/google/images/generations:
+  /v2/google/images/generations:
     post:
       operationId: jogg_post_google_images_generations
       x-mcp-scope: image.generate
@@ -3838,7 +3838,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/ark/images/generations:
+  /v2/ark/images/generations:
     post:
       operationId: jogg_post_ark_images_generations
       x-mcp-scope: image.generate
@@ -3860,7 +3860,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/openai/images/generations:
+  /v2/openai/images/generations:
     post:
       operationId: jogg_post_openai_images_generations
       x-mcp-scope: image.generate
@@ -3882,7 +3882,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/images/tasks/{task_id}:
+  /v2/images/tasks/{task_id}:
     get:
       operationId: jogg_get_images_tasks_task_id
       x-mcp-scope: image.generate
@@ -3899,7 +3899,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/runway/videos/generations:
+  /v2/runway/videos/generations:
     post:
       operationId: jogg_post_runway_videos_generations
       x-mcp-scope: video.generate
@@ -3920,7 +3920,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/kling/videos/generations:
+  /v2/kling/videos/generations:
     post:
       operationId: jogg_post_kling_videos_generations
       x-mcp-scope: video.generate
@@ -3941,7 +3941,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/ark/videos/generations:
+  /v2/ark/videos/generations:
     post:
       operationId: jogg_post_ark_videos_generations
       x-mcp-scope: video.generate
@@ -3962,7 +3962,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/google/videos/generations:
+  /v2/google/videos/generations:
     post:
       operationId: jogg_post_google_videos_generations
       x-mcp-scope: video.generate
@@ -3983,7 +3983,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/minimax/videos/generations:
+  /v2/minimax/videos/generations:
     post:
       operationId: jogg_post_minimax_videos_generations
       x-mcp-scope: video.generate
@@ -4004,7 +4004,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/pixverse/videos/generations:
+  /v2/pixverse/videos/generations:
     post:
       operationId: jogg_post_pixverse_videos_generations
       x-mcp-scope: video.generate
@@ -4025,7 +4025,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/openai/videos/generations:
+  /v2/openai/videos/generations:
     post:
       operationId: jogg_post_openai_videos_generations
       x-mcp-scope: video.generate
@@ -4046,7 +4046,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/alibaba/videos/generations:
+  /v2/alibaba/videos/generations:
     post:
       operationId: jogg_post_alibaba_videos_generations
       x-mcp-scope: video.generate
@@ -4067,7 +4067,7 @@ paths:
         '200':
           $ref: '#/components/responses/ProviderGenerationTask'
 
-  /open/v2/videos/tasks/{task_id}:
+  /v2/videos/tasks/{task_id}:
     get:
       operationId: jogg_get_videos_tasks_task_id
       x-mcp-scope: video.generate

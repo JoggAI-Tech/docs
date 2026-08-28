@@ -31,14 +31,14 @@ billing owner according to the selected model, quality, and image count.
     Call the provider-specific create endpoint and persist the returned `task_id`.
   </Step>
   <Step title="Poll the unified task endpoint">
-    Call `GET /open/v2/images/tasks/{task_id}` until `status` is `succeeded` or
+    Call `GET /v2/images/tasks/{task_id}` until `status` is `succeeded` or
     `failed`. Successful output URLs are Jogg OSS URLs.
   </Step>
 </Steps>
 
 ```bash
 curl --request POST \
-  --url 'https://api.jogg.ai/open/v2/google/images/generations' \
+  --url 'https://api.jogg.ai/v2/google/images/generations' \
   --header 'x-api-key: YOUR_API_KEY' \
   --header 'Content-Type: application/json' \
   --data '{
