@@ -1,0 +1,64 @@
+---
+title: "Provider Image Generation"
+description: "Submit Google, Ark, and OpenAI image requests through JoggAI and poll one asynchronous task format."
+---
+
+Provider image endpoints preserve the supported official field names while using
+JoggAI credentials, API credits, queues, and object storage. The response is always
+a JoggAI task; upstream task IDs and provider credentials are never exposed.
+
+<Warning>
+Every create request is billable. API credits are charged to the current Space's
+billing owner according to the selected model, quality, and image count.
+</Warning>
+
+## Supported models
+
+| Provider | Models |
+| --- | --- |
+| Google | `gemini-3-pro-image-preview`, `gemini-3.1-flash-image-preview` |
+| Ark | `doubao-seedream-4-0-250828`, `doubao-seedream-4-5-251128` |
+| OpenAI | `gpt-image-2` |
+
+## Workflow
+
+<Steps>
+  <Step title="Upload reference assets">
+    Use [Upload Asset](/api-reference/v2/Asset/UploadAsset), upload the bytes to
+    the signed URL, then use the resulting Jogg OSS URL in the provider request.
+  </Step>
+  <Step title="Submit once">
+    Call the provider-specific create endpoint and persist the returned `task_id`.
+  </Step>
+  <Step title="Poll the unified task endpoint">
+    Call `GET /open/v2/images/tasks/{task_id}` until `status` is `succeeded` or
+    `failed`. Successful output URLs are Jogg OSS URLs.
+  </Step>
+</Steps>
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/open/v2/google/images/generations' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "model": "gemini-3.1-flash-image-preview",
+    "contents": [{"role": "user", "parts": [{"text": "A clean studio product photo"}]}],
+    "generationConfig": {
+      "candidateCount": 1,
+      "responseModalities": ["IMAGE"],
+      "imageConfig": {"aspectRatio": "1:1", "imageSize": "2K"}
+    }
+  }'
+```
+
+Requests use strict JSON decoding. Unknown fields, non-Jogg asset URLs, unsupported
+model and parameter combinations, callbacks, custom watermarks, and external task
+IDs return `400` instead of being ignored.
+
+<CardGroup cols={2}>
+  <Card title="Google Images" href="/api-reference/v2/ProviderImages/GoogleGenerateImages" />
+  <Card title="Ark Images" href="/api-reference/v2/ProviderImages/ArkGenerateImages" />
+  <Card title="OpenAI Images" href="/api-reference/v2/ProviderImages/OpenAIGenerateImages" />
+  <Card title="Get Image Task" href="/api-reference/v2/ProviderImages/GetImageTask" />
+</CardGroup>
