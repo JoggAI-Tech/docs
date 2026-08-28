@@ -1,7 +1,13 @@
 ---
 title: "Generate Video with Google"
-openapi: "POST /v2/google/videos/generations"
+description: "JoggAI provider API endpoint."
 ---
+
+## Endpoint
+
+```http
+POST https://api.jogg.ai/v2/google/videos/generations
+```
 
 Submit a paid Veo request using one `instances` item and supported `parameters`.
 When `lastFrame` is provided, the same instance must also include `image` as the first frame.

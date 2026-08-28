@@ -1,7 +1,13 @@
 ---
 title: "Generate Video with Runway"
-openapi: "POST /v2/runway/videos/generations"
+description: "JoggAI provider API endpoint."
 ---
+
+## Endpoint
+
+```http
+POST https://api.jogg.ai/v2/runway/videos/generations
+```
 
 Submit a paid Runway request using `promptText`, `promptImage`, `ratio`, and
 `duration`. `promptImage` is required because the current Jogg integration uses

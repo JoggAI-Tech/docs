@@ -1,7 +1,13 @@
 ---
 title: "Generate Images with Google"
-openapi: "POST /v2/google/images/generations"
+description: "JoggAI provider API endpoint."
 ---
+
+## Endpoint
+
+```http
+POST https://api.jogg.ai/v2/google/images/generations
+```
 
 Submit a supported Gemini image request. This paid operation returns a JoggAI
 `task_id`; poll the unified image task endpoint for results.

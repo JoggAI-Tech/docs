@@ -1,7 +1,13 @@
 ---
 title: "Get Provider Image Task"
-openapi: "GET /v2/images/tasks/{task_id}"
+description: "JoggAI provider API endpoint."
 ---
+
+## Endpoint
+
+```http
+GET https://api.jogg.ai/v2/images/tasks/{task_id}
+```
 
 Retrieve a provider image task in the current Space. Cross-Space and unknown
 task IDs return the same not-found response. This read-only endpoint never

@@ -1,7 +1,13 @@
 ---
 title: "Generate Video with MiniMax"
-openapi: "POST /v2/minimax/videos/generations"
+description: "JoggAI provider API endpoint."
 ---
+
+## Endpoint
+
+```http
+POST https://api.jogg.ai/v2/minimax/videos/generations
+```
 
 Submit a paid MiniMax request using either `prompt` or supported `content` media.
 The active model configuration determines valid modes and pricing.

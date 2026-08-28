@@ -45,120 +45,10 @@ tags:
     description: User account operations
   - name: Webhook
     description: Webhook endpoint management for event notifications
-  - name: Provider Images
-    description: Provider-compatible asynchronous image generation
-  - name: Provider Videos
-    description: Provider-compatible asynchronous video generation
 
 paths:
-  /v2/audio/tts/synthesize:
-    post:
-      operationId: jogg_post_audio_tts_synthesize
-      x-mcp-scope: voice.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-billing-warning: Consumes API credits based on the generated audio duration.
-      tags: [Voice]
-      summary: Synthesize speech
-      description: Generate speech audio and an optional subtitle file from text.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [text, voice_id]
-              properties:
-                text:
-                  type: string
-                  minLength: 1
-                voice_id:
-                  type: string
-                  minLength: 1
-                idempotency_key:
-                  type: string
-                  maxLength: 255
-      responses:
-        '200':
-          description: Audio task result
-
-  /v2/audio/tts/tasks/{task_id}:
-    get:
-      operationId: jogg_get_audio_tts_tasks_task_id
-      x-mcp-scope: voice.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
-      x-mcp-ltd-restricted: true
-      tags: [Voice]
-      summary: Get speech task
-      parameters:
-        - name: task_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Audio task status
-
-  /v2/audio/asr/transcribe:
-    post:
-      operationId: jogg_post_audio_asr_transcribe
-      x-mcp-scope: voice.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-billing-warning: Consumes API credits based on the submitted audio duration.
-      tags: [Voice]
-      summary: Transcribe audio
-      description: Submit an uploaded Jogg OSS audio asset for transcription.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required: [audio_url, duration_seconds]
-              properties:
-                audio_url:
-                  type: string
-                  format: uri
-                duration_seconds:
-                  type: number
-                  minimum: 0
-                  exclusiveMinimum: true
-                  maximum: 3600
-      responses:
-        '200':
-          description: Transcription task
-
-  /v2/audio/asr/tasks/{task_id}:
-    get:
-      operationId: jogg_get_audio_asr_tasks_task_id
-      x-mcp-scope: voice.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
-      x-mcp-ltd-restricted: true
-      tags: [Voice]
-      summary: Get transcription task
-      parameters:
-        - name: task_id
-          in: path
-          required: true
-          schema:
-            type: string
-      responses:
-        '200':
-          description: Transcription task status
-
   /v2/ai_scripts:
     post:
-      operationId: jogg_post_ai_scripts
-      x-mcp-scope: script.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Consumes API credits when the script generation request is accepted.
       tags:
         - Asset
       summary: Submit AI script generation request
@@ -314,10 +204,6 @@ paths:
 
   /v2/ai_scripts/results/{task_id}:
     get:
-      operationId: jogg_get_ai_scripts_results_task_id
-      x-mcp-scope: script.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Asset
       summary: Get AI script generation status
@@ -381,10 +267,6 @@ paths:
 
   /v2/avatar_video/{id}:
     get:
-      operationId: jogg_get_avatar_video_id
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Video
       summary: Retrieve talking avatar video
@@ -436,10 +318,6 @@ paths:
 
   /v2/avatars/public:
     get:
-      operationId: jogg_get_avatars_public
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Avatar
       summary: Get Public Avatar List
@@ -546,10 +424,6 @@ paths:
 
   /v2/avatars/custom:
     get:
-      operationId: jogg_get_avatars_custom
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Avatar
       summary: Get Instant Avatar List
@@ -628,10 +502,6 @@ paths:
 
   /v2/avatars/photo_avatars:
     get:
-      operationId: jogg_get_avatars_photo_avatars
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Avatar
       summary: Get Photo Avatar List
@@ -696,10 +566,6 @@ paths:
 
   /v2/avatars/product_avatars:
     get:
-      operationId: jogg_get_avatars_product_avatars
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Avatar
       summary: List product avatars
@@ -772,11 +638,6 @@ paths:
 
   /v2/create_video_from_avatar:
     post:
-      operationId: jogg_post_create_video_from_avatar
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Creates paid video-generation work and consumes API credits.
       tags:
         - Video
       summary: Create talking avatar video
@@ -886,11 +747,6 @@ paths:
 
   /v2/create_video_from_product:
     post:
-      operationId: jogg_post_create_video_from_product
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Creates paid product-video work and consumes API credits.
       tags:
         - Video
       summary: Generate Video from Product
@@ -995,9 +851,9 @@ paths:
                       type: string
                       description: Script generation language
                       example: "english"
-                    override_script:
-                      type: string
-                      description: Override the auto-generated script
+                override_script:
+                  type: string
+                  description: Override the auto-generated script
                 webhook_url:
                   type: string
                   description: Webhook URL for status notifications
@@ -1028,11 +884,6 @@ paths:
 
   /v2/create_video_from_product/preview_list:
     post:
-      operationId: jogg_post_create_video_from_product_preview_list
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Creates paid preview-generation work and may consume credits for each accepted preview.
       tags:
         - Video
       summary: Submit Preview List
@@ -1136,34 +987,18 @@ paths:
                       description: Script writing style
                       enum: ["Don't Worry", "Storytime", "Discovery", "Data", "Top 3 reasons", "Light marketing"]
                       example: "Storytime"
-                    language:
-                      type: string
-                      description: Script generation language
-                      example: "english"
-                    override_script:
-                      type: string
-                      description: Override the auto-generated script
+                language:
+                  type: string
+                  description: Script generation language
+                  example: "english"
+                override_script:
+                  type: string
+                  description: Override the auto-generated script
                 webhook_url:
                   type: string
                   description: Webhook URL for status notifications
                   format: uri
                   example: "https://example.com/webhook"
-                pay_type:
-                  type: integer
-                  description: |
-                    Billing type for preview:
-                    * 0 - Default (0.5 credits per 2 minutes)
-                    * 1 - Per 24 seconds (0.1 credits per 24 seconds)
-                  enum: [0, 1]
-                  default: 0
-                  example: 0
-                preview_seconds:
-                  type: integer
-                  description: |
-                    Preview video duration in seconds.
-                    If set, scenes will be truncated based on character estimation to match the target duration.
-                  minimum: 1
-                  example: 30
       responses:
         '200':
           description: Success
@@ -1198,11 +1033,6 @@ paths:
 
   /v2/create_video_from_product/render_single_preview:
     post:
-      operationId: jogg_post_create_video_from_product_render_single_preview
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Renders paid video work from the selected preview and consumes API credits.
       tags:
         - Video
       summary: Render Video from Preview
@@ -1245,11 +1075,6 @@ paths:
 
   /v2/create_video_with_template:
     post:
-      operationId: jogg_post_create_video_with_template
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Creates paid template-video work and consumes API credits.
       tags:
         - Video
       summary: Create video from template
@@ -1326,20 +1151,29 @@ paths:
                           content:
                             type: string
                             description: |
-                              text/script 类型必填，文案内容；
-                              image/video 类型可选，可作为 url 的兼容写法（直接传媒体 URL）
+                              Variable content:
+                              * For text/script type: Required, the text content
+                              * For image/video type: Optional, can be used as URL (compatible with url field)
+                            example: "Product description text"
                           url:
                             type: string
-                            description: 媒体资源 URL（image/video 类型与 asset_id 二选一）
+                            description: |
+                              Media resource URL for image/video type.
+                              Either url or asset_id is required for image/video type.
                             format: uri
+                            example: "https://res.jogg.ai/media/image.jpg"
                           asset_id:
                             type: integer
-                            description: 素材 ID（image/video 类型，通过 /open/material/upload 上传后获得，与 url 二选一）
-                webhook_url:
-                  type: string
-                  description: Webhook URL for status notifications
-                  format: uri
-                  example: "https://example.com/webhook"
+                            description: |
+                              Asset ID for image/video type.
+                              Obtained after uploading via /v2/upload/asset endpoint.
+                              Either url or asset_id is required for image/video type.
+                            example: 12345
+                          webhook_url:
+                            type: string
+                            description: Webhook URL for status notifications
+                            format: uri
+                            example: "https://example.com/webhook"
                 disable_random_trans:
                   type: boolean
                   description: Disable random transitions
@@ -1376,10 +1210,6 @@ paths:
 
   /v2/musics:
     get:
-      operationId: jogg_get_musics
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Asset
       summary: List background music
@@ -1425,10 +1255,6 @@ paths:
 
   /v2/photo_avatar:
     get:
-      operationId: jogg_get_photo_avatar
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Avatar
       summary: Check Motion Status
@@ -1493,11 +1319,6 @@ paths:
 
   /v2/photo_avatar/add_motion:
     post:
-      operationId: jogg_post_photo_avatar_add_motion
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Creates paid avatar-motion work and consumes Jogg account credits.
       tags:
         - Avatar
       summary: Add Motion to Photo Avatar
@@ -1555,24 +1376,30 @@ paths:
                       data:
                         type: object
                         properties:
-                          motion_id:
-                            type: string
-                            description: Motion ID
-                            example: "motion_123"
                           avatar_id:
                             type: integer
                             description: Avatar ID
                             example: 123
+                          motion_id:
+                            type: string
+                            description: Motion ID for tracking generation status
+                            example: "motion_456"
                           status:
                             type: string
                             description: Motion generation status
+                            enum: [pending, processing, completed, failed]
+                            example: "processing"
+              example:
+                rid: "7abb75ebf2523038874d66cf5dfb2b02"
+                code: 0
+                msg: "success"
+                data:
+                  avatar_id: 123
+                  motion_id: "motion_456"
+                  status: "processing"
 
   /v2/photo_avatar/photo:
     get:
-      operationId: jogg_get_photo_avatar_photo
-      x-mcp-scope: image.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Avatar
       summary: Check Photo Generation Status
@@ -1628,11 +1455,6 @@ paths:
 
   /v2/photo_avatar/photo/generate:
     post:
-      operationId: jogg_post_photo_avatar_photo_generate
-      x-mcp-scope: image.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Creates paid image-generation work and consumes API credits.
       tags:
         - Avatar
       summary: Generate Photo Avatar
@@ -1706,10 +1528,6 @@ paths:
 
   /v2/product:
     post:
-      operationId: jogg_post_product
-      x-mcp-scope: product.write
-      x-mcp-read-only: false
-      x-mcp-destructive: false
       tags:
         - Product
       summary: Create Product V2
@@ -1776,10 +1594,6 @@ paths:
                         $ref: '#/components/schemas/ProductInfo'
 
     put:
-      operationId: jogg_put_product
-      x-mcp-scope: product.write
-      x-mcp-read-only: false
-      x-mcp-destructive: true
       tags:
         - Product
       summary: Update Product V2
@@ -1831,10 +1645,6 @@ paths:
 
   /v2/product_avatar:
     get:
-      operationId: jogg_get_product_avatar
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Avatar
       summary: Check image to product avatar status
@@ -1900,11 +1710,6 @@ paths:
 
   /v2/product_avatar/add_motion:
     post:
-      operationId: jogg_post_product_avatar_add_motion
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Creates paid product-avatar motion work and consumes Jogg account credits.
       tags:
         - Avatar
       summary: Convert image to product avatar
@@ -1976,11 +1781,6 @@ paths:
 
   /v2/product_avatar/generation:
     post:
-      operationId: jogg_post_product_avatar_generation
-      x-mcp-scope: image.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: May consume Jogg account credits per generated image after any applicable free allowance.
       tags:
         - Avatar
       summary: Create product avatar image
@@ -2093,10 +1893,6 @@ paths:
 
   /v2/product_avatar/generation/{batch_id}:
     get:
-      operationId: jogg_get_product_avatar_generation_batch_id
-      x-mcp-scope: image.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Avatar
       summary: Check product avatar image generation status
@@ -2185,10 +1981,6 @@ paths:
 
   /v2/product_previews:
     get:
-      operationId: jogg_get_product_previews
-      x-mcp-scope: product.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Video
       summary: Get Product Preview List
@@ -2297,10 +2089,6 @@ paths:
 
   /v2/product_video/{product_video_id}:
     get:
-      operationId: jogg_get_product_video_product_video_id
-      x-mcp-scope: product.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Video
       summary: Check Product Video Status
@@ -2357,10 +2145,6 @@ paths:
 
   /v2/product_videos:
     get:
-      operationId: jogg_get_product_videos
-      x-mcp-scope: product.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Video
       summary: Get Product Video List
@@ -2382,6 +2166,11 @@ paths:
             default: 10
         - name: status
           in: query
+          description: |
+            Filter by status:
+            * 3 - Processing
+            * 4 - Success
+            * 5 - Failed
           schema:
             type: integer
             enum: [3, 4, 5]
@@ -2463,10 +2252,6 @@ paths:
 
   /v2/template/custom/{id}:
     get:
-      operationId: jogg_get_template_custom_id
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Template
       summary: Get specific custom template details
@@ -2533,10 +2318,6 @@ paths:
 
   /v2/template_video/{video_id}:
     get:
-      operationId: jogg_get_template_video_video_id
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Video
       summary: Get template video status and details
@@ -2610,10 +2391,6 @@ paths:
 
   /v2/template_videos:
     get:
-      operationId: jogg_get_template_videos
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Video
       summary: List template videos
@@ -2718,70 +2495,23 @@ paths:
 
   /v2/templates:
     get:
-      operationId: jogg_get_templates
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Template
       summary: List index templates
       description: |
-        Retrieve a list of index templates with optional filtering by aspect ratio, tags, and search query.
-        Supports filtering templates by different aspect ratios, tags, and search functionality.
+        Retrieve a list of index templates with optional filtering by aspect ratio.
       parameters:
         - name: aspect_ratio
           in: query
-          description: Filter by aspect ratio
+          description: |
+            Screen aspect ratio filter:
+            * portrait - Portrait [9:16]
+            * landscape - Landscape [16:9]
+            * square - Square [1:1]
           schema:
             type: string
             enum: [portrait, landscape, square]
             example: "portrait"
-        - name: search
-          in: query
-          description: Search query for template name
-          schema:
-            type: string
-            example: "product showcase"
-        - name: tag_ids
-          in: query
-          description: Comma-separated list of tag IDs
-          schema:
-            type: string
-            example: "1,2,3"
-        - name: tag_id
-          in: query
-          description: Single tag ID
-          schema:
-            type: integer
-            example: 1
-        - name: parent_id
-          in: query
-          description: Parent tag ID
-          schema:
-            type: integer
-            example: 0
-        - name: name
-          in: query
-          description: Template names filter (can be multiple)
-          schema:
-            type: array
-            items:
-              type: string
-            example: ["Template 1", "Template 2"]
-        - name: prop
-          in: query
-          description: Sort field
-          schema:
-            type: string
-            enum: [it.sort]
-            example: "it.sort"
-        - name: order
-          in: query
-          description: Sort order
-          schema:
-            type: string
-            enum: [asc, desc]
-            example: "asc"
       responses:
         '200':
           description: Success
@@ -2828,13 +2558,30 @@ paths:
                                     * 2 - Square [1:1]
                                   enum: [0, 1, 2]
                                   example: 1
+              example:
+                rid: "7abb75ebf2523038874d66cf5dfb2b02"
+                code: 0
+                msg: "success"
+                data:
+                  templates:
+                    - id: 149
+                      name: "Product Showcase"
+                      cover_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-cover.png"
+                      preview_url: "https://res.jogg.ai/jogg/res/person/2025-06-27/template-preview.mp4"
+                      aspect_ratio: 1
+                    - id: 143
+                      name: "eufy Security eufyCam 3C Add-on Camera"
+                      cover_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-cover2.png"
+                      preview_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-preview2.mp4"
+                      aspect_ratio: 0
+                    - id: 108
+                      name: "Toyland Cartoon Stickers"
+                      cover_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-cover3.png"
+                      preview_url: "https://res.jogg.ai/jogg/dp/output/2024-08-06/template-preview3.webm"
+                      aspect_ratio: 0
 
   /v2/templates/custom:
     get:
-      operationId: jogg_get_templates_custom
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Template
       summary: List user's custom templates
@@ -2868,10 +2615,6 @@ paths:
 
   /v2/upload/asset:
     post:
-      operationId: jogg_post_upload_asset
-      x-mcp-scope: asset.write
-      x-mcp-read-only: false
-      x-mcp-destructive: false
       tags:
         - Asset
       summary: Upload asset file
@@ -2925,14 +2668,10 @@ paths:
 
   /v2/user/remaining_quota:
     get:
-      operationId: jogg_get_user_remaining_quota
-      x-mcp-scope: quota.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - User
       summary: Get Remaining Quota
-      description: Retrieve the remaining JoggAI API quota for the selected Space billing account
+      description: Retrieve the remaining JoggAI API quota for the authenticated user
       responses:
         '200':
           description: Success
@@ -2953,10 +2692,6 @@ paths:
 
   /v2/user/whoami:
     get:
-      operationId: jogg_get_user_whoami
-      x-mcp-scope: account.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - User
       summary: Get Current User Information
@@ -2985,11 +2720,6 @@ paths:
 
   /v2/video_translate/:
     post:
-      operationId: jogg_post_video_translate
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-billing-warning: Creates paid translation work and consumes API credits based on the processed video.
       tags:
         - Video
       summary: Translate Video
@@ -3059,10 +2789,6 @@ paths:
 
   /v2/video_translate/{video_translate_id}:
     get:
-      operationId: jogg_get_video_translate_video_translate_id
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Video
       summary: Check Translation Status
@@ -3114,10 +2840,6 @@ paths:
 
   /v2/video_translate/target_languages:
     get:
-      operationId: jogg_get_video_translate_target_languages
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Video
       summary: List Target Languages
@@ -3139,252 +2861,11 @@ paths:
                             type: array
                             description: List of supported language codes
                             items:
-                              type: string
+                                  type: string
                             example: ["spanish", "french", "german", "japanese"]
-
-  /v2/create_lip_sync_video:
-    post:
-      operationId: jogg_post_create_lip_sync_video
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-billing-warning: Creates paid lip-sync work and consumes API credits based on output duration.
-      tags:
-        - Video
-      summary: Create lip sync video task
-      description: |
-        Submit a video URL and an audio URL to create a lip sync task.
-        Use the returned task ID to poll for processing status and results.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              type: object
-              required:
-                - video_url
-                - audio_url
-              properties:
-                video_url:
-                  type: string
-                  format: uri
-                  description: Source video URL
-                  example: "https://res.jogg.ai/source-video.mp4"
-                audio_url:
-                  type: string
-                  format: uri
-                  description: Source audio URL
-                  example: "https://res.jogg.ai/source-audio.wav"
-                playback_type:
-                  type: string
-                  description: Playback strategy when source video is shorter than audio
-                  enum: [normal, normal_reverse, normal_reverse_by_audio]
-                  default: normal
-                  example: "normal"
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/BaseResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          task_id:
-                            type: string
-                            description: Lip sync task ID
-                            example: "3d5c6930-d0da-4f7b-826e-cd1530f6734f"
-                          status:
-                            type: string
-                            description: Initial task status
-                            enum: [pending, processing, success, failed]
-                            example: "pending"
-
-  /v2/lip_sync_video:
-    get:
-      operationId: jogg_get_lip_sync_video
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
-      x-mcp-ltd-restricted: true
-      tags:
-        - Video
-      summary: Query latest lip sync task by input
-      description: |
-        Query the latest lip sync task under the current authenticated user and space
-        by the same video URL, audio URL, and playback type.
-        Agents should call this endpoint before creating a new task to avoid duplicates.
-      parameters:
-        - name: video_url
-          in: query
-          required: true
-          description: Source video URL
-          schema:
-            type: string
-            format: uri
-            example: "https://res.jogg.ai/source-video.mp4"
-        - name: audio_url
-          in: query
-          required: true
-          description: Source audio URL
-          schema:
-            type: string
-            format: uri
-            example: "https://res.jogg.ai/source-audio.wav"
-        - name: playback_type
-          in: query
-          required: false
-          description: Lip sync playback strategy, defaults to `normal`
-          schema:
-            type: string
-            enum: [normal, normal_reverse, normal_reverse_by_audio]
-            default: normal
-            example: "normal"
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/BaseResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          task_id:
-                            type: string
-                            description: Matched lip sync task ID
-                            example: "3d5c6930-d0da-4f7b-826e-cd1530f6734f"
-                          status:
-                            type: string
-                            description: Task status
-                            enum: [pending, processing, success, failed]
-                            example: "processing"
-                          created_at:
-                            type: integer
-                            description: Task creation timestamp in seconds
-                            example: 1741500000
-                          completed_at:
-                            type: integer
-                            description: Task completion timestamp in seconds, present when finished
-                            example: 1741500030
-                          data:
-                            type: object
-                            nullable: true
-                            properties:
-                              result_url:
-                                type: string
-                                format: uri
-                                description: Final output video URL
-                                example: "https://res.jogg.ai/lipsync-result.mp4"
-                              cover_url:
-                                type: string
-                                format: uri
-                                description: Final output cover URL
-                                example: "https://res.jogg.ai/lipsync-cover.jpg"
-                              duration_seconds:
-                                type: number
-                                description: Final output duration in seconds
-                                example: 12.5
-                          error:
-                            type: object
-                            nullable: true
-                            properties:
-                              message:
-                                type: string
-                                description: Failure message when status is `failed`
-                                example: "consume retry limit reached: audio duration fetch failed"
-
-  /v2/lip_sync_video/{task_id}:
-    get:
-      operationId: jogg_get_lip_sync_video_task_id
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
-      x-mcp-ltd-restricted: true
-      tags:
-        - Video
-      summary: Get lip sync task by task ID
-      description: |
-        Query lip sync task status and result by task ID.
-      parameters:
-        - name: task_id
-          in: path
-          required: true
-          description: Lip sync task ID
-          schema:
-            type: string
-            example: "3d5c6930-d0da-4f7b-826e-cd1530f6734f"
-      responses:
-        '200':
-          description: Success
-          content:
-            application/json:
-              schema:
-                allOf:
-                  - $ref: '#/components/schemas/BaseResponse'
-                  - type: object
-                    properties:
-                      data:
-                        type: object
-                        properties:
-                          task_id:
-                            type: string
-                            description: Lip sync task ID
-                            example: "3d5c6930-d0da-4f7b-826e-cd1530f6734f"
-                          status:
-                            type: string
-                            description: Task status
-                            enum: [pending, processing, success, failed]
-                            example: "success"
-                          created_at:
-                            type: integer
-                            description: Task creation timestamp in seconds
-                            example: 1741500000
-                          completed_at:
-                            type: integer
-                            description: Task completion timestamp in seconds, present when finished
-                            example: 1741500030
-                          data:
-                            type: object
-                            nullable: true
-                            properties:
-                              result_url:
-                                type: string
-                                format: uri
-                                description: Final output video URL
-                                example: "https://res.jogg.ai/lipsync-result.mp4"
-                              cover_url:
-                                type: string
-                                format: uri
-                                description: Final output cover URL
-                                example: "https://res.jogg.ai/lipsync-cover.jpg"
-                              duration_seconds:
-                                type: number
-                                description: Final output duration in seconds
-                                example: 12.5
-                          error:
-                            type: object
-                            nullable: true
-                            properties:
-                              message:
-                                type: string
-                                description: Failure message when status is `failed`
-                                example: "consume retry limit reached: audio duration fetch failed"
 
   /v2/visual_styles:
     get:
-      operationId: jogg_get_visual_styles
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Asset
       summary: List visual styles
@@ -3429,10 +2910,6 @@ paths:
 
   /v2/voices:
     get:
-      operationId: jogg_get_voices
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Voice
       summary: Get Timbre List
@@ -3527,10 +3004,6 @@ paths:
 
   /v2/voices/custom:
     get:
-      operationId: jogg_get_voices_custom
-      x-mcp-scope: catalog.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Voice
       summary: Get User Timbre List
@@ -3587,10 +3060,6 @@ paths:
 
   /v2/endpoints:
     get:
-      operationId: jogg_get_endpoints
-      x-mcp-scope: webhook.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Webhook
       summary: List Webhook Endpoints
@@ -3617,10 +3086,6 @@ paths:
 
   /v2/endpoint:
     post:
-      operationId: jogg_post_endpoint
-      x-mcp-scope: webhook.write
-      x-mcp-read-only: false
-      x-mcp-destructive: false
       tags:
         - Webhook
       summary: Add Webhook Endpoint
@@ -3653,7 +3118,7 @@ paths:
                   description: List of event types to subscribe to
                   items:
                     type: string
-                  example: ["video.completed", "video.failed"]
+                  example: ["generated_avatar_video_success", "generated_avatar_video_failed"]
       responses:
         '200':
           description: Success
@@ -3669,10 +3134,6 @@ paths:
 
   /v2/endpoint/{endpoint_id}:
     put:
-      operationId: jogg_put_endpoint_endpoint_id
-      x-mcp-scope: webhook.write
-      x-mcp-read-only: false
-      x-mcp-destructive: true
       tags:
         - Webhook
       summary: Update Webhook Endpoint
@@ -3712,7 +3173,7 @@ paths:
                   description: Updated list of event types
                   items:
                     type: string
-                  example: ["video.completed", "video.failed", "avatar.created"]
+                  example: ["generated_avatar_video_success", "generated_avatar_video_failed", "generated_photo_avatar_success"]
       responses:
         '200':
           description: Success
@@ -3727,10 +3188,6 @@ paths:
                         $ref: '#/components/schemas/WebhookEndpoint'
 
     delete:
-      operationId: jogg_delete_endpoint_endpoint_id
-      x-mcp-scope: webhook.write
-      x-mcp-read-only: false
-      x-mcp-destructive: true
       tags:
         - Webhook
       summary: Delete Webhook Endpoint
@@ -3764,10 +3221,6 @@ paths:
 
   /v2/events:
     get:
-      operationId: jogg_get_events
-      x-mcp-scope: webhook.read
-      x-mcp-read-only: true
-      x-mcp-destructive: false
       tags:
         - Webhook
       summary: List Webhook Events
@@ -3797,10 +3250,6 @@ paths:
                               - "generated_video_failed"
                               - "create_avatar_success"
                               - "create_avatar_failed"
-                              - "generated_image_success"
-                              - "generated_image_failed"
-                              - "generated_motion_success"
-                              - "generated_motion_failed"
                               - "generated_product_video_success"
                               - "generated_product_video_failed"
                               - "generated_avatar_video_success"
@@ -3816,274 +3265,6 @@ paths:
                               - "generated_script_success"
                               - "generated_script_failed"
 
-  /v2/google/images/generations:
-    post:
-      operationId: jogg_post_google_images_generations
-      x-mcp-scope: image.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid Google image-generation work and consumes API credits for each requested image.
-      tags: [Provider Images]
-      summary: Generate images with Google
-      description: Submit a Gemini image request using Jogg-hosted provider credentials and receive a Jogg asynchronous task ID.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GoogleImageGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/ark/images/generations:
-    post:
-      operationId: jogg_post_ark_images_generations
-      x-mcp-scope: image.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid Ark image-generation work and consumes API credits for each requested image.
-      tags: [Provider Images]
-      summary: Generate images with Ark
-      description: Submit a Seedream image request using Jogg-hosted provider credentials and receive a Jogg asynchronous task ID.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ArkImageGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/openai/images/generations:
-    post:
-      operationId: jogg_post_openai_images_generations
-      x-mcp-scope: image.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid OpenAI image-generation work and consumes API credits for each requested image.
-      tags: [Provider Images]
-      summary: Generate images with OpenAI
-      description: Submit a GPT Image 2 request using Jogg-hosted provider credentials and receive a Jogg asynchronous task ID.
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAIImageGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/images/tasks/{task_id}:
-    get:
-      operationId: jogg_get_images_tasks_task_id
-      x-mcp-scope: image.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      tags: [Provider Images]
-      summary: Get provider image task
-      description: Get a provider image task owned by the authenticated user and current Space.
-      parameters:
-        - $ref: '#/components/parameters/ProviderTaskID'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/runway/videos/generations:
-    post:
-      operationId: jogg_post_runway_videos_generations
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid Runway video-generation work and consumes API credits according to the current model price.
-      tags: [Provider Videos]
-      summary: Generate video with Runway
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/RunwayVideoGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/kling/videos/generations:
-    post:
-      operationId: jogg_post_kling_videos_generations
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid Kling video-generation work and consumes API credits according to model, duration, resolution, and audio options.
-      tags: [Provider Videos]
-      summary: Generate video with Kling
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/KlingVideoGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/ark/videos/generations:
-    post:
-      operationId: jogg_post_ark_videos_generations
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid Ark video-generation work and consumes API credits according to model, duration, resolution, audio, and materials.
-      tags: [Provider Videos]
-      summary: Generate video with Ark
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/ArkVideoGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/google/videos/generations:
-    post:
-      operationId: jogg_post_google_videos_generations
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid Google Veo video-generation work and consumes API credits according to model and audio options.
-      tags: [Provider Videos]
-      summary: Generate video with Google
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/GoogleVideoGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/minimax/videos/generations:
-    post:
-      operationId: jogg_post_minimax_videos_generations
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid MiniMax video-generation work and consumes API credits according to output duration, resolution, and reference materials.
-      tags: [Provider Videos]
-      summary: Generate video with MiniMax
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/MiniMaxVideoGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/pixverse/videos/generations:
-    post:
-      operationId: jogg_post_pixverse_videos_generations
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid PixVerse video-generation work and consumes API credits according to duration, quality, audio, and multi-clip options.
-      tags: [Provider Videos]
-      summary: Generate video with PixVerse
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/PixVerseVideoGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/openai/videos/generations:
-    post:
-      operationId: jogg_post_openai_videos_generations
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid OpenAI Sora video-generation work and consumes API credits according to seconds and output size.
-      tags: [Provider Videos]
-      summary: Generate video with OpenAI
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/OpenAIVideoGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/alibaba/videos/generations:
-    post:
-      operationId: jogg_post_alibaba_videos_generations
-      x-mcp-scope: video.generate
-      x-mcp-read-only: false
-      x-mcp-destructive: true
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      x-mcp-billing-warning: Creates paid Alibaba HappyHorse video-generation work and consumes API credits according to version, mode, duration, and resolution.
-      tags: [Provider Videos]
-      summary: Generate video with Alibaba
-      requestBody:
-        required: true
-        content:
-          application/json:
-            schema:
-              $ref: '#/components/schemas/AlibabaVideoGenerationRequest'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
-  /v2/videos/tasks/{task_id}:
-    get:
-      operationId: jogg_get_videos_tasks_task_id
-      x-mcp-scope: video.generate
-      x-mcp-read-only: true
-      x-mcp-destructive: false
-      x-mcp-ltd-restricted: true
-      x-mcp-prod-hidden: true
-      tags: [Provider Videos]
-      summary: Get provider video task
-      description: Get a provider video task owned by the authenticated user and current Space.
-      parameters:
-        - $ref: '#/components/parameters/ProviderTaskID'
-      responses:
-        '200':
-          $ref: '#/components/responses/ProviderGenerationTask'
-
 components:
   securitySchemes:
     apiKeyAuth:
@@ -4092,30 +3273,7 @@ components:
       name: x-api-key
       description: API key for authentication. Obtain your key from the JoggAI dashboard.
 
-  responses:
-    ProviderGenerationTask:
-      description: Provider generation task accepted or returned
-      content:
-        application/json:
-          schema:
-            allOf:
-              - $ref: '#/components/schemas/BaseResponse'
-              - type: object
-                additionalProperties: false
-                properties:
-                  data:
-                    $ref: '#/components/schemas/ProviderGenerationTask'
-
   parameters:
-    ProviderTaskID:
-      name: task_id
-      in: path
-      required: true
-      description: Jogg asynchronous task ID
-      schema:
-        type: string
-        minLength: 1
-
     PageParam:
       name: page
       in: query
@@ -4138,496 +3296,6 @@ components:
         example: 10
 
   schemas:
-    ProviderGenerationTask:
-      type: object
-      additionalProperties: false
-      required: [task_id, vendor, type, model, status, output_urls, error]
-      properties:
-        task_id:
-          type: string
-        vendor:
-          type: string
-          enum: [google, ark, openai, runway, kling, minimax, pixverse, alibaba]
-        type:
-          type: string
-          enum: [image, video]
-        model:
-          type: string
-        status:
-          type: string
-          enum: [queued, processing, succeeded, failed]
-        output_urls:
-          type: array
-          items:
-            type: string
-            format: uri
-        error:
-          type: string
-          nullable: true
-
-    GoogleImageGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, contents]
-      properties:
-        model:
-          type: string
-          enum: [gemini-3-pro-image-preview, gemini-3.1-flash-image-preview]
-        contents:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/GoogleImageContent'
-        generationConfig:
-          $ref: '#/components/schemas/GoogleImageGenerationConfig'
-
-    GoogleImageContent:
-      type: object
-      additionalProperties: false
-      required: [parts]
-      properties:
-        role:
-          type: string
-          enum: [user]
-        parts:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/GoogleImagePart'
-
-    GoogleImagePart:
-      type: object
-      additionalProperties: false
-      oneOf:
-        - required: [text]
-        - required: [fileData]
-      properties:
-        text:
-          type: string
-          minLength: 1
-          maxLength: 1500
-        fileData:
-          $ref: '#/components/schemas/GoogleImageFileData'
-
-    GoogleImageFileData:
-      type: object
-      additionalProperties: false
-      required: [fileUri]
-      properties:
-        mimeType:
-          type: string
-          pattern: '^image/'
-        fileUri:
-          type: string
-          format: uri
-          description: Jogg OSS asset URL returned by the upload endpoint.
-
-    GoogleImageGenerationConfig:
-      type: object
-      additionalProperties: false
-      properties:
-        candidateCount:
-          type: integer
-          minimum: 1
-          maximum: 4
-          default: 1
-        responseModalities:
-          type: array
-          minItems: 1
-          maxItems: 1
-          items:
-            type: string
-            enum: [IMAGE]
-        imageConfig:
-          type: object
-          additionalProperties: false
-          properties:
-            aspectRatio:
-              $ref: '#/components/schemas/ProviderImageAspectRatio'
-            imageSize:
-              type: string
-              enum: [1K, 2K, 4K]
-              default: 2K
-
-    ArkImageGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, prompt]
-      properties:
-        model:
-          type: string
-          enum: [doubao-seedream-4-0-250828, doubao-seedream-4-5-251128]
-        prompt:
-          type: string
-          minLength: 1
-          maxLength: 1500
-        image:
-          type: array
-          items:
-            type: string
-            format: uri
-            description: Jogg OSS asset URL returned by the upload endpoint.
-        size:
-          type: string
-          enum: [1K, 2K, 4K]
-          default: 2K
-        n:
-          type: integer
-          minimum: 1
-          maximum: 4
-          default: 1
-
-    OpenAIImageGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, prompt]
-      properties:
-        model:
-          type: string
-          enum: [gpt-image-2]
-        prompt:
-          type: string
-          minLength: 1
-          maxLength: 1500
-        n:
-          type: integer
-          minimum: 1
-          maximum: 4
-          default: 1
-        size:
-          type: string
-          enum: [auto, 1024x1024, 1024x1536, 1536x1024]
-          default: auto
-        quality:
-          type: string
-          enum: [medium, high]
-          default: medium
-
-    ProviderVideoURL:
-      type: object
-      additionalProperties: false
-      required: [url]
-      properties:
-        url:
-          type: string
-          format: uri
-          description: Jogg OSS asset URL returned by the upload endpoint.
-
-    ProviderVideoContent:
-      type: object
-      additionalProperties: false
-      required: [type]
-      properties:
-        type:
-          type: string
-          enum: [text, image_url, video_url, audio_url]
-        text:
-          type: string
-        image_url:
-          $ref: '#/components/schemas/ProviderVideoURL'
-        video_url:
-          $ref: '#/components/schemas/ProviderVideoURL'
-        audio_url:
-          $ref: '#/components/schemas/ProviderVideoURL'
-        role:
-          type: string
-          enum: [first_frame, last_frame, reference, style_reference, motion_reference, audio_track]
-
-    RunwayVideoGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, promptText, promptImage]
-      properties:
-        model:
-          type: string
-          enum: [gen3a_turbo, gen4_turbo]
-        promptText:
-          type: string
-          minLength: 1
-          maxLength: 1500
-        promptImage:
-          type: string
-          format: uri
-          description: Jogg OSS asset URL returned by the upload endpoint.
-        ratio:
-          $ref: '#/components/schemas/ProviderVideoAspectRatio'
-        duration:
-          type: integer
-          enum: [5, 10]
-          default: 10
-
-    KlingVideoGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, prompt]
-      properties:
-        model:
-          type: string
-          enum: [kling-2.6, kling-3.0]
-        prompt:
-          type: string
-          minLength: 1
-          maxLength: 2500
-        contents:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProviderVideoContent'
-        settings:
-          type: object
-          additionalProperties: false
-          properties:
-            duration:
-              type: integer
-              enum: [5, 10]
-              default: 10
-            aspect_ratio:
-              type: string
-              enum: ['9:16', '16:9', '1:1']
-            resolution:
-              type: string
-              enum: [720p, 1080p]
-              default: 720p
-        options:
-          type: object
-          additionalProperties: false
-          properties:
-            negative_prompt:
-              type: string
-              maxLength: 2500
-            generate_audio:
-              type: boolean
-              default: false
-
-    ArkVideoGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, content]
-      properties:
-        model:
-          type: string
-          enum:
-            - doubao-seedance-1-0-pro-250528
-            - doubao-seedance-2-0-260128
-            - doubao-seedance-2-0-fast-260128
-            - doubao-seedance-2-5-260628
-        content:
-          type: array
-          minItems: 1
-          items:
-            $ref: '#/components/schemas/ProviderVideoContent'
-        duration:
-          type: integer
-          minimum: 1
-          maximum: 30
-          default: 10
-        ratio:
-          $ref: '#/components/schemas/ProviderVideoAspectRatio'
-        resolution:
-          type: string
-          pattern: '^[0-9]+p$'
-          default: 720p
-        generate_audio:
-          type: boolean
-          default: false
-
-    GoogleVideoGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, instances]
-      properties:
-        model:
-          type: string
-          enum: [veo-3.0-generate-001, veo-3.0-fast-generate-001, veo-3.1-generate-001, veo-3.1-fast-generate-001]
-        instances:
-          type: array
-          minItems: 1
-          maxItems: 1
-          items:
-            type: object
-            additionalProperties: false
-            required: [prompt]
-            anyOf:
-              - required: [image]
-              - not:
-                  required: [lastFrame]
-            properties:
-              prompt:
-                type: string
-                minLength: 1
-                maxLength: 1500
-              image:
-                type: string
-                format: uri
-              lastFrame:
-                type: string
-                format: uri
-        parameters:
-          type: object
-          additionalProperties: false
-          properties:
-            aspectRatio:
-              type: string
-              enum: ['9:16', '16:9']
-            durationSeconds:
-              type: integer
-              minimum: 1
-              maximum: 8
-              default: 8
-            generateAudio:
-              type: boolean
-              default: false
-            resolution:
-              type: string
-              enum: [720p, 1080p]
-              default: 720p
-
-    MiniMaxVideoGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model]
-      properties:
-        model:
-          type: string
-          enum: [MiniMax-Hailuo-02, MiniMax-H3]
-        prompt:
-          type: string
-          maxLength: 2000
-        content:
-          type: array
-          items:
-            $ref: '#/components/schemas/ProviderVideoContent'
-        first_frame_image:
-          type: string
-          format: uri
-        duration:
-          type: integer
-          minimum: 3
-          maximum: 15
-        resolution:
-          type: string
-          enum: [768P, 1080P, 2K]
-        ratio:
-          $ref: '#/components/schemas/ProviderVideoAspectRatio'
-
-    PixVerseVideoGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, prompt]
-      properties:
-        model:
-          type: string
-          enum: [v5.5]
-        prompt:
-          type: string
-          minLength: 1
-          maxLength: 2048
-        image_url:
-          type: string
-          format: uri
-        aspect_ratio:
-          type: string
-          enum: ['9:16', '16:9', '1:1', '3:4', '4:3']
-        duration:
-          type: integer
-          enum: [5, 8, 10]
-          default: 5
-        quality:
-          type: string
-          enum: [360p, 540p, 720p, 1080p]
-          default: 720p
-        negative_prompt:
-          type: string
-          maxLength: 2048
-        generate_audio_switch:
-          type: boolean
-          default: false
-        generate_multi_clip_switch:
-          type: boolean
-          default: false
-
-    OpenAIVideoGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, prompt]
-      properties:
-        model:
-          type: string
-          enum: [sora-2]
-        prompt:
-          type: string
-          minLength: 1
-          maxLength: 1500
-        input_reference:
-          type: string
-          format: uri
-        seconds:
-          type: integer
-          enum: [4, 8, 12]
-          default: 4
-        size:
-          type: string
-          enum: [1280x720, 720x1280, 1920x1080, 1080x1920]
-          default: 1280x720
-
-    AlibabaVideoGenerationRequest:
-      type: object
-      additionalProperties: false
-      required: [model, input]
-      properties:
-        model:
-          type: string
-          enum:
-            - happyhorse-1.0-t2v
-            - happyhorse-1.0-i2v
-            - happyhorse-1.0-r2v
-            - happyhorse-1.1-t2v
-            - happyhorse-1.1-i2v
-            - happyhorse-1.1-r2v
-        input:
-          type: object
-          additionalProperties: false
-          properties:
-            prompt:
-              type: string
-              maxLength: 1500
-            media:
-              type: array
-              items:
-                type: object
-                additionalProperties: false
-                required: [url, type]
-                properties:
-                  url:
-                    type: string
-                    format: uri
-                  type:
-                    type: string
-                    enum: [first_frame, reference_image]
-        parameters:
-          type: object
-          additionalProperties: false
-          properties:
-            resolution:
-              type: string
-              enum: [720p, 1080p]
-              default: 1080p
-            ratio:
-              type: string
-              enum: ['9:16', '16:9', '1:1', '3:4', '4:3']
-            duration:
-              type: integer
-              minimum: 3
-              maximum: 15
-              default: 5
-
-    ProviderImageAspectRatio:
-      type: string
-      enum: ['9:16', '16:9', '1:1', '3:4', '4:3', '21:9', '2:3', '3:2']
-
-    ProviderVideoAspectRatio:
-      type: string
-      enum: ['9:16', '16:9', '1:1', '3:4', '4:3', '21:9']
-
     BaseResponse:
       type: object
       required:
@@ -5001,7 +3669,7 @@ components:
           description: Subscribed event types
           items:
             type: string
-          example: ["video.completed", "video.failed"]
+          example: ["generated_avatar_video_success", "generated_avatar_video_failed"]
         username:
           type: string
           description: Username of the webhook owner
@@ -5032,3 +3700,4 @@ components:
           type: integer
           description: Total number of pages
           example: 10
+

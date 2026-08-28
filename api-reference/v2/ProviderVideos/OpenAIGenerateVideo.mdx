@@ -1,7 +1,13 @@
 ---
 title: "Generate Video with OpenAI"
-openapi: "POST /v2/openai/videos/generations"
+description: "JoggAI provider API endpoint."
 ---
+
+## Endpoint
+
+```http
+POST https://api.jogg.ai/v2/openai/videos/generations
+```
 
 Submit a paid `sora-2` request using `prompt`, `input_reference`, `seconds`, and
 `size`. The response is a JoggAI asynchronous task.
