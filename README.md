@@ -28,6 +28,15 @@ mintlify dev
 ├── home/                          # 首页文件
 │   └── WelcometoJoggAI.mdx        (包含 Key Features 和视频展示)
 │
+├── mcp/                           # JoggAI MCP（仅路径访问，不加入导航）
+│   ├── overview.mdx               # 服务概览与能力边界
+│   ├── install-clients.mdx        # Codex/Claude/Cursor/ChatGPT 安装
+│   ├── authentication.mdx         # OAuth、redirect URI 与 scope
+│   ├── tools-billing-safety.mdx   # 工具、扣费、异步任务与安全
+│   ├── codex.mdx                  # Codex 手动配置
+│   ├── other-clients.mdx          # 其他及自定义客户端
+│   └── troubleshooting.mdx        # 常见问题排查
+│
 ├── api-reference/
 │   ├── v1/                        # API v1（维护中）
 │   │   ├── QuickStart/

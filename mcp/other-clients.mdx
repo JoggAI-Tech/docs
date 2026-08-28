@@ -1,0 +1,116 @@
+---
+title: "Manual and Custom Clients"
+description: "Manually connect Claude Code, Cursor, ChatGPT, or a custom Streamable HTTP agent to JoggAI MCP."
+---
+
+Use the [multi-client installer](/mcp/install-clients) for the fastest setup.
+This page documents the equivalent client-specific settings and the contract a
+custom MCP client must implement.
+
+<Warning>
+Dynamic client registration is not available during controlled beta. JoggAI must
+pre-register the client ID and exact redirect URI. Do not send client secrets,
+access tokens, authorization codes, or API keys to support.
+</Warning>
+
+## Common connection values
+
+| Setting | Value |
+| --- | --- |
+| Server URL | `https://api.jogg.ai/mcp` |
+| OAuth resource | `https://api.jogg.ai/mcp` |
+| Transport | Streamable HTTP |
+| Authorization flow | Authorization Code with PKCE (`S256`) |
+| Protected resource metadata | `https://api.jogg.ai/.well-known/oauth-protected-resource/mcp` |
+
+## Claude Code
+
+The npm installer runs the following native flow with public client ID
+`claude` and a fixed callback port:
+
+```bash
+claude mcp add-json --scope user JoggAI \
+  '{"type":"http","url":"https://api.jogg.ai/mcp","oauth":{"clientId":"claude","callbackPort":5555,"scopes":"openid account.read quota.read catalog.read asset.read asset.write script.generate image.generate video.generate product.read product.write webhook.read webhook.write"}}'
+
+claude mcp login JoggAI
+```
+
+The registered redirect URI is `http://localhost:5555/callback`. Keep the
+terminal open until browser authorization completes.
+
+## Cursor
+
+The installer preserves unrelated servers and atomically adds this entry to
+`~/.cursor/mcp.json`:
+
+```json
+{
+  "mcpServers": {
+    "JoggAI": {
+      "url": "https://api.jogg.ai/mcp",
+      "auth": {
+        "CLIENT_ID": "cursor",
+        "scopes": [
+          "openid",
+          "account.read",
+          "quota.read",
+          "catalog.read",
+          "asset.read",
+          "asset.write",
+          "script.generate",
+          "image.generate",
+          "video.generate",
+          "product.read",
+          "product.write",
+          "webhook.read",
+          "webhook.write"
+        ]
+      }
+    }
+  }
+}
+```
+
+Restart Cursor, open **Customize > MCP**, select JoggAI, and complete OAuth. Cursor
+uses `http://localhost:8787/callback` for desktop or
+`https://www.cursor.com/agents/mcp/oauth/callback` for agents.
+
+## ChatGPT
+
+ChatGPT has no local configuration file or CLI that the npm package can safely
+modify. In **Settings > Connectors**, add a custom MCP connector with:
+
+| Setting | Value |
+| --- | --- |
+| Name | `JoggAI MCP` |
+| MCP URL | `https://api.jogg.ai/mcp` |
+| OAuth client ID | `chatgpt` |
+| Redirect URI | `https://chatgpt.com/connector_platform_oauth_redirect` |
+
+Complete OAuth in ChatGPT. The installer command for `chatgpt` returns these
+settings as JSON and does not claim that it changed ChatGPT.
+
+## Connect a custom agent
+
+<Steps>
+  <Step title="Request a client registration">
+    Provide JoggAI with a stable client ID, the exact redirect URI, and the
+    scopes your integration requires.
+  </Step>
+  <Step title="Configure resource discovery">
+    Point the agent at `https://api.jogg.ai/mcp`. A `401` challenge identifies
+    the protected resource metadata.
+  </Step>
+  <Step title="Run Authorization Code with PKCE">
+    Include `resource=https://api.jogg.ai/mcp` in authorization, token, and
+    refresh-token requests. Use the exact redirect URI and PKCE `S256`.
+  </Step>
+  <Step title="Call MCP tools">
+    Send the Bearer token to the MCP endpoint, initialize according to the MCP
+    client contract, then use `tools/list` and `tools/call`.
+  </Step>
+</Steps>
+
+Access tokens are bound to the MCP resource. Use a proven MCP SDK with
+Streamable HTTP and OAuth support instead of placing a long-lived token in a
+command line, source file, or custom JSON configuration.

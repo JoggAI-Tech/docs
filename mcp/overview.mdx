@@ -1,0 +1,129 @@
+---
+title: "JoggAI MCP"
+description: "Connect AI agents to JoggAI video, avatar, voice, asset, product, and webhook capabilities through MCP."
+---
+
+JoggAI MCP lets compatible AI agents discover and call JoggAI capabilities through conversation. It is a hosted [Model Context Protocol](https://modelcontextprotocol.io/) server backed by the same OpenAPI v2 operations, JoggAI account, Space, and credits you already use.
+
+<Warning>
+JoggAI MCP is in a controlled beta. The production endpoint returns `404` until MCP is enabled for the deployment. Contact [support@jogg.ai](mailto:support@jogg.ai) before configuring a client.
+</Warning>
+
+## Connect JoggAI to your agent
+
+<Steps>
+  <Step title="Choose an MCP client">
+    Use Codex, Claude Code, Cursor, or ChatGPT. See
+    [Install MCP Clients](/mcp/install-clients) for the client-aware setup
+    command and each client's OAuth boundary.
+  </Step>
+  <Step title="Add the remote endpoint">
+    Configure the client with the hosted Streamable HTTP endpoint:
+
+    ```text
+    https://api.jogg.ai/mcp
+    ```
+  </Step>
+  <Step title="Authorize with OAuth">
+    Sign in to JoggAI in the browser, choose the Space to use, and approve the requested permissions. Public MCP access does not require copying an API key into the client.
+  </Step>
+  <Step title="Ask the agent to use JoggAI">
+    Start a new conversation and ask the agent to list an avatar, generate a video, translate media, or check an existing task.
+  </Step>
+</Steps>
+
+<CardGroup cols={3}>
+  <Card title="Install a client" icon="download" href="/mcp/install-clients">
+    Configure Codex, Claude Code, Cursor, or ChatGPT.
+  </Card>
+  <Card title="Review permissions" icon="shield-halved" href="/mcp/authentication">
+    Understand OAuth resources, redirects, and tool scopes.
+  </Card>
+  <Card title="Control paid work" icon="coins" href="/mcp/tools-billing-safety">
+    Review billing warnings, asynchronous jobs, and safety hints.
+  </Card>
+</CardGroup>
+
+## Endpoint and transport
+
+| Setting | Value |
+| --- | --- |
+| MCP endpoint | `https://api.jogg.ai/mcp` |
+| Transport | Stateless Streamable HTTP |
+| Authentication | OAuth 2.0 Authorization Code with PKCE |
+| OAuth resource | `https://api.jogg.ai/mcp` |
+| API coverage | Explicitly registered OpenAPI v2 operations, discovered with `tools/list` |
+
+Only explicitly registered `/open/v2` operations are available as tools. JoggAI does not expose legacy `/open` or `/open/v1` operations, MCP prompts, MCP resources, or MCP Tasks through this endpoint.
+
+## What agents can do
+
+<CardGroup cols={2}>
+  <Card title="Account and catalog" icon="address-card">
+    Read account and quota information, then discover available avatars, voices, music, templates, and visual styles.
+  </Card>
+  <Card title="Assets and scripts" icon="file-lines">
+    Request signed asset upload URLs and create AI scripts without sending file bytes through JSON-RPC.
+  </Card>
+  <Card title="Avatars and images" icon="image">
+    Generate photo avatars, product avatar images, and motion for supported avatar types.
+  </Card>
+  <Card title="Video workflows" icon="film">
+    Create avatar, product, and template videos; translate video; and create lip sync tasks.
+  </Card>
+  <Card title="Products" icon="box">
+    Create and update products, generate previews, render a selected preview, and check product video results.
+  </Card>
+  <Card title="Webhooks" icon="webhook">
+    List events and manage webhook endpoints when the approved OAuth scopes include webhook access.
+  </Card>
+</CardGroup>
+
+The exact tool list depends on the scopes approved during OAuth. JoggAI filters `tools/list` by scope and checks the permission again for every `tools/call` request.
+
+See [Tools, Billing, and Safety](/mcp/tools-billing-safety) before allowing an
+agent to submit generation work or modify webhook endpoints.
+
+## Long-running jobs and uploads
+
+Video generation, translation, and other long-running work remain asynchronous. The agent submits a job, keeps its task ID, and calls the corresponding status tool until the job completes.
+
+For uploads, an MCP tool returns a signed upload URL. The client uploads the file directly to object storage, so large file bytes do not pass through the MCP JSON-RPC request.
+
+## MCP compared with the REST API
+
+| | JoggAI MCP | JoggAI REST API |
+| --- | --- | --- |
+| Best for | AI agents choosing and calling tools | Applications with deterministic request flows |
+| Discovery | `tools/list` | OpenAPI documentation |
+| Invocation | `tools/call` with JSON Schema input | HTTP method, path, headers, and body |
+| Public authentication | OAuth Bearer token | API key |
+| Long-running work | Submit and status tools | Submit and status endpoints |
+| Billing context | Existing JoggAI Space and credits | Existing JoggAI Space and credits |
+
+MCP complements the REST API; it does not replace it. Existing OpenAPI integrations and JoggAI plugins continue to use their current endpoints and credentials.
+
+## FAQ
+
+### Do I need an API key?
+
+No. Public Remote MCP clients authenticate with OAuth. Complete the browser login instead of pasting an API key into an agent or configuration file.
+
+### Do I need GitHub or an npm package?
+
+You do not need GitHub or a repository clone. The recommended
+`@joggai/mcp-client` package configures supported clients, then exits; it is not
+an MCP proxy and does not stay running. You can also configure a compatible
+client manually.
+
+### Can any MCP client connect?
+
+The client must support Streamable HTTP and OAuth, and its OAuth client ID and exact redirect URI must be registered with JoggAI. Dynamic client registration is not available during the controlled beta. See [Other MCP clients](/mcp/other-clients).
+
+### Does MCP cost extra?
+
+MCP uses the selected Space's existing JoggAI balance. Tool calls consume credits according to the underlying JoggAI operation; there is no separate MCP balance.
+
+### Can an agent use my custom avatars and voices?
+
+Yes, when they are available in the authorized Space and the approved scopes allow the corresponding catalog and generation tools.

@@ -1,0 +1,117 @@
+---
+title: "Connect Codex to JoggAI MCP"
+description: "Add JoggAI MCP to Codex, authorize with OAuth, and verify the connection."
+---
+
+Codex connects directly to the hosted JoggAI MCP endpoint. You do not need
+GitHub or a locally running MCP server. The recommended installer applies the
+required OAuth client and resource settings, then delegates login to Codex.
+
+<Warning>
+JoggAI MCP must be enabled for the deployment before setup. If the endpoint returns `404`, contact [support@jogg.ai](mailto:support@jogg.ai).
+</Warning>
+
+## Install and authorize JoggAI
+
+Run:
+
+```bash
+npx -y @joggai/mcp-client install codex
+```
+
+If `codex` is provided by the ChatGPT desktop app and is not on your `PATH`, run:
+
+```bash
+JOGG_CODEX_BIN="/Applications/ChatGPT.app/Contents/Resources/codex" \
+npx -y @joggai/mcp-client install codex
+```
+
+The installer registers `JoggAI`, invokes `codex mcp login`, and returns the
+final Codex MCP configuration. Complete JoggAI login and Space authorization in
+the browser.
+
+Installation is idempotent. If an old same-URL entry has incorrect OAuth
+metadata, rebuild it explicitly:
+
+```bash
+npx -y @joggai/mcp-client install codex --replace
+```
+
+## Manual setup
+
+Run these commands with the Codex CLI used by your Codex desktop app:
+
+<Steps>
+  <Step title="Register the remote server">
+    ```bash
+    codex mcp add JoggAI \
+      --url https://api.jogg.ai/mcp \
+      --oauth-client-id codex \
+      --oauth-resource https://api.jogg.ai/mcp
+    ```
+  </Step>
+  <Step title="Sign in to JoggAI">
+    ```bash
+    codex mcp login JoggAI --scopes openid,account.read,quota.read,catalog.read,asset.read,asset.write,script.generate,image.generate,video.generate,product.read,product.write,webhook.read,webhook.write
+    ```
+
+    Keep the terminal open while the browser authorization completes. Sign in, select the intended Space, and approve the requested permissions.
+  </Step>
+  <Step title="Verify the configuration">
+    ```bash
+    codex mcp get JoggAI --json
+    codex mcp list --json
+    ```
+
+    Confirm that `JoggAI` uses the expected URL, OAuth client ID, and resource.
+  </Step>
+  <Step title="Start a new Codex task">
+    A new task loads the newly configured MCP server. Ask Codex to use JoggAI explicitly on the first request.
+  </Step>
+</Steps>
+
+## Try it
+
+Start with a read-only request:
+
+```text
+Use JoggAI to show my remaining quota and list five public avatars suitable
+for a landscape product video. Do not create anything yet.
+```
+
+Then submit a generation request:
+
+```text
+Use JoggAI to create a talking-avatar video from the avatar and voice I chose.
+Show me the inputs before submitting, then monitor the existing task until it
+finishes. Do not create a duplicate task while one is running.
+```
+
+Codex only sees tools allowed by the OAuth scopes you approved. Destructive operations, such as deleting a webhook endpoint, remain clearly marked in the tool definition and still require the corresponding write scope.
+
+## OAuth callback behavior
+
+The JoggAI `codex` OAuth client accepts the dynamic loopback callback created by Codex for this MCP resource. Let `codex mcp login` choose the local port and callback path.
+
+<Warning>
+Do not set a custom HTTPS `mcp_oauth_callback_url` for JoggAI. A callback such as `https://devbox.example.internal/callback` does not match the registered Codex loopback policy and authorization will be rejected.
+</Warning>
+
+The callback listener is local to your computer and is used only to complete the OAuth redirect. Access and refresh tokens must not be pasted into chat, committed to Git, or shared between users.
+
+## Reauthorize or remove the connection
+
+Run login again when scopes change or authorization has been revoked:
+
+```bash
+npx -y @joggai/mcp-client login codex
+```
+
+To remove the local registration:
+
+```bash
+npx -y @joggai/mcp-client uninstall codex
+```
+
+The equivalent native `codex mcp login/logout/remove` commands remain available.
+See [Troubleshooting](/mcp/troubleshooting) if login succeeds but tools are unavailable.
