@@ -1,6 +1,6 @@
 ---
 title: "Manual and Custom Clients"
-description: "Manually connect Claude Code, Cursor, ChatGPT, or a custom Streamable HTTP agent to Jogg Remote MCP."
+description: "Manually connect Claude Code, Cursor, ChatGPT, or a custom Streamable HTTP agent to JoggAI MCP."
 ---
 
 Use the [multi-client installer](/mcp/install-clients) for the fastest setup.
@@ -29,10 +29,10 @@ The npm installer runs the following native flow with public client ID
 `claude` and a fixed callback port:
 
 ```bash
-claude mcp add-json --scope user jogg \
+claude mcp add-json --scope user JoggAI \
   '{"type":"http","url":"https://api.jogg.ai/mcp","oauth":{"clientId":"claude","callbackPort":5555,"scopes":"openid account.read quota.read catalog.read asset.read asset.write script.generate voice.generate image.generate video.generate product.read product.write webhook.read webhook.write"}}'
 
-claude mcp login jogg
+claude mcp login JoggAI
 ```
 
 The registered redirect URI is `http://localhost:5555/callback`. Keep the
@@ -46,7 +46,7 @@ The installer preserves unrelated servers and atomically adds this entry to
 ```json
 {
   "mcpServers": {
-    "jogg": {
+    "JoggAI": {
       "url": "https://api.jogg.ai/mcp",
       "auth": {
         "CLIENT_ID": "cursor",
@@ -72,7 +72,7 @@ The installer preserves unrelated servers and atomically adds this entry to
 }
 ```
 
-Restart Cursor, open **Customize > MCP**, select Jogg, and complete OAuth. Cursor
+Restart Cursor, open **Customize > MCP**, select JoggAI, and complete OAuth. Cursor
 uses `http://localhost:8787/callback` for desktop or
 `https://www.cursor.com/agents/mcp/oauth/callback` for agents.
 
@@ -83,7 +83,7 @@ modify. In **Settings > Connectors**, add a custom MCP connector with:
 
 | Setting | Value |
 | --- | --- |
-| Name | `JoggAI` |
+| Name | `JoggAI MCP` |
 | MCP URL | `https://api.jogg.ai/mcp` |
 | OAuth client ID | `chatgpt` |
 | Redirect URI | `https://chatgpt.com/connector_platform_oauth_redirect` |

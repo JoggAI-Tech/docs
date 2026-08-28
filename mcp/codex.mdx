@@ -1,14 +1,14 @@
 ---
-title: "Connect Codex"
-description: "Add Jogg Remote MCP to Codex, authorize with OAuth, and verify the connection."
+title: "Connect Codex to JoggAI MCP"
+description: "Add JoggAI MCP to Codex, authorize with OAuth, and verify the connection."
 ---
 
-Codex connects directly to the hosted Jogg Remote MCP endpoint. You do not need
+Codex connects directly to the hosted JoggAI MCP endpoint. You do not need
 GitHub or a locally running MCP server. The recommended installer applies the
 required OAuth client and resource settings, then delegates login to Codex.
 
 <Warning>
-Jogg Remote MCP must be enabled for the deployment before setup. If the endpoint returns `404`, contact [support@jogg.ai](mailto:support@jogg.ai).
+JoggAI MCP must be enabled for the deployment before setup. If the endpoint returns `404`, contact [support@jogg.ai](mailto:support@jogg.ai).
 </Warning>
 
 ## Install and authorize JoggAI
@@ -19,7 +19,7 @@ Run:
 npx -y @joggai/mcp-client install codex
 ```
 
-The installer registers `jogg`, invokes `codex mcp login`, and returns the
+The installer registers `JoggAI`, invokes `codex mcp login`, and returns the
 final Codex MCP configuration. Complete JoggAI login and Space authorization in
 the browser.
 
@@ -37,7 +37,7 @@ Run these commands with the Codex CLI used by your Codex desktop app:
 <Steps>
   <Step title="Register the remote server">
     ```bash
-    codex mcp add jogg \
+    codex mcp add JoggAI \
       --url https://api.jogg.ai/mcp \
       --oauth-client-id codex \
       --oauth-resource https://api.jogg.ai/mcp
@@ -45,18 +45,18 @@ Run these commands with the Codex CLI used by your Codex desktop app:
   </Step>
   <Step title="Sign in to JoggAI">
     ```bash
-    codex mcp login jogg --scopes openid,account.read,quota.read,catalog.read,asset.read,asset.write,script.generate,voice.generate,image.generate,video.generate,product.read,product.write,webhook.read,webhook.write
+    codex mcp login JoggAI --scopes openid,account.read,quota.read,catalog.read,asset.read,asset.write,script.generate,voice.generate,image.generate,video.generate,product.read,product.write,webhook.read,webhook.write
     ```
 
     Keep the terminal open while the browser authorization completes. Sign in, select the intended Space, and approve the requested permissions.
   </Step>
   <Step title="Verify the configuration">
     ```bash
-    codex mcp get jogg --json
+    codex mcp get JoggAI --json
     codex mcp list --json
     ```
 
-    Confirm that `jogg` uses the expected URL, OAuth client ID, and resource.
+    Confirm that `JoggAI` uses the expected URL, OAuth client ID, and resource.
   </Step>
   <Step title="Start a new Codex task">
     A new task loads the newly configured MCP server. Ask Codex to use JoggAI explicitly on the first request.
@@ -81,6 +81,12 @@ finishes. Do not create a duplicate task while one is running.
 ```
 
 Codex only sees tools allowed by the OAuth scopes you approved. Destructive operations, such as deleting a webhook endpoint, remain clearly marked in the tool definition and still require the corresponding write scope.
+
+Provider image and video tools appear automatically after the server contract is
+updated and Codex refreshes `tools/list`; no npm installer update is required.
+These create tools are marked destructive because they consume the selected
+Space's API credits. Store the returned task ID and use the matching read-only
+image or video task tool instead of replaying a timed-out submission.
 
 ## OAuth callback behavior
 

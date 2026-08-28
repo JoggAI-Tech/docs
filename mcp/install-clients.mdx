@@ -1,9 +1,9 @@
 ---
-title: "Install MCP Clients"
-description: "Configure Jogg Remote MCP in Codex, Claude Code, Cursor, or ChatGPT with one client-aware command."
+title: "Install JoggAI MCP Clients"
+description: "Configure JoggAI MCP in Codex, Claude Code, Cursor, or ChatGPT with one client-aware command."
 ---
 
-JoggAI provides a small installer that applies the correct MCP and OAuth settings
+JoggAI MCP provides a small installer that applies the correct MCP and OAuth settings
 for each supported client:
 
 ```bash
@@ -15,7 +15,7 @@ not an MCP proxy and does not stay running after installation. OAuth tokens rema
 in the selected client's native credential store.
 
 <Warning>
-Jogg Remote MCP is in controlled beta. The installer cannot enable the hosted
+JoggAI MCP is in controlled beta. The installer cannot enable the hosted
 endpoint or register a new OAuth client. Contact
 [support@jogg.ai](mailto:support@jogg.ai) if the endpoint or selected client is
 not enabled for your workspace.
@@ -33,7 +33,7 @@ not enabled for your workspace.
 `claude-code` is accepted as an alias for `claude`.
 
 <Note>
-For Cursor, open **Customize > MCP**, select Jogg, and complete OAuth after the
+For Cursor, open **Customize > MCP**, select JoggAI, and complete OAuth after the
 configuration is written. For ChatGPT, follow the returned steps in
 **Settings > Connectors**. An `installed` Cursor result does not mean the
 account is authenticated yet.
@@ -61,7 +61,7 @@ npx -y @joggai/mcp-client clients
 
 ## Existing configurations
 
-Installation is idempotent. If `jogg` already points to the production URL,
+Installation is idempotent. If `JoggAI` already points to the production URL,
 Codex and Claude Code reuse the registration and start login without deleting it.
 
 The installer refuses to overwrite a same-named entry that points elsewhere.
@@ -79,8 +79,8 @@ dynamically registered configuration.
 
 | Option | Purpose |
 | --- | --- |
-| `--name NAME` | Change the local MCP server name from `jogg` |
-| `--url URL` | Target a non-production Jogg MCP deployment |
+| `--name NAME` | Change the local MCP server name from `JoggAI` |
+| `--url URL` | Target a non-production JoggAI MCP deployment |
 | `--client-id ID` | Use a client ID pre-registered by that deployment |
 | `--scopes LIST` | Request a comma-separated OAuth scope set |
 | `--replace` | Rebuild an existing same-named registration |
@@ -88,7 +88,7 @@ dynamically registered configuration.
 | `--scope local|user|project` | Select the Claude Code configuration scope |
 | `--cursor-config PATH` | Override the Cursor `mcp.json` location |
 
-By default, the installer requests all 14 currently supported scopes so the
+By default, the installer requests all currently supported scopes so the
 client can discover the complete tool set after the OAuth consent step. Use
 `--scopes` to request a smaller set; the Jogg authorization page remains the
 place where the user reviews and approves the requested access.

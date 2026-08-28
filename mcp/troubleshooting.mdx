@@ -1,11 +1,11 @@
 ---
 title: "MCP Troubleshooting"
-description: "Resolve Jogg Remote MCP availability, OAuth, scope, upload, and asynchronous task issues."
+description: "Resolve JoggAI MCP availability, OAuth, scope, upload, and asynchronous task issues."
 ---
 
 ## The MCP endpoint returns 404
 
-Jogg Remote MCP is controlled by a deployment feature flag. A `404` from `https://api.jogg.ai/mcp` means the hosted endpoint is not enabled in that environment yet; it is not fixed by installing an npm package or cloning a GitHub repository.
+JoggAI MCP is controlled by a deployment feature flag. A `404` from `https://api.jogg.ai/mcp` means the hosted endpoint is not enabled in that environment yet; it is not fixed by installing an npm package or cloning a GitHub repository.
 
 Contact [support@jogg.ai](mailto:support@jogg.ai) to confirm beta availability.
 
@@ -42,7 +42,7 @@ Replacement logs out and removes only that named entry before rebuilding it.
 Confirm the server was added with both the registered client ID and MCP resource:
 
 ```bash
-codex mcp get jogg --json
+codex mcp get JoggAI --json
 ```
 
 The configuration must contain:
@@ -56,7 +56,7 @@ oauth_resource: https://api.jogg.ai/mcp
 Remove and add the entry again if those values are wrong. Then run:
 
 ```bash
-codex mcp login jogg
+codex mcp login JoggAI
 ```
 
 ## The OAuth callback is rejected
@@ -73,16 +73,16 @@ Reauthorize the connection and approve the needed permissions. If a Space admini
 
 Review the complete [scope table](/mcp/authentication#tool-scopes).
 
-## Cursor says installed, but Jogg is not connected
+## Cursor says installed, but JoggAI is not connected
 
 For Cursor, installation means the MCP JSON configuration was written. OAuth is
-still a Cursor UI action. Restart Cursor, open **Customize > MCP**, select Jogg,
+still a Cursor UI action. Restart Cursor, open **Customize > MCP**, select JoggAI,
 and complete sign-in before expecting tools to load.
 
 ## ChatGPT installation returns `manual_action_required`
 
 This is expected. ChatGPT does not expose a local configuration API. Follow the
-returned action in **Settings > Connectors** using the Jogg MCP URL and public
+returned action in **Settings > Connectors** using the JoggAI MCP URL and public
 client ID instead of retrying the npm command.
 
 ## A tool returns an audience or resource error

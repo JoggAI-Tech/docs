@@ -1,12 +1,12 @@
 ---
-title: "Jogg Remote MCP"
+title: "JoggAI MCP"
 description: "Connect AI agents to JoggAI video, avatar, voice, asset, product, and webhook capabilities through MCP."
 ---
 
-Jogg Remote MCP lets compatible AI agents discover and call JoggAI capabilities through conversation. It is a hosted [Model Context Protocol](https://modelcontextprotocol.io/) server backed by the same OpenAPI v2 operations, JoggAI account, Space, and credits you already use.
+JoggAI MCP lets compatible AI agents discover and call JoggAI capabilities through conversation. It is a hosted [Model Context Protocol](https://modelcontextprotocol.io/) server backed by the same OpenAPI v2 operations, JoggAI account, Space, and credits you already use.
 
 <Warning>
-Jogg Remote MCP is in a controlled beta. The production endpoint returns `404` until MCP is enabled for the deployment. Contact [support@jogg.ai](mailto:support@jogg.ai) before configuring a client.
+JoggAI MCP is in a controlled beta. The production endpoint returns `404` until MCP is enabled for the deployment. Contact [support@jogg.ai](mailto:support@jogg.ai) before configuring a client.
 </Warning>
 
 ## Connect JoggAI to your agent
@@ -52,7 +52,7 @@ Jogg Remote MCP is in a controlled beta. The production endpoint returns `404` u
 | Transport | Stateless Streamable HTTP |
 | Authentication | OAuth 2.0 Authorization Code with PKCE |
 | OAuth resource | `https://api.jogg.ai/mcp` |
-| API coverage | 52 registered OpenAPI v2 operations |
+| API coverage | Explicitly registered OpenAPI v2 operations, discovered with `tools/list` |
 
 Only explicitly registered `/open/v2` operations are available as tools. JoggAI does not expose legacy `/open` or `/open/v1` operations, MCP prompts, MCP resources, or MCP Tasks through this endpoint.
 
@@ -66,10 +66,13 @@ Only explicitly registered `/open/v2` operations are available as tools. JoggAI 
     Request signed asset upload URLs and create AI scripts without sending file bytes through JSON-RPC.
   </Card>
   <Card title="Avatars and images" icon="image">
-    Generate photo avatars, product avatar images, and motion for supported avatar types.
+    Generate photo avatars and product avatar images, or submit supported Google,
+    Ark, and OpenAI provider image requests.
   </Card>
   <Card title="Video and audio" icon="film">
-    Create avatar, product, and template videos; synthesize speech; transcribe audio; translate video; and create lip sync tasks.
+    Create avatar, product, and template videos; synthesize speech; transcribe audio;
+    translate video; create lip sync tasks; and use supported Runway, Kling, Ark,
+    Google, MiniMax, PixVerse, OpenAI, and Alibaba video models.
   </Card>
   <Card title="Products" icon="box">
     Create and update products, generate previews, render a selected preview, and check product video results.
@@ -92,7 +95,7 @@ For uploads, an MCP tool returns a signed upload URL. The client uploads the fil
 
 ## MCP compared with the REST API
 
-| | Jogg Remote MCP | JoggAI REST API |
+| | JoggAI MCP | JoggAI REST API |
 | --- | --- | --- |
 | Best for | AI agents choosing and calling tools | Applications with deterministic request flows |
 | Discovery | `tools/list` | OpenAPI documentation |
