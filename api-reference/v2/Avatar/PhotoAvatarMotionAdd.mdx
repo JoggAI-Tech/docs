@@ -5,6 +5,10 @@ openapi: "POST /v2/photo_avatar/add_motion"
 
 Add motion to a photo avatar to make it animated.
 
+<Note>
+Motion 1.0, 2.0, and 3.0 have been discontinued by the official model provider. Only Motion 2.0 Pro (`2.0-Pro`) remains available.
+</Note>
+
 ## Example Usage
 
 ```bash
@@ -16,7 +20,7 @@ curl --request POST \
     "image_url": "https://res.jogg.ai/photo.jpg",
     "name": "My Photo Avatar",
     "voice_id": "en-US-ChristopherNeural",
-    "model": "2.0"
+    "model": "2.0-Pro"
   }'
 ```
 
@@ -30,5 +34,4 @@ curl --request POST \
     Check motion generation status
   </Card>
 </CardGroup>
-
 

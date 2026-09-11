@@ -9798,16 +9798,14 @@ components:
       properties:
         description:
           type: string
-          description: For Model 1.0, descriptions must be under 300 bytes, and for other models, they must not exceed 1500 bytes.
+          description: Descriptions must not exceed 1500 bytes.
         image_url:
           type: string
         model:
           type: string
           enum:
-            - "1.0"
-            - "2.0"
             - "2.0-Pro"
-            - "3.0"
+          description: Motion 1.0, 2.0, and 3.0 have been discontinued by the official model provider. Only Motion 2.0 Pro remains available.
         name:
           type: string
         photo_id:

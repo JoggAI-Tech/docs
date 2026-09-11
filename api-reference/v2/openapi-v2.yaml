@@ -1482,9 +1482,9 @@ paths:
                   example: "en-US-ChristopherNeural"
                 model:
                   type: string
-                  description: Motion model version
-                  enum: ["1.0", "2.0", "2.0-Pro", "3.0"]
-                  example: "2.0"
+                  description: Motion 1.0, 2.0, and 3.0 have been discontinued by the official model provider. Only Motion 2.0 Pro remains available.
+                  enum: ["2.0-Pro"]
+                  example: "2.0-Pro"
                 description:
                   type: string
                   description: Avatar description
@@ -3829,4 +3829,3 @@ components:
           type: integer
           description: Total number of pages
           example: 10
-
