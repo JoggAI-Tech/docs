@@ -11,18 +11,36 @@ JoggAI API uses a credit-based pricing model. Credits are consumed based on the 
 
 ## Credit Pricing Table
 
-| Service | Consumption | Details |
-|---------|-------------|---------|
-| **Video Generation** | 1 credit per 2 minutes | Videos less than 2 minutes also consume 1 credit |
-| **Video Translation** | 0.5 credits per 20 seconds | Videos less than 20 seconds also consume 0.5 credits |
-| **Lip Sync Video** | 1 credit per 125 seconds | Estimated at about 0.008 credit per second, typically displayed as 0.01 credit per second |
-| **Preview Video** | 0.5 credits per 2 minutes | Videos less than 2 minutes also consume 0.5 credits |
-| **AI Scripts** | 0.2 credits per call | Per API request |
-| **Photo Avatar Generation** | 0.05 credits per image | Single image generation |
-| **Photo Avatar Generation (Batch)** | 0.2 credits per call | Generates 4 images |
-| **Motion 2.0 Pro** | 3 credits | Per motion generation |
+<Tabs>
+<Tab title="New subscription">
 
-Motion 1.0, 2.0, and 3.0 have been discontinued by the official model provider. Only Motion 2.0 Pro (`2.0-Pro`) remains available.
+| Service | Consumption | Details | Endpoint |
+|---------|-------------|---------|----------|
+| **Avatar Video** | 250 credits per 15 seconds | Duration rounded up to the next 15 seconds; minimum 30 seconds (500 credits) | `POST /v2/create_video_from_avatar` |
+| **Video Translation** | 125 credits per 15 seconds | Per target language; duration rounded up to the next 15 seconds; minimum 30 seconds (250 credits per language) | `POST /v2/video_translate/` |
+| **Lip Sync Video** | 125 credits per 15 seconds | Duration rounded up to the next 15 seconds; minimum 30 seconds (250 credits) | `POST /v2/create_lip_sync_video` |
+| **Preview Video** | 125 credits per 15 seconds | Duration rounded up to the next 15 seconds; minimum 30 seconds (250 credits) | `POST /v2/create_video_from_product/preview_list` |
+| **AI Scripts** | 40 credits per call | Per API request | `POST /v2/ai_scripts` |
+| **Avatar Photo Generation** | 10 credits per image | Single image generation | `POST /v2/photo_avatar/photo/generate` |
+| **Avatar Photo Generation(Batch)** | 40 credits per call | Generates 4 images | `POST /v2/photo_avatar/photo/generate` |
+| **Photo Avatar Generation** | 600 credits | Per motion generation | `POST /v2/photo_avatar/add_motion` |
+
+</Tab>
+<Tab title="Legacy">
+
+| Service | Consumption | Details | Endpoint |
+|---------|-------------|---------|----------|
+| **Avatar Video** | 1 credit per 2 minutes | Videos less than 2 minutes also consume 1 credit | `POST /v2/create_video_from_avatar` |
+| **Video Translation** | 0.5 credits per 20 seconds | Videos less than 20 seconds also consume 0.5 credits | `POST /v2/video_translate/` |
+| **Lip Sync Video** | 1 credit per 125 seconds | Estimated at about 0.008 credit per second, typically displayed as 0.01 credit per second | `POST /v2/create_lip_sync_video` |
+| **Preview Video** | 0.5 credits per 2 minutes | Videos less than 2 minutes also consume 0.5 credits | `POST /v2/create_video_from_product/preview_list` |
+| **AI Scripts** | 0.2 credits per call | Per API request | `POST /v2/ai_scripts` |
+| **Avatar Photo Generation** | 0.05 credits per image | Single image generation | `POST /v2/photo_avatar/photo/generate` |
+| **Avatar Photo Generation(Batch)** | 0.2 credits per call | Generates 4 images | `POST /v2/photo_avatar/photo/generate` |
+| **Photo Avatar Generation** | 3 credits | Per motion generation | `POST /v2/photo_avatar/add_motion` |
+
+</Tab>
+</Tabs>
 
 ---
 
