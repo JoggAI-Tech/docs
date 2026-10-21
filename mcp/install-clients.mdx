@@ -1,106 +1,256 @@
 ---
 title: "Install JoggAI MCP Clients"
-description: "Configure JoggAI MCP in Codex, Claude Code, Cursor, or ChatGPT with one client-aware command."
+description: "Install JoggAI MCP in Codex, Claude Code, Gemini CLI, Cursor, and other desktop, IDE, and command-line clients."
 ---
 
-JoggAI MCP provides a small installer that applies the correct MCP and OAuth settings
-for each supported client:
+Connect your AI client to JoggAI, authorize your Space, and start creating with
+natural-language prompts. The installer configures the client; you complete
+sign-in in your browser.
+
+## Quick start
+
+You need **Node.js 18 or later with npm**, your chosen AI client, and a JoggAI
+account with access to the Space you want to use. Run the installer under the
+same operating-system account as your client.
+
+Choose a client from the table below, then run:
 
 ```bash
-npx -y @joggai/mcp-client install <client>
+npx -y @joggai/mcp-client@latest install <client>
 ```
 
-The package configures the hosted endpoint at `https://api.jogg.ai/mcp`. It is
-not an MCP proxy and does not stay running after installation. OAuth tokens remain
-in the selected client's native credential store.
+Or paste an installation prompt into your agent, for example:
 
-<Warning>
-JoggAI MCP is in controlled beta. The installer cannot enable the hosted
-endpoint or register a new OAuth client. Contact
-[support@jogg.ai](mailto:support@jogg.ai) if the endpoint or selected client is
-not enabled for your workspace.
-</Warning>
+```text
+Help me install JoggAI MCP by running this command and guide me through login authorization: npx -y @joggai/mcp-client@latest install gemini
+```
+
+The default server name is `JoggAI`. The production endpoint is
+`https://api-services-intl.jogg.ai/mcp`, using **Streamable HTTP**. The installer
+exits after setup; your AI client connects to JoggAI directly and manages its own
+OAuth tokens. You do not need to enter an API key, client secret, or callback URL
+for the standard installation.
 
 ## Choose your client
 
-| Client | Command | What completes automatically |
-| --- | --- | --- |
-| Codex | `npx -y @joggai/mcp-client install codex` | Registration and native browser OAuth |
-| Claude Code | `npx -y @joggai/mcp-client install claude` | Registration and native browser OAuth |
-| Cursor | `npx -y @joggai/mcp-client install cursor` | Atomic update of `~/.cursor/mcp.json` |
-| ChatGPT | `npx -y @joggai/mcp-client install chatgpt` | Prints the manual connector settings |
+Use these commands for the desktop, IDE, or CLI application you actually run.
+The additional adapters require `@joggai/mcp-client` **0.1.6 or later**; `@latest`
+selects the current release.
 
-`claude-code` is accepted as an alias for `claude`.
+| Client | Installation command | Complete authorization |
+| --- | --- | --- |
+| Codex | `npx -y @joggai/mcp-client@latest install codex` | Follow the native browser login, then start a new Codex task. |
+| Claude Code | `npx -y @joggai/mcp-client@latest install claude` | Follow the native browser login, then start a new Claude Code session. |
+| Gemini CLI | `npx -y @joggai/mcp-client@latest install gemini` | Restart Gemini CLI and run `/mcp auth JoggAI`. |
+| Cursor | `npx -y @joggai/mcp-client@latest install cursor` | Open **Customize > MCP**, select **JoggAI**, and authorize. |
+| VS Code / GitHub Copilot | `npx -y @joggai/mcp-client@latest install vscode` | Run **MCP: List Servers**, select **JoggAI**, start it, and authorize. |
+| Kiro | `npx -y @joggai/mcp-client@latest install kiro` | Reload MCP configuration and authorize **JoggAI** in MCP settings. |
+| OpenCode | `npx -y @joggai/mcp-client@latest install opencode` | Run `opencode mcp auth JoggAI`. |
+| Antigravity | `npx -y @joggai/mcp-client@latest install antigravity` | Open **Agent settings > Customizations** and authenticate **JoggAI**. |
+| Windsurf | `npx -y @joggai/mcp-client@latest install windsurf` | Reload MCP configuration and authorize **JoggAI**. If no configuration is found, provide `--config` as described below. |
+| Devin Desktop | `npx -y @joggai/mcp-client@latest install devin` | Reload MCP configuration and authorize **JoggAI** in MCP settings. |
+| Cline extension | `npx -y @joggai/mcp-client@latest install cline --config "/path/to/cline_mcp_settings.json"` | Replace the example path with your extension's actual configuration file, then reload and authorize **JoggAI**. |
+| Cline CLI | `npx -y @joggai/mcp-client@latest install cline-cli` | Reload configuration in the Cline CLI MCP manager and authorize **JoggAI**. |
+
+Aliases include `claude-code` for `claude`, `gemini-cli` for `gemini`,
+`cursor-ide` for `cursor`, and `github-copilot` for `vscode`.
 
 <Note>
-For Cursor, open **Customize > MCP**, select JoggAI, and complete OAuth after the
-configuration is written. For ChatGPT, follow the returned steps in
-**Settings > Connectors**. An `installed` Cursor result does not mean the
-account is authenticated yet.
+For clients that use a configuration file, `installed` means the configuration
+was written. Complete the client's authorization action before using JoggAI.
+Sign in, select your Space, and review the requested permissions in the browser.
+If tools do not appear afterward, reload the client or start a new conversation.
 </Note>
+
+## Gemini CLI
+
+<Steps>
+  <Step title="Install JoggAI">
+    Run the command in a terminal, or ask Gemini CLI to run it:
+
+    ```bash
+    npx -y @joggai/mcp-client@latest install gemini
+    ```
+
+    The installer adds `JoggAI` to `~/.gemini/settings.json`, using `httpUrl`
+    for Streamable HTTP, enabling OAuth, and supplying JoggAI scopes. It
+    preserves your other servers and settings.
+  </Step>
+  <Step title="Authorize your Space">
+    Restart Gemini CLI, then enter this command inside Gemini CLI:
+
+    ```text
+    /mcp auth JoggAI
+    ```
+
+    Complete the browser sign-in, select your JoggAI Space, and approve access.
+    If you installed with `--name`, use that name instead of `JoggAI`.
+  </Step>
+  <Step title="Check the connection">
+    Ask Gemini CLI to list the available JoggAI tools or read your account's
+    remaining quota. This checks access without submitting a generation task.
+  </Step>
+</Steps>
+
+Gemini CLI uses `httpUrl` for this connection. Do not substitute a legacy
+`/sse` endpoint. Antigravity has its own installer command and configuration.
+
+## Client-specific configuration
+
+### VS Code profiles, Insiders, and remote workspaces
+
+The default command writes the standard VS Code user profile's `mcp.json`
+with a `servers.JoggAI` entry and `type: "http"`.
+
+For a named profile, Insiders, or a remote workspace, run **MCP: Open User
+Configuration** in that environment. Use its actual file path, and run the
+installer in the environment that can access that file:
+
+```bash
+npx -y @joggai/mcp-client@latest install vscode --config "/path/to/profile/mcp.json"
+```
+
+### Cline extension and Cline CLI
+
+In the extension, open **MCP Servers > Configure > Configure MCP Servers** to
+find the correct file. The `cline` adapter requires that path:
+
+```bash
+npx -y @joggai/mcp-client@latest install cline --config "/path/to/cline_mcp_settings.json"
+```
+
+For standalone Cline CLI, use `install cline-cli`. It uses
+`CLINE_MCP_SETTINGS_PATH` when set, otherwise
+`~/.cline/data/settings/cline_mcp_settings.json`.
+
+### Windsurf, Devin Desktop, and Antigravity
+
+Windsurf uses an existing `~/.codeium/windsurf/mcp_config.json` when available.
+If it is missing, open **Cascade > MCP > View raw config**, copy the actual file
+path, and run:
+
+```bash
+npx -y @joggai/mcp-client@latest install windsurf --config "/path/to/mcp_config.json"
+```
+
+Use `install devin` for Devin Desktop. It writes `devin/mcp_config.json` under
+AppData on Windows or the XDG configuration directory on macOS/Linux, defaulting
+to `~/.config` when `XDG_CONFIG_HOME` is unset.
+
+Antigravity uses `~/.gemini/config/mcp_config.json`. If your version's **View raw
+config** opens a different file, pass its path with `install antigravity --config`.
+
+### Kiro and OpenCode
+
+Kiro uses `~/.kiro/settings/mcp.json` and receives an explicit `oauthScopes`
+list. Reload its configuration and authorize **JoggAI** in the application.
+
+OpenCode uses `OPENCODE_CONFIG` when set, otherwise `opencode.json` or
+`opencode.jsonc` under `$XDG_CONFIG_HOME/opencode`, defaulting to
+`~/.config/opencode`. If both files exist, choose one with `--config`. Complete
+sign-in with `opencode mcp auth JoggAI`.
+
+## Client IDs and callbacks
+
+For a standard installation, let the installer and AI client manage OAuth:
+
+- The existing Codex, Claude Code, and Cursor adapters keep their configured
+  public client IDs (`codex`, `claude`, and `cursor`) for compatibility.
+- The additional native adapters omit a fixed ID by default. During
+  authorization, the AI client registers with the JoggAI deployment and manages
+  its own client ID and callback.
+- Dynamic registration must be enabled on that deployment before a new client
+  can authorize this way. Installing the npm package does not enable it on the
+  server. If registration is unavailable, contact your deployment administrator
+  or [JoggAI support](mailto:support@jogg.ai).
+- Use `--client-id` only when an administrator supplies a pre-registered ID and
+  the selected adapter supports it. A client ID is not a secret, and inventing
+  one does not register it. Windsurf, Devin Desktop, Cline, and Cline CLI do not
+  accept this override.
+
+The client manages its callback, including any local listener port. A new client
+ID after re-registration can be normal. Authorization still validates the
+registered redirect URI, PKCE, and requested access; dynamic registration does
+not mean any ID or callback is accepted.
 
 ## Verify and maintain the connection
 
-The same interface works across clients:
-
 ```bash
-npx -y @joggai/mcp-client status <client>
-npx -y @joggai/mcp-client login <client>
-npx -y @joggai/mcp-client uninstall <client>
+npx -y @joggai/mcp-client@latest status <client>
+npx -y @joggai/mcp-client@latest login <client>
+npx -y @joggai/mcp-client@latest uninstall <client>
 ```
 
-Codex and Claude Code execute their native commands. Cursor reads or updates its
-JSON configuration and returns a manual OAuth action. ChatGPT always returns a
-manual action because it has no local configuration API.
+Use the same `--name` and configuration-path options you used to install.
+For example, the Cline extension still needs `--config` for these commands.
 
-Run this command to inspect those capabilities as JSON:
+Codex and Claude Code run their native login commands. For clients configured
+through JSON or JSONC, `login` prints the authorization action to complete in the
+application. `status` reports configuration presence, not a live authenticated
+session. After signing in, ask your agent to list JoggAI tools or read quota to
+confirm access. Removing a configuration does not necessarily revoke tokens
+cached by the client; disconnect the application in JoggAI to revoke its access.
 
-```bash
-npx -y @joggai/mcp-client clients
-```
-
-## Existing configurations
-
-Installation is idempotent. If `JoggAI` already points to the production URL,
-Codex and Claude Code reuse the registration and start login without deleting it.
-
-The installer refuses to overwrite a same-named entry that points elsewhere.
-Review the existing entry first, then explicitly replace it:
+To inspect adapter capabilities:
 
 ```bash
-npx -y @joggai/mcp-client install <client> --replace
+npx -y @joggai/mcp-client@latest clients
 ```
 
-`--replace` also forces a same-URL entry to be rebuilt with the current OAuth
-client metadata. Use this when migrating an old API-key, Bearer-token, or
-dynamically registered configuration.
+## Existing configurations and upgrades
+
+Version 0.1.6 preserves the existing installer commands and their default client
+IDs. Existing Codex, Claude Code, and Cursor connections do not require dynamic
+registration just to upgrade the installer.
+
+An unchanged Codex or Claude Code registration is reused and login starts
+without deleting it. The additional native adapters preserve an existing
+same-URL entry. Cursor rewrites the selected entry with its installer settings
+while keeping other servers.
+
+To intentionally rebuild the selected entry, use:
+
+```bash
+npx -y @joggai/mcp-client@latest install <client> --replace
+```
+
+This replaces that entry's settings, including custom headers or per-server
+options. Inspect existing settings before using it. An entry pointing to an
+unrelated URL requires `--replace`.
+
+Codex, Claude Code, and Cursor installations using the former default
+`https://api.jogg.ai/mcp` migrate to the current endpoint when reinstalled.
+Complete authorization again for the current resource URL.
 
 ## Configuration options
 
 | Option | Purpose |
 | --- | --- |
-| `--name NAME` | Change the local MCP server name from `JoggAI` |
-| `--url URL` | Target a non-production JoggAI MCP deployment |
-| `--client-id ID` | Use a client ID pre-registered by that deployment |
-| `--scopes LIST` | Request a comma-separated OAuth scope set |
-| `--replace` | Rebuild an existing same-named registration |
-| `--callback-port PORT` | Set the registered Claude Code callback port |
-| `--scope local|user|project` | Select the Claude Code configuration scope |
-| `--cursor-config PATH` | Override the Cursor `mcp.json` location |
+| `--name NAME` | Change the local MCP server name from `JoggAI`. Use the same name for login and maintenance commands. |
+| `--url URL` | Target an explicit test or private JoggAI MCP deployment. |
+| `--config PATH` | Select the JSON/JSONC configuration file. Required for the Cline extension. |
+| `--cursor-config PATH` | Override Cursor's `mcp.json` location. |
+| `--client-id ID` | Use an existing public OAuth client registration where the adapter supports it. |
+| `--scopes LIST` | Request comma-separated scopes where the adapter supports this option. |
+| `--replace` | Rebuild the selected existing entry. |
+| `--callback-port PORT` | Set the Claude Code callback port, default `5555`; its registration must allow the callback. |
+| `--scope local`, `--scope user`, `--scope project` | Select the Claude Code configuration scope, default `user`. |
 
-By default, the installer requests all currently supported scopes so the
-client can discover the complete tool set after the OAuth consent step. Use
-`--scopes` to request a smaller set; the Jogg authorization page remains the
-place where the user reviews and approves the requested access.
+Codex, Claude Code, Cursor, Gemini CLI, Kiro, and OpenCode accept `--scopes`.
+The other listed clients negotiate scopes themselves and reject this option.
+For example, to request read-only access in a new Gemini CLI installation:
 
-For a custom deployment, `--url`, `--client-id`, redirect URI, and OAuth
-resource must all match its server configuration.
+```bash
+npx -y @joggai/mcp-client@latest install gemini --scopes openid,account.read,quota.read,catalog.read
+```
 
-## Credential safety
+For an existing Gemini CLI entry, use `--replace` if you intend to change its
+configured scopes, then authorize again. On a new Codex registration, the native
+add command obtains initial scopes from server metadata; an explicit `--scopes`
+value applies when logging in to an existing entry.
 
-The installer does not accept API keys, bearer tokens, client secrets, access
-tokens, or refresh tokens. Do not put credentials in command arguments, source
-control, MCP JSON files, screenshots, or support requests.
+Review the effective permissions on the JoggAI consent page. Video, image, and
+speech generation require their corresponding generation scopes.
 
-Continue with [Authentication and Scopes](/mcp/authentication) before enabling
-write or generation tools.
+For a custom deployment, its MCP URL, OAuth resource, registration settings, and
+allowed callbacks must agree. The installer does not change server settings.
