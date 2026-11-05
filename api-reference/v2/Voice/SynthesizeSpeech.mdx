@@ -1,0 +1,141 @@
+---
+title: "Synthesize Speech"
+description: "Generate speech with an optional ElevenLabs model: Flash v2.5 or v4 Turbo."
+openapi: "POST /v2/audio/tts/synthesize"
+---
+
+Generate speech audio from text using a public voice or a custom voice you can access.
+The result includes a task ID, audio URL, and a subtitle URL when available.
+
+## Choose a model
+
+`model_id` is **optional** and applies only to ElevenLabs voices.
+
+| Value | Behavior |
+| --- | --- |
+| Omitted | Uses `eleven_flash_v2_5` for an ElevenLabs voice |
+| `eleven_flash_v2_5` | Selects Flash v2.5 |
+| `eleven_v4_turbo` | Selects v4 Turbo |
+
+Empty strings, whitespace, `null`, non-string values, and all other model IDs are
+rejected. For a voice from another provider, omit `model_id` to keep that
+provider's existing behavior; explicitly choosing an ElevenLabs model is rejected.
+
+Find a `voice_id` in [Get Voices](/api-reference/v2/Voice/GetVoices) or
+[Get Custom Voices](/api-reference/v2/Voice/GetCustomVoices).
+
+## Pauses and audio tags
+
+ElevenLabs documents different text controls for these models:
+
+| Model | SSML `<break>` | Audio tags |
+| --- | --- | --- |
+| `eleven_flash_v2_5` | Supported: `<break time="1.5s" />`. Use seconds, with a maximum of 3 seconds per break. | Does not support the square-bracket audio-tag controls used by v3/v4. |
+| `eleven_v4_turbo` | Not supported. | Supports instructions such as `[whispers]`, `[laughs]`, `[short pause]`, `[pause]`, and `[long pause]` inside the text. |
+
+Place the control directly in `text`; no additional tag parameter is needed.
+Pause tags do not specify a fixed number of seconds, so they are not an exact
+replacement for a timed SSML break. Delivery can vary with the voice and context.
+ElevenLabs also warns that excessive SSML breaks can cause faster speech or audio
+artifacts.
+
+Jogg adapts pause syntax when sending the synthesis request:
+
+| Selected model | Input control | Sent to ElevenLabs |
+| --- | --- | --- |
+| `eleven_v4_turbo` | Timed break greater than 0 and up to 0.5 seconds | `[short pause]` |
+| `eleven_v4_turbo` | Timed break over 0.5 and up to 1 second | `[pause]` |
+| `eleven_v4_turbo` | Timed break over 1 second, including breaks over 2 seconds | `[long pause]` |
+| `eleven_v4_turbo` | Zero-second break | Removed |
+| `eleven_flash_v2_5` | `[short pause]` | `<break time="0.3s"/>` |
+| `eleven_flash_v2_5` | `[pause]` | `<break time="0.75s"/>` |
+| `eleven_flash_v2_5` | `[long pause]` | `<break time="1.5s"/>` |
+
+Supported millisecond break values are converted to seconds before selecting the
+v4 Turbo pause tag. These are Jogg compatibility rules; ElevenLabs does not define
+an exact duration for each pause tag. Changing models can therefore change the
+length of the pause. Flash only converts these three pause tags and preserves
+other bracketed text. Delivery tags such as `[whispers]` need v4 Turbo.
+
+Conversion uses a copy for synthesis and preserves your original text. Model
+selection, request identity, and billing continue to follow the rules on this page.
+
+New v4 Turbo subtitles omit complete square-bracket audio tags and SSML breaks.
+When adapting v4 pause tags for Flash, subtitles omit those controls and their
+converted breaks while retaining other bracketed text. These v4 compatibility
+paths split words at explicit pauses and preserve the returned timing gap.
+Native Flash SSML breaks continue to use the existing subtitle processing.
+The input-text fallback uses the same filtering when word timestamps are
+unavailable. A control-only result has no subtitle text. Existing subtitles are
+not rewritten.
+
+Flash v2.5 with a timed break:
+
+```json
+{
+  "text": "I will check the schedule.<break time=\"1.5s\" />The next session starts at noon.",
+  "voice_id": "YOUR_ELEVENLABS_VOICE_ID",
+  "model_id": "eleven_flash_v2_5",
+  "idempotency_key": "speech-example-flash-pause"
+}
+```
+
+v4 Turbo with delivery and pause tags:
+
+```json
+{
+  "text": "[whispers] The room is quiet. [short pause] You can begin.",
+  "voice_id": "YOUR_ELEVENLABS_VOICE_ID",
+  "model_id": "eleven_v4_turbo",
+  "idempotency_key": "speech-example-turbo-tags"
+}
+```
+
+Official ElevenLabs references (checked November 5, 2026):
+
+- [Pause syntax, supported models, and the 3-second limit](https://elevenlabs.io/docs/help-center/product/core-capabilities/text-to-speech/how-can-i-add-pauses).
+- [Audio tags, including explicit v4 Turbo support](https://elevenlabs.io/docs/help-center/product/core-capabilities/text-to-speech/how-do-audio-tags-work-with-eleven-v3-and-v4).
+- [Prompting guidance and pause-tag examples](https://elevenlabs.io/docs/overview/capabilities/text-to-speech/best-practices#prompting-eleven-v4).
+- [Official SSML guide: audio-tag compatibility FAQ](https://elevenlabs.io/blog/ssml-tags-explained).
+
+## Example: select v4 Turbo
+
+```bash
+curl --request POST \
+  --url 'https://api.jogg.ai/v2/audio/tts/synthesize' \
+  --header 'x-api-key: YOUR_API_KEY' \
+  --header 'Content-Type: application/json' \
+  --data '{
+    "text": "Hello from JoggAI.",
+    "voice_id": "YOUR_ELEVENLABS_VOICE_ID",
+    "model_id": "eleven_v4_turbo",
+    "idempotency_key": "speech-example-turbo"
+  }'
+```
+
+To use the default Flash v2.5 model, omit `model_id`:
+
+```json
+{
+  "text": "Hello from JoggAI.",
+  "voice_id": "YOUR_ELEVENLABS_VOICE_ID",
+  "idempotency_key": "speech-example-flash"
+}
+```
+
+## Retry the same request
+
+Keep the returned `task_id`. Use the same optional `idempotency_key` only when
+retrying the same request. A key already used with a different explicit model
+causes a conflict; use a new key when intentionally changing the model or text.
+
+Synthesis consumes API credits based on the generated audio duration. After a
+timeout, check the existing [speech task](/api-reference/v2/Voice/GetSpeechTask)
+when its ID is known, or retry the unchanged request with its original key.
+Avoid creating another paid request just because the connection timed out.
+
+## Use the same selection through MCP
+
+The `jogg_post_audio_tts_synthesize` tool accepts the same optional field under
+`body.model_id`. See [MCP speech model selection](/mcp/tools-billing-safety#speech-model-selection)
+for a `tools/call` example.
