@@ -132,7 +132,9 @@
       
       "pages": [
         "api-reference/v2/Voice/GetVoices",
-        "api-reference/v2/Voice/GetCustomVoices"
+        "api-reference/v2/Voice/GetCustomVoices",
+        "api-reference/v2/Voice/SynthesizeSpeech",
+        "api-reference/v2/Voice/GetSpeechTask"
       ]
     },
     {

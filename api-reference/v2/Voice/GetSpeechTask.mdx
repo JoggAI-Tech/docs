@@ -1,0 +1,21 @@
+---
+title: "Get Speech Task"
+description: "Retrieve speech synthesis status and audio results without creating a new task."
+openapi: "GET /v2/audio/tts/tasks/{task_id}"
+---
+
+Look up the `task_id` returned by [Synthesize Speech](/api-reference/v2/Voice/SynthesizeSpeech)
+in the same authorized Space.
+
+```bash
+curl --request GET \
+  --url 'https://api.jogg.ai/v2/audio/tts/tasks/tts_123' \
+  --header 'x-api-key: YOUR_API_KEY'
+```
+
+The task status is `processing`, `succeeded`, or `failed`. Successful tasks
+include the generated audio `url`, `duration_seconds`, and `subtitle_url` when
+available. Failed tasks include `error_message`.
+
+This lookup does not start another synthesis. Keep the original task ID when
+checking results after a timeout.

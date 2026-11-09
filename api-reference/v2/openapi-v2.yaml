@@ -47,6 +47,106 @@ tags:
     description: Webhook endpoint management for event notifications
 
 paths:
+  /v2/audio/tts/synthesize:
+    post:
+      operationId: jogg_post_audio_tts_synthesize
+      tags: [Voice]
+      summary: Synthesize speech
+      description: |
+        Generate speech audio and an optional subtitle file from text.
+        For ElevenLabs voices, model_id optionally selects eleven_flash_v2_5 or eleven_v4_turbo.
+        Omitting model_id uses eleven_flash_v2_5 for ElevenLabs voices and preserves existing behavior for other providers.
+        Explicit model_id values are only supported for ElevenLabs voices. Empty strings, null, non-string values, and unsupported model IDs are rejected.
+        Reuse the same idempotency_key only for the same request; changing an explicit model with the same key causes a conflict.
+        Flash v2.5 supports SSML `<break time="1.5s" />` up to 3 seconds and does not support audio tags.
+        v4 Turbo supports audio tags such as `[whispers]`, `[short pause]`, `[pause]`, and `[long pause]`, but does not support SSML `<break>`. Pause tags do not specify an exact duration.
+        Put controls in text; no additional tag parameter is needed. When sending a v4 Turbo synthesis request, Jogg converts positive timed breaks of up to 0.5 seconds to `[short pause]`, over 0.5 and up to 1 second to `[pause]`, and over 1 second to `[long pause]`; zero-second breaks are removed. Supported millisecond inputs are converted to seconds first.
+        For Flash v2.5, Jogg converts `[short pause]`, `[pause]`, and `[long pause]` to SSML breaks of 0.3, 0.75, and 1.5 seconds respectively. These are Jogg compatibility rules, not exact duration equivalences specified by ElevenLabs. Other bracketed text is retained for Flash.
+        Conversion uses a synthesis request copy and preserves the original text and existing request identity and billing rules. Newly generated v4 Turbo subtitles omit audio tags and break tags. When adapting v4 pause tags for Flash, subtitles omit those controls and their converted breaks while retaining other bracketed text. These v4 compatibility paths split words at explicit pauses and retain provider timing gaps. Native Flash breaks continue to use the existing subtitle processing. Input-text subtitle fallback uses model-specific filtering.
+        See ElevenLabs' [pause guide](https://elevenlabs.io/docs/help-center/product/core-capabilities/text-to-speech/how-can-i-add-pauses) and [audio-tag guide](https://elevenlabs.io/docs/help-center/product/core-capabilities/text-to-speech/how-do-audio-tags-work-with-eleven-v3-and-v4).
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              required: [text, voice_id]
+              properties:
+                text:
+                  type: string
+                  minLength: 1
+                  description: Text to synthesize.
+                voice_id:
+                  type: string
+                  minLength: 1
+                  description: Public voice or an authorized custom voice ID.
+                model_id:
+                  type: string
+                  description: ElevenLabs-only speech model. Omit to use eleven_flash_v2_5 for ElevenLabs voices and retain the voice provider's existing behavior otherwise. Explicit values for other providers, empty strings, null, and unsupported model IDs are rejected.
+                  enum: [eleven_flash_v2_5, eleven_v4_turbo]
+                  default: eleven_flash_v2_5
+                idempotency_key:
+                  type: string
+                  maxLength: 255
+                  description: Stable key for retries of this request. Use a new key for a different model or text.
+            examples:
+              defaultModel:
+                summary: Omit the model to use Flash v2.5 for an ElevenLabs voice
+                value:
+                  text: Hello from JoggAI.
+                  voice_id: YOUR_ELEVENLABS_VOICE_ID
+                  idempotency_key: speech-example-flash
+              turboModel:
+                summary: Select v4 Turbo for an ElevenLabs voice
+                value:
+                  text: Hello from JoggAI.
+                  voice_id: YOUR_ELEVENLABS_VOICE_ID
+                  model_id: eleven_v4_turbo
+                  idempotency_key: speech-example-turbo
+              flashPause:
+                summary: Flash v2.5 with a timed SSML pause
+                value:
+                  text: 'I will check the schedule.<break time="1.5s" />The next session starts at noon.'
+                  voice_id: YOUR_ELEVENLABS_VOICE_ID
+                  model_id: eleven_flash_v2_5
+                  idempotency_key: speech-example-flash-pause
+              turboAudioTags:
+                summary: v4 Turbo with audio tags
+                value:
+                  text: '[whispers] The room is quiet. [short pause] You can begin.'
+                  voice_id: YOUR_ELEVENLABS_VOICE_ID
+                  model_id: eleven_v4_turbo
+                  idempotency_key: speech-example-turbo-tags
+      responses:
+        '200':
+          description: Speech task result. Check the business code before reading data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpeechTaskResponse'
+
+  /v2/audio/tts/tasks/{task_id}:
+    get:
+      operationId: jogg_get_audio_tts_tasks_task_id
+      tags: [Voice]
+      summary: Get speech task
+      description: Retrieve the status and result of an existing speech task in the authorized Space without starting another synthesis.
+      parameters:
+        - name: task_id
+          in: path
+          required: true
+          description: Task ID returned by speech synthesis.
+          schema:
+            type: string
+            example: tts_123
+      responses:
+        '200':
+          description: Speech task status. Check the business code before reading data.
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/SpeechTaskResponse'
+
   /v2/create_lip_sync_video:
     post:
       tags:
@@ -3425,6 +3525,45 @@ components:
         example: 10
 
   schemas:
+    SpeechTaskResponse:
+      allOf:
+        - $ref: '#/components/schemas/BaseResponse'
+        - type: object
+          properties:
+            data:
+              $ref: '#/components/schemas/SpeechTask'
+
+    SpeechTask:
+      type: object
+      required: [task_id, status, progress, url, subtitle_url, duration_seconds]
+      properties:
+        task_id:
+          type: string
+          description: Speech task ID to keep for status queries and retries.
+          example: tts_123
+        status:
+          type: string
+          enum: [processing, succeeded, failed]
+          example: succeeded
+        progress:
+          type: integer
+          minimum: 0
+          maximum: 100
+          example: 100
+        url:
+          type: string
+          description: Generated audio URL when the task succeeds; otherwise empty.
+        subtitle_url:
+          type: string
+          description: Subtitle file URL when available; otherwise empty.
+        duration_seconds:
+          type: number
+          description: Generated audio duration in seconds.
+          example: 2.5
+        error_message:
+          type: string
+          description: Failure details when the task fails.
+
     BaseResponse:
       type: object
       required:

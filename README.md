@@ -53,7 +53,7 @@ mintlify dev
 │       ├── API Documentation/     (12个教程)
 │       ├── Video/                 (7个)
 │       ├── Avatar/                (5个)
-│       ├── Voice/                 (2个)
+│       ├── Voice/                 (4个，含 TTS 合成与任务查询)
 │       ├── Asset/                 (5个)
 │       ├── Template/              (3个)
 │       ├── Product/               (2个)
